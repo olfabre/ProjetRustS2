@@ -2,21 +2,22 @@ use serde::{Deserialize, Serialize};
 use std::fs;
 
 #[derive(Debug, Serialize, Deserialize)]
-#[serde(tag = "type")] // Differencie automatiquement "Joueur" et "Piece"
-enum Objet {
-    Piece {
-        id: String,
-        nom: String,
-        description: String,
-        connections: Vec<Connection>,
-        inventaire: Vec<String>,
-    },
-    Joueur {
-        nom: String,
-        position: String,
-        vie: u32,
-        force: u32,
-    },
+struct Piece {
+    r#type: String,  // "Piece"
+    id: String,
+    nom: String,
+    description: String,
+    connections: Vec<Connection>,
+    inventaire: Vec<String>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+struct Joueur {
+    r#type: String,  // "Joueur"
+    nom: String,
+    position: String,
+    vie: u32,
+    force: u32,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -29,19 +30,19 @@ fn main() {
     // Lire le fichier JSON
     let json_str = fs::read_to_string("src/data.json").expect("Impossible de lire le fichier");
 
-    // Parser le JSON en Vec<Objet>
-    let objets: Vec<Objet> = serde_json::from_str(&json_str).expect("Erreur de parsing JSON");
+    // Parser le JSON en une liste générique de `serde_json::Value`
+    let objets: Vec<serde_json::Value> = serde_json::from_str(&json_str).expect("Erreur de parsing JSON");
 
-    // Afficher les objets
+    // Parcourir les objets JSON et les parser dans leurs structures respectives
     for obj in &objets {
-        match obj {
-            Objet::Joueur { nom, position, vie, force } => {
-                println!("Joueur trouvé : {} à la position {} avec {} de vie et {} de force.",
-                         nom, position, vie, force);
-            }
-            Objet::Piece { id, nom, description, connections, inventaire } => {
-                println!("Pièce {} ({}) : {} - Connexions: {:?}", id, nom, description, connections);
-            }
+        if obj["type"] == "Joueur" {
+            let joueur: Joueur = serde_json::from_value(obj.clone()).expect("Erreur de parsing Joueur");
+            println!("Joueur : {:?}", joueur);
+        } else if obj["type"] == "Piece" {
+            let piece: Piece = serde_json::from_value(obj.clone()).expect("Erreur de parsing Piece");
+            println!("Pièce : {:?}", piece);
+        } else {
+            println!("Type inconnu : {:?}", obj);
         }
     }
 }
