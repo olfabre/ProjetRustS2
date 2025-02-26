@@ -1,35 +1,40 @@
 [
-
-{
-  "type": "Piece",
-  "id": "01",
-  "nom": "chambre bleu",
-  "description": "La {nom} a des objets ",
-  "connections": [
-    { "orientation": "nord", "destination": "02"},
-    { "orientation": "sud", "destination": "03"}
-  ],
-  "inventaire": []
-},
-
+  {
+    "type": "Piece",
+    "id": "01",
+    "nom": "chambre bleu",
+    "description": "Une pièce avec un lit.",
+    "connections": [
+      { "orientation": "nord", "destination": "02" }
+    ],
+    "inventaire": []
+  },
   {
     "type": "Piece",
     "id": "02",
     "nom": "chambre rouge",
-    "description": "La {nom} a des objets ",
+    "description": "Une chambre avec des rideaux rouges.",
     "connections": [
-      { "orientation": "sud", "destination": "01"},
-      { "orientation": "est", "destination": "04"}
+      { "orientation": "sud", "destination": "01" },
+      { "orientation": "est", "destination": "03" }
     ],
     "inventaire": []
   },
-
-{
-  "type": "Joueur",
-  "nom" : "Pierre",
-  "position": "piece1",
-  "vie": 100,
-  "force": 20
-}
-
+  {
+    "type": "Piece",
+    "id": "03",
+    "nom": "bibliothèque",
+    "description": "Une salle remplie de livres anciens.",
+    "connections": [
+      { "orientation": "ouest", "destination": "02" }
+    ],
+    "inventaire": []
+  },
+  {
+    "type": "Joueur",
+    "nom": "Pierre",
+    "position": "01",
+    "vie": 100,
+    "force": 20
+  }
 ]
