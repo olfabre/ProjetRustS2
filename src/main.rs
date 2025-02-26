@@ -7,7 +7,7 @@ struct Joueur {
     r#type: String,
     r#position: String,
 }
-// main change
+
 
 fn main() {
     println!("Hello, world!");

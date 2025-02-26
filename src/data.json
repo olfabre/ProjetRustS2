@@ -1,5 +1,35 @@
+[
+
 {
-  "type": "Hero",
-  "position": "piece1"
+  "type": "Piece",
+  "id": "01",
+  "nom": "chambre bleu",
+  "description": "La {nom} a des objets ",
+  "connections": [
+    { "orientation": "nord", "destination": "02"},
+    { "orientation": "sud", "destination": "03"}
+  ],
+  "inventaire": []
+},
+
+  {
+    "type": "Piece",
+    "id": "02",
+    "nom": "chambre rouge",
+    "description": "La {nom} a des objets ",
+    "connections": [
+      { "orientation": "sud", "destination": "01"},
+      { "orientation": "est", "destination": "04"}
+    ],
+    "inventaire": []
+  },
+
+{
+  "type": "Joueur",
+  "nom" : "Pierre",
+  "position": "piece1",
+  "vie": 100,
+  "force": 20
 }
 
+]
