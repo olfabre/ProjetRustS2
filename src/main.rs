@@ -7,7 +7,7 @@ use std::fs;
 use models::{Piece, Joueur};
 use serde_json;
 use crate::models::Oridentation;
-use crate::traits::{Deplacable, GameObject};
+use crate::traits::{Deplacable, ComportementJoueur, ComportementObjet};
 
 fn main() {
     // Lire le fichier JSON
@@ -32,9 +32,12 @@ fn main() {
 
     // Vérifier si un joueur existe et lui faire avancer dans une direction donnée
     if let Some(ref mut joueur) = joueur {
-        joueur.afficher();
+        joueur.afficher_status();
         joueur.avancer(&pieces, Oridentation::NORD); // Test moving north
-        joueur.afficher(); // Afficher après déplacement
+        joueur.afficher_status(); // Afficher après déplacement
+        // println!("{}", pieces.last().unwrap().description.to_string());
+        pieces.last().unwrap().decriver();
+
     } else {
         println!("❌ Aucun joueur trouvé dans le JSON !");
     }
