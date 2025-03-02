@@ -2,12 +2,13 @@
 use serde::{Serialize, Deserialize};
 use crate::models::Oridentation;
 use crate::models::piece::Piece;
-use crate::traits::{GameObject, Deplacable};
+use crate::traits::{ComportementJoueur, ComportementObjet, Deplacable};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Joueur {
     pub r#type: String,
     pub nom: String,
+    pub description: String,
     pub position: String,
     pub vie: u32,
     pub force: u32,
@@ -15,22 +16,24 @@ pub struct Joueur {
 
 
 
-impl GameObject for Joueur {
-    fn get_type(&self) -> &str {
-        &self.r#type
-    }
-
-    fn afficher(&self) {
+impl ComportementJoueur for Joueur {
+    fn afficher_status(&self) {
         println!(
             "Joueur: {} est à la position {} avec {} de vie et {} de force",
             self.nom, self.position, self.vie, self.force
         );
     }
+}
+
+impl ComportementObjet for Joueur {
+    fn get_type(&self) -> &str {
+        &self.r#type
+    }
 
     fn decriver(&self) {
         println!(
             "{}",
-            self.position
+            self.description
         );
     }
 }

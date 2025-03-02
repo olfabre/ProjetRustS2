@@ -1,7 +1,7 @@
 
+use crate::models::Piece;
 
-pub trait GameObject {
+pub trait ComportementObjet {
     fn get_type(&self) -> &str;
-    fn afficher(&self);
     fn decriver(&self);
 }

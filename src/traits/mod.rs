@@ -1,6 +1,9 @@
 
-pub mod game_object;
+pub mod comportement_joueur;
+pub mod comportemente_objet;
 pub mod deplacable;
 
-pub use game_object::GameObject;
+
+pub use comportement_joueur::ComportementJoueur;
+pub use comportemente_objet::ComportementObjet;
 pub use deplacable::Deplacable;

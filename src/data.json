@@ -48,6 +48,7 @@
   {
     "type": "Joueur",
     "nom": "Pierre",
+    "description": "Un magicien",
     "position": "e18sHall",
     "vie": 100,
     "force": 20
