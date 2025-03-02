@@ -1,35 +1,55 @@
 [
-
-{
-  "type": "Piece",
-  "id": "01",
-  "nom": "chambre bleu",
-  "description": "La {nom} a des objets ",
-  "connections": [
-    { "orientation": "nord", "destination": "02"},
-    { "orientation": "sud", "destination": "03"}
-  ],
-  "inventaire": []
-},
-
   {
     "type": "Piece",
-    "id": "02",
-    "nom": "chambre rouge",
-    "description": "La {nom} a des objets ",
+    "id": "e18sHall",
+    "nom": "Hall d'entrée",
+    "description": "En sortant de l'ascenseur, le hall vous accueille avec un air de professionnalisme tranquille. Un élégant bureau de réception se trouve à votre gauche, où un écran d'ordinateur brille doucement et un téléphone repose soigneusement à côté. Devant vous, un groupe de fauteuils et de canapés vous invite à vous asseoir, leur disposition centrée autour d'une table basse polie qui brille sous les lumières vives du plafond. À votre droite, des plantes en pot apportent une touche de verdure, tandis que des œuvres d'art encadrées ornent les murs, donnant à l'espace une sensation de chaleur. À proximité, une fontaine à eau bourdonne faiblement et un distributeur automatique attend de distribuer un rafraîchissement rapide. Vous regardez dans un tableau d'affichage :",
     "connections": [
-      { "orientation": "sud", "destination": "01"},
-      { "orientation": "est", "destination": "04"}
+      { "orientation": "NORD", "destination": "e18s02" },
+      { "orientation": "OUEST", "destination": "e18s01" },
+      { "orientation": "SUD", "destination": "e18sConference" },
+      { "orientation": "EST", "destination": "e18sCouloir" }
     ],
     "inventaire": []
   },
-
-{
-  "type": "Joueur",
-  "nom" : "Pierre",
-  "position": "piece1",
-  "vie": 100,
-  "force": 20
-}
-
+  {
+    "type": "Piece",
+    "id": "e18s01",
+    "nom": "Salle du Gerant",
+    "description": "Le bureau du directeur dégage une atmosphère d'autorité et de raffinement dès que vous entrez. La pièce maîtresse est un imposant bureau de direction. Un ordinateur portable élégant et un ensemble de documents soigneusement rangés sont posés sur le dessus du bureau, à côté d'un ensemble de stylos plaqués or et d'une petite photo encadrée qui suggère une touche personnelle. D'un côté, une grande bibliothèque se dresse, ses étagères garnies de livres sur le leadership, les affaires et quelques accents décoratifs comme des serre-livres astucieux et de petites sculptures. Un globe repose sur un support à proximité, son charme vintage ajoutant un élément classique à l'espace.",
+    "connections": [
+      { "orientation": "EST", "destination": "e18sHall" }
+    ],
+    "inventaire": []
+  },
+  {
+    "type": "Piece",
+    "id": "s18s02",
+    "nom": "Salle des employés de bureau",
+    "description": "The room is a maze of identical cubicles, each framed by neutral-colored partitions that barely reach shoulder height. Within each cubicle, desks hold computer monitors, keyboards, and an assortment of office supplies—sticky notes, pens in holders, and coffee mugs emblazoned with quirky slogans. Rolling chairs are tucked neatly beneath the desks, and personal touches like small potted plants, family photos, or calendars occasionally break the monotony. Overhead, fluorescent lights cast a steady, even glow, while a photocopier and a water cooler sit near the far wall, quietly completing the office's functional landscape.",
+    "connections": [
+      { "orientation": "SUD", "destination": "e18sHall" },
+      { "orientation": "OUEST", "destination": "e18s02c01" },
+      { "orientation": "NORD", "destination": "e18s02c02" },
+      { "orientation": "EST", "destination": "e18s02c03" }
+    ],
+    "inventaire": []
+  },
+  {
+    "type": "Piece",
+    "id": "e18sCouloir",
+    "nom": "Couloir",
+    "description": "Un couloir aseptisé, droit, lumineux et tout blanc avec une porte blanche à l'autre bout.",
+    "connections": [
+      { "orientation": "OUEST", "destination": "e18sHall" }
+    ],
+    "inventaire": []
+  },
+  {
+    "type": "Joueur",
+    "nom": "Pierre",
+    "position": "e18sHall",
+    "vie": 100,
+    "force": 20
+  }
 ]
