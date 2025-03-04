@@ -1,13 +1,4 @@
-mod traits;
-mod models;
 
-use serde::{Deserialize, Serialize};
-use std::fs;
-
-use models::{Piece, Joueur};
-use serde_json;
-use crate::models::Oridentation;
-use crate::traits::{Deplacable, ComportementJoueur, ComportementObjet};
 
 mod game;
 
