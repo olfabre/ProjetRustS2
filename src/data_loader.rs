@@ -1,15 +1,15 @@
 use serde::{Deserialize, Serialize};
 use std::fs;
 
-const GAME_DATA_FILE: &str = "../data/game_data.json"; // Chemin du fichier JSON // Définition du chemin du fichier JSON
+const GAME_DATA_FILE: &str = "data.json"; // Correction du chemin du fichier JSON
 
 #[derive(Serialize, Deserialize)]
-struct GameData {
-    characters: Vec<Character>,
-    enemies: Vec<Enemy>,
-    items: Vec<Item>,
-    quests: Vec<Quest>,
-    world: World,
+pub struct GameData {
+    pub characters: Vec<Character>,
+    pub enemies: Vec<Enemy>,
+    pub items: Vec<Item>,
+    pub quests: Vec<Quest>,
+    pub world: World,
 }
 
 #[derive(Serialize, Deserialize, Clone)]
@@ -56,7 +56,15 @@ pub struct Quest {
     pub completed: bool,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
+pub struct Npc {
+    pub name: String,
+    pub role: String,
+    pub dialogue: Vec<String>,
+    pub quests: Vec<Quest>,
+}
+
+#[derive(Serialize, Deserialize, Clone)]
 pub struct Zone {
     pub name: String,
     pub description: String,
@@ -66,17 +74,9 @@ pub struct Zone {
     pub requires_item: Option<String>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct World {
     pub zones: Vec<Zone>,
-}
-
-#[derive(Serialize, Deserialize)]
-pub struct Npc {
-    pub name: String,
-    pub role: String,
-    pub dialogue: Vec<String>,
-    pub quests: Vec<Quest>,
 }
 
 pub fn load_game_data() -> GameData {

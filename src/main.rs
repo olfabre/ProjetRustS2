@@ -1,11 +1,18 @@
-use game::character::Character;
-use game::combat::Combat;
-use game::event::Event;
-use game::io_handler::talk_to_npc;
-use game::npc::Npc;
-use game::world::World;
+mod character;
+mod combat;
+mod event;
+mod io_handler;
+mod npc;
+mod world;
+mod data_loader;
 
-mod game;
+mod item;
+
+use character::Character;
+use combat::Combat;
+use event::Event;
+use io_handler::talk_to_npc;
+use world::World;
 
 fn main() {
     println!("🎮 Bienvenue dans l'aventure RPG !");
@@ -26,7 +33,7 @@ fn main() {
         println!("5. Voir mon inventaire");
         println!("6. Quitter");
 
-        let choice = game::io_handler::get_user_input();
+        let choice = io_handler::get_user_input();
         match choice.trim() {
             "1" => {
                 world.explore(&mut player);
