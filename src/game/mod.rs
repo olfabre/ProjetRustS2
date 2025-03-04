@@ -13,9 +13,9 @@ pub mod save_load;
 pub mod enemy;
 pub mod item;
 pub mod npc;
+ mod data_loader;
 
-
-pub fn run() {
+ pub fn run() {
     println!("Bienvenue dans le RPG en mode texte !");
     
     let mut world = world::World::create_world();

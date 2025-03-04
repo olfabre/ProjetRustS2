@@ -1,4 +1,5 @@
 use serde::{Serialize, Deserialize};
+use crate::game::data_loader::load_game_data;
 
 #[derive(Serialize, Deserialize)]
 pub struct Enemy {
@@ -9,16 +10,8 @@ pub struct Enemy {
 }
 
 impl Enemy {
-    pub fn new(name: &str, health: i32, strength: i32, agility: i32) -> Self {
-        Self {
-            name: name.to_string(),
-            health,
-            strength,
-            agility,
-        }
-    }
-
-    pub fn is_alive(&self) -> bool {
-        self.health > 0
+    pub fn load_from_json() -> Vec<Self> {
+        let data = load_game_data();
+        data.enemies
     }
 }

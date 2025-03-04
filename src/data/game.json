@@ -1,0 +1,110 @@
+{
+  "characters": [
+    {
+      "name": "Héros",
+      "health": 100,
+      "strength": 10,
+      "agility": 10,
+      "intelligence": 10,
+      "level": 1,
+      "experience": 0,
+      "inventory": [],
+      "active_quests": [],
+      "completed_quests": []
+    }
+  ],
+  "enemies": [
+    {
+      "name": "Gobelin",
+      "health": 20,
+      "strength": 5,
+      "agility": 3
+    },
+    {
+      "name": "Bandit",
+      "health": 30,
+      "strength": 7,
+      "agility": 5
+    }
+  ],
+  "items": [
+    {
+      "name": "Potion de soin",
+      "item_type": "Potion",
+      "effect": 20
+    },
+    {
+      "name": "Épée en fer",
+      "item_type": "Weapon",
+      "effect": 5
+    },
+    {
+      "name": "Armure légère",
+      "item_type": "Armor",
+      "effect": 3
+    }
+  ],
+  "quests": [
+    {
+      "name": "Trouver l'amulette perdue",
+      "description": "Retrouve l'amulette du sage cachée dans la forêt.",
+      "reward": "Clé dorée",
+      "completed": false
+    },
+    {
+      "name": "Sauver le village",
+      "description": "Protéger le village des monstres.",
+      "reward": "100 pièces d'or",
+      "completed": false
+    }
+  ],
+  "world": {
+    "zones": [
+      {
+        "name": "Forêt",
+        "description": "Une forêt sombre et inquiétante.",
+        "npcs": [],
+        "items": ["Amulette perdue", "Potion de soin", "Épée en fer"],
+        "effect": "None",
+        "requires_item": null
+      },
+      {
+        "name": "Village",
+        "description": "Un village paisible.",
+        "npcs": [
+          {
+            "name": "Gérard",
+            "role": "Sage du village",
+            "dialogue": ["J’ai une mission spéciale pour toi..."],
+            "quests": ["Trouver l'amulette perdue"]
+          },
+          {
+            "name": "Elena",
+            "role": "Aventurière",
+            "dialogue": ["J'ai une quête pour toi, es-tu intéressé ?"],
+            "quests": ["Sauver le village"]
+          }
+        ],
+        "items": ["Armure légère"],
+        "effect": "Healing",
+        "requires_item": null
+      },
+      {
+        "name": "Marais Toxique",
+        "description": "L'air est empoisonné et l'eau trouble...",
+        "npcs": [],
+        "items": [],
+        "effect": "Poisonous",
+        "requires_item": "Clé dorée"
+      },
+      {
+        "name": "Temple Mystique",
+        "description": "Une aura puissante émane de ces ruines anciennes...",
+        "npcs": [],
+        "items": ["Amulette magique"],
+        "effect": "StrengthBoost",
+        "requires_item": "Clé dorée"
+      }
+    ]
+  }
+}
