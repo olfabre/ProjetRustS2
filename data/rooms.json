@@ -1,0 +1,38 @@
+[
+    {
+        "id": 0,
+        "name": "Entrée de la grotte",
+        "description": "Vous êtes devant une grotte sombre et mystérieuse",
+        "terrain_type": "Caverne",
+        "items": ["Torche", "Potion de soin"],
+        "npcs": [],
+        "north": 1,
+        "south": null,
+        "east": 2, 
+        "west": null
+    },
+    {
+        "id": 1,
+        "name": "Salle du trésor",
+        "description": "Vous voyez un trésor scintillant, mais attention au piège !",
+        "terrain_type": "Donjon",
+        "items": ["Pièce d'or", "Épée ancienne"],
+        "npcs": ["Gardien squelette"],
+        "north": null,
+        "south": 0, 
+        "east": null,
+        "west": null
+    },
+    {
+        "id": 2,
+        "name": "Forêt mystérieuse",
+        "description": "Une forêt dense avec des bruits étranges...",
+        "terrain_type": "Forêt",
+        "items": ["Baies comestibles"],  
+        "npcs": ["Vieil ermite"],        
+        "north": null,
+        "south": null,
+        "east": null,
+        "west": 0
+    }
+]

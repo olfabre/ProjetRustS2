@@ -1,0 +1,20 @@
+[
+    {
+        "id": 0,
+        "name": "Guerrier",
+        "health": 100,
+        "strength": 15,
+        "intelligence": 5,
+        "position": 0,
+        "inventory": []
+    },
+    {
+        "id": 1,
+        "name": "Mage",
+        "health": 80,
+        "strength": 5,
+        "intelligence": 20,
+        "position": 1, 
+        "inventory": []
+    }
+]

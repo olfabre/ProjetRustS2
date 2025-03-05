@@ -1,0 +1,14 @@
+[
+    {
+        "id": 0,
+        "name": "Potion de soin",
+        "description": "Restaure 20 points de vie.",
+        "effect": "heal_20"
+    },
+    {
+        "id": 1,
+        "name": "Épée de fer",
+        "description": "Une épée tranchante en fer.",
+        "effect": "attack_bonus_5"
+    }
+]
