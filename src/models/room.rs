@@ -18,6 +18,11 @@ pub struct Room {
     pub npcs: Vec<u32>,    // Liste des PNJ présents
 
     pub exits: HashMap<String, usize>, // Clé = "north", "south", etc. ; Valeur = index de la salle
+
+    pub north: Option<u32>,
+    pub south: Option<u32>,
+    pub east: Option<u32>,
+    pub west: Option<u32>,
 }
 
 impl Descriptible for Room{
