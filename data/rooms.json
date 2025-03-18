@@ -5,7 +5,7 @@
         "description": "Un grand portail en pierre avec des gravures anciennes.",
         "terrain_type": "caverne",
         "items": [0, 1],
-        "npcs": [0],
+        "pnjs": [0],
         "exits": {
             "north": 1
         }
@@ -16,7 +16,7 @@
         "description": "Une immense salle où repose un trône en or.",
         "terrain_type": "château",
         "items": [2],
-        "npcs": [1],
+        "pnjs": [1],
         "exits": {
             "south": 0,
             "east": 2
@@ -29,7 +29,7 @@
         "terrain_type": "château",
         "sombre": true,
         "items": [3],
-        "npcs": [],
+        "pnjs": [],
         "exits": {
             "west": 1
         }
@@ -40,7 +40,7 @@
         "description": "Des inscriptions murales présentent une énigme complexe.",
         "terrain_type": "bibliothèque",
         "items": [4],
-        "npcs": [2],
+        "pnjs": [2],
         "exits": {
             "west": 2,
             "north": 4
@@ -52,7 +52,7 @@
         "description": "Un sol instable et des flèches cachées rendent cette pièce dangereuse.",
         "terrain_type": "souterrain",
         "items": [],
-        "npcs": [3],
+        "pnjs": [3],
         "exits": {
             "south": 3,
             "east": 5
@@ -65,7 +65,7 @@
         "terrain_type": "caverne",
         "locked": true,
         "items": [2],
-        "npcs": [4],
+        "pnjs": [4],
         "exits": {
             "west": 4
         }
