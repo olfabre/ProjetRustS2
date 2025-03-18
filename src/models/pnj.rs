@@ -12,7 +12,7 @@ pub struct Pnj {
 }
 
 impl Pnj {
-    /// 🔥 Permet à un PNJ de parler en utilisant `dialogue.rs`
+    /// Permet à un PNJ de parler en utilisant `dialogue.rs`
     /*pub fn parler_au_pnj(pnj_nom: &str, position: usize, rooms: &[Room], pnjs: &[Pnj], dialogues: &[Dialogue]) {
         let room = &rooms[position];
 

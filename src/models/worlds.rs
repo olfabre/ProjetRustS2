@@ -24,7 +24,7 @@ pub enum Evenement {
     ChangementMeteo(Meteo),
 }
 
-pub struct Monde {
+pub struct worlds {
     pub salles: Vec<Room>,
     pub personnages: Vec<Character>,
     pub objets: Vec<Item>,

@@ -23,6 +23,7 @@ impl Descriptible for Character {
 }
 
 impl Movable for Character {
+    //Le personnages doit se déplacer avec une direction
     fn move_to(&mut self, direction: &str, rooms: &[Room]) {
         if let Some(current_room) = rooms.get(self.position) {
             if let Some(&new_position) = current_room.exits.get(direction) {
@@ -38,6 +39,7 @@ impl Movable for Character {
 }
 
 impl Character {
+    //on ne doit pas avoir trop rooms
     pub fn prendre_objet(&mut self, objet_nom: &str, rooms: &mut [Room], items: &[Item]) {
         if let Some(room) = rooms.get_mut(self.position) {
             if let Some(&item_id) = room.items.iter().find(|&&id| {
@@ -80,6 +82,7 @@ impl Character {
         }
     }
 
+    //L'inventaire de l'objet pas de la character(&self)
     pub fn afficher_inventaire(&self) {
         println!("🎒 Inventaire :");
         if self.inventory.is_empty() {

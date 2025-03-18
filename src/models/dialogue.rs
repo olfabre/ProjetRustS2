@@ -21,7 +21,7 @@ pub struct DialogueOption {
 }
 
 impl Dialogue {
-    /// 🔥 Affiche un dialogue et permet au joueur de choisir une réponse
+    /// Affiche un dialogue et permet au joueur de choisir une réponse
     pub fn afficher_dialogue(&self) {
         if let Some(first_step) = self.dialogues.first() {
             self.afficher_et_gérer_choix(first_step);
