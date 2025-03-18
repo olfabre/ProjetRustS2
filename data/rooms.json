@@ -1,0 +1,73 @@
+[
+    {
+        "id": 0,
+        "name": "Entrée du donjon",
+        "description": "Un grand portail en pierre avec des gravures anciennes.",
+        "terrain_type": "caverne",
+        "items": [0, 1],
+        "npcs": [0],
+        "exits": {
+            "north": 1
+        }
+    },
+    {
+        "id": 1,
+        "name": "Salle du trône",
+        "description": "Une immense salle où repose un trône en or.",
+        "terrain_type": "château",
+        "items": [2],
+        "npcs": [1],
+        "exits": {
+            "south": 0,
+            "east": 2
+        }
+    },
+    {
+        "id": 2,
+        "name": "Couloir sombre",
+        "description": "Un long couloir avec des torches vacillantes.",
+        "terrain_type": "château",
+        "sombre": true,
+        "items": [3],
+        "npcs": [],
+        "exits": {
+            "west": 1
+        }
+    },
+    {
+        "id": 3,
+        "name": "Salle aux énigmes",
+        "description": "Des inscriptions murales présentent une énigme complexe.",
+        "terrain_type": "bibliothèque",
+        "items": [4],
+        "npcs": [2],
+        "exits": {
+            "west": 2,
+            "north": 4
+        }
+    },
+    {
+        "id": 4,
+        "name": "Salle des pièges",
+        "description": "Un sol instable et des flèches cachées rendent cette pièce dangereuse.",
+        "terrain_type": "souterrain",
+        "items": [],
+        "npcs": [3],
+        "exits": {
+            "south": 3,
+            "east": 5
+        }
+    },
+    {
+        "id": 5,
+        "name": "Salle du trésor",
+        "description": "Une immense pièce remplie de richesses, mais la porte est verrouillée.",
+        "terrain_type": "caverne",
+        "locked": true,
+        "items": [2],
+        "npcs": [4],
+        "exits": {
+            "west": 4
+        }
+    }
+]

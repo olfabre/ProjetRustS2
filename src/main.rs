@@ -1,11 +1,9 @@
+mod io;
+mod models;
 
-
-mod game;
-
+use models::game::Game;
 
 fn main() {
-    println!("🎮 Bienvenue dans le RPG en mode texte !");
-
-    // Démarrer le jeu
-    game::run();
+    let mut game = Game::new();
+    game.run();
 }
