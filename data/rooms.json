@@ -18,8 +18,7 @@
         "items": [2],
         "pnjs": [1],
         "exits": {
-            "south": 0,
-            "east": 2
+            "south": 0
         }
     },
     {
@@ -31,7 +30,8 @@
         "items": [3],
         "pnjs": [],
         "exits": {
-            "west": 1
+            "west": 0,
+            "east": 3
         }
     },
     {
