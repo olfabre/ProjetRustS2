@@ -34,7 +34,7 @@ impl Pnj {
     pub fn parler_au_pnj(pnj_nom: &str, position: usize, rooms: &[Room], pnjs: &[Pnj], dialogues: &[Dialogue]) {
         let room = &rooms[position];
 
-        if let Some(&pnj_id) = room.npcs.iter().find(|&&id| {
+        if let Some(&pnj_id) = room.pnjs.iter().find(|&&id| {
             pnjs.iter().any(|p| p.id == id && p.name.to_lowercase() == pnj_nom.to_lowercase())
         }) {
             if let Some(pnj) = pnjs.iter().find(|p| p.id == pnj_id) {

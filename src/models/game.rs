@@ -45,9 +45,9 @@ impl Game {
                 }
 
                 // Affichage des PNJ présents
-                if !current_room.npcs.is_empty() {
+                if !current_room.pnjs.is_empty() {
                     println!("🧑‍🤝‍🧑 Personnages présents :");
-                    for &pnj_id in &current_room.npcs {
+                    for &pnj_id in &current_room.pnjs {
                         if let Some(pnj) = self.pnjs.iter().find(|p| p.id == pnj_id) {
                             println!("- {}", pnj.name);
                         }
