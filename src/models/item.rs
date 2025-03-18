@@ -1,12 +1,9 @@
-
-use serde::{Deserialize, Serialize};
 use crate::models::traits::Descriptible;
 use crate::models::traits::Interactable;
-
-
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct Item { 
+pub struct Item {
     pub id: u32,
     pub name: String,
     pub description: String,
