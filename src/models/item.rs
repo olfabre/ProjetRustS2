@@ -10,7 +10,8 @@ pub struct Item {
     pub id: u32,
     pub name: String,
     pub description: String,
-    pub effect: String,
+    pub effect: Option<String>,
+    pub usable: bool,
 }
 
 impl Descriptible for Item {

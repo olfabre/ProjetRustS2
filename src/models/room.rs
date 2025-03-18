@@ -1,21 +1,23 @@
 use serde::{Deserialize, Serialize};
 use crate::models::traits::Descriptible;
+use std::collections::HashMap;
+
+
+
 
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Room {
-    pub id: u32,
+    pub id: usize,
     pub name: String,
     pub description: String,
     pub terrain_type: String, // Forêt, Donjon, Village, etc.
-    pub items: Vec<String>,   // Liste des objets trouvables ici
-    pub npcs: Vec<String>,    // Liste des PNJ présents
+    pub sombre: Option<bool>,
+    pub locked: Option<bool>,  // ✅ Ajout du champ locked
+    pub items: Vec<u32>,   // Liste des objets trouvables ici
+    pub npcs: Vec<u32>,    // Liste des PNJ présents
 
-
-    pub north: Option<u32>,
-    pub south: Option<u32>,
-    pub east: Option<u32>,
-    pub west: Option<u32>,
+    pub exits: HashMap<String, usize>, // Clé = "north", "south", etc. ; Valeur = index de la salle
 }
 
 impl Descriptible for Room{

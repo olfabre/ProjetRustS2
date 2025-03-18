@@ -2,6 +2,7 @@
     {
         "id": 0,
         "name": "Guerrier",
+        "class": "combat",
         "health": 100,
         "strength": 15,
         "intelligence": 5,
@@ -11,10 +12,11 @@
     {
         "id": 1,
         "name": "Mage",
+        "class": "magie",
         "health": 80,
         "strength": 5,
         "intelligence": 20,
-        "position": 1, 
+        "position": 1,
         "inventory": []
     }
 ]
