@@ -1,44 +1,68 @@
-mod traits;
 mod models;
+mod io;
 
-use serde::{Deserialize, Serialize};
-use std::fs;
-
-use models::{Piece, Joueur};
-use serde_json;
-use crate::models::Oridentation;
-use crate::traits::{Deplacable, ComportementJoueur, ComportementObjet};
+use models::game::Game;
 
 fn main() {
-    // Lire le fichier JSON
-    let json_str = fs::read_to_string("src/data.json").expect("Impossible de lire le fichier");
+    // Charger les salles
+    /*let rooms = load_room_from_file("data/rooms.json").expect("Erreur lors du chargement des salles.");
+    let mut characters = load_characters_from_file("data/characters.json").expect("Erreur lors du chargement des personnages.");
+    let items = load_items_from_file("data/items.json").expect("Erreur lors du chargement des objets.");
 
-    // Parser le JSON en une liste d'objets
-    let objets: Vec<serde_json::Value> = serde_json::from_str(&json_str).expect("Erreur de parsing JSON");
+    // Afficher les descriptions avec le trait
+    println!("📍 Zones disponibles :");
+    for room in &rooms {
+        println!("{}\n{}\nType : {}", room.name, room.get_description(), room.terrain_type);
+        if !room.items.is_empty() {
+            println!("🌟 Objets trouvables : {:?}", room.items);
+        }
 
-    let mut pieces: Vec<Piece> = Vec::new();
-    let mut joueur: Option<Joueur> = None;
+        if !room.npcs.is_empty() {
+            println!("🧑‍🤝‍🧑 PNJ présents : {:?}", room.npcs);
+        }
+    
+        println!("---");
+    }
 
-    // Trier les objets en `Piece` et `Joueur`
-    for obj in objets {
-        if obj["type"] == "Piece" {
-            let piece: Piece = serde_json::from_value(obj.clone()).expect("Erreur de parsing Piece");
-            pieces.push(piece);
-        } else if obj["type"] == "Joueur" {
-            let j: Joueur = serde_json::from_value(obj.clone()).expect("Erreur de parsing Joueur");
-            joueur = Some(j);
+    println!("\n🧑‍🎤 Personnages disponibles :");
+    let characters_clone = characters.clone();
+
+    for character in &characters_clone {
+        println!("{}", character.get_description());
+
+        
+    }
+    if let Some(character) = characters.first_mut() {
+        loop {
+            println!("\n🌍 {} est actuellement dans : {}", character.name, rooms[character.position].name);
+            println!("Où veux-tu aller ? (n->north, s-<south, e->east, w->west, quit)");
+
+            // 🔹 Lire l'entrée utilisateur
+            let mut direction = String::new();
+            stdin().read_line(&mut direction).expect("Erreur de lecture");
+            let direction = direction.trim().to_lowercase();
+
+            if direction == "quit" {
+                println!("🏁 Fin du déplacement.");
+                break;
+            }
+
+            // 🔹 Déplacer le personnage
+            character.move_to(&direction, &rooms);
         }
     }
 
-    // Vérifier si un joueur existe et lui faire avancer dans une direction donnée
-    if let Some(ref mut joueur) = joueur {
-        joueur.afficher_status();
-        joueur.avancer(&pieces, Oridentation::NORD); // Test moving north
-        joueur.afficher_status(); // Afficher après déplacement
-        // println!("{}", pieces.last().unwrap().description.to_string());
-        pieces.last().unwrap().decriver();
-
-    } else {
-        println!("❌ Aucun joueur trouvé dans le JSON !");
+    println!("\n🛠 Objets disponibles :");
+    for item in &items {
+        println!("{}", item.get_description());
     }
+
+    println!("🛠 Essayons d'interagir avec un objet...");
+    if let Some(item) = items.first() {
+        item.interact();
+    }*/
+
+    let mut game = Game::new();
+    game.run();
+    
 }

@@ -1,8 +1,11 @@
+pub mod traits;
+pub mod room;
+pub mod character;
+pub mod item;
+pub mod game;
+pub mod pnj;
+pub mod dialogue;
+mod elements;
 
-pub mod piece;
-pub mod joueur;
-pub mod connection;
+//pub mod worlds;
 
-pub use piece::Piece;
-pub use joueur::Joueur;
-pub use connection::{Connection, Oridentation};
