@@ -1,0 +1,1544 @@
+[
+  {
+    "id": 0,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 64,
+      "Sous-sol": 66,
+      "Tunnel": 19
+    }
+  },
+  {
+    "id": 1,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 2,
+      "Ouest": 64
+    }
+  },
+  {
+    "id": 2,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 3,
+      "Ouest": 1
+    }
+  },
+  {
+    "id": 3,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 2,
+      "Sud": 6
+    }
+  },
+  {
+    "id": 4,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 5,
+      "Est": 6
+    }
+  },
+  {
+    "id": 5,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 4,
+      "Ouest": 65
+    }
+  },
+  {
+    "id": 6,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 3,
+      "Ouest": 4,
+      "Est": 7
+    }
+  },
+  {
+    "id": 7,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 43,
+      "Est": 8,
+      "Ouest": 6
+    }
+  },
+  {
+    "id": 8,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 9,
+      "Ouest": 7
+    }
+  },
+  {
+    "id": 9,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Ouest": 8,
+      "Sud": 10
+    }
+  },
+  {
+    "id": 10,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 9,
+      "Sud": 11
+    }
+  },
+  {
+    "id": 11,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 10,
+      "Sud": 12
+    }
+  },
+  {
+    "id": 12,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 11,
+      "Sud": 13
+    }
+  },
+  {
+    "id": 13,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 12,
+      "Sud": 14
+    }
+  },
+  {
+    "id": 14,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 13,
+      "Ouest": 39,
+      "Sud": 15
+    }
+  },
+  {
+    "id": 15,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 14,
+      "Sud": 16
+    }
+  },
+  {
+    "id": 16,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord":15,
+      "Sud": 17
+    }
+  },
+  {
+    "id": 17,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 18,
+      "Ouest": 32,
+      "Nord": 16
+    }
+  },
+  {
+    "id": 18,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 17,
+      "Sud": 19
+    }
+  },
+  {
+    "id": 19,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 18,
+      "Ouest": 20,
+      "Tunnel": 0,
+      "À l'étage": 114
+    }
+  },
+  {
+    "id": 20,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 19,
+      "Ouest": 21
+    }
+  },
+  {
+    "id": 21,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 20,
+      "Ouest": 22
+    }
+  },
+  {
+    "id": 22,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 21,
+      "Ouest": 23
+    }
+  },
+  {
+    "id": 23,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 22,
+      "Ouest": 24
+    }
+  },
+  {
+    "id": 24,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 25,
+      "Est": 23
+    }
+  },
+  {
+    "id": 25,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 24,
+      "Nord": 26
+    }
+  },
+  {
+    "id": 26,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 27,
+      "Sud": 25
+    }
+  },
+  {
+    "id": 27,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 33,
+      "Sud": 26,
+      "Est": 28
+    }
+  },
+  {
+    "id": 28,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 29,
+      "Ouest": 27
+    }
+  },
+  {
+    "id": 29,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 30,
+      "Ouest": 28
+    }
+  },
+  {
+    "id": 30,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 38,
+      "Sud": 31,
+      "Ouest": 29
+    }
+  },
+  {
+    "id": 31,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 30,
+      "Est": 32
+    }
+  },
+  {
+    "id": 32,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 17,
+      "Ouest": 31
+    }
+  },
+  {
+    "id": 33,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 34,
+      "Sud": 27
+    }
+  },
+  {
+    "id": 34,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 33,
+      "Nord": 47,
+      "Est": 35,
+      "Ouest": 48,
+      "Sous-sol": 89,
+      "À l'étage": 90
+    }
+  },
+  {
+    "id": 35,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 36,
+      "Ouest": 34
+    }
+  },
+  {
+    "id": 36,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 37,
+      "Ouest": 35
+    }
+  },
+  {
+    "id": 37,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 40,
+      "Sud": 38,
+      "Est": 39,
+      "Ouest": 36
+    }
+  },
+  {
+    "id": 38,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 37,
+      "Sud": 30
+    }
+  },
+  {
+    "id": 39,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 14,
+      "Ouest": 37
+    }
+  },
+  {
+    "id": 40,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 41,
+      "Sud": 37
+    }
+  },
+  {
+    "id": 41,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 40,
+      "Nord": 42,
+      "Ouest": 44
+    }
+  },
+  {
+    "id": 42,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 43,
+      "Sud": 41
+    }
+  },
+  {
+    "id": 43,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 7,
+      "Sud": 42
+    }
+  },
+  {
+    "id": 44,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 41,
+      "Ouest": 45
+    }
+  },
+  {
+    "id": 45,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 44,
+      "Ouest": 46
+    }
+  },
+  {
+    "id": 46,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 45,
+      "Ouest": 54,
+      "Sud": 47,
+      "Sous-sol": 87
+    }
+  },
+  {
+    "id": 47,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 46,
+      "Sud": 34
+    }
+  },
+  {
+    "id": 48,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 34,
+      "Ouest": 49
+    }
+  },
+  {
+    "id": 49,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 48,
+      "Ouest": 50
+    }
+  },
+  {
+    "id": 50,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 51,
+      "Est": 49
+    }
+  },
+  {
+    "id": 51,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 52,
+      "Sud": 50
+    }
+  },
+  {
+    "id": 52,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 51,
+      "Est": 53,
+      "Nord": 55
+    }
+  },
+  {
+    "id": 53,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 55,
+      "Est": 54,
+      "Ouest": 52
+    }
+  },
+  {
+    "id": 54,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 59,
+      "Est": 46,
+      "Ouest": 53
+    }
+  },
+  {
+    "id": 55,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 56,
+      "Sud": 52
+    }
+  },
+  {
+    "id": 56,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 57,
+      "Sud": 55
+    }
+  },
+  {
+    "id": 57,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 56,
+      "Est": 58
+    }
+  },
+  {
+    "id": 58,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 61,
+      "Ouest": 57
+    }
+  },
+  {
+    "id": 59,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 54,
+      "Nord": 60
+    }
+  },
+  {
+    "id": 60,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 61,
+      "Sud": 59,
+      "Est": 65
+    }
+  },
+  {
+    "id": 61,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 62,
+      "Sud": 60,
+      "Ouest": 58
+    }
+  },
+  {
+    "id": 62,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 63,
+      "Sud": 61
+    }
+  },
+  {
+    "id": 63,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 62,
+      "Est": 64
+    }
+  },
+  {
+    "id": 64,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 0,
+      "Est": 1,
+      "Ouest": 63
+    }
+  },
+  {
+    "id": 65,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 5,
+      "Ouest": 60
+    }
+  },
+  {
+    "id": 66,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 67,
+      "Rez-de-chaussée": 0
+    }
+  },
+  {
+    "id": 67,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 68,
+      "Ouest": 75
+    }
+  },
+  {
+    "id": 68,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 69,
+      "Ouest": 67
+    }
+  },
+  {
+    "id": 69,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 70,
+      "Ouest": 68
+    }
+  },
+  {
+    "id": 70,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 69,
+      "Sud": 71
+    }
+  },
+  {
+    "id": 71,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Ouest": 72,
+      "Nord": 70
+    }
+  },
+  {
+    "id": 72,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 73,
+      "Est": 71
+    }
+  },
+  {
+    "id": 73,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 72,
+      "Ouest": 74
+    }
+  },
+  {
+    "id": 74,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 73,
+      "Ouest": 84
+    }
+  },
+  {
+    "id": 75,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 76,
+      "Est": 67
+    }
+  },
+  {
+    "id": 76,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 75,
+      "Sud": 77
+    }
+  },
+  {
+    "id": 77,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Ouest": 78,
+      "Nord": 76,
+      "Sud": 84
+    }
+  },
+  {
+    "id": 78,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 77,
+      "Ouest": 79
+    }
+  },
+  {
+    "id": 79,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 80,
+      "Est": 78
+    }
+  },
+  {
+    "id": 80,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 79,
+      "Sud": 81
+    }
+  },
+  {
+    "id": 81,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 80,
+      "Sud": 82
+    }
+  },
+  {
+    "id": 82,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 81,
+      "Est": 83
+    }
+  },
+  {
+    "id": 83,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 86,
+      "Ouest": 82
+    }
+  },
+  {
+    "id": 84,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 77,
+      "Sud": 85,
+      "Est": 74
+    }
+  },
+  {
+    "id": 85,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 86,
+      "Nord": 84
+    }
+  },
+  {
+    "id": 86,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 85,
+      "Est": 87,
+      "Ouest": 83
+    }
+  },
+  {
+    "id": 87,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 88,
+      "Ouest": 86,
+      "Rez-de-chaussée": 46
+    }
+  },
+  {
+    "id": 88,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 87,
+      "Sud": 89
+    }
+  },
+  {
+    "id": 89,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 88,
+      "Rez-de-chaussée": 34
+    }
+  },
+  {
+    "id": 90,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 96,
+      "Est": 91,
+      "Rez-de-chaussée": 34
+    }
+  },
+  {
+    "id": 91,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 92,
+      "Ouest": 90
+    }
+  },
+  {
+    "id": 92,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 93,
+      "Ouest": 91
+    }
+  },
+  {
+    "id": 93,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 100,
+      "Est": 94,
+      "Ouest": 92
+    }
+  },
+  {
+    "id": 94,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 95,
+      "Ouest": 93
+    }
+  },
+  {
+    "id": 95,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Sud": 106,
+      "Ouest": 94
+    }
+  },
+  {
+    "id": 96,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 90,
+      "Sud": 97
+    }
+  },
+  {
+    "id": 97,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 96,
+      "Sud": 107,
+      "Est": 98
+    }
+  },
+  {
+    "id": 98,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 99,
+      "Ouest": 97
+    }
+  },
+  {
+    "id": 99,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 101,
+      "Ouest": 98
+    }
+  },
+  {
+    "id": 100,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 93,
+      "Sud": 101
+    }
+  },
+  {
+    "id": 101,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 100,
+      "Sud": 102,
+      "Ouest": 99
+    }
+  },
+  {
+    "id": 102,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 101,
+      "Est": 103
+    }
+  },
+  {
+    "id": 103,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 104,
+      "Ouest": 102
+    }
+  },
+  {
+    "id": 104,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 105,
+      "Sud": 115,
+      "Ouest": 103
+    }
+  },
+  {
+    "id": 105,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 106,
+      "Sud": 104
+    }
+  },
+  {
+    "id": 106,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 95,
+      "Sud": 105
+    }
+  },
+  {
+    "id": 107,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 97,
+      "Sud": 108
+    }
+  },
+  {
+    "id": 108,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 107,
+      "Sud": 109
+    }
+  },
+  {
+    "id": 109,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 108,
+      "Est": 110
+    }
+  },
+  {
+    "id": 110,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 111,
+      "Ouest": 109
+    }
+  },
+  {
+    "id": 111,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 112,
+      "Ouest": 110
+    }
+  },
+  {
+    "id": 112,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 113,
+      "Ouest": 111
+    }
+  },
+  {
+    "id": 113,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Est": 114,
+      "Ouest": 112
+    }
+  },
+  {
+    "id": 114,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Ouest": 113,
+      "Nord": 115,
+      "Rez-de-chaussée": 19
+    }
+  },
+  {
+    "id": 115,
+    "name": " ",
+    "description": " ",
+    "terrain_type": " ",
+    "locked": false,
+    "items": [],
+    "pnjs": [],
+    "exits": {
+      "Nord": 104,
+      "Sud": 114
+    }
+  }
+]
