@@ -1,0 +1,54 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+struct Entity {
+    id: u32
+    name: String
+    description: String
+}
+
+struct Vivant {
+    entity: Entity
+    health: i32
+    strength: i32
+    intelligence: i32
+    inventory: Vec<Item>
+
+}
+
+struct Item {
+    entity: Entity
+    type: String
+    effect: String
+    usable: boolean
+}
+
+struct Character {
+    vivant: Vivant
+    position: usize
+}
+
+struct Pnj {
+    vivant: Vivant
+    role: String
+    dialogue_id: u32
+}
+
+struct Room {
+    entity: Entity
+    terrain_type: String
+    locked: boolean
+    items: Vec<u32>
+    pnj: Vec<u32>
+}
+
+Entity <-- Vivant
+Entity <-- Item
+Vivant <-- Character
+Vivant <-- Pnj
+Entity <-- Room
+
+
+
+
+@enduml

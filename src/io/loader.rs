@@ -1,6 +1,9 @@
 use std::fs;
 use serde_json;
-use crate::models::{character::Character, dialogue::Dialogue, item::Item, pnj::Pnj, room::Room};
+use crate::models::{dialogue::Dialogue, room::Room};
+use crate::models::elements::character::Character;
+use crate::models::elements::item::Item;
+use crate::models::elements::pnj::Pnj;
 
 pub fn load_room_from_file(filename: &str) -> Result<Vec<Room>, serde_json::Error> {
     let data = fs::read_to_string(filename).expect("Impossible de lire le fichier des zones");

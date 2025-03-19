@@ -1,31 +1,76 @@
 [
     {
-        "id": 0,
-        "name": "Gardien",
+        "vivant": {
+            "elem": {
+                "id": 0,
+                "name": "Gardien",
+                "description": "Effrayant"
+            },
+            "health": 100,
+            "strength": 15,
+            "intelligence": 10,
+            "inventory": []
+        },
         "role": "Guide",
         "dialogue_id": 0
     },
     {
-        "id": 1,
-        "name": "Roi fantôme",
+        "vivant": {
+            "elem": {
+                "id": 1,
+                "name": "Roi fantôme",
+                "description": "Effrayant"
+            },
+            "health": 100,
+            "strength": 15,
+            "intelligence": 10,
+            "inventory": []
+        },
         "role": "Boss",
         "dialogue_id": 1
     },
     {
-        "id": 2,
-        "name": "Sage énigmatique",
+        "vivant": {
+            "elem": {
+                "id": 2,
+                "name": "Sage enigmatique",
+                "description": "Effrayant"
+            },
+            "health": 100,
+            "strength": 15,
+            "intelligence": 10,
+            "inventory": []
+        },
         "role": "Donneur de quête",
         "dialogue_id": 2
     },
     {
-        "id": 3,
-        "name": "Golem de pierre",
+        "vivant": {
+            "elem": {
+                "id": 3,
+                "name": "Golem de pierre",
+                "description": "Effrayant"
+            },
+            "health": 100,
+            "strength": 15,
+            "intelligence": 10,
+            "inventory": []
+        },
         "role": "Ennemi",
         "dialogue_id": 3
     },
     {
-        "id": 4,
-        "name": "Dragon endormi",
+        "vivant": {
+            "elem": {
+                "id": 4,
+                "name": "Dragon endormi",
+                "description": "Effrayant"
+            },
+            "health": 100,
+            "strength": 15,
+            "intelligence": 10,
+            "inventory": []
+        },
         "role": "Boss",
         "dialogue_id": 4
     }

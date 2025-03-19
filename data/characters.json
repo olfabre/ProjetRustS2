@@ -1,22 +1,31 @@
 [
+
     {
-        "id": 0,
-        "name": "Guerrier",
-        "class": "combat",
-        "health": 100,
-        "strength": 15,
-        "intelligence": 5,
-        "position": 0,
-        "inventory": []
+        "vivant": {
+            "elem": {
+                "id": 0,
+                "name": "Guerrier",
+                "description": "Un aventurier courageux"
+            },
+            "health": 100,
+            "strength": 15,
+            "intelligence": 10,
+            "inventory": []
+        },
+        "position": 0
     },
     {
-        "id": 1,
-        "name": "Mage",
-        "class": "magie",
-        "health": 80,
-        "strength": 5,
-        "intelligence": 20,
-        "position": 1,
-        "inventory": []
+        "vivant": {
+            "elem": {
+                "id": 1,
+                "name": "Mage",
+                "description": "Un aventurier sage"
+            },
+            "health": 100,
+            "strength": 5,
+            "intelligence": 25,
+            "inventory": []
+        },
+        "position": 0
     }
 ]

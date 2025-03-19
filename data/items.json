@@ -1,49 +1,66 @@
 [
     {
-        "id": 0,
-        "name": "Potion de soin",
-        "type": "consommable",
-        "description": "Restaure 20 points de vie.",
+        "elem": {
+            "id": 0,
+            "name": "Potion de soin",
+
+            "description": "Restaure 20 points de vie."
+        },
+
         "effect": "heal_20",
         "usable": true
     },
     {
-        "id": 1,
-        "name": "Épée de fer",
-        "type": "arme",
-        "description": "Une épée tranchante en fer.",
+        "elem": {
+            "id": 1,
+            "name": "Épée de fer",
+
+            "description": "Une épée tranchante en fer."
+        },
+
         "effect": "attack_bonus_5",
         "usable": false
     },
     {
-        "id": 2,
-        "name": "Gemme enchantée",
-        "type": "objet spécial",
-        "description": "Une pierre précieuse pulsant d'une lumière mystique.",
+        "elem": {
+            "id": 2,
+            "name": "Gemme enchantée",
+
+            "description": "Une pierre précieuse pulsant d'une lumière mystique."
+        },
+
         "effect": "Confère une protection magique.",
         "usable": false
     },
     {
-        "id": 3,
-        "name": "Parchemin mystérieux",
-        "type": "consommable",
-        "description": "Un vieux parchemin contenant un message crypté.",
+        "elem": {
+            "id": 3,
+            "name": "Parchemin mystérieux",
+
+            "description": "Un vieux parchemin contenant un message crypté."
+        },
+
         "effect": "Dévoile un secret ancien.",
         "usable":true
     },
     {
-        "id": 4,
-        "name": "Parchemin des énigmes",
-        "type": "objet spécial",
-        "description": "Un vieux parchemin contenant un message crypté.",
+        "elem": {
+            "id": 4,
+            "name": "Parchemin des énigmes",
+
+            "description": "Un vieux parchemin contenant un message crypté."
+        },
+
         "effect": "Contient une énigme qui, une fois résolue, octroie un bonus d'intelligence.",
         "usable": false
     },
     {
-        "id": 5,
-        "name": "Clé du trésor",
-        "type": "objet spécial",
-        "description": "Une clé ancienne, ornée de symboles magiques.",
+        "elem": {
+            "id": 5,
+            "name": "Clé du trésor",
+            "description": "Une clé ancienne, ornée de symboles magiques."
+        },
+
         "effect": "Déverrouille la salle du trésor.",
         "usable": true
     }
