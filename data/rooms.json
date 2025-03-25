@@ -5,9 +5,10 @@
             "name": "Entrée du Donjon",
             "description": "Une grande porte en bois renforcé mène à l'intérieur du mystérieux donjon.",
             "terrain_type": "château",
-            "locked": true,
+            "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Sud": 64,
                 "Sous-sol": 66,
@@ -22,6 +23,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {"Est": 2, "Ouest": 64}
         },
         {
@@ -32,6 +34,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {"Sud": 3, "Ouest": 1}
         },
         {
@@ -42,6 +45,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {"Nord": 2, "Sud": 6}
         },
         {
@@ -52,6 +56,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {"Sud": 5, "Est": 6}
         },
         {
@@ -60,7 +65,8 @@
             "description": "Une ancienne cellule de prisonnier désormais vide et lugubre.",
             "terrain_type": "souterrain",
             "locked": true,
-            "items": [],
+            "items": [8],
+            "enemies": [2],
             "pnjs": [],
             "exits": {"Nord": 4, "Ouest": 65}
         },
@@ -72,6 +78,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {"Nord": 3, "Ouest": 4, "Est": 7}
         },
         {
@@ -82,6 +89,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {"Sud": 43, "Est": 8, "Ouest": 6}
         },
         {
@@ -92,6 +100,7 @@
             "locked": true,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {"Est": 9, "Ouest": 7}
         },
         {
@@ -102,6 +111,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {"Ouest": 8, "Sud": 10}
         },
         {
@@ -112,6 +122,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {"Nord": 9, "Sud": 11}
         },
         {
@@ -122,6 +133,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {"Nord": 10, "Sud": 12}
         },
         {
@@ -132,6 +144,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {"Nord": 11, "Sud": 13}
         },
         {
@@ -140,8 +153,9 @@
             "description": "La cuisine du donjon, désormais couverte de poussière et d'ustensiles rouillés.",
             "terrain_type": "château",
             "locked": true,
-            "items": [],
+            "items": [0, 3],
             "pnjs": [],
+            "enemies": [],
             "exits": {"Nord": 12, "Sud": 14}
         },
         {
@@ -152,6 +166,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {"Nord": 13, "Ouest": 39, "Sud": 15}
         },
         {
@@ -162,6 +177,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 14,
                 "Sud": 16
@@ -175,6 +191,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 15,
                 "Sud": 17
@@ -188,6 +205,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Sud": 18,
                 "Ouest": 32,
@@ -202,6 +220,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 17,
                 "Sud": 19
@@ -215,6 +234,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 18,
                 "Ouest": 20,
@@ -230,6 +250,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 19,
                 "Ouest": 21
@@ -243,6 +264,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 20,
                 "Ouest": 22
@@ -256,6 +278,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 21,
                 "Ouest": 23
@@ -269,6 +292,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 22,
                 "Ouest": 24
@@ -282,6 +306,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 25,
                 "Est": 23
@@ -295,6 +320,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Sud": 24,
                 "Nord": 26
@@ -308,6 +334,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 27,
                 "Sud": 25
@@ -321,6 +348,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 33,
                 "Sud": 26,
@@ -335,6 +363,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 29,
                 "Ouest": 27
@@ -345,9 +374,10 @@
             "name": "Salle des coffres",
             "description": "Une pièce remplie de coffres fermés à clé. Une forte odeur de métal y règne.",
             "terrain_type": "Pierre froide",
-            "locked": false,
+            "locked": true,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 30,
                 "Ouest": 28
@@ -361,6 +391,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 38,
                 "Sud": 31,
@@ -375,6 +406,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 30,
                 "Est": 32
@@ -388,6 +420,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 17,
                 "Ouest": 31
@@ -401,6 +434,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 34,
                 "Sud": 27
@@ -414,6 +448,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Sud": 33,
                 "Nord": 47,
@@ -431,6 +466,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 36,
                 "Ouest": 34
@@ -444,6 +480,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 37,
                 "Ouest": 35
@@ -457,6 +494,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 40,
                 "Sud": 38,
@@ -472,6 +510,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 37,
                 "Sud": 30
@@ -485,6 +524,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 14,
                 "Ouest": 37
@@ -498,6 +538,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 41,
                 "Sud": 37
@@ -511,6 +552,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Sud": 40,
                 "Nord": 42,
@@ -523,8 +565,9 @@
             "description": "Un autel au centre de la pièce porte une clé dorée. Un piège est sûrement caché...",
             "terrain_type": "Sol piégé",
             "locked": false,
-            "items": [],
+            "items": [5],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 43,
                 "Sud": 41
@@ -538,6 +581,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [1],
             "exits": {
                 "Nord": 7,
                 "Sud": 42
@@ -551,6 +595,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 41,
                 "Ouest": 45
@@ -564,6 +609,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 44,
                 "Ouest": 46
@@ -577,6 +623,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 45,
                 "Ouest": 54,
@@ -592,6 +639,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 46,
                 "Sud": 34
@@ -605,6 +653,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 34,
                 "Ouest": 49
@@ -618,6 +667,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 48,
                 "Ouest": 50
@@ -631,6 +681,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 51,
                 "Est": 49
@@ -644,6 +695,7 @@
             "locked": true,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 52,
                 "Sud": 50
@@ -657,6 +709,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Sud": 51,
                 "Est": 53,
@@ -671,6 +724,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 55,
                 "Est": 54,
@@ -685,6 +739,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 59,
                 "Est": 46,
@@ -699,6 +754,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 56,
                 "Sud": 52
@@ -712,6 +768,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 57,
                 "Sud": 55
@@ -725,6 +782,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Sud": 56,
                 "Est": 58
@@ -738,6 +796,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 61,
                 "Ouest": 57
@@ -751,6 +810,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Sud": 54,
                 "Nord": 60
@@ -764,6 +824,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 61,
                 "Sud": 59,
@@ -778,6 +839,7 @@
             "locked": true,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 62,
                 "Sud": 60,
@@ -792,6 +854,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 63,
                 "Sud": 61
@@ -805,6 +868,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Sud": 62,
                 "Est": 64
@@ -818,6 +882,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 0,
                 "Est": 1,
@@ -832,6 +897,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 5,
                 "Ouest": 60
@@ -845,6 +911,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [0],
             "exits": {
                 "Sud": 67,
                 "Rez-de-chaussée": 0
@@ -858,6 +925,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 68,
                 "Ouest": 75
@@ -871,6 +939,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 69,
                 "Ouest": 67
@@ -884,6 +953,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Sud": 70,
                 "Ouest": 68
@@ -897,6 +967,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 69,
                 "Sud": 71
@@ -910,6 +981,7 @@
             "locked": true,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Ouest": 72,
                 "Nord": 70
@@ -923,6 +995,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Sud": 73,
                 "Est": 71
@@ -936,6 +1009,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 72,
                 "Ouest": 74
@@ -949,6 +1023,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 73,
                 "Ouest": 84
@@ -962,6 +1037,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Sud": 76,
                 "Est": 67
@@ -975,6 +1051,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 75,
                 "Sud": 77
@@ -988,6 +1065,7 @@
             "locked": true,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Ouest": 78,
                 "Nord": 76,
@@ -1002,6 +1080,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 77,
                 "Ouest": 79
@@ -1015,6 +1094,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Sud": 80,
                 "Est": 78
@@ -1028,6 +1108,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 79,
                 "Sud": 81
@@ -1041,6 +1122,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 80,
                 "Sud": 82
@@ -1054,6 +1136,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 81,
                 "Est": 83
@@ -1067,6 +1150,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 86,
                 "Ouest": 82
@@ -1080,6 +1164,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 77,
                 "Sud": 85,
@@ -1094,6 +1179,7 @@
             "locked": true,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Sud": 86,
                 "Nord": 84
@@ -1107,6 +1193,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 85,
                 "Est": 87,
@@ -1121,6 +1208,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Sud": 88,
                 "Ouest": 86,
@@ -1135,6 +1223,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 87,
                 "Sud": 89
@@ -1148,6 +1237,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 88,
                 "Rez-de-chaussée": 34
@@ -1161,6 +1251,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Sud": 96,
                 "Est": 91,
@@ -1175,6 +1266,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 92,
                 "Ouest": 90
@@ -1188,6 +1280,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 93,
                 "Ouest": 91
@@ -1201,6 +1294,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Sud": 100,
                 "Est": 94,
@@ -1215,6 +1309,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 95,
                 "Ouest": 93
@@ -1228,6 +1323,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Sud": 106,
                 "Ouest": 94
@@ -1241,6 +1337,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 90,
                 "Sud": 97
@@ -1254,6 +1351,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 96,
                 "Sud": 107,
@@ -1268,6 +1366,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 99,
                 "Ouest": 97
@@ -1281,6 +1380,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 101,
                 "Ouest": 98
@@ -1294,6 +1394,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 93,
                 "Sud": 101
@@ -1307,6 +1408,7 @@
             "locked": true,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 100,
                 "Sud": 102,
@@ -1321,6 +1423,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 101,
                 "Est": 103
@@ -1334,6 +1437,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 104,
                 "Ouest": 102
@@ -1347,6 +1451,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 105,
                 "Sud": 115,
@@ -1361,6 +1466,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 106,
                 "Sud": 104
@@ -1374,6 +1480,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 95,
                 "Sud": 105
@@ -1387,6 +1494,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 97,
                 "Sud": 108
@@ -1400,6 +1508,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 107,
                 "Sud": 109
@@ -1413,6 +1522,7 @@
             "locked": true,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 108,
                 "Est": 110
@@ -1426,6 +1536,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 111,
                 "Ouest": 109
@@ -1439,6 +1550,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 112,
                 "Ouest": 110
@@ -1452,6 +1564,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 113,
                 "Ouest": 111
@@ -1465,6 +1578,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Est": 114,
                 "Ouest": 112
@@ -1478,6 +1592,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Ouest": 113,
                 "Nord": 115,
@@ -1492,6 +1607,7 @@
             "locked": false,
             "items": [],
             "pnjs": [],
+            "enemies": [],
             "exits": {
                 "Nord": 104,
                 "Sud": 114

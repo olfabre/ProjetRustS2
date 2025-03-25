@@ -1,0 +1,54 @@
+@startuml
+
+entity "Personnage" as Pers {
+  * id : int
+  * nom : string
+  * santé : int
+  * force : int
+  * agilité : int
+  * position : int
+  * experience : int
+}
+
+entity "Salle" as Room {
+  * id : int
+  * nom : string
+  * description : string
+  * terrain_type : string
+  * locked : bool
+}
+
+entity "Objet" as Obj {
+  * id : int
+  * nom : string
+  * type : string
+  * effet : string
+  * utilisable : bool
+}
+
+entity "Ennemi" as En {
+  * id : int
+  * nom : string
+  * santé : int
+  * force : int
+  * agilité : int
+  * salle_id : int
+}
+
+entity "PNJ" as Pnj {
+  * id : int
+  * nom : string
+  * dialogues : string
+  * salle_id : int
+}
+
+' Associations
+Pers -- Room : explore
+Pers -- Obj : possède
+Pers -- En : combat
+Pers -- Pnj : parle
+Room -- Obj : contient
+Room -- En : héberge
+Room -- Pnj : héberge
+
+@enduml

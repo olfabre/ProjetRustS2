@@ -5,9 +5,12 @@
         "class": "combat",
         "health": 100,
         "strength": 15,
+        "agility": 10,
         "intelligence": 5,
         "position": 0,
-        "inventory": []
+        "inventory": [],
+        "level": 1,
+        "experience": 0
     },
     {
         "id": 1,
@@ -15,8 +18,11 @@
         "class": "magie",
         "health": 80,
         "strength": 5,
+        "agility": 10,
         "intelligence": 20,
         "position": 1,
-        "inventory": []
+        "inventory": [],
+        "level": 1,
+        "experience": 0
     }
 ]

@@ -1,0 +1,66 @@
+[
+  {
+    "id": 0,
+    "name": "Spectre des âmes",
+    "health": 40,
+    "strength": 8,
+    "agility": 3,
+    "room_id": 66
+  },
+  {
+    "id": 1,
+    "name": "Gardien de pierre",
+    "health": 80,
+    "strength": 12,
+    "agility": 2,
+    "room_id": 43
+  },
+  {
+    "id": 2,
+    "name": "Garde squelette",
+    "health": 30,
+    "strength": 10,
+    "agility": 5,
+    "room_id": 11
+  },
+  {
+    "id": 3,
+    "name": "Golem de pierre",
+    "health": 50,
+    "strength": 15,
+    "agility": 3,
+    "room_id": 43
+  },
+  {
+    "id": 4,
+    "name": "Dragon endormi",
+    "health": 100,
+    "strength": 25,
+    "agility": 8,
+    "room_id": 4
+  },
+  {
+    "id": 5,
+    "name": "Esprit vengeur",
+    "health": 35,
+    "strength": 14,
+    "agility": 6,
+    "room_id": 73
+  },
+  {
+    "id": 6,
+    "name": "Rôdeur masqué",
+    "health": 45,
+    "strength": 10,
+    "agility": 10,
+    "room_id": 28
+  },
+  {
+    "id": 7,
+    "name": "Garde spectral",
+    "health": 60,
+    "strength": 18,
+    "agility": 4,
+    "room_id": 109
+  }
+]
