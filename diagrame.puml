@@ -41,12 +41,21 @@ entity "PNJ" as Pnj {
   * dialogues : string
   * salle_id : int
 }
+entity Quete {
+  +id : u32
+  +titre : String
+  +description : String
+  +accomplie : bool
+}
+
+
 
 ' Associations
 Pers -- Room : explore
-Pers -- Obj : possède
+Pers -- Obj : possède, utilise
 Pers -- En : combat
 Pers -- Pnj : parle
+Pers ||--o{ Quete : suit
 Room -- Obj : contient
 Room -- En : héberge
 Room -- Pnj : héberge

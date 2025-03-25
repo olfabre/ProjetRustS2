@@ -1,0 +1,47 @@
+@startuml
+
+entity "Salle" as Salle {
+  +id : u32
+  +nom : String
+  +description : String
+}
+
+entity "Objet" as Objet {
+  +id : u32
+  +nom : String
+  +type : String
+  +effet : String
+}
+
+entity "Personnage" {
+  +id : u32
+  +nom : String
+  +santé : u32
+  +force : u32
+  +position : u32
+}
+
+entity "Ennemi" {
+  +id : u32
+  +nom : String
+  +santé : u32
+  +salle_id : u32
+}
+
+entity "PNJ" {
+  +id : u32
+  +nom : String
+}
+
+entity "Dialogue" {
+  +id : u32
+  +contenu : String
+}
+
+Salle --{ Objet : contient
+Salle --{ "Ennemi" : contient
+Salle --{ PNJ : contient
+Personnage --{ Objet : possède
+PNJ --{ Dialogue : dialogue
+
+@enduml
