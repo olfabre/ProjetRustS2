@@ -1,7 +1,7 @@
-use crate::models::{character::Character, room::Room, item::Item, pnj::Pnj, dialogue::Dialogue};
-use crate::io::loader::{load_characters_from_file, load_dialogues_from_file, load_items_from_file, load_pnjs_from_file, load_room_from_file};
+use crate::models::{character::Character, room::Room, item::Item, pnj::Pnj, dialogue::Dialogue, ennemie::Enemy, ennemie};
+use crate::io::loader::{load_characters_from_file, load_dialogues_from_file, load_items_from_file, load_pnjs_from_file, load_room_from_file, load_ennemie_from_file};
 use std::io::stdin;
-
+use crate::models::combat::Combat;
 
 pub struct Game {
     rooms: Vec<Room>,
@@ -9,6 +9,7 @@ pub struct Game {
     items: Vec<Item>,
     pnjs: Vec<Pnj>,
     dialogues: Vec<Dialogue>,
+    ennemies: Vec<Enemy>,
 }
 
 impl Game {
@@ -19,8 +20,9 @@ impl Game {
         let items = load_items_from_file("data/items.json").expect("Erreur lors du chargement des objets.");
         let pnjs = load_pnjs_from_file("data/pnjs.json").expect("Erreur lors du chargement des PNJ.");
         let dialogues = load_dialogues_from_file("data/dialogue.json").expect("Erreur lors du chargement des PNJ");
+        let ennemies = load_ennemie_from_file("data/ennemie.json").expect("Erreur lors du chargement des ennemis.");
 
-        Game { rooms, characters, items, pnjs, dialogues }
+        Game { rooms, characters, items, pnjs, dialogues, ennemies }
     }
 
     /// Démarre la boucle principale du jeu
@@ -32,7 +34,7 @@ impl Game {
                 println!("\n🌍 {} est actuellement dans : {}", character.name, current_room.name);
                 println!("📍 {} : {}", current_room.name, current_room.description);
 
-                // Affichage des objets trouvés
+                // Affichage des objets trouvés dans la salle
                 if !current_room.items.is_empty() {
                     println!("🛠 Objets trouvés :");
                     for &item_id in &current_room.items {
@@ -44,10 +46,28 @@ impl Game {
                     println!("🛠 Aucun objet trouvable ici.");
                 }
 
-                // Affichage des PNJ présents
-                if !current_room.npcs.is_empty() {
+                // Vérifie si la salle contient des ennemis
+                if !current_room.enemies.is_empty() {
+                    println!("⚔️ Ennemis présents ici :");
+                    for &ennemie_id in &current_room.enemies {
+                        // Recherche de l’ennemi correspondant dans la liste globale
+                        if let Some(ennemie) = self.ennemies.iter().find(|e| e.id == ennemie_id) {
+                            println!(
+                                "   - {} (PV: {}, Force: {}, Agilité: {})",
+                                ennemie.name, ennemie.health, ennemie.strength, ennemie.agility
+                            );
+                        }
+                    }
+                } else {
+                    // Aucun ennemi trouvé dans cette salle
+                    println!("⚔️ Aucun ennemi présent ici.");
+                }
+
+
+                // Affichage des PNJ présents dans la salle
+                if !current_room.pnjs.is_empty() {
                     println!("🧑‍🤝‍🧑 Personnages présents :");
-                    for &pnj_id in &current_room.npcs {
+                    for &pnj_id in &current_room.pnjs {
                         if let Some(pnj) = self.pnjs.iter().find(|p| p.id == pnj_id) {
                             println!("- {}", pnj.name);
                         }
@@ -56,8 +76,17 @@ impl Game {
                     println!("🧑‍🤝‍🧑 Aucun personnage ici.");
                 }
 
-                println!("\nOù veux-tu aller ? (north, south, east, west, quit, prendre <objet>, utiliser <objet>, parler <pnj>)");
+                println!("\nOù veux-tu aller ? (north, south, east, west, up, down, tunnel, quit, prendre <objet>, utiliser <objet>, parler <pnj>, combattre <ennemie>)");
 
+                // Affiche les directions disponibles
+                println!("Sorties disponibles :");
+                for direction in current_room.exits.keys() {
+                    println!("- {}", direction);
+                }
+
+
+
+                // Lecture de l'entrée utilisateur
                 let mut input = String::new();
                 stdin().read_line(&mut input).expect("Erreur de lecture");
                 let input = input.trim().to_lowercase();
@@ -69,42 +98,73 @@ impl Game {
 
                 // Prendre un objet
                 if input.starts_with("prendre ") {
-                    let objet_nom = &input[8..].trim().to_lowercase(); // Normalisation
-                
-                    if let Some(&item_id) = self.rooms[character.position]
-                        .items
-                        .iter()
-                        .find(|&&id| self.items[id as usize].name.to_lowercase() == *objet_nom) 
-                    {
-                        let item = self.items[item_id as usize].clone();
-                        character.inventory.push(item.clone());
-                        println!("🎒 {} a pris l'objet : {}", character.name, item.name.clone());
-                
-                        // Supprimer l'objet de la salle
-                        self.rooms[character.position].items.retain(|&id| id != item_id);
-                    } else {
-                        println!("❌ Objet non trouvé !");
-                    }
+                    let objet_nom = &input[8..].trim().to_lowercase();
+                    character.prendre_objet(objet_nom, &mut self.rooms, &self.items);
                     continue;
                 }
-                
-                
+
+                //Utiliser les objtes
+                if input.starts_with("utiliser ") {
+                    let objet_nom = &input[8..].trim();
+                    character.utiliser_objet(objet_nom, &mut self.rooms, &self.items);
+                    continue;
+                }
+
+
                 // Parler à un PNJ
                 if input.starts_with("parler ") {
                     let pnj_nom = &input[7..].trim();
                     Pnj::parler_au_pnj(pnj_nom, character.position, &self.rooms, &self.pnjs, &self.dialogues);
                     continue;
                 }
-                
-                
 
-                // Déplacement du personnage
-                if let Some(&new_position) = current_room.exits.get(&input) {
-                    character.position = new_position;
-                    println!("🚶 {} se déplace vers {}.", character.name, self.rooms[new_position].name);
-                } else {
-                    println!("❌ Pas de passage dans cette direction !");
+                // Combattre un ennemi
+                if input.starts_with("combattre ") {
+                    let ennemi_nom = &input[10..].trim().to_lowercase();
+                    let current_room_id = character.position as u32;
+
+                    if let Some(enemy) = self.ennemies.iter().find(|e| e.room_id == current_room_id && e.name.to_lowercase() == *ennemi_nom) {
+                        // Clone de l'ennemi pour pouvoir le manipuler sans bouger l'original (qui est dans self.ennemies)
+                        let enemy_clone = enemy.clone();
+                        let enemy_id = enemy.id;
+
+                        // Lancement du combat et récupération du résultat (true si ennemi vaincu, false sinon)
+                        let ennemi_vaincu = Combat::fight(character, enemy_clone);
+
+                        if ennemi_vaincu {
+                            // Si l’ennemi est vaincu, on le supprime de la salle actuelle
+                            if let Some(room) = self.rooms.get_mut(character.position) {
+                                room.enemies.retain(|&id| id != enemy_id);
+                            }
+
+                            // Suppression de l’ennemi de la liste globale
+                            self.ennemies.retain(|e| e.id != enemy_id);
+                        } else if character.health == 0 {
+                            // Si le joueur est mort, on peut afficher un message final et quitter le jeu
+                            println!("☠️ Le héros est tombé au combat. Le donjon garde ses secrets... 😔");
+                            break; // Sort de la boucle principale -> fin du jeu
+                        }
+                    } else {
+                        println!("❌ Aucun ennemi nommé '{}' ici.", ennemi_nom);
+                    }
+
                 }
+
+                // Traduire les directions anglaises vers les directions du fichier JSON
+                let direction = match input.as_str() {
+                    "north" => "Nord",
+                    "south" => "Sud",
+                    "east" => "Est",
+                    "west" => "Ouest",
+                    "up" => "À l'étage",
+                    "down" => "Sous-sol",
+                    "tunnel" => "Tunnel",
+                    "rez-de-chaussée" => "Rez-de-chaussée",
+                    _ => input.as_str(),
+                };
+
+                // Déplacement du personnage avec vérification
+                character.try_move(direction, &self.rooms);
             }
         }
     }

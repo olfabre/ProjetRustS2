@@ -5,6 +5,8 @@ pub mod item;
 pub mod game;
 pub mod pnj;
 pub mod dialogue;
-pub mod combat;
+
+pub mod ennemie;
+mod combat;
 //pub mod worlds;
 

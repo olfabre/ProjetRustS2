@@ -9,5 +9,6 @@ pub trait Interactable {
 }
 
 pub trait Movable {
-    fn move_to(&mut self, direction: &str, rooms: &[Room]);
+    fn move_to_position(&mut self, direction: usize);
+    fn get_position(&self);
 }

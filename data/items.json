@@ -46,6 +46,30 @@
         "description": "Une clé ancienne, ornée de symboles magiques.",
         "effect": "Déverrouille la salle du trésor.",
         "usable": true
+    },
+    {
+        "id": 6,
+        "name": "Anneau de furtivité",
+        "type": "objet spécial",
+        "description": "Un anneau magique qui rend son porteur presque invisible aux yeux des ennemis.",
+        "effect": "boost_agility_5",
+        "usable": false
+    },
+    {
+        "id": 7,
+        "name": "Potion de rage",
+        "type": "consommable",
+        "description": "Fait entrer le joueur dans un état de rage, augmentant sa force temporairement.",
+        "effect": "boost_strength_10",
+        "usable": true
+    },
+    {
+        "id": 8,
+        "name": "Clé rouillée",
+        "type": "objet spécial",
+        "description": "Une vieille clé corrodée, probablement utile pour ouvrir une porte oubliée.",
+        "effect": "Déverrouille une vieille cellule.",
+        "usable": true
     }
     
     

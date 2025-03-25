@@ -15,7 +15,8 @@ pub struct Room {
     pub sombre: Option<bool>,
     pub locked: Option<bool>,  // Ajout du champ locked
     pub items: Vec<u32>,   // Liste des objets trouvables ici
-    pub npcs: Vec<u32>,    // Liste des PNJ présents
+    pub pnjs: Vec<u32>, // Liste des PNJ présents
+    pub enemies: Vec<u32>, // ennemie présent dans la salle
 
     pub exits: HashMap<String, usize>, // Clé = "north", "south", etc. ; Valeur = index de la salle
 
