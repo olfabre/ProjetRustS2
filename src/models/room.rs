@@ -19,6 +19,11 @@ pub struct Room {
     pub enemies: Vec<u32>, // ennemie présent dans la salle
 
     pub exits: HashMap<String, usize>, // Clé = "north", "south", etc. ; Valeur = index de la salle
+
+    pub north: Option<u32>,
+    pub south: Option<u32>,
+    pub east: Option<u32>,
+    pub west: Option<u32>,
 }
 
 impl Descriptible for Room{
