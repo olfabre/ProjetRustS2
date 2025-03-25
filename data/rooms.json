@@ -6,14 +6,10 @@
             "description": "Une grande porte en bois renforcé mène à l'intérieur du mystérieux donjon.",
             "terrain_type": "château",
             "locked": false,
-            "items": [],
+            "items": [0, 1, 2],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Sud": 64,
-                "Sous-sol": 66,
-                "Tunnel": 19
-            }
+            "exits": {"Sud": 64, "Sous-sol": 66, "Tunnel": 19}
         },
         {
             "id": 1,
@@ -21,7 +17,7 @@
             "description": "Des armures rouillées alignées contre les murs semblent observer silencieusement.",
             "terrain_type": "château",
             "locked": false,
-            "items": [],
+            "items": [3, 4, 5],
             "pnjs": [],
             "enemies": [],
             "exits": {"Est": 2, "Ouest": 64}
@@ -32,7 +28,7 @@
             "description": "Un long couloir éclairé par des torches murales vacillantes.",
             "terrain_type": "château",
             "locked": false,
-            "items": [],
+            "items": [6, 7, 8],
             "pnjs": [],
             "enemies": [],
             "exits": {"Sud": 3, "Ouest": 1}
@@ -43,7 +39,7 @@
             "description": "Des étagères remplies de vieux livres couverts de poussière.",
             "terrain_type": "bibliothèque",
             "locked": false,
-            "items": [],
+            "items": [9, 10, 11],
             "pnjs": [],
             "enemies": [],
             "exits": {"Nord": 2, "Sud": 6}
@@ -54,7 +50,7 @@
             "description": "D'immenses statues en pierre figées dans des postures menaçantes.",
             "terrain_type": "château",
             "locked": false,
-            "items": [],
+            "items": [12, 13, 14],
             "pnjs": [],
             "enemies": [],
             "exits": {"Sud": 5, "Est": 6}
@@ -65,7 +61,7 @@
             "description": "Une ancienne cellule de prisonnier désormais vide et lugubre.",
             "terrain_type": "souterrain",
             "locked": true,
-            "items": [8],
+            "items": [15, 16, 8],
             "enemies": [2],
             "pnjs": [],
             "exits": {"Nord": 4, "Ouest": 65}
@@ -76,7 +72,7 @@
             "description": "Un carrefour faiblement éclairé, des murmures lointains se font entendre.",
             "terrain_type": "château",
             "locked": false,
-            "items": [],
+            "items": [17, 18, 19],
             "pnjs": [],
             "enemies": [],
             "exits": {"Nord": 3, "Ouest": 4, "Est": 7}
@@ -87,7 +83,7 @@
             "description": "Le sol est jonché de mécanismes dissimulés prêts à déclencher des pièges mortels.",
             "terrain_type": "château",
             "locked": false,
-            "items": [],
+            "items": [20, 21, 22],
             "pnjs": [],
             "enemies": [],
             "exits": {"Sud": 43, "Est": 8, "Ouest": 6}
@@ -98,7 +94,7 @@
             "description": "Les moindres bruits résonnent étrangement dans ce couloir sombre.",
             "terrain_type": "château",
             "locked": true,
-            "items": [],
+            "items": [23, 24, 25],
             "pnjs": [],
             "enemies": [],
             "exits": {"Est": 9, "Ouest": 7}
@@ -109,7 +105,7 @@
             "description": "Une petite pièce froide où l'humidité ruisselle sur les murs.",
             "terrain_type": "souterrain",
             "locked": false,
-            "items": [],
+            "items": [26, 27, 28],
             "pnjs": [],
             "enemies": [],
             "exits": {"Ouest": 8, "Sud": 10}
@@ -120,7 +116,7 @@
             "description": "Un passage étroit nécessitant de se faufiler avec précaution.",
             "terrain_type": "caverne",
             "locked": false,
-            "items": [],
+            "items": [29, 30, 31],
             "pnjs": [],
             "enemies": [],
             "exits": {"Nord": 9, "Sud": 11}
@@ -131,7 +127,7 @@
             "description": "Autrefois occupée par les gardes, cette pièce est aujourd'hui vide et silencieuse.",
             "terrain_type": "château",
             "locked": false,
-            "items": [],
+            "items": [32, 33, 34],
             "pnjs": [],
             "enemies": [],
             "exits": {"Nord": 10, "Sud": 12}
@@ -142,7 +138,7 @@
             "description": "Des tables renversées et des restes épars rappellent d'anciens festins.",
             "terrain_type": "château",
             "locked": false,
-            "items": [],
+            "items": [35, 36, 37],
             "pnjs": [],
             "enemies": [],
             "exits": {"Nord": 11, "Sud": 13}
@@ -153,7 +149,7 @@
             "description": "La cuisine du donjon, désormais couverte de poussière et d'ustensiles rouillés.",
             "terrain_type": "château",
             "locked": true,
-            "items": [0, 3],
+            "items": [0, 3, 38],
             "pnjs": [],
             "enemies": [],
             "exits": {"Nord": 12, "Sud": 14}
@@ -164,7 +160,7 @@
             "description": "Un corridor sombre menant vers d'autres parties du donjon.",
             "terrain_type": "château",
             "locked": false,
-            "items": [],
+            "items": [39, 27, 25],
             "pnjs": [],
             "enemies": [],
             "exits": {"Nord": 13, "Ouest": 39, "Sud": 15}
@@ -175,13 +171,10 @@
             "description": "Une pièce austère avec des bancs en bois et des armes accrochées aux murs.",
             "terrain_type": "Pierre froide",
             "locked": false,
-            "items": [],
+            "items": [26, 28, 29],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Nord": 14,
-                "Sud": 16
-            }
+            "exits": {"Nord": 14, "Sud": 16}
         },
         {
             "id": 16,
@@ -189,13 +182,10 @@
             "description": "Un couloir étroit faiblement éclairé par des torches tremblotantes.",
             "terrain_type": "Pierre froide",
             "locked": false,
-            "items": [],
+            "items": [30, 31, 17],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Nord": 15,
-                "Sud": 17
-            }
+            "exits": {"Nord": 15, "Sud": 17}
         },
         {
             "id": 17,
@@ -203,14 +193,10 @@
             "description": "Une vaste pièce avec un ancien puits en son centre. Des chaînes rouillées pendent du plafond.",
             "terrain_type": "Sol pavé",
             "locked": false,
-            "items": [],
+            "items": [18, 19, 20],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Sud": 18,
-                "Ouest": 32,
-                "Nord": 16
-            }
+            "exits": {"Sud": 18, "Ouest": 32, "Nord": 16}
         },
         {
             "id": 18,
@@ -218,13 +204,10 @@
             "description": "L'air est chargé d'humidité et l'odeur de moisissure est persistante.",
             "terrain_type": "Sol terreux",
             "locked": false,
-            "items": [],
+            "items": [21, 22, 23],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Nord": 17,
-                "Sud": 19
-            }
+            "exits": {"Nord": 17, "Sud": 19}
         },
         {
             "id": 19,
@@ -232,15 +215,10 @@
             "description": "Un carrefour stratégique reliant diverses parties du donjon. Une étrange rune gravée dans le sol brille faiblement.",
             "terrain_type": "Pierre froide",
             "locked": false,
-            "items": [],
+            "items": [24, 25, 26],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Nord": 18,
-                "Ouest": 20,
-                "Tunnel": 0,
-                "À l'étage": 114
-            }
+            "exits": {"Nord": 18, "Ouest": 20, "Tunnel": 0, "À l'étage": 114}
         },
         {
             "id": 20,
@@ -248,13 +226,10 @@
             "description": "Un long couloir où des fresques effacées racontent des histoires oubliées.",
             "terrain_type": "Pierre sculptée",
             "locked": false,
-            "items": [],
+            "items": [27, 28, 29],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Est": 19,
-                "Ouest": 21
-            }
+            "exits": {"Est": 19, "Ouest": 21}
         },
         {
             "id": 21,
@@ -262,13 +237,10 @@
             "description": "Une grande pièce où une trappe entrouverte laisse entrevoir un puits profond et obscur.",
             "terrain_type": "Sol pavé",
             "locked": false,
-            "items": [],
+            "items": [30, 31, 32],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Est": 20,
-                "Ouest": 22
-            }
+            "exits": {"Est": 20, "Ouest": 22}
         },
         {
             "id": 22,
@@ -276,13 +248,10 @@
             "description": "Une pièce où repose une imposante statue de pierre représentant un guerrier en armure.",
             "terrain_type": "Dalles fendues",
             "locked": false,
-            "items": [],
+            "items": [33, 34, 35],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Est": 21,
-                "Ouest": 23
-            }
+            "exits": {"Est": 21, "Ouest": 23}
         },
         {
             "id": 23,
@@ -290,13 +259,10 @@
             "description": "Des étagères poussiéreuses remplissent cette pièce étroite, débordant de grimoires anciens.",
             "terrain_type": "Bois vermoulu",
             "locked": false,
-            "items": [],
+            "items": [36, 37, 38],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Est": 22,
-                "Ouest": 24
-            }
+            "exits": {"Est": 22, "Ouest": 24}
         },
         {
             "id": 24,
@@ -304,13 +270,10 @@
             "description": "Une pièce sombre avec des armes rouillées accrochées aux murs.",
             "terrain_type": "Pierre froide",
             "locked": false,
-            "items": [],
+            "items": [39, 0, 1],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Nord": 25,
-                "Est": 23
-            }
+            "exits": {"Nord": 25, "Est": 23}
         },
         {
             "id": 25,
@@ -318,13 +281,10 @@
             "description": "Un passage exigu avec des torches vacillantes.",
             "terrain_type": "Pierre froide",
             "locked": false,
-            "items": [],
+            "items": [2, 3, 4],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Sud": 24,
-                "Nord": 26
-            }
+            "exits": {"Sud": 24, "Nord": 26}
         },
         {
             "id": 26,
@@ -332,13 +292,10 @@
             "description": "Une grande pièce décorée de bannières anciennes et de trophées de bataille.",
             "terrain_type": "Pierre froide",
             "locked": false,
-            "items": [],
+            "items": [5, 6, 7],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Nord": 27,
-                "Sud": 25
-            }
+            "exits": {"Nord": 27, "Sud": 25}
         },
         {
             "id": 27,
@@ -346,14 +303,10 @@
             "description": "Une pièce où des statues menaçantes semblent surveiller chaque mouvement.",
             "terrain_type": "Pierre froide",
             "locked": false,
-            "items": [],
+            "items": [8, 9, 10],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Nord": 33,
-                "Sud": 26,
-                "Est": 28
-            }
+            "exits": {"Nord": 33, "Sud": 26, "Est": 28}
         },
         {
             "id": 28,
@@ -361,13 +314,10 @@
             "description": "Des étagères poussiéreuses remplies de parchemins et de grimoires.",
             "terrain_type": "Pierre froide",
             "locked": false,
-            "items": [],
+            "items": [11, 12, 13],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Est": 29,
-                "Ouest": 27
-            }
+            "exits": {"Est": 29, "Ouest": 27}
         },
         {
             "id": 29,
@@ -375,13 +325,10 @@
             "description": "Une pièce remplie de coffres fermés à clé. Une forte odeur de métal y règne.",
             "terrain_type": "Pierre froide",
             "locked": true,
-            "items": [],
+            "items": [14, 15, 16],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Est": 30,
-                "Ouest": 28
-            }
+            "exits": {"Est": 30, "Ouest": 28}
         },
         {
             "id": 30,
@@ -389,14 +336,10 @@
             "description": "Une pièce richement décorée avec un grand lit et une armoire verrouillée.",
             "terrain_type": "Pierre froide",
             "locked": false,
-            "items": [],
+            "items": [17, 18, 19],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Nord": 38,
-                "Sud": 31,
-                "Ouest": 29
-            }
+            "exits": {"Nord": 38, "Sud": 31, "Ouest": 29}
         },
         {
             "id": 31,
@@ -404,13 +347,10 @@
             "description": "Une pièce paisible avec des tapisseries anciennes et une lumière tamisée.",
             "terrain_type": "Pierre froide",
             "locked": false,
-            "items": [],
+            "items": [20, 21, 22],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Nord": 30,
-                "Est": 32
-            }
+            "exits": {"Nord": 30, "Est": 32}
         },
         {
             "id": 32,
@@ -418,13 +358,10 @@
             "description": "Une vaste pièce pavée de dalles sombres et humides, marquée par des fissures profondes.",
             "terrain_type": "Sol pavé",
             "locked": false,
-            "items": [],
+            "items": [23, 24, 25],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Est": 17,
-                "Ouest": 31
-            }
+            "exits": {"Est": 17, "Ouest": 31}
         },
         {
             "id": 33,
@@ -432,13 +369,10 @@
             "description": "Un hall faiblement éclairé par une torche vacillante fixée au mur.",
             "terrain_type": "Sol pierreux",
             "locked": false,
-            "items": [],
+            "items": [26, 27, 28],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Nord": 34,
-                "Sud": 27
-            }
+            "exits": {"Nord": 34, "Sud": 27}
         },
         {
             "id": 34,
@@ -446,17 +380,10 @@
             "description": "Un carrefour avec plusieurs portes menant vers différents niveaux du donjon.",
             "terrain_type": "Sol dallé",
             "locked": false,
-            "items": [],
+            "items": [29, 30, 31],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Sud": 33,
-                "Nord": 47,
-                "Est": 35,
-                "Ouest": 48,
-                "Sous-sol": 89,
-                "À l'étage": 90
-            }
+            "exits": {"Sud": 33, "Nord": 47, "Est": 35, "Ouest": 48, "Sous-sol": 89, "À l'étage": 90}
         },
         {
             "id": 35,
@@ -464,13 +391,10 @@
             "description": "Un étroit couloir où l'ombre semble se mouvoir à votre passage.",
             "terrain_type": "Sol pierreux",
             "locked": false,
-            "items": [],
+            "items": [32, 33, 34],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Est": 36,
-                "Ouest": 34
-            }
+            "exits": {"Est": 36, "Ouest": 34}
         },
         {
             "id": 36,
@@ -478,13 +402,10 @@
             "description": "Une salle vide... mais une impression étrange de danger persiste.",
             "terrain_type": "Sol piégé",
             "locked": false,
-            "items": [],
+            "items": [35, 36, 37],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Est": 37,
-                "Ouest": 35
-            }
+            "exits": {"Est": 37, "Ouest": 35}
         },
         {
             "id": 37,
@@ -492,15 +413,10 @@
             "description": "Une grande pièce bordée de statues de chevaliers en armure. Certaines semblent avoir bougé...",
             "terrain_type": "Sol dallé",
             "locked": false,
-            "items": [],
+            "items": [38, 39, 0],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Nord": 40,
-                "Sud": 38,
-                "Est": 39,
-                "Ouest": 36
-            }
+            "exits": {"Nord": 40, "Sud": 38, "Est": 39, "Ouest": 36}
         },
         {
             "id": 38,
@@ -508,13 +424,10 @@
             "description": "Un espace mystérieux bordé de miroirs brisés qui renvoient des reflets déformés.",
             "terrain_type": "Sol glissant",
             "locked": false,
-            "items": [],
+            "items": [1, 2, 3],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Nord": 37,
-                "Sud": 30
-            }
+            "exits": {"Nord": 37, "Sud": 30}
         },
         {
             "id": 39,
@@ -522,13 +435,10 @@
             "description": "Un silence pesant règne ici, interrompu seulement par les gouttes d'eau tombant du plafond.",
             "terrain_type": "Sol froid",
             "locked": false,
-            "items": [],
+            "items": [4, 5, 6],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Est": 14,
-                "Ouest": 37
-            }
+            "exits": {"Est": 14, "Ouest": 37}
         },
         {
             "id": 40,
@@ -536,13 +446,10 @@
             "description": "Une salle aux murs décorés d'armures rouillées et d'épées brisées.",
             "terrain_type": "Sol poussiéreux",
             "locked": false,
-            "items": [],
+            "items": [7, 8, 9],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Nord": 41,
-                "Sud": 37
-            }
+            "exits": {"Nord": 41, "Sud": 37}
         },
         {
             "id": 41,
@@ -550,14 +457,10 @@
             "description": "Une salle remplie de runes étranges gravées dans la pierre.",
             "terrain_type": "Sol gravé",
             "locked": false,
-            "items": [],
+            "items": [10, 11, 12],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Sud": 40,
-                "Nord": 42,
-                "Ouest": 44
-            }
+            "exits": {"Sud": 40, "Nord": 42, "Ouest": 44}
         },
         {
             "id": 42,
@@ -568,10 +471,7 @@
             "items": [5],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Nord": 43,
-                "Sud": 41
-            }
+            "exits": {"Nord": 43, "Sud": 41}
         },
         {
             "id": 43,
@@ -579,13 +479,10 @@
             "description": "Un colosse de pierre repose ici, prêt à défendre ce lieu... ou à attaquer les imprudents.",
             "terrain_type": "Sol gravé",
             "locked": false,
-            "items": [],
+            "items": [13, 14, 15],
             "pnjs": [],
             "enemies": [1],
-            "exits": {
-                "Nord": 7,
-                "Sud": 42
-            }
+            "exits": {"Nord": 7, "Sud": 42}
         },
         {
             "id": 44,
@@ -593,13 +490,10 @@
             "description": "Des objets anciens reposent sur des étagères, certains émettent une lueur inquiétante.",
             "terrain_type": "Sol poussiéreux",
             "locked": false,
-            "items": [],
+            "items": [16, 17, 18],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Est": 41,
-                "Ouest": 45
-            }
+            "exits": {"Est": 41, "Ouest": 45}
         },
         {
             "id": 45,
@@ -607,13 +501,10 @@
             "description": "Un coffre en fer massif repose ici. Qui sait ce qu'il renferme ?",
             "terrain_type": "Sol pierreux",
             "locked": false,
-            "items": [],
+            "items": [19, 20, 21],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Est": 44,
-                "Ouest": 46
-            }
+            "exits": {"Est": 44, "Ouest": 46}
         },
         {
             "id": 46,
@@ -621,15 +512,10 @@
             "description": "Une pièce obscure où plusieurs portes mènent vers des directions incertaines. Un souffle glacial s'échappe du passage vers le sous-sol.",
             "terrain_type": "pierre froide",
             "locked": false,
-            "items": [],
+            "items": [22, 23, 24],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Est": 45,
-                "Ouest": 54,
-                "Sud": 47,
-                "Sous-sol": 87
-            }
+            "exits": {"Est": 45, "Ouest": 54, "Sud": 47, "Sous-sol": 87}
         },
         {
             "id": 47,
@@ -637,13 +523,10 @@
             "description": "Un long couloir faiblement éclairé par des torches vacillantes. Des murmures résonnent dans les murs de pierre.",
             "terrain_type": "pierre humide",
             "locked": false,
-            "items": [],
+            "items": [25, 26, 27],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Nord": 46,
-                "Sud": 34
-            }
+            "exits": {"Nord": 46, "Sud": 34}
         },
         {
             "id": 48,
@@ -651,13 +534,10 @@
             "description": "Un hall sinistre avec des symboles étranges gravés sur les murs. Une odeur de soufre flotte dans l'air.",
             "terrain_type": "pierre fissurée",
             "locked": false,
-            "items": [],
+            "items": [28, 29, 30],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Est": 34,
-                "Ouest": 49
-            }
+            "exits": {"Est": 34, "Ouest": 49}
         },
         {
             "id": 49,
@@ -665,13 +545,10 @@
             "description": "Une pièce plongée dans l'obscurité où les ombres semblent se mouvoir par elles-mêmes.",
             "terrain_type": "pierre froide",
             "locked": false,
-            "items": [],
+            "items": [31, 32, 33],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Est": 48,
-                "Ouest": 50
-            }
+            "exits": {"Est": 48, "Ouest": 50}
         },
         {
             "id": 50,
@@ -679,13 +556,10 @@
             "description": "Une salle voûtée, silencieuse, où l'air est pesant et oppressant.",
             "terrain_type": "dalles de pierre",
             "locked": false,
-            "items": [],
+            "items": [34, 35, 36],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Nord": 51,
-                "Est": 49
-            }
+            "exits": {"Nord": 51, "Est": 49}
         },
         {
             "id": 51,
@@ -693,13 +567,10 @@
             "description": "Une large pièce avec des statues imposantes représentant des guerriers en armure. L'air semble chargé d'une présence invisible.",
             "terrain_type": "pierre sculptée",
             "locked": true,
-            "items": [],
+            "items": [37, 38, 39],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Nord": 52,
-                "Sud": 50
-            }
+            "exits": {"Nord": 52, "Sud": 50}
         },
         {
             "id": 52,
@@ -707,14 +578,10 @@
             "description": "Un ancien temple en ruine, envahi par des racines et des gravats. Des gravures évoquent d'anciennes cérémonies.",
             "terrain_type": "pierre effritée",
             "locked": false,
-            "items": [],
+            "items": [0, 1, 2],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Sud": 51,
-                "Est": 53,
-                "Nord": 55
-            }
+            "exits": {"Sud": 51, "Est": 53, "Nord": 55}
         },
         {
             "id": 53,
@@ -722,14 +589,10 @@
             "description": "Une crypte lugubre, avec des cercueils de pierre brisés et des odeurs nauséabondes.",
             "terrain_type": "pierre sombre",
             "locked": false,
-            "items": [],
+            "items": [3, 4, 5],
             "pnjs": [],
             "enemies": [],
-            "exits": {
-                "Nord": 55,
-                "Est": 54,
-                "Ouest": 52
-            }
+            "exits": {"Nord": 55, "Est": 54, "Ouest": 52}
         },
         {
             "id": 54,
