@@ -2,6 +2,8 @@ use crate::models::traits::{Descriptible, Movable};
 use crate::models::{item::Item, room::Room};
 use serde::{Deserialize, Serialize};
 
+const MAX_ROOMS: usize = 10; // Limite du nombre de salles accessibles
+
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Character {
     pub id: u32,
@@ -23,15 +25,26 @@ impl Descriptible for Character {
 }
 
 impl Movable for Character {
-    //Le personnages doit se déplacer avec une direction
     fn move_to(&mut self, direction: &str, rooms: &[Room]) {
+        if rooms.len() > MAX_ROOMS {
+            println!(
+                "❌ Trop de salles définies dans le jeu. Limite : {}",
+                MAX_ROOMS
+            );
+            return;
+        }
+
         if let Some(current_room) = rooms.get(self.position) {
             if let Some(&new_position) = current_room.exits.get(direction) {
-                self.position = new_position;
-                println!(
-                    "{} se déplace vers {}.",
-                    self.name, rooms[new_position].name
-                );
+                if new_position < rooms.len() {
+                    self.position = new_position;
+                    println!(
+                        "{} se déplace vers {}.",
+                        self.name, rooms[new_position].name
+                    );
+                } else {
+                    println!("❌ Impossible d'aller dans cette direction !");
+                }
             } else {
                 println!("❌ Pas de passage dans cette direction !");
             }
@@ -42,7 +55,6 @@ impl Movable for Character {
 }
 
 impl Character {
-    //on ne doit pas avoir trop rooms
     pub fn prendre_objet(&mut self, objet_nom: &str, rooms: &mut [Room], items: &[Item]) {
         if let Some(room) = rooms.get_mut(self.position) {
             if let Some(&item_id) = room.items.iter().find(|&&id| {
@@ -51,8 +63,8 @@ impl Character {
                 })
             }) {
                 if let Some(item) = items.iter().find(|i| i.id == item_id) {
-                    room.items.retain(|&id| id != item_id); // ✅ Supprimer l'objet de la salle
-                    self.inventory.push(item.clone()); // ✅ Ajouter l'objet dans l'inventaire
+                    room.items.retain(|&id| id != item_id);
+                    self.inventory.push(item.clone());
                     println!("🎒 {} a pris l'objet : {}", self.name, item.name);
                 }
             } else {
@@ -72,12 +84,10 @@ impl Character {
             let item = self.inventory.remove(index);
 
             match item.name.as_str() {
-                "Torche" => {
-                    println!(
-                        "🔥 {} allume la torche. La salle est maintenant éclairée !",
-                        self.name
-                    );
-                }
+                "Torche" => println!(
+                    "🔥 {} allume la torche. La salle est maintenant éclairée !",
+                    self.name
+                ),
                 "Potion de soin" => {
                     self.health += 10;
                     println!(
@@ -86,18 +96,15 @@ impl Character {
                     );
                 }
                 "Gemme enchantée" => {
-                    println!("💎 {} sent une force mystique l'entourer.", self.name);
+                    println!("💎 {} sent une force mystique l'entourer.", self.name)
                 }
-                _ => {
-                    println!("❌ Cet objet ne peut pas être utilisé.");
-                }
+                _ => println!("❌ Cet objet ne peut pas être utilisé."),
             }
         } else {
             println!("❌ Tu ne possèdes pas cet objet dans ton inventaire !");
         }
     }
 
-    //L'inventaire de l'objet pas de la character(&self)
     pub fn afficher_inventaire(&self) {
         println!("🎒 Inventaire :");
         if self.inventory.is_empty() {
