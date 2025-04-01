@@ -1,11 +1,21 @@
 use std::{fs, io};
 use std::io::{stdout, Write};
 use serde_json;
-use crate::models::{character::Character, dialogue::Dialogue, item::Item, pnj::Pnj, room::Room, ennemie::Enemy};
 
+use crate::models::{
+    character::Character,
+    dialogue::Dialogue,
+    item::Item,
+    pnj::Pnj,
+    room::{Room, RoomWrapper},
+    ennemie::Enemy,
+};
+
+/// Charge les salles depuis un fichier JSON contenant des RoomWrapper
 pub fn load_room_from_file(filename: &str) -> Result<Vec<Room>, serde_json::Error> {
-    let data = fs::read_to_string(filename).expect("Impossible de lire le fichier des zones");
-    let rooms: Vec<Room> = serde_json::from_str(&data)?;
+    let data = fs::read_to_string(filename).expect("Impossible de lire le fichier des zones.");
+    let wrappers: Vec<RoomWrapper> = serde_json::from_str(&data)?;
+    let rooms: Vec<Room> = wrappers.into_iter().map(Room::from).collect();
     Ok(rooms)
 }
 

@@ -1,1564 +1,17 @@
-[
-  {
-    "id": 0,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 64,
-      "Sous-sol": 66,
-      "Tunnel": 19
-    }
-  },
-  {
-    "id": 1,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 2,
-      "Ouest": 64
-    }
-  },
-  {
-    "id": 2,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 3,
-      "Ouest": 1
-    }
-  },
-  {
-    "id": 3,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 2,
-      "Sud": 6
-    }
-  },
-  {
-    "id": 4,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 5,
-      "Est": 6
-    }
-  },
-  {
-    "id": 5,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 4,
-      "Ouest": 65
-    }
-  },
-  {
-    "id": 6,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 3,
-      "Ouest": 4,
-      "Est": 7
-    }
-  },
-  {
-    "id": 7,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 43,
-      "Est": 8,
-      "Ouest": 6
-    }
-  },
-  {
-    "id": 8,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 9,
-      "Ouest": 7
-    }
-  },
-  {
-    "id": 9,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Ouest": 8,
-      "Sud": 10
-    }
-  },
-  {
-    "id": 10,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 9,
-      "Sud": 11
-    }
-  },
-  {
-    "id": 11,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 10,
-      "Sud": 12
-    }
-  },
-  {
-    "id": 12,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 11,
-      "Sud": 13
-    }
-  },
-  {
-    "id": 13,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 12,
-      "Sud": 14
-    }
-  },
-  {
-    "id": 14,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 13,
-      "Ouest": 39,
-      "Sud": 15
-    }
-  },
-  {
-    "id": 15,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 14,
-      "Sud": 16
-    }
-  },
-  {
-    "id": 16,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord":15,
-      "Sud": 17
-    }
-  },
-  {
-    "id": 17,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 18,
-      "Ouest": 32,
-      "Nord": 16
-    }
-  },
-  {
-    "id": 18,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 17,
-      "Sud": 19
-    }
-  },
-  {
-    "id": 19,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 18,
-      "Ouest": 20,
-      "Tunnel": 0,
-      "À l'étage": 114
-    }
-  },
-  {
-    "id": 20,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 19,
-      "Ouest": 21
-    }
-  },
-  {
-    "id": 21,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 20,
-      "Ouest": 22
-    }
-  },
-  {
-    "id": 22,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 21,
-      "Ouest": 23
-    }
-  },
-  {
-    "id": 23,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 22,
-      "Ouest": 24
-    }
-  },
-  {
-    "id": 24,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 25,
-      "Est": 23
-    }
-  },
-  {
-    "id": 25,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 24,
-      "Nord": 26
-    }
-  },
-  {
-    "id": 26,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 27,
-      "Sud": 25
-    }
-  },
-  {
-    "id": 27,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 33,
-      "Sud": 26,
-      "Est": 28
-    }
-  },
-  {
-    "id": 28,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 29,
-      "Ouest": 27
-    }
-  },
-  {
-    "id": 29,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 30,
-      "Ouest": 28
-    }
-  },
-  {
-    "id": 30,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 38,
-      "Sud": 31,
-      "Ouest": 29
-    }
-  },
-  {
-    "id": 31,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 30,
-      "Est": 32
-    }
-  },
-  {
-    "id": 32,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 17,
-      "Ouest": 31
-    }
-  },
-  {
-    "id": 33,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 34,
-      "Sud": 27
-    }
-  },
-  {
-    "id": 34,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 33,
-      "Nord": 47,
-      "Est": 35,
-      "Ouest": 48,
-      "Sous-sol": 89,
-      "À l'étage": 90
-    }
-  },
-  {
-    "id": 35,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 36,
-      "Ouest": 34
-    }
-  },
-  {
-    "id": 36,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 37,
-      "Ouest": 35
-    }
-  },
-  {
-    "id": 37,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 40,
-      "Sud": 38,
-      "Est": 39,
-      "Ouest": 36
-    }
-  },
-  {
-    "id": 38,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 37,
-      "Sud": 30
-    }
-  },
-  {
-    "id": 39,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 14,
-      "Ouest": 37
-    }
-  },
-  {
-    "id": 40,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 41,
-      "Sud": 37
-    }
-  },
-  {
-    "id": 41,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 40,
-      "Nord": 42,
-      "Ouest": 44
-    }
-  },
-  {
-    "id": 42,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 43,
-      "Sud": 41
-    }
-  },
-  {
-    "id": 43,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 7,
-      "Sud": 42
-    }
-  },
-  {
-    "id": 44,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 41,
-      "Ouest": 45
-    }
-  },
-  {
-    "id": 45,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 44,
-      "Ouest": 46
-    }
-  },
-  {
-    "id": 46,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 45,
-      "Ouest": 54,
-      "Sud": 47,
-      "Sous-sol": 87
-    }
-  },
-  {
-    "id": 47,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 46,
-      "Sud": 34
-    }
-  },
-  {
-    "id": 48,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 34,
-      "Ouest": 49
-    }
-  },
-  {
-    "id": 49,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 48,
-      "Ouest": 50
-    }
-  },
-  {
-    "id": 50,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 51,
-      "Est": 49
-    }
-  },
-  {
-    "id": 51,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 52,
-      "Sud": 50
-    }
-  },
-  {
-    "id": 52,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 51,
-      "Est": 53,
-      "Nord": 55
-    }
-  },
-  {
-    "id": 53,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 55,
-      "Est": 54,
-      "Ouest": 52
-    }
-  },
-  {
-    "id": 54,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 59,
-      "Est": 46,
-      "Ouest": 53
-    }
-  },
-  {
-    "id": 55,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 56,
-      "Sud": 52
-    }
-  },
-  {
-    "id": 56,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 57,
-      "Sud": 55
-    }
-  },
-  {
-    "id": 57,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 56,
-      "Est": 58
-    }
-  },
-  {
-    "id": 58,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 61,
-      "Ouest": 57
-    }
-  },
-  {
-    "id": 59,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 54,
-      "Nord": 60
-    }
-  },
-  {
-    "id": 60,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 61,
-      "Sud": 59,
-      "Est": 65
-    }
-  },
-  {
-    "id": 61,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 62,
-      "Sud": 60,
-      "Ouest": 58
-    }
-  },
-  {
-    "id": 62,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 63,
-      "Sud": 61
-    }
-  },
-  {
-    "id": 63,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 62,
-      "Est": 64
-    }
-  },
-  {
-    "id": 64,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 0,
-      "Est": 1,
-      "Ouest": 63
-    }
-  },
-  {
-    "id": 65,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 5,
-      "Ouest": 60
-    }
-  },
-  {
-    "id": 66,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 67,
-      "Rez-de-chaussée": 0
-    }
-  },
-  {
-    "id": 67,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 68,
-      "Ouest": 75
-    }
-  },
-  {
-    "id": 68,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 69,
-      "Ouest": 67
-    }
-  },
-  {
-    "id": 69,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 70,
-      "Ouest": 68
-    }
-  },
-  {
-    "id": 70,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 69,
-      "Sud": 71
-    }
-  },
-  {
-    "id": 71,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Ouest": 72,
-      "Nord": 70
-    }
-  },
-  {
-    "id": 72,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 73,
-      "Est": 71
-    }
-  },
-  {
-    "id": 73,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 72,
-      "Ouest": 74
-    }
-  },
-  {
-    "id": 74,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 73,
-      "Ouest": 84
-    }
-  },
-  {
-    "id": 75,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 76,
-      "Est": 67
-    }
-  },
-  {
-    "id": 76,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 75,
-      "Sud": 77
-    }
-  },
-  {
-    "id": 77,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Ouest": 78,
-      "Nord": 76,
-      "Sud": 84
-    }
-  },
-  {
-    "id": 78,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 77,
-      "Ouest": 79
-    }
-  },
-  {
-    "id": 79,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 80,
-      "Est": 78
-    }
-  },
-  {
-    "id": 80,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 79,
-      "Sud": 81
-    }
-  },
-  {
-    "id": 81,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 80,
-      "Sud": 82
-    }
-  },
-  {
-    "id": 82,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 81,
-      "Est": 83
-    }
-  },
-  {
-    "id": 83,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 86,
-      "Ouest": 82
-    }
-  },
-  {
-    "id": 84,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 77,
-      "Sud": 85,
-      "Est": 74
-    }
-  },
-  {
-    "id": 85,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 86,
-      "Nord": 84
-    }
-  },
-  {
-    "id": 86,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 85,
-      "Est": 87,
-      "Ouest": 83
-    }
-  },
-  {
-    "id": 87,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 88,
-      "Ouest": 86,
-      "Rez-de-chaussée": 46
-    }
-  },
-  {
-    "id": 88,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 87,
-      "Sud": 89
-    }
-  },
-  {
-    "id": 89,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 88,
-      "Rez-de-chaussée": 34
-    }
-  },
-  {
-    "id": 90,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 96,
-      "Est": 91,
-      "Rez-de-chaussée": 34
-    }
-  },
-  {
-    "id": 91,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 92,
-      "Ouest": 90
-    }
-  },
-  {
-    "id": 92,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 93,
-      "Ouest": 91
-    }
-  },
-  {
-    "id": 93,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 100,
-      "Est": 94,
-      "Ouest": 92
-    }
-  },
-  {
-    "id": 94,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 95,
-      "Ouest": 93
-    }
-  },
-  {
-    "id": 95,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Sud": 106,
-      "Ouest": 94
-    }
-  },
-  {
-    "id": 96,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 90,
-      "Sud": 97
-    }
-  },
-  {
-    "id": 97,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 96,
-      "Sud": 107,
-      "Est": 98
-    }
-  },
-  {
-    "id": 98,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 99,
-      "Ouest": 97
-    }
-  },
-  {
-    "id": 99,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 101,
-      "Ouest": 98
-    }
-  },
-  {
-    "id": 100,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 93,
-      "Sud": 101
-    }
-  },
-  {
-    "id": 101,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 100,
-      "Sud": 102,
-      "Ouest": 99
-    }
-  },
-  {
-    "id": 102,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 101,
-      "Est": 103
-    }
-  },
-  {
-    "id": 103,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 104,
-      "Ouest": 102
-    }
-  },
-  {
-    "id": 104,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 105,
-      "Sud": 115,
-      "Ouest": 103
-    }
-  },
-  {
-    "id": 105,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 106,
-      "Sud": 104
-    }
-  },
-  {
-    "id": 106,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 95,
-      "Sud": 105
-    }
-  },
-  {
-    "id": 107,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 97,
-      "Sud": 108
-    }
-  },
-  {
-    "id": 108,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 107,
-      "Sud": 109
-    }
-  },
-  {
-    "id": 109,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 108,
-      "Est": 110
-    }
-  },
-  {
-    "id": 110,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 111,
-      "Ouest": 109
-    }
-  },
-  {
-    "id": 111,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 112,
-      "Ouest": 110
-    }
-  },
-  {
-    "id": 112,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 113,
-      "Ouest": 111
-    }
-  },
-  {
-    "id": 113,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Est": 114,
-      "Ouest": 112
-    }
-  },
-  {
-    "id": 114,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Ouest": 113,
-      "Nord": 115,
-      "Rez-de-chaussée": 19
-    }
-  },
-  {
-    "id": 115,
-    "name": " ",
-    "description": " ",
-    "terrain_type": " ",
-    "locked": false,
-    "items": [],
-    "pnjs": [],
-    "exits": {
-      "Nord": 104,
-      "Sud": 114
-    }
-  }
-]
-
-
 
 [
   {
-    "id": 0,
-    "name": "Entrée du Donjon",
-    "description": "Une grande porte en bois renforcé mène à l'intérieur du mystérieux donjon.",
+    "elem": {
+      "id": 0,
+      "name": "Entrée du Donjon",
+      "description": "Une grande porte en bois renforcé mène à l'intérieur du mystérieux donjon."
+    },
     "terrain_type": "château",
-    "locked": true,
-    "items": [],
+    "locked": false,
+    "items": [0, 1, 2],
     "pnjs": [],
-    "exits": {
-      "Sud": 64,
-      "Sous-sol": 66,
-      "Tunnel": 19
-    }
+    "enemies": [],
+    "exits": {"Sud": 64, "Sous-sol": 66, "Tunnel": 19}
   },
   {
     "id": 1,
@@ -1566,8 +19,9 @@
     "description": "Des armures rouillées alignées contre les murs semblent observer silencieusement.",
     "terrain_type": "château",
     "locked": false,
-    "items": [],
+    "items": [3, 4, 5],
     "pnjs": [],
+    "enemies": [],
     "exits": {"Est": 2, "Ouest": 64}
   },
   {
@@ -1576,8 +30,9 @@
     "description": "Un long couloir éclairé par des torches murales vacillantes.",
     "terrain_type": "château",
     "locked": false,
-    "items": [],
+    "items": [6, 7, 8],
     "pnjs": [],
+    "enemies": [],
     "exits": {"Sud": 3, "Ouest": 1}
   },
   {
@@ -1586,8 +41,9 @@
     "description": "Des étagères remplies de vieux livres couverts de poussière.",
     "terrain_type": "bibliothèque",
     "locked": false,
-    "items": [],
+    "items": [9, 10, 11],
     "pnjs": [],
+    "enemies": [],
     "exits": {"Nord": 2, "Sud": 6}
   },
   {
@@ -1596,8 +52,9 @@
     "description": "D'immenses statues en pierre figées dans des postures menaçantes.",
     "terrain_type": "château",
     "locked": false,
-    "items": [],
+    "items": [12, 13, 14],
     "pnjs": [],
+    "enemies": [],
     "exits": {"Sud": 5, "Est": 6}
   },
   {
@@ -1606,7 +63,8 @@
     "description": "Une ancienne cellule de prisonnier désormais vide et lugubre.",
     "terrain_type": "souterrain",
     "locked": true,
-    "items": [],
+    "items": [15, 16, 8],
+    "enemies": [2],
     "pnjs": [],
     "exits": {"Nord": 4, "Ouest": 65}
   },
@@ -1616,8 +74,9 @@
     "description": "Un carrefour faiblement éclairé, des murmures lointains se font entendre.",
     "terrain_type": "château",
     "locked": false,
-    "items": [],
+    "items": [17, 18, 19],
     "pnjs": [],
+    "enemies": [],
     "exits": {"Nord": 3, "Ouest": 4, "Est": 7}
   },
   {
@@ -1626,8 +85,9 @@
     "description": "Le sol est jonché de mécanismes dissimulés prêts à déclencher des pièges mortels.",
     "terrain_type": "château",
     "locked": false,
-    "items": [],
+    "items": [20, 21, 22],
     "pnjs": [],
+    "enemies": [],
     "exits": {"Sud": 43, "Est": 8, "Ouest": 6}
   },
   {
@@ -1636,8 +96,9 @@
     "description": "Les moindres bruits résonnent étrangement dans ce couloir sombre.",
     "terrain_type": "château",
     "locked": true,
-    "items": [],
+    "items": [23, 24, 25],
     "pnjs": [],
+    "enemies": [],
     "exits": {"Est": 9, "Ouest": 7}
   },
   {
@@ -1646,8 +107,9 @@
     "description": "Une petite pièce froide où l'humidité ruisselle sur les murs.",
     "terrain_type": "souterrain",
     "locked": false,
-    "items": [],
+    "items": [26, 27, 28],
     "pnjs": [],
+    "enemies": [],
     "exits": {"Ouest": 8, "Sud": 10}
   },
   {
@@ -1656,8 +118,9 @@
     "description": "Un passage étroit nécessitant de se faufiler avec précaution.",
     "terrain_type": "caverne",
     "locked": false,
-    "items": [],
+    "items": [29, 30, 31],
     "pnjs": [],
+    "enemies": [],
     "exits": {"Nord": 9, "Sud": 11}
   },
   {
@@ -1666,8 +129,9 @@
     "description": "Autrefois occupée par les gardes, cette pièce est aujourd'hui vide et silencieuse.",
     "terrain_type": "château",
     "locked": false,
-    "items": [],
+    "items": [32, 33, 34],
     "pnjs": [],
+    "enemies": [],
     "exits": {"Nord": 10, "Sud": 12}
   },
   {
@@ -1676,8 +140,9 @@
     "description": "Des tables renversées et des restes épars rappellent d'anciens festins.",
     "terrain_type": "château",
     "locked": false,
-    "items": [],
+    "items": [35, 36, 37],
     "pnjs": [],
+    "enemies": [],
     "exits": {"Nord": 11, "Sud": 13}
   },
   {
@@ -1686,8 +151,9 @@
     "description": "La cuisine du donjon, désormais couverte de poussière et d'ustensiles rouillés.",
     "terrain_type": "château",
     "locked": true,
-    "items": [],
+    "items": [0, 3, 38],
     "pnjs": [],
+    "enemies": [],
     "exits": {"Nord": 12, "Sud": 14}
   },
   {
@@ -1696,8 +162,9 @@
     "description": "Un corridor sombre menant vers d'autres parties du donjon.",
     "terrain_type": "château",
     "locked": false,
-    "items": [],
+    "items": [39, 27, 25],
     "pnjs": [],
+    "enemies": [],
     "exits": {"Nord": 13, "Ouest": 39, "Sud": 15}
   },
   {
@@ -1706,12 +173,10 @@
     "description": "Une pièce austère avec des bancs en bois et des armes accrochées aux murs.",
     "terrain_type": "Pierre froide",
     "locked": false,
-    "items": [],
+    "items": [26, 28, 29],
     "pnjs": [],
-    "exits": {
-      "Nord": 14,
-      "Sud": 16
-    }
+    "enemies": [],
+    "exits": {"Nord": 14, "Sud": 16}
   },
   {
     "id": 16,
@@ -1719,12 +184,10 @@
     "description": "Un couloir étroit faiblement éclairé par des torches tremblotantes.",
     "terrain_type": "Pierre froide",
     "locked": false,
-    "items": [],
+    "items": [30, 31, 17],
     "pnjs": [],
-    "exits": {
-      "Nord": 15,
-      "Sud": 17
-    }
+    "enemies": [],
+    "exits": {"Nord": 15, "Sud": 17}
   },
   {
     "id": 17,
@@ -1732,13 +195,10 @@
     "description": "Une vaste pièce avec un ancien puits en son centre. Des chaînes rouillées pendent du plafond.",
     "terrain_type": "Sol pavé",
     "locked": false,
-    "items": [],
+    "items": [18, 19, 20],
     "pnjs": [],
-    "exits": {
-      "Sud": 18,
-      "Ouest": 32,
-      "Nord": 16
-    }
+    "enemies": [],
+    "exits": {"Sud": 18, "Ouest": 32, "Nord": 16}
   },
   {
     "id": 18,
@@ -1746,12 +206,10 @@
     "description": "L'air est chargé d'humidité et l'odeur de moisissure est persistante.",
     "terrain_type": "Sol terreux",
     "locked": false,
-    "items": [],
+    "items": [21, 22, 23],
     "pnjs": [],
-    "exits": {
-      "Nord": 17,
-      "Sud": 19
-    }
+    "enemies": [],
+    "exits": {"Nord": 17, "Sud": 19}
   },
   {
     "id": 19,
@@ -1759,14 +217,10 @@
     "description": "Un carrefour stratégique reliant diverses parties du donjon. Une étrange rune gravée dans le sol brille faiblement.",
     "terrain_type": "Pierre froide",
     "locked": false,
-    "items": [],
+    "items": [24, 25, 26],
     "pnjs": [],
-    "exits": {
-      "Nord": 18,
-      "Ouest": 20,
-      "Tunnel": 0,
-      "À l'étage": 114
-    }
+    "enemies": [],
+    "exits": {"Nord": 18, "Ouest": 20, "Tunnel": 0, "À l'étage": 114}
   },
   {
     "id": 20,
@@ -1774,12 +228,10 @@
     "description": "Un long couloir où des fresques effacées racontent des histoires oubliées.",
     "terrain_type": "Pierre sculptée",
     "locked": false,
-    "items": [],
+    "items": [27, 28, 29],
     "pnjs": [],
-    "exits": {
-      "Est": 19,
-      "Ouest": 21
-    }
+    "enemies": [],
+    "exits": {"Est": 19, "Ouest": 21}
   },
   {
     "id": 21,
@@ -1787,12 +239,10 @@
     "description": "Une grande pièce où une trappe entrouverte laisse entrevoir un puits profond et obscur.",
     "terrain_type": "Sol pavé",
     "locked": false,
-    "items": [],
+    "items": [30, 31, 32],
     "pnjs": [],
-    "exits": {
-      "Est": 20,
-      "Ouest": 22
-    }
+    "enemies": [],
+    "exits": {"Est": 20, "Ouest": 22}
   },
   {
     "id": 22,
@@ -1800,12 +250,10 @@
     "description": "Une pièce où repose une imposante statue de pierre représentant un guerrier en armure.",
     "terrain_type": "Dalles fendues",
     "locked": false,
-    "items": [],
+    "items": [33, 34, 35],
     "pnjs": [],
-    "exits": {
-      "Est": 21,
-      "Ouest": 23
-    }
+    "enemies": [],
+    "exits": {"Est": 21, "Ouest": 23}
   },
   {
     "id": 23,
@@ -1813,12 +261,10 @@
     "description": "Des étagères poussiéreuses remplissent cette pièce étroite, débordant de grimoires anciens.",
     "terrain_type": "Bois vermoulu",
     "locked": false,
-    "items": [],
+    "items": [36, 37, 38],
     "pnjs": [],
-    "exits": {
-      "Est": 22,
-      "Ouest": 24
-    }
+    "enemies": [],
+    "exits": {"Est": 22, "Ouest": 24}
   },
   {
     "id": 24,
@@ -1826,12 +272,10 @@
     "description": "Une pièce sombre avec des armes rouillées accrochées aux murs.",
     "terrain_type": "Pierre froide",
     "locked": false,
-    "items": [],
+    "items": [39, 0, 1],
     "pnjs": [],
-    "exits": {
-      "Nord": 25,
-      "Est": 23
-    }
+    "enemies": [],
+    "exits": {"Nord": 25, "Est": 23}
   },
   {
     "id": 25,
@@ -1839,12 +283,10 @@
     "description": "Un passage exigu avec des torches vacillantes.",
     "terrain_type": "Pierre froide",
     "locked": false,
-    "items": [],
+    "items": [2, 3, 4],
     "pnjs": [],
-    "exits": {
-      "Sud": 24,
-      "Nord": 26
-    }
+    "enemies": [],
+    "exits": {"Sud": 24, "Nord": 26}
   },
   {
     "id": 26,
@@ -1852,12 +294,10 @@
     "description": "Une grande pièce décorée de bannières anciennes et de trophées de bataille.",
     "terrain_type": "Pierre froide",
     "locked": false,
-    "items": [],
+    "items": [5, 6, 7],
     "pnjs": [],
-    "exits": {
-      "Nord": 27,
-      "Sud": 25
-    }
+    "enemies": [],
+    "exits": {"Nord": 27, "Sud": 25}
   },
   {
     "id": 27,
@@ -1865,13 +305,10 @@
     "description": "Une pièce où des statues menaçantes semblent surveiller chaque mouvement.",
     "terrain_type": "Pierre froide",
     "locked": false,
-    "items": [],
+    "items": [8, 9, 10],
     "pnjs": [],
-    "exits": {
-      "Nord": 33,
-      "Sud": 26,
-      "Est": 28
-    }
+    "enemies": [],
+    "exits": {"Nord": 33, "Sud": 26, "Est": 28}
   },
   {
     "id": 28,
@@ -1879,25 +316,21 @@
     "description": "Des étagères poussiéreuses remplies de parchemins et de grimoires.",
     "terrain_type": "Pierre froide",
     "locked": false,
-    "items": [],
+    "items": [11, 12, 13],
     "pnjs": [],
-    "exits": {
-      "Est": 29,
-      "Ouest": 27
-    }
+    "enemies": [],
+    "exits": {"Est": 29, "Ouest": 27}
   },
   {
     "id": 29,
     "name": "Salle des coffres",
     "description": "Une pièce remplie de coffres fermés à clé. Une forte odeur de métal y règne.",
     "terrain_type": "Pierre froide",
-    "locked": false,
-    "items": [],
+    "locked": true,
+    "items": [14, 15, 16],
     "pnjs": [],
-    "exits": {
-      "Est": 30,
-      "Ouest": 28
-    }
+    "enemies": [],
+    "exits": {"Est": 30, "Ouest": 28}
   },
   {
     "id": 30,
@@ -1905,13 +338,10 @@
     "description": "Une pièce richement décorée avec un grand lit et une armoire verrouillée.",
     "terrain_type": "Pierre froide",
     "locked": false,
-    "items": [],
+    "items": [17, 18, 19],
     "pnjs": [],
-    "exits": {
-      "Nord": 38,
-      "Sud": 31,
-      "Ouest": 29
-    }
+    "enemies": [],
+    "exits": {"Nord": 38, "Sud": 31, "Ouest": 29}
   },
   {
     "id": 31,
@@ -1919,12 +349,10 @@
     "description": "Une pièce paisible avec des tapisseries anciennes et une lumière tamisée.",
     "terrain_type": "Pierre froide",
     "locked": false,
-    "items": [],
+    "items": [20, 21, 22],
     "pnjs": [],
-    "exits": {
-      "Nord": 30,
-      "Est": 32
-    }
+    "enemies": [],
+    "exits": {"Nord": 30, "Est": 32}
   },
   {
     "id": 32,
@@ -1932,12 +360,10 @@
     "description": "Une vaste pièce pavée de dalles sombres et humides, marquée par des fissures profondes.",
     "terrain_type": "Sol pavé",
     "locked": false,
-    "items": [],
+    "items": [23, 24, 25],
     "pnjs": [],
-    "exits": {
-      "Est": 17,
-      "Ouest": 31
-    }
+    "enemies": [],
+    "exits": {"Est": 17, "Ouest": 31}
   },
   {
     "id": 33,
@@ -1945,12 +371,10 @@
     "description": "Un hall faiblement éclairé par une torche vacillante fixée au mur.",
     "terrain_type": "Sol pierreux",
     "locked": false,
-    "items": [],
+    "items": [26, 27, 28],
     "pnjs": [],
-    "exits": {
-      "Nord": 34,
-      "Sud": 27
-    }
+    "enemies": [],
+    "exits": {"Nord": 34, "Sud": 27}
   },
   {
     "id": 34,
@@ -1958,16 +382,10 @@
     "description": "Un carrefour avec plusieurs portes menant vers différents niveaux du donjon.",
     "terrain_type": "Sol dallé",
     "locked": false,
-    "items": [],
+    "items": [29, 30, 31],
     "pnjs": [],
-    "exits": {
-      "Sud": 33,
-      "Nord": 47,
-      "Est": 35,
-      "Ouest": 48,
-      "Sous-sol": 89,
-      "À l'étage": 90
-    }
+    "enemies": [],
+    "exits": {"Sud": 33, "Nord": 47, "Est": 35, "Ouest": 48, "Sous-sol": 89, "À l'étage": 90}
   },
   {
     "id": 35,
@@ -1975,12 +393,10 @@
     "description": "Un étroit couloir où l'ombre semble se mouvoir à votre passage.",
     "terrain_type": "Sol pierreux",
     "locked": false,
-    "items": [],
+    "items": [32, 33, 34],
     "pnjs": [],
-    "exits": {
-      "Est": 36,
-      "Ouest": 34
-    }
+    "enemies": [],
+    "exits": {"Est": 36, "Ouest": 34}
   },
   {
     "id": 36,
@@ -1988,12 +404,10 @@
     "description": "Une salle vide... mais une impression étrange de danger persiste.",
     "terrain_type": "Sol piégé",
     "locked": false,
-    "items": [],
+    "items": [35, 36, 37],
     "pnjs": [],
-    "exits": {
-      "Est": 37,
-      "Ouest": 35
-    }
+    "enemies": [],
+    "exits": {"Est": 37, "Ouest": 35}
   },
   {
     "id": 37,
@@ -2001,14 +415,10 @@
     "description": "Une grande pièce bordée de statues de chevaliers en armure. Certaines semblent avoir bougé...",
     "terrain_type": "Sol dallé",
     "locked": false,
-    "items": [],
+    "items": [38, 39, 0],
     "pnjs": [],
-    "exits": {
-      "Nord": 40,
-      "Sud": 38,
-      "Est": 39,
-      "Ouest": 36
-    }
+    "enemies": [],
+    "exits": {"Nord": 40, "Sud": 38, "Est": 39, "Ouest": 36}
   },
   {
     "id": 38,
@@ -2016,12 +426,10 @@
     "description": "Un espace mystérieux bordé de miroirs brisés qui renvoient des reflets déformés.",
     "terrain_type": "Sol glissant",
     "locked": false,
-    "items": [],
+    "items": [1, 2, 3],
     "pnjs": [],
-    "exits": {
-      "Nord": 37,
-      "Sud": 30
-    }
+    "enemies": [],
+    "exits": {"Nord": 37, "Sud": 30}
   },
   {
     "id": 39,
@@ -2029,12 +437,10 @@
     "description": "Un silence pesant règne ici, interrompu seulement par les gouttes d'eau tombant du plafond.",
     "terrain_type": "Sol froid",
     "locked": false,
-    "items": [],
+    "items": [4, 5, 6],
     "pnjs": [],
-    "exits": {
-      "Est": 14,
-      "Ouest": 37
-    }
+    "enemies": [],
+    "exits": {"Est": 14, "Ouest": 37}
   },
   {
     "id": 40,
@@ -2042,12 +448,10 @@
     "description": "Une salle aux murs décorés d'armures rouillées et d'épées brisées.",
     "terrain_type": "Sol poussiéreux",
     "locked": false,
-    "items": [],
+    "items": [7, 8, 9],
     "pnjs": [],
-    "exits": {
-      "Nord": 41,
-      "Sud": 37
-    }
+    "enemies": [],
+    "exits": {"Nord": 41, "Sud": 37}
   },
   {
     "id": 41,
@@ -2055,13 +459,10 @@
     "description": "Une salle remplie de runes étranges gravées dans la pierre.",
     "terrain_type": "Sol gravé",
     "locked": false,
-    "items": [],
+    "items": [10, 11, 12],
     "pnjs": [],
-    "exits": {
-      "Sud": 40,
-      "Nord": 42,
-      "Ouest": 44
-    }
+    "enemies": [],
+    "exits": {"Sud": 40, "Nord": 42, "Ouest": 44}
   },
   {
     "id": 42,
@@ -2069,12 +470,10 @@
     "description": "Un autel au centre de la pièce porte une clé dorée. Un piège est sûrement caché...",
     "terrain_type": "Sol piégé",
     "locked": false,
-    "items": [],
+    "items": [5],
     "pnjs": [],
-    "exits": {
-      "Nord": 43,
-      "Sud": 41
-    }
+    "enemies": [],
+    "exits": {"Nord": 43, "Sud": 41}
   },
   {
     "id": 43,
@@ -2082,12 +481,10 @@
     "description": "Un colosse de pierre repose ici, prêt à défendre ce lieu... ou à attaquer les imprudents.",
     "terrain_type": "Sol gravé",
     "locked": false,
-    "items": [],
+    "items": [13, 14, 15],
     "pnjs": [],
-    "exits": {
-      "Nord": 7,
-      "Sud": 42
-    }
+    "enemies": [1],
+    "exits": {"Nord": 7, "Sud": 42}
   },
   {
     "id": 44,
@@ -2095,12 +492,10 @@
     "description": "Des objets anciens reposent sur des étagères, certains émettent une lueur inquiétante.",
     "terrain_type": "Sol poussiéreux",
     "locked": false,
-    "items": [],
+    "items": [16, 17, 18],
     "pnjs": [],
-    "exits": {
-      "Est": 41,
-      "Ouest": 45
-    }
+    "enemies": [],
+    "exits": {"Est": 41, "Ouest": 45}
   },
   {
     "id": 45,
@@ -2108,12 +503,10 @@
     "description": "Un coffre en fer massif repose ici. Qui sait ce qu'il renferme ?",
     "terrain_type": "Sol pierreux",
     "locked": false,
-    "items": [],
+    "items": [19, 20, 21],
     "pnjs": [],
-    "exits": {
-      "Est": 44,
-      "Ouest": 46
-    }
+    "enemies": [],
+    "exits": {"Est": 44, "Ouest": 46}
   },
   {
     "id": 46,
@@ -2121,14 +514,10 @@
     "description": "Une pièce obscure où plusieurs portes mènent vers des directions incertaines. Un souffle glacial s'échappe du passage vers le sous-sol.",
     "terrain_type": "pierre froide",
     "locked": false,
-    "items": [],
+    "items": [22, 23, 24],
     "pnjs": [],
-    "exits": {
-      "Est": 45,
-      "Ouest": 54,
-      "Sud": 47,
-      "Sous-sol": 87
-    }
+    "enemies": [],
+    "exits": {"Est": 45, "Ouest": 54, "Sud": 47, "Sous-sol": 87}
   },
   {
     "id": 47,
@@ -2136,12 +525,10 @@
     "description": "Un long couloir faiblement éclairé par des torches vacillantes. Des murmures résonnent dans les murs de pierre.",
     "terrain_type": "pierre humide",
     "locked": false,
-    "items": [],
+    "items": [25, 26, 27],
     "pnjs": [],
-    "exits": {
-      "Nord": 46,
-      "Sud": 34
-    }
+    "enemies": [],
+    "exits": {"Nord": 46, "Sud": 34}
   },
   {
     "id": 48,
@@ -2149,12 +536,10 @@
     "description": "Un hall sinistre avec des symboles étranges gravés sur les murs. Une odeur de soufre flotte dans l'air.",
     "terrain_type": "pierre fissurée",
     "locked": false,
-    "items": [],
+    "items": [28, 29, 30],
     "pnjs": [],
-    "exits": {
-      "Est": 34,
-      "Ouest": 49
-    }
+    "enemies": [],
+    "exits": {"Est": 34, "Ouest": 49}
   },
   {
     "id": 49,
@@ -2162,12 +547,10 @@
     "description": "Une pièce plongée dans l'obscurité où les ombres semblent se mouvoir par elles-mêmes.",
     "terrain_type": "pierre froide",
     "locked": false,
-    "items": [],
+    "items": [31, 32, 33],
     "pnjs": [],
-    "exits": {
-      "Est": 48,
-      "Ouest": 50
-    }
+    "enemies": [],
+    "exits": {"Est": 48, "Ouest": 50}
   },
   {
     "id": 50,
@@ -2175,12 +558,10 @@
     "description": "Une salle voûtée, silencieuse, où l'air est pesant et oppressant.",
     "terrain_type": "dalles de pierre",
     "locked": false,
-    "items": [],
+    "items": [34, 35, 36],
     "pnjs": [],
-    "exits": {
-      "Nord": 51,
-      "Est": 49
-    }
+    "enemies": [],
+    "exits": {"Nord": 51, "Est": 49}
   },
   {
     "id": 51,
@@ -2188,12 +569,10 @@
     "description": "Une large pièce avec des statues imposantes représentant des guerriers en armure. L'air semble chargé d'une présence invisible.",
     "terrain_type": "pierre sculptée",
     "locked": true,
-    "items": [],
+    "items": [37, 38, 39],
     "pnjs": [],
-    "exits": {
-      "Nord": 52,
-      "Sud": 50
-    }
+    "enemies": [],
+    "exits": {"Nord": 52, "Sud": 50}
   },
   {
     "id": 52,
@@ -2201,13 +580,10 @@
     "description": "Un ancien temple en ruine, envahi par des racines et des gravats. Des gravures évoquent d'anciennes cérémonies.",
     "terrain_type": "pierre effritée",
     "locked": false,
-    "items": [],
+    "items": [0, 1, 2],
     "pnjs": [],
-    "exits": {
-      "Sud": 51,
-      "Est": 53,
-      "Nord": 55
-    }
+    "enemies": [],
+    "exits": {"Sud": 51, "Est": 53, "Nord": 55}
   },
   {
     "id": 53,
@@ -2215,13 +591,10 @@
     "description": "Une crypte lugubre, avec des cercueils de pierre brisés et des odeurs nauséabondes.",
     "terrain_type": "pierre sombre",
     "locked": false,
-    "items": [],
+    "items": [3, 4, 5],
     "pnjs": [],
-    "exits": {
-      "Nord": 55,
-      "Est": 54,
-      "Ouest": 52
-    }
+    "enemies": [],
+    "exits": {"Nord": 55, "Est": 54, "Ouest": 52}
   },
   {
     "id": 54,
@@ -2229,13 +602,10 @@
     "description": "Autrefois un sanctuaire sacré, aujourd'hui ravagé par le temps et les créatures du donjon.",
     "terrain_type": "carrelage fissuré",
     "locked": false,
-    "items": [],
+    "items": [6, 7, 8],
     "pnjs": [],
-    "exits": {
-      "Nord": 59,
-      "Est": 46,
-      "Ouest": 53
-    }
+    "enemies": [],
+    "exits": {"Nord": 59, "Est": 46, "Ouest": 53}
   },
   {
     "id": 55,
@@ -2243,12 +613,10 @@
     "description": "Un passage étroit où chaque pas résonne étrangement. On sent une présence malveillante.",
     "terrain_type": "pierres moussues",
     "locked": false,
-    "items": [],
+    "items": [9, 10, 11],
     "pnjs": [],
-    "exits": {
-      "Nord": 56,
-      "Sud": 52
-    }
+    "enemies": [],
+    "exits": {"Nord": 56, "Sud": 52}
   },
   {
     "id": 56,
@@ -2256,12 +624,10 @@
     "description": "Chaque mot prononcé ici semble répété mille fois, rendant la communication difficile.",
     "terrain_type": "pierre creuse",
     "locked": false,
-    "items": [],
+    "items": [12, 13, 14],
     "pnjs": [],
-    "exits": {
-      "Nord": 57,
-      "Sud": 55
-    }
+    "enemies": [],
+    "exits": {"Nord": 57, "Sud": 55}
   },
   {
     "id": 57,
@@ -2269,12 +635,10 @@
     "description": "De vieux livres poussiéreux remplissent cette pièce. Certains manuscrits semblent murmurer par eux-mêmes.",
     "terrain_type": "bois vermoulu",
     "locked": false,
-    "items": [],
+    "items": [15, 16, 17],
     "pnjs": [],
-    "exits": {
-      "Sud": 56,
-      "Est": 58
-    }
+    "enemies": [],
+    "exits": {"Sud": 56, "Est": 58}
   },
   {
     "id": 58,
@@ -2282,12 +646,10 @@
     "description": "Les visages peints sur les tableaux semblent vous suivre du regard où que vous alliez.",
     "terrain_type": "dalles froides",
     "locked": false,
-    "items": [],
+    "items": [18, 19, 20],
     "pnjs": [],
-    "exits": {
-      "Est": 61,
-      "Ouest": 57
-    }
+    "enemies": [],
+    "exits": {"Est": 61, "Ouest": 57}
   },
   {
     "id": 59,
@@ -2295,12 +657,10 @@
     "description": "Un long couloir faiblement éclairé par des torches vacillantes.",
     "terrain_type": "Pierres humides",
     "locked": false,
-    "items": [],
+    "items": [21, 22, 23],
     "pnjs": [],
-    "exits": {
-      "Sud": 54,
-      "Nord": 60
-    }
+    "enemies": [],
+    "exits": {"Sud": 54, "Nord": 60}
   },
   {
     "id": 60,
@@ -2308,13 +668,10 @@
     "description": "Une grande salle avec une statue imposante d'un guerrier en armure.",
     "terrain_type": "Dalles de pierre",
     "locked": false,
-    "items": [],
+    "items": [24, 25, 26],
     "pnjs": [],
-    "exits": {
-      "Nord": 61,
-      "Sud": 59,
-      "Est": 65
-    }
+    "enemies": [],
+    "exits": {"Nord": 61, "Sud": 59, "Est": 65}
   },
   {
     "id": 61,
@@ -2322,13 +679,10 @@
     "description": "Un escalier en pierre à moitié impraticable descend dans l'obscurité, une faible brise glaciale s'en échappe.",
     "terrain_type": "Escalier de pierre",
     "locked": true,
-    "items": [],
+    "items": [27, 28, 29],
     "pnjs": [],
-    "exits": {
-      "Nord": 62,
-      "Sud": 60,
-      "Ouest": 58
-    }
+    "enemies": [],
+    "exits": {"Nord": 62, "Sud": 60, "Ouest": 58}
   },
   {
     "id": 62,
@@ -2336,12 +690,10 @@
     "description": "Des enclumes rouillées et des outils éparpillés jonchent le sol.",
     "terrain_type": "Dalles craquelées",
     "locked": false,
-    "items": [],
+    "items": [30, 31, 32],
     "pnjs": [],
-    "exits": {
-      "Nord": 63,
-      "Sud": 61
-    }
+    "enemies": [],
+    "exits": {"Nord": 63, "Sud": 61}
   },
   {
     "id": 63,
@@ -2349,12 +701,10 @@
     "description": "Une pièce richement décorée, bien que poussiéreuse.",
     "terrain_type": "Tapis usés",
     "locked": false,
-    "items": [],
+    "items": [33, 34, 35],
     "pnjs": [],
-    "exits": {
-      "Sud": 62,
-      "Est": 64
-    }
+    "enemies": [],
+    "exits": {"Sud": 62, "Est": 64}
   },
   {
     "id": 64,
@@ -2362,13 +712,10 @@
     "description": "Un trône brisé trône au fond de cette vaste salle silencieuse.",
     "terrain_type": "Pierres polies",
     "locked": false,
-    "items": [],
+    "items": [36, 37, 38],
     "pnjs": [],
-    "exits": {
-      "Nord": 0,
-      "Est": 1,
-      "Ouest": 63
-    }
+    "enemies": [],
+    "exits": {"Nord": 0, "Est": 1, "Ouest": 63}
   },
   {
     "id": 65,
@@ -2376,12 +723,10 @@
     "description": "Une pièce silencieuse ornée de symboles mystérieux.",
     "terrain_type": "Marbre fissuré",
     "locked": false,
-    "items": [],
+    "items": [1, 2, 3],
     "pnjs": [],
-    "exits": {
-      "Est": 5,
-      "Ouest": 60
-    }
+    "enemies": [],
+    "exits": {"Est": 5, "Ouest": 60}
   },
   {
     "id": 66,
@@ -2389,12 +734,10 @@
     "description": "Un puits profond émettant une lumière pâle et inquiétante.",
     "terrain_type": "Pierres moussues",
     "locked": false,
-    "items": [],
+    "items": [4, 5, 6],
     "pnjs": [],
-    "exits": {
-      "Sud": 67,
-      "Rez-de-chaussée": 0
-    }
+    "enemies": [0],
+    "exits": {"Sud": 67, "Rez-de-chaussée": 0}
   },
   {
     "id": 67,
@@ -2402,12 +745,10 @@
     "description": "Des chaînes rouillées pendent du plafond, des murmures résonnent dans l'air.",
     "terrain_type": "Sols de terre battue",
     "locked": false,
-    "items": [],
+    "items": [7, 8, 9],
     "pnjs": [],
-    "exits": {
-      "Est": 68,
-      "Ouest": 75
-    }
+    "enemies": [],
+    "exits": {"Est": 68, "Ouest": 75}
   },
   {
     "id": 68,
@@ -2415,12 +756,10 @@
     "description": "Un long couloir étroit, l'air y est suffocant.",
     "terrain_type": "Pierres froides",
     "locked": false,
-    "items": [],
+    "items": [10, 11, 12],
     "pnjs": [],
-    "exits": {
-      "Est": 69,
-      "Ouest": 67
-    }
+    "enemies": [],
+    "exits": {"Est": 69, "Ouest": 67}
   },
   {
     "id": 69,
@@ -2428,12 +767,10 @@
     "description": "Une pièce remplie de graffitis étranges et de marques de griffes.",
     "terrain_type": "Pierres fissurées",
     "locked": false,
-    "items": [],
+    "items": [13, 14, 15],
     "pnjs": [],
-    "exits": {
-      "Sud": 70,
-      "Ouest": 68
-    }
+    "enemies": [],
+    "exits": {"Sud": 70, "Ouest": 68}
   },
   {
     "id": 70,
@@ -2441,12 +778,10 @@
     "description": "Des instruments de torture rouillés sont éparpillés dans cette salle sombre.",
     "terrain_type": "Dalles ensanglantées",
     "locked": false,
-    "items": [],
+    "items": [16, 17, 18],
     "pnjs": [],
-    "exits": {
-      "Nord": 69,
-      "Sud": 71
-    }
+    "enemies": [],
+    "exits": {"Nord": 69, "Sud": 71}
   },
   {
     "id": 71,
@@ -2454,12 +789,10 @@
     "description": "Une cellule humide avec une odeur de pourriture.",
     "terrain_type": "Sol boueux",
     "locked": true,
-    "items": [],
+    "items": [19, 20, 21],
     "pnjs": [],
-    "exits": {
-      "Ouest": 72,
-      "Nord": 70
-    }
+    "enemies": [],
+    "exits": {"Ouest": 72, "Nord": 70}
   },
   {
     "id": 72,
@@ -2467,12 +800,10 @@
     "description": "Un passage étroit avec des gravures inquiétantes sur les murs.",
     "terrain_type": "Pierres humides",
     "locked": false,
-    "items": [],
+    "items": [22, 23, 24],
     "pnjs": [],
-    "exits": {
-      "Sud": 73,
-      "Est": 71
-    }
+    "enemies": [],
+    "exits": {"Sud": 73, "Est": 71}
   },
   {
     "id": 73,
@@ -2480,12 +811,10 @@
     "description": "Une pièce lugubre remplie de vieux ossements éparpillés sur le sol. Une odeur de mort y règne.",
     "terrain_type": "Sombre et rocailleux",
     "locked": false,
-    "items": [],
+    "items": [25, 26, 27],
     "pnjs": [],
-    "exits": {
-      "Nord": 72,
-      "Ouest": 74
-    }
+    "enemies": [],
+    "exits": {"Nord": 72, "Ouest": 74}
   },
   {
     "id": 74,
@@ -2493,12 +822,10 @@
     "description": "Les murs sont couverts de chaînes rouillées, certaines encore accrochées à des ossements.",
     "terrain_type": "Humide et glissant",
     "locked": false,
-    "items": [],
+    "items": [28, 29, 30],
     "pnjs": [],
-    "exits": {
-      "Est": 73,
-      "Ouest": 84
-    }
+    "enemies": [],
+    "exits": {"Est": 73, "Ouest": 84}
   },
   {
     "id": 75,
@@ -2506,12 +833,10 @@
     "description": "Un couloir étroit où les murmures des âmes en peine résonnent dans l'obscurité.",
     "terrain_type": "Sombre et étroit",
     "locked": false,
-    "items": [],
+    "items": [31, 32, 33],
     "pnjs": [],
-    "exits": {
-      "Sud": 76,
-      "Est": 67
-    }
+    "enemies": [],
+    "exits": {"Sud": 76, "Est": 67}
   },
   {
     "id": 76,
@@ -2519,12 +844,10 @@
     "description": "Des statues de guerriers pétrifiés semblent observer chaque mouvement. Un sentiment d'oppression s'y dégage.",
     "terrain_type": "Pavé et humide",
     "locked": false,
-    "items": [],
+    "items": [34, 35, 36],
     "pnjs": [],
-    "exits": {
-      "Nord": 75,
-      "Sud": 77
-    }
+    "enemies": [],
+    "exits": {"Nord": 75, "Sud": 77}
   },
   {
     "id": 77,
@@ -2532,13 +855,10 @@
     "description": "Au centre trône un immense pilier brisé, entouré de gravats et de signes mystérieux.",
     "terrain_type": "Rocailleux et poussiéreux",
     "locked": true,
-    "items": [],
+    "items": [37, 38, 39],
     "pnjs": [],
-    "exits": {
-      "Ouest": 78,
-      "Nord": 76,
-      "Sud": 84
-    }
+    "enemies": [],
+    "exits": {"Ouest": 78, "Nord": 76, "Sud": 84}
   },
   {
     "id": 78,
@@ -2546,12 +866,10 @@
     "description": "Une forge éteinte occupe la pièce. Des outils rouillés et des armes brisées traînent partout.",
     "terrain_type": "Rocailleux et poussiéreux",
     "locked": false,
-    "items": [],
+    "items": [0, 1, 2],
     "pnjs": [],
-    "exits": {
-      "Est": 77,
-      "Ouest": 79
-    }
+    "enemies": [],
+    "exits": {"Est": 77, "Ouest": 79}
   },
   {
     "id": 79,
@@ -2559,12 +877,10 @@
     "description": "Une crypte froide et poussiéreuse. Des cercueils ouverts indiquent que quelque chose est récemment passé par ici.",
     "terrain_type": "Rocailleux et froid",
     "locked": false,
-    "items": [],
+    "items": [3, 4, 5],
     "pnjs": [],
-    "exits": {
-      "Sud": 80,
-      "Est": 78
-    }
+    "enemies": [],
+    "exits": {"Sud": 80, "Est": 78}
   },
   {
     "id": 80,
@@ -2572,12 +888,10 @@
     "description": "Un long couloir où des visages fantomatiques semblent surgir des murs.",
     "terrain_type": "Froid et effrayant",
     "locked": false,
-    "items": [],
+    "items": [6, 7, 8],
     "pnjs": [],
-    "exits": {
-      "Nord": 79,
-      "Sud": 81
-    }
+    "enemies": [],
+    "exits": {"Nord": 79, "Sud": 81}
   },
   {
     "id": 81,
@@ -2585,12 +899,10 @@
     "description": "Une vaste salle avec un gouffre béant en son centre. Des cordes déchirées pendent sur les bords.",
     "terrain_type": "Poussiéreux et dangereux",
     "locked": false,
-    "items": [],
+    "items": [9, 10, 11],
     "pnjs": [],
-    "exits": {
-      "Nord": 80,
-      "Sud": 82
-    }
+    "enemies": [],
+    "exits": {"Nord": 80, "Sud": 82}
   },
   {
     "id": 82,
@@ -2598,12 +910,10 @@
     "description": "De nombreuses étagères contiennent des reliques anciennes et poussiéreuses, certaines dégageant une lueur inquiétante.",
     "terrain_type": "Ancien et mystérieux",
     "locked": false,
-    "items": [],
+    "items": [12, 13, 14],
     "pnjs": [],
-    "exits": {
-      "Nord": 81,
-      "Est": 83
-    }
+    "enemies": [],
+    "exits": {"Nord": 81, "Est": 83}
   },
   {
     "id": 83,
@@ -2611,12 +921,10 @@
     "description": "Un autel sacré repose au centre, décoré de symboles oubliés.",
     "terrain_type": "Mystique et paisible",
     "locked": false,
-    "items": [],
+    "items": [15, 16, 17],
     "pnjs": [],
-    "exits": {
-      "Est": 86,
-      "Ouest": 82
-    }
+    "enemies": [],
+    "exits": {"Est": 86, "Ouest": 82}
   },
   {
     "id": 84,
@@ -2624,13 +932,10 @@
     "description": "Des chaînes suspendues, des hurlements d'âmes perdues... un endroit terrifiant où peu osent s'attarder.",
     "terrain_type": "Oppressant et glacial",
     "locked": false,
-    "items": [],
+    "items": [18, 19, 20],
     "pnjs": [],
-    "exits": {
-      "Nord": 77,
-      "Sud": 85,
-      "Est": 74
-    }
+    "enemies": [],
+    "exits": {"Nord": 77, "Sud": 85, "Est": 74}
   },
   {
     "id": 85,
@@ -2638,12 +943,10 @@
     "description": "Des cendres noires recouvrent le sol. On distingue à peine des silhouettes gravées sur les murs.",
     "terrain_type": "Sombre et cendreux",
     "locked": true,
-    "items": [],
+    "items": [21, 22, 23],
     "pnjs": [],
-    "exits": {
-      "Sud": 86,
-      "Nord": 84
-    }
+    "enemies": [],
+    "exits": {"Sud": 86, "Nord": 84}
   },
   {
     "id": 86,
@@ -2651,13 +954,10 @@
     "description": "Une pièce sombre avec des chaînes rouillées accrochées aux murs. Des murmures semblent résonner dans l'air.",
     "terrain_type": "Souterrain humide",
     "locked": false,
-    "items": [],
+    "items": [24, 25, 26],
     "pnjs": [],
-    "exits": {
-      "Nord": 85,
-      "Est": 87,
-      "Ouest": 83
-    }
+    "enemies": [],
+    "exits": {"Nord": 85, "Est": 87, "Ouest": 83}
   },
   {
     "id": 87,
@@ -2665,13 +965,10 @@
     "description": "Cette pièce est remplie de gravures murales racontant les sombres histoires des âmes perdues du donjon.",
     "terrain_type": "Souterrain rocheux",
     "locked": false,
-    "items": [],
+    "items": [27, 28, 29],
     "pnjs": [],
-    "exits": {
-      "Sud": 88,
-      "Ouest": 86,
-      "Rez-de-chaussée": 46
-    }
+    "enemies": [],
+    "exits": {"Sud": 88, "Ouest": 86, "Rez-de-chaussée": 46}
   },
   {
     "id": 88,
@@ -2679,12 +976,10 @@
     "description": "Une tombe massive est au centre, gardée par une aura mystérieuse et oppressante.",
     "terrain_type": "Souterrain lugubre",
     "locked": false,
-    "items": [],
+    "items": [30, 31, 32],
     "pnjs": [],
-    "exits": {
-      "Nord": 87,
-      "Sud": 89
-    }
+    "enemies": [],
+    "exits": {"Nord": 87, "Sud": 89}
   },
   {
     "id": 89,
@@ -2692,12 +987,10 @@
     "description": "Une large caverne remplie de stalactites et de stalagmites. Des ombres bougent parfois dans l'obscurité.",
     "terrain_type": "Caverne humide",
     "locked": false,
-    "items": [],
+    "items": [33, 34, 35],
     "pnjs": [],
-    "exits": {
-      "Nord": 88,
-      "Rez-de-chaussée": 34
-    }
+    "enemies": [],
+    "exits": {"Nord": 88, "Rez-de-chaussée": 34}
   },
   {
     "id": 90,
@@ -2705,13 +998,10 @@
     "description": "Une immense bibliothèque oubliée, couverte de toiles d'araignées, mais remplie de livres anciens.",
     "terrain_type": "Étage poussiéreux",
     "locked": false,
-    "items": [],
+    "items": [36, 37, 38],
     "pnjs": [],
-    "exits": {
-      "Sud": 96,
-      "Est": 91,
-      "Rez-de-chaussée": 34
-    }
+    "enemies": [],
+    "exits": {"Sud": 96, "Est": 91, "Rez-de-chaussée": 34}
   },
   {
     "id": 91,
@@ -2719,12 +1009,10 @@
     "description": "Des fauteuils en cuir usé entourent une cheminée éteinte. Les murs sont ornés de portraits inquiétants.",
     "terrain_type": "Étage ancien",
     "locked": false,
-    "items": [],
+    "items": [39, 0, 1],
     "pnjs": [],
-    "exits": {
-      "Est": 92,
-      "Ouest": 90
-    }
+    "enemies": [],
+    "exits": {"Est": 92, "Ouest": 90}
   },
   {
     "id": 92,
@@ -2732,12 +1020,10 @@
     "description": "Des symboles occultes sont gravés sur le sol, et des restes de bougies encerclent l'autel central.",
     "terrain_type": "Étage ésotérique",
     "locked": false,
-    "items": [],
+    "items": [2, 3, 4],
     "pnjs": [],
-    "exits": {
-      "Est": 93,
-      "Ouest": 91
-    }
+    "enemies": [],
+    "exits": {"Est": 93, "Ouest": 91}
   },
   {
     "id": 93,
@@ -2745,13 +1031,10 @@
     "description": "Une sphère cristalline brisée repose sur un piédestal, laissant échapper une lueur inquiétante.",
     "terrain_type": "Étage mystique",
     "locked": false,
-    "items": [],
+    "items": [5, 6, 7],
     "pnjs": [],
-    "exits": {
-      "Sud": 100,
-      "Est": 94,
-      "Ouest": 92
-    }
+    "enemies": [],
+    "exits": {"Sud": 100, "Est": 94, "Ouest": 92}
   },
   {
     "id": 94,
@@ -2759,12 +1042,10 @@
     "description": "Des miroirs couverts de poussière ornent les murs, certains renvoyant des reflets étrangement déformés.",
     "terrain_type": "Étage étroit",
     "locked": false,
-    "items": [],
+    "items": [8, 9, 10],
     "pnjs": [],
-    "exits": {
-      "Est": 95,
-      "Ouest": 93
-    }
+    "enemies": [],
+    "exits": {"Est": 95, "Ouest": 93}
   },
   {
     "id": 95,
@@ -2772,12 +1053,10 @@
     "description": "Des étagères remplies de parchemins déchirés et de grimoires dangereux couvrent les murs.",
     "terrain_type": "Étage mystérieux",
     "locked": false,
-    "items": [],
+    "items": [11, 12, 13],
     "pnjs": [],
-    "exits": {
-      "Sud": 106,
-      "Ouest": 94
-    }
+    "enemies": [],
+    "exits": {"Sud": 106, "Ouest": 94}
   },
   {
     "id": 96,
@@ -2785,12 +1064,10 @@
     "description": "Une grande pièce avec des armes rouillées accrochées aux murs.",
     "terrain_type": "Pavés froids",
     "locked": false,
-    "items": [],
+    "items": [14, 15, 16],
     "pnjs": [],
-    "exits": {
-      "Nord": 90,
-      "Sud": 97
-    }
+    "enemies": [],
+    "exits": {"Nord": 90, "Sud": 97}
   },
   {
     "id": 97,
@@ -2798,13 +1075,10 @@
     "description": "Un long couloir éclairé par quelques torches faiblissantes.",
     "terrain_type": "Pierre humide",
     "locked": false,
-    "items": [],
+    "items": [17, 18, 19],
     "pnjs": [],
-    "exits": {
-      "Nord": 96,
-      "Sud": 107,
-      "Est": 98
-    }
+    "enemies": [],
+    "exits": {"Nord": 96, "Sud": 107, "Est": 98}
   },
   {
     "id": 98,
@@ -2812,12 +1086,10 @@
     "description": "Une petite chambre avec des meubles en ruine et une forte odeur de moisissure.",
     "terrain_type": "Bois vermoulu",
     "locked": false,
-    "items": [],
+    "items": [20, 21, 22],
     "pnjs": [],
-    "exits": {
-      "Est": 99,
-      "Ouest": 97
-    }
+    "enemies": [],
+    "exits": {"Est": 99, "Ouest": 97}
   },
   {
     "id": 99,
@@ -2825,12 +1097,10 @@
     "description": "Une pièce étrange avec un grand miroir fissuré au fond.",
     "terrain_type": "Marbre craquelé",
     "locked": false,
-    "items": [],
+    "items": [23, 24, 25],
     "pnjs": [],
-    "exits": {
-      "Est": 101,
-      "Ouest": 98
-    }
+    "enemies": [],
+    "exits": {"Est": 101, "Ouest": 98}
   },
   {
     "id": 100,
@@ -2838,12 +1108,10 @@
     "description": "Un vaste hall où aucun bruit ne semble résonner.",
     "terrain_type": "Dalles de pierre",
     "locked": false,
-    "items": [],
+    "items": [26, 27, 28],
     "pnjs": [],
-    "exits": {
-      "Nord": 93,
-      "Sud": 101
-    }
+    "enemies": [],
+    "exits": {"Nord": 93, "Sud": 101}
   },
   {
     "id": 101,
@@ -2851,13 +1119,10 @@
     "description": "Une salle circulaire avec des symboles gravés sur le sol.",
     "terrain_type": "Pierres anciennes",
     "locked": true,
-    "items": [],
+    "items": [29, 30, 31],
     "pnjs": [],
-    "exits": {
-      "Nord": 100,
-      "Sud": 102,
-      "Ouest": 99
-    }
+    "enemies": [],
+    "exits": {"Nord": 100, "Sud": 102, "Ouest": 99}
   },
   {
     "id": 102,
@@ -2865,12 +1130,10 @@
     "description": "Un espace sombre grouillant de rongeurs affamés.",
     "terrain_type": "Terre battue",
     "locked": false,
-    "items": [],
+    "items": [32, 33, 34],
     "pnjs": [],
-    "exits": {
-      "Nord": 101,
-      "Est": 103
-    }
+    "enemies": [],
+    "exits": {"Nord": 101, "Est": 103}
   },
   {
     "id": 103,
@@ -2878,12 +1141,10 @@
     "description": "Une vieille bibliothèque pleine de livres en décomposition.",
     "terrain_type": "Bois poussiéreux",
     "locked": false,
-    "items": [],
+    "items": [35, 36, 37],
     "pnjs": [],
-    "exits": {
-      "Est": 104,
-      "Ouest": 102
-    }
+    "enemies": [],
+    "exits": {"Est": 104, "Ouest": 102}
   },
   {
     "id": 104,
@@ -2891,13 +1152,10 @@
     "description": "Une pièce majestueuse où repose un vieux trône délabré.",
     "terrain_type": "Tapis rouge en lambeaux",
     "locked": false,
-    "items": [],
+    "items": [38, 39, 0],
     "pnjs": [],
-    "exits": {
-      "Nord": 105,
-      "Sud": 115,
-      "Ouest": 103
-    }
+    "enemies": [],
+    "exits": {"Nord": 105, "Sud": 115, "Ouest": 103}
   },
   {
     "id": 105,
@@ -2905,12 +1163,10 @@
     "description": "Une pièce autrefois somptueuse aujourd'hui en ruine.",
     "terrain_type": "Tapisseries déchirées",
     "locked": false,
-    "items": [],
+    "items": [27, 28, 29],
     "pnjs": [],
-    "exits": {
-      "Nord": 106,
-      "Sud": 104
-    }
+    "enemies": [],
+    "exits": {"Nord": 106, "Sud": 104}
   },
   {
     "id": 106,
@@ -2918,12 +1174,10 @@
     "description": "Une vaste pièce aux murs recouverts de tapisseries décrivant d'anciennes batailles. De nombreux piédestaux vides suggèrent que des objets précieux ont été déplacés.",
     "terrain_type": "Salle ornée",
     "locked": false,
-    "items": [],
+    "items": [30, 31, 32],
     "pnjs": [],
-    "exits": {
-      "Nord": 95,
-      "Sud": 105
-    }
+    "enemies": [],
+    "exits": {"Nord": 95, "Sud": 105}
   },
   {
     "id": 107,
@@ -2931,12 +1185,10 @@
     "description": "Un long couloir bordé de statues imposantes représentant les héros légendaires du royaume. Le silence oppressant donne une impression de respect et de crainte.",
     "terrain_type": "Couloir statuaire",
     "locked": false,
-    "items": [],
+    "items": [33, 34, 35],
     "pnjs": [],
-    "exits": {
-      "Nord": 97,
-      "Sud": 108
-    }
+    "enemies": [],
+    "exits": {"Nord": 97, "Sud": 108}
   },
   {
     "id": 108,
@@ -2944,12 +1196,10 @@
     "description": "Une petite pièce étroite où repose une armure imposante, semblant encore prête à se battre pour protéger les lieux.",
     "terrain_type": "Pièce de garde",
     "locked": false,
-    "items": [],
+    "items": [36, 37, 38],
     "pnjs": [],
-    "exits": {
-      "Nord": 107,
-      "Sud": 109
-    }
+    "enemies": [],
+    "exits": {"Nord": 107, "Sud": 109}
   },
   {
     "id": 109,
@@ -2957,12 +1207,10 @@
     "description": "Des étagères poussiéreuses abritent d'anciens grimoires et parchemins mystérieux. Un parfum de vieux papier et de cire flotte dans l'air.",
     "terrain_type": "Bibliothèque",
     "locked": true,
-    "items": [],
+    "items": [39, 0, 1],
     "pnjs": [],
-    "exits": {
-      "Nord": 108,
-      "Est": 110
-    }
+    "enemies": [],
+    "exits": {"Nord": 108, "Est": 110}
   },
   {
     "id": 110,
@@ -2970,12 +1218,10 @@
     "description": "Un espace encombré de fioles, de chaudrons et d'étranges mixtures encore fumantes.",
     "terrain_type": "Atelier magique",
     "locked": false,
-    "items": [],
+    "items": [2, 3, 4],
     "pnjs": [],
-    "exits": {
-      "Est": 111,
-      "Ouest": 109
-    }
+    "enemies": [],
+    "exits": {"Est": 111, "Ouest": 109}
   },
   {
     "id": 111,
@@ -2983,12 +1229,10 @@
     "description": "Une pièce circulaire marquée par des symboles gravés dans le sol. L'air est chargé d'une énergie inquiétante.",
     "terrain_type": "Salle mystique",
     "locked": false,
-    "items": [],
+    "items": [5, 6, 7],
     "pnjs": [],
-    "exits": {
-      "Est": 112,
-      "Ouest": 110
-    }
+    "enemies": [],
+    "exits": {"Est": 112, "Ouest": 110}
   },
   {
     "id": 112,
@@ -2996,12 +1240,10 @@
     "description": "Un passage étroit et faiblement éclairé. Les murs semblent suinter une humidité froide.",
     "terrain_type": "Couloir sombre",
     "locked": false,
-    "items": [],
+    "items": [8, 9, 10],
     "pnjs": [],
-    "exits": {
-      "Est": 113,
-      "Ouest": 111
-    }
+    "enemies": [],
+    "exits": {"Est": 113, "Ouest": 111}
   },
   {
     "id": 113,
@@ -3009,12 +1251,10 @@
     "description": "Des sarcophages et des tombes ouvertes témoignent d'anciens rituels funéraires. Des ossements jonchent le sol.",
     "terrain_type": "Crypte",
     "locked": false,
-    "items": [],
+    "items": [11, 12, 13],
     "pnjs": [],
-    "exits": {
-      "Est": 114,
-      "Ouest": 112
-    }
+    "enemies": [],
+    "exits": {"Est": 114, "Ouest": 112}
   },
   {
     "id": 114,
@@ -3022,13 +1262,10 @@
     "description": "Une pièce imposante avec d'immenses portes menant à différents niveaux du donjon.",
     "terrain_type": "Salle de transition",
     "locked": false,
-    "items": [],
+    "items": [14, 15, 16],
     "pnjs": [],
-    "exits": {
-      "Ouest": 113,
-      "Nord": 115,
-      "Rez-de-chaussée": 19
-    }
+    "enemies": [],
+    "exits": {"Ouest": 113, "Nord": 115, "Rez-de-chaussée": 19}
   },
   {
     "id": 115,
@@ -3036,12 +1273,9 @@
     "description": "Une immense pièce obscure où trône un fauteuil de pierre noire. Des traces de rituels démoniaques sont visibles au sol.",
     "terrain_type": "Salle du boss",
     "locked": false,
-    "items": [],
+    "items": [17, 18, 19],
     "pnjs": [],
-    "exits": {
-      "Nord": 104,
-      "Sud": 114
-    }
+    "enemies": [],
+    "exits": {"Nord": 104, "Sud": 114}
   }
 ]
-
