@@ -7,17 +7,17 @@ use crate::models::{
     dialogue::Dialogue,
     entities::item::Item,
     entities::pnj::Pnj,
-    entities::room::{Room, RoomWrapper},
+    entities::room::Room,
     entities::ennemie::Enemy,
 };
 
 /// Charge les salles depuis un fichier JSON contenant des RoomWrapper
 pub fn load_room_from_file(filename: &str) -> Result<Vec<Room>, serde_json::Error> {
-    let data = fs::read_to_string(filename).expect("Impossible de lire le fichier des zones.");
-    let wrappers: Vec<RoomWrapper> = serde_json::from_str(&data)?;
-    let rooms: Vec<Room> = wrappers.into_iter().map(Room::from).collect();
+    let data = fs::read_to_string(filename).expect("Impossible de lire le fichier des zones");
+    let rooms: Vec<Room> = serde_json::from_str(&data)?;
     Ok(rooms)
 }
+
 
 pub fn load_characters_from_file(filename: &str) -> Result<Vec<Character>, serde_json::Error> {
     let data = fs::read_to_string(filename).expect("Impossible de lire le fichier des personnages.");
