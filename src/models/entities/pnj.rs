@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize}; 
 
-use crate::models::room::Room;
+use crate::models::entities::room::Room;
 use crate::models::dialogue::Dialogue;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]

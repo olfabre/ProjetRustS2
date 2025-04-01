@@ -1,4 +1,4 @@
-use crate::models::room::Room;
+use crate::models::entities::room::Room;
 
 pub trait Descriptible {
     fn get_description(&self) -> String;

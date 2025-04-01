@@ -1,7 +1,7 @@
 use std::{fs, io};
 use std::io::{stdout, Write};
 use serde_json;
-use crate::models::{character::Character, dialogue::Dialogue, item::Item, pnj::Pnj, room::Room, ennemie::Enemy};
+use crate::models::{entities::character::Character, dialogue::Dialogue, entities::item::Item, entities::pnj::Pnj, entities::room::Room, entities::ennemie::Enemy};
 
 pub fn load_room_from_file(filename: &str) -> Result<Vec<Room>, serde_json::Error> {
     let data = fs::read_to_string(filename).expect("Impossible de lire le fichier des zones");

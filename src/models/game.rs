@@ -1,4 +1,4 @@
-use crate::models::{character::Character, room::Room, item::Item, pnj::Pnj, dialogue::Dialogue, ennemie::Enemy, ennemie};
+use crate::models::{entities::character::Character, entities::room::Room, entities::item::Item, entities::pnj::Pnj, dialogue::Dialogue, entities::ennemie::Enemy, entities::ennemie};
 use crate::io::loader::{load_characters_from_file, load_dialogues_from_file, load_items_from_file, load_pnjs_from_file, load_room_from_file, load_ennemie_from_file};
 use std::io::stdin;
 use crate::models::combat::Combat;
