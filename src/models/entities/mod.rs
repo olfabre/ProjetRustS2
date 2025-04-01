@@ -7,3 +7,4 @@ pub mod pnj;
 pub mod ennemie;
 
 pub mod room;
+pub mod vivant;
