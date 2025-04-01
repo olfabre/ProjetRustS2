@@ -1,47 +1,250 @@
 @startuml
+skinparam classAttributeIconSize 0
 
-entity "Salle" as Salle {
-  +id : u32
-  +nom : String
-  +description : String
+'============================='
+'        CLASSES DE BASE'
+'============================='
+class Entity {
+  +id: u32
+  +name: String
+  +description: String
 }
 
-entity "Objet" as Objet {
-  +id : u32
-  +nom : String
-  +type : String
-  +effet : String
+class Item {
+  +type: String
+  +effect: String
+  +usable: boolean
+  +weight: f32
+  +value: u32
+  +stackable: boolean
+  +equippable: boolean
+  +bonus_value: i32
+  -entity: Entity
 }
 
-entity "Personnage" {
-  +id : u32
-  +nom : String
-  +santé : u32
-  +force : u32
-  +position : u32
+class Room {
+  +terrain_type: String
+  +locked: boolean
+  +items: Vec<u32>
+  +pnj: Vec<u32>
+  +enemies: Vec<u32>
+  -entity: Entity
 }
 
-entity "Ennemi" {
-  +id : u32
-  +nom : String
-  +santé : u32
-  +salle_id : u32
+'============================='
+'        INVENTAIRE'
+'============================='
+class Inventory {
+  +capacity: u32
+  +items: Vec<InventoryItem>
+  +add_item(item_id: u32, quantity: u32): bool
+  +remove_item(item_id: u32, quantity: u32): bool
+  +has_item(item_id: u32, quantity: u32): bool
+  +equip_item(item_id: u32): bool
+  +unequip_item(item_id: u32): bool
+  +get_weight(): f32
 }
 
-entity "PNJ" {
-  +id : u32
-  +nom : String
+class InventoryItem {
+  +item_id: u32
+  +quantity: u32
+  +equipped: boolean
 }
 
-entity "Dialogue" {
-  +id : u32
-  +contenu : String
+'============================='
+'        VIVANTS'
+'============================='
+class Vivant {
+  +health: i32
+  +strength: i32
+  +intelligence: i32
+  +defense: i32
+  +use_item(item_id: u32): Result
+  +equip_item(item_id: u32): Result
+  +get_equipped_weapon_bonus(): i32
+  +get_equipped_armor_protection(): i32
+  -entity: Entity
 }
 
-Salle --{ Objet : contient
-Salle --{ "Ennemi" : contient
-Salle --{ PNJ : contient
-Personnage --{ Objet : possède
-PNJ --{ Dialogue : dialogue
+class Joueur {
+  +position: usize
+  +money: u32
+  +experience: u32
+  +level: u32
+  +add_experience(amount: u32): void
+  -vivant: Vivant
+}
+
+class Pnj {
+  +role: String
+  +dialogue_id: u32
+  -vivant: Vivant
+}
+
+class Enemy {
+  +aggressiveness: u32
+  +loot_table: Vec<LootEntry>
+  -vivant: Vivant
+}
+
+class Merchant {
+  +buy_multiplier: f32
+  +sell_multiplier: f32
+  +buy_from_player(player: Joueur, item_id: u32, quantity: u32): Result
+  +sell_to_player(player: Joueur, item_id: u32, quantity: u32): Result
+  -pnj: Pnj
+}
+
+class LootEntry {
+  +item_id: u32
+  +min_quantity: u32
+  +max_quantity: u32
+  +drop_chance: f32
+}
+
+'============================='
+'        DIALOGUES'
+'============================='
+class Dialogue {
+  +id: u32
+  +content: String
+  +choices: Vec<DialogueChoice>
+}
+
+class DialogueChoice {
+  +text: String
+  +next_id: Option<u32>
+  +effect: Option<String>
+}
+
+'============================='
+'        COMBAT'
+'============================='
+class Combat {
+  +attacker: Vivant
+  +defender: Vivant
+  +round(): CombatResult
+  +execute_round(): CombatResult
+}
+
+enum CombatResult {
+  VICTORY
+  DEFEAT
+  ONGOING
+  ESCAPE
+}
+
+'============================='
+'        QUÊTES'
+'============================='
+class Quest {
+  +objectives: Vec<QuestObjective>
+  +rewards: Vec<QuestReward>
+  +completed: boolean
+  +check_item_collection(player: Joueur): void
+  +give_rewards(player: Joueur): Result
+  +update_completion_status(): void
+  -entity: Entity
+}
+
+enum QuestObjective {
+  KILL_ENEMIES {enemy_type: String, count: u32, current: u32}
+  COLLECT_ITEMS {item_id: u32, count: u32, current: u32}
+  VISIT_LOCATION {room_id: u32, visited: boolean}
+}
+
+enum QuestReward {
+  ITEM {item_id: u32, quantity: u32}
+  EXPERIENCE(u32)
+  MONEY(u32)
+}
+
+'============================='
+'        ÉTAT DU JEU'
+'============================='
+class GameState {
+  +items: Map<u32, Item>
+  +rooms: Map<u32, Room>
+  +npcs: Map<u32, Pnj>
+  +enemies: Map<u32, Enemy>
+  +quests: Map<u32, Quest>
+  +get_item(item_id: u32): Item
+  +is_item_weapon(item_id: u32): boolean
+  +is_item_armor(item_id: u32): boolean
+  +load_from_files(): Result
+}
+
+'============================='
+'        RELATIONS'
+'============================='
+Vivant --> Entity
+Vivant "1" *-- "1" Inventory
+Inventory "1" o-- "*" InventoryItem
+InventoryItem --> Item : references
+
+Joueur --> Vivant
+Pnj --> Vivant
+Enemy --> Vivant
+Enemy "1" *-- "*" LootEntry
+Merchant --> Pnj
+Merchant "1" *-- "1" Inventory
+
+Item --> Entity
+Room --> Entity
+Quest --> Entity
+
+Joueur --> Pnj : dialoguer
+Joueur --> Enemy : peut_combattre
+Joueur "1" -- "*" Quest : accepte
+Joueur "1" -- "*" Merchant : commerce_avec >
+Joueur "1" -- "*" Combat : participe_à
+Joueur "1" --> "1" Room : se_trouve_dans
+Joueur --> Inventory : manipule
+
+Dialogue "1" o-- "*" DialogueChoice
+Pnj --> Dialogue : commence_avec
+
+Combat --> Vivant : attacker
+Combat --> Vivant : defender
+Combat ..> CombatResult : produces
+Combat "0..*" -- "1" Room : se_déroule_dans
+
+Quest "1" *-- "*" QuestObjective
+Quest "1" *-- "*" QuestReward
+Quest "0..*" -- "0..1" Pnj : est_donnée_par
+
+GameState "1" *-- "*" Item
+GameState "1" *-- "*" Room
+GameState "1" *-- "*" Pnj
+GameState "1" *-- "*" Enemy
+GameState "1" *-- "*" Quest
+
+Room "1" o-- "*" Item : contient
+Room "1" o-- "*" Pnj : contient
+Room "1" o-- "*" Enemy : contient
+
+LootEntry --> Item : référence
+
+
+
+'============================='
+'        NOTES POUR CLARTÉ'
+'============================='
+note right of Inventory
+  Gère la collection d'objets
+  avec leur quantité et
+  statut d'équipement
+end note
+
+note right of LootEntry
+  Définit les possibilités
+  de butin après avoir
+  vaincu un ennemi
+end note
+
+note right of GameState
+  Centralize l'état du jeu
+  et l'accès aux données
+end note
 
 @enduml
