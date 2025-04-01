@@ -31,8 +31,8 @@ impl Game {
             loop {
                 let current_room = &self.rooms[character.position];
 
-                println!("\n🌍 {} est actuellement dans : {}", character.name, current_room.name);
-                println!("📍 {} : {}", current_room.name, current_room.description);
+                println!("\n🌍 {} est actuellement dans : {}", character.name, current_room.name());
+                println!("📍 {} : {}", current_room.elem.name(), current_room.elem.description());
 
                 // Affichage des objets trouvés dans la salle
                 if !current_room.items.is_empty() {
