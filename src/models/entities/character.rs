@@ -53,14 +53,14 @@ impl Character {
                 // Vérifie si la salle est verrouillée (locked = true)
                 if next_room.locked.unwrap_or(false) {
                     // Si oui, empêche le déplacement et affiche un message d'information
-                    println!("🚪 La salle '{}' est verrouillée. Tu as besoin d'une clé ou d'une action spéciale pour entrer.", next_room.name);
+                    println!("🚪 La salle '{}' est verrouillée. Tu as besoin d'une clé ou d'une action spéciale pour entrer.", next_room.name());
                 } else {
                     // Sinon, met à jour la position du personnage vers la nouvelle salle
                     self.position = next_room_id;
 
                     // Affiche le nom et la description de la salle dans laquelle on vient d’entrer
-                    println!("✅ {} est maintenant dans : {}", self.name, next_room.name);
-                    println!("📖 Description : {}", next_room.description);
+                    println!("✅ {} est maintenant dans : {}", self.name, next_room.name());
+                    println!("📖 Description : {}", next_room.description());
                 }
             } else {
                 // Si la salle n’existe pas (ID invalide), affiche un message d’erreur
@@ -183,7 +183,7 @@ impl Character {
                     let current_room = &mut rooms[self.position];
                     if current_room.locked.unwrap_or(false) {
                         current_room.locked = Some(false); // On déverrouille
-                        println!("🔓 Tu as utilisé la clé. La salle '{}' est maintenant déverrouillée !", current_room.name);
+                        println!("🔓 Tu as utilisé la clé. La salle '{}' est maintenant déverrouillée !", current_room.name());
                         self.inventory.remove(index); // Clé supprimée après usage
                     } else {
                         println!("ℹ️ Il n'y a rien à déverrouiller ici.");
