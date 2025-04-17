@@ -31,15 +31,15 @@ impl Game {
             loop {
                 let current_room = &self.rooms[character.position];
 
-                println!("\n🌍 {} est actuellement dans : {}", character.name, current_room.name());
+                println!("\n🌍 {} est actuellement dans : {}", character.name(), current_room.name());
                 println!("📍 {} : {}", current_room.elem.name(), current_room.elem.description());
 
                 // Affichage des objets trouvés dans la salle
                 if !current_room.items.is_empty() {
                     println!("🛠 Objets trouvés :");
                     for &item_id in &current_room.items {
-                        if let Some(item) = self.items.iter().find(|i| i.id == item_id) {
-                            println!("- {} : {} (Effet : {})", item.name, item.description, item.effect.as_deref().unwrap_or("Aucun"));
+                        if let Some(item) = self.items.iter().find(|i| i.id() == item_id) {
+                            println!("- {} : {} (Effet : {})", item.name(), item.description(), item.effect());
                         }
                     }
                 } else {
@@ -68,8 +68,8 @@ impl Game {
                 if !current_room.pnjs.is_empty() {
                     println!("🧑‍🤝‍🧑 Personnages présents :");
                     for &pnj_id in &current_room.pnjs {
-                        if let Some(pnj) = self.pnjs.iter().find(|p| p.id == pnj_id) {
-                            println!("- {}", pnj.name);
+                        if let Some(pnj) = self.pnjs.iter().find(|p| p.id() == pnj_id) {
+                            println!("- {}", pnj.name());
                         }
                     }
                 } else {
@@ -114,7 +114,7 @@ impl Game {
                 // Parler à un PNJ
                 if input.starts_with("parler ") {
                     let pnj_nom = &input[7..].trim();
-                    Pnj::parler_au_pnj(pnj_nom, character.position, &self.rooms, &self.pnjs, &self.dialogues);
+                    Pnj::parler_au_pnj(pnj_nom, character, &self.rooms, &self.pnjs, &self.dialogues);
                     continue;
                 }
 
@@ -139,7 +139,7 @@ impl Game {
 
                             // Suppression de l’ennemi de la liste globale
                             self.ennemies.retain(|e| e.id != enemy_id);
-                        } else if character.health == 0 {
+                        } else if character.health() == 0 {
                             // Si le joueur est mort, on peut afficher un message final et quitter le jeu
                             println!("☠️ Le héros est tombé au combat. Le donjon garde ses secrets... 😔");
                             break; // Sort de la boucle principale -> fin du jeu
