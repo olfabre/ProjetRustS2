@@ -1,14 +1,16 @@
+use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 use std::io::stdin;
 use crate::models::entities::character::Character;
+use crate::models::entities::quete::Quete;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Dialogue {
     pub dialogue_id: u32,
-    pub dialogues: Vec<DialogueStep>,
+    pub dialogue_steps: Vec<DialogueStep>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct DialogueStep {
     pub action: String,
     pub active: bool,
@@ -16,7 +18,7 @@ pub struct DialogueStep {
     pub options: Vec<DialogueOption>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct DialogueOption {
     pub réponse: String,
     pub réaction: String,
@@ -24,81 +26,75 @@ pub struct DialogueOption {
 
 impl Dialogue {
     /// Affiche un dialogue et permet au joueur de choisir une réponse
-    pub fn afficher_dialogue(&self, character: &mut Character) {
-        if !self.dialogues.is_empty() {
-            self.afficher_et_gérer_choix(character);
+    pub fn afficher_dialogue(&mut self, character: &mut Character, quetes: &mut HashMap<u32,Quete>) {
+        if !self.dialogue_steps.is_empty() {
+            println!("Ce PNJ n'a rien à dire.");
         } else {
-            println!("💬 Ce PNJ n'a rien à dire.");
-        }
-    }
 
-    /// 🔄 Gère un échange de dialogue en affichant les options et en traitant la réponse
-    /// 🔄 Gère un échange de dialogue en affichant les options et en traitant la réponse
-    fn afficher_et_gérer_choix(&self, character: &mut Character) {
-        let mut current_index = 0; // Start at the first dialogue step
+            let mut current_index = 0; // Start at the first dialogue step
 
-        while current_index < self.dialogues.len() {
-            let step = &self.dialogues[current_index];
+            while current_index < self.dialogue_steps.len() {
+                // let dialogue_step = &self.dialogues[current_index];
 
-            // ⏩ Skip inactive steps
-            if !step.active {
-                current_index += 1;
-                continue;
-            }
+                // Instead of holding the mutable reference, extract needed values early
+                let is_active = self.dialogue_steps[current_index].active;
+                let question = self.dialogue_steps[current_index].question.clone();
+                let options = self.dialogue_steps[current_index].options.clone();
+                let action = self.dialogue_steps[current_index].action.clone();
 
-            println!("💬 PNJ : \"{}\"", step.question);
+                if !is_active {
+                    current_index += 1;
+                    continue;
+                }
 
-            for (i, option) in step.options.iter().enumerate() {
-                println!("{}. {}", i + 1, option.réponse);
-            }
+                println!("💬 PNJ : \"{}\"", question);
 
-            println!("➡ Tape le numéro de ton choix :");
-            let mut choix = String::new();
-            stdin().read_line(&mut choix).expect("Erreur de lecture");
+                for (i, option) in options.iter().enumerate() {
+                    println!("{}. {}", i + 1, option.réponse);
+                }
 
-            if let Ok(index) = choix.trim().parse::<usize>() {
-                if index > 0 && index <= step.options.len() {
-                    let selected_option = &step.options[index - 1];
+                println!("➡ Tape le numéro de ton choix :");
+                let mut choix = String::new();
+                stdin().read_line(&mut choix).expect("Erreur de lecture");
 
-                    // Afficher la réaction
-                    println!("💬 PNJ : \"{}\"", selected_option.réaction);
+                if let Ok(index) = choix.trim().parse::<usize>() {
+                    if index > 0 && index <= options.len() {
+                        let selected_option = &options[index - 1];
 
-                    // 🛠️ Vérifier si l'action commence par "accepteQuete"
-                    if step.action.starts_with("accepteQuete") && selected_option.réponse == "Accepter Quête" {
-                        // Extraire l'ID de la quête (si format "accepteQuete:42")
-                        if let Some(id_str) = step.action.split(':').nth(1) {
-                            if let Ok(id) = id_str.parse::<u32>() {
-                                self.accepter_quete(id, character);
+                        // Afficher la réaction
+                        println!("💬 PNJ : \"{}\"", selected_option.réaction);
+
+                        // 🛠️ Vérifier si l'action commence par "accepteQuete"
+                        if action.starts_with("accepteQuete") && selected_option.réponse == "Accepter Quête" {
+                            // Extraire l'ID de la quête (si format "accepteQuete:42")
+                            if let Some(id_str) = action.split(':').nth(1) {
+                                if let Ok(id) = id_str.parse::<u32>() {
+                                    character.ajouter_quete(id);
+                                    // Once the quest is accepted, the dialogue becomes inactive,
+                                    self.dialogue_steps[current_index].active = false;
+                                }
                             }
                         }
-                    }
 
-                    // 🔍 Rechercher si la réaction correspond à une question existante
-                    if let Some((new_index, _)) = self.dialogues
-                        .iter()
-                        .enumerate()
-                        .find(|(_, d)| d.question == selected_option.réaction)
-                    {
-                        current_index = new_index; // ✅ Mettre à jour l'index
-                        continue; // 🔄 Passer à la prochaine question
-                    }
+                        // 🔍 Rechercher si la réaction correspond à une question existante
+                        if let Some((new_index, _)) = self.dialogue_steps
+                            .iter()
+                            .enumerate()
+                            .find(|(_, d)| d.question == selected_option.réaction)
+                        {
+                            current_index = new_index; // ✅ Mettre à jour l'index
+                            continue; // 🔄 Passer à la prochaine question
+                        }
 
-                    // 🛑 Fin du dialogue si aucune nouvelle question ne correspond
-                    break;
+                        // 🛑 Fin du dialogue si aucune nouvelle question ne correspond
+                        break;
+                    } else {
+                        println!("❌ Choix invalide !");
+                    }
                 } else {
-                    println!("❌ Choix invalide !");
+                    println!("❌ Entrée invalide !");
                 }
-            } else {
-                println!("❌ Entrée invalide !");
             }
         }
-    }
-
-    /// 🎯 Accepter une quête
-    pub fn accepter_quete(&self, id: u32, character: &mut Character) {
-        println!("🗺️ Quête {} acceptée !", id);
-
-        character.ajouter_quete(id);
-        // Ajouter la quête au journal du joueur ici
     }
 }

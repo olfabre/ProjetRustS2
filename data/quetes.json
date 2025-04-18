@@ -10,5 +10,17 @@
     "recompense": [],
     "recompense_items": [],
     "recompense_argent": 0
+  },
+  {
+    "entity": {
+      "id": 1,
+      "name": "chevalière de Davrik",
+      "description": "Sans valeur pour vous, mais un trésor pour quelqu'un d'autre."
+    },
+    "statu": "disponible",
+    "objectif": 0,
+    "recompense": [],
+    "recompense_items": [],
+    "recompense_argent": 0
   }
 ]

@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 use serde::de::Visitor;
 use crate::models::traits::{Movable, Descriptible};
@@ -239,6 +240,7 @@ impl Character {
     }
 
     pub fn ajouter_quete(&mut self, id: u32) {
+
         self.quests.push(id);
     }
 
@@ -279,14 +281,14 @@ impl Character {
         self.vivant.inventory_mut()
     }
 
-    pub fn get_active_quests(&self, all_quests: &Vec<Quete>) -> Vec<String> {
+    pub fn get_active_quests(&self, all_quests: &HashMap<u32, Quete>) -> Vec<String> {
         // Create a vector to store the names of matching quests.
         let mut quest_titles: Vec<String> = vec![];
 
         // Iterate over each quest ID in the character's quests list.
         for &quest_id_from_char in &self.quests {
             // Find the quest in the all_quests list that matches the ID.
-            if let Some(quest_found) = all_quests.iter().find(|quest_item| quest_item.id() == quest_id_from_char) {
+            if let Some(quest_found) = all_quests.get(&quest_id_from_char) {
                 // Clone the name and push it to the quest_titles vector.
                 quest_titles.push(quest_found.name().to_string());
             }

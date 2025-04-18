@@ -4,6 +4,7 @@ use crate::io::loader::*;
 use std::io::stdin;
 use crate::models::combat::Combat;
 use crate::models::entities::quete::Quete;
+use std::collections::HashMap;
 
 pub struct Game {
     rooms: Vec<Room>,
@@ -12,7 +13,7 @@ pub struct Game {
     pnjs: Vec<Pnj>,
     dialogues: Vec<Dialogue>,
     ennemies: Vec<Enemy>,
-    quetes: Vec<Quete>,
+    quetes: HashMap<u32, Quete>,
 }
 
 impl Game {
@@ -22,7 +23,7 @@ impl Game {
         let characters = load_characters_from_file("data/characters.json").expect("Erreur lors du chargement des personnages.");
         let items = load_items_from_file("data/items.json").expect("Erreur lors du chargement des objets.");
         let pnjs = load_pnjs_from_file("data/pnjs.json").expect("Erreur lors du chargement des PNJ.");
-        let dialogues = load_dialogues_from_file("data/dialogue.json").expect("Erreur lors du chargement des PNJ");
+        let dialogues = load_dialogues_from_file("data/dialogue.json").expect("Erreur lors du chargement des dialogues");
         let ennemies = load_ennemie_from_file("data/ennemie.json").expect("Erreur lors du chargement des ennemis.");
         let quetes = load_quetes_from_file("data/quetes.json").expect("Erreur lors du chargement des quetes.");
 
@@ -118,7 +119,7 @@ impl Game {
                 // Parler à un PNJ
                 if input.starts_with("parler ") {
                     let pnj_nom = &input[7..].trim();
-                    Pnj::parler_au_pnj(pnj_nom, character, &self.rooms, &self.pnjs, &self.dialogues);
+                    Pnj::parler_au_pnj(pnj_nom, character, &self.rooms, &self.pnjs, &mut self.dialogues, &mut self.quetes);
                     continue;
                 }
 

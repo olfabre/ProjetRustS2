@@ -1,7 +1,7 @@
 [
     {
         "dialogue_id": 0,
-        "dialogues": [
+        "dialogue_steps": [
             {
                 "action" : "",
                 "active" : true,
@@ -17,7 +17,7 @@
     },
     {
         "dialogue_id": 1,
-        "dialogues": [
+        "dialogue_steps": [
             {
                 "action" : "accepteQuete:0",
                 "active" : true,
@@ -31,7 +31,7 @@
     },
     {
         "dialogue_id": 2,
-        "dialogues": [
+        "dialogue_steps": [
             {
                 "action" : "",
                 "active" : true,
@@ -54,7 +54,7 @@
     },
     {
         "dialogue_id": 3,
-        "dialogues": [
+        "dialogue_steps": [
             {
                 "action" : "",
                 "active" : true,
@@ -69,7 +69,7 @@
     },
     {
         "dialogue_id": 4,
-        "dialogues": [
+        "dialogue_steps": [
             {
                 "action" : "",
                 "active" : true,
@@ -78,6 +78,29 @@
                     { "réponse": "Le réveiller", "réaction": "Le dragon ouvre ses yeux en colère ! Prépare-toi au combat !" },
                     { "réponse": "Voler un trésor", "réaction": "Tu attrapes discrètement une gemme enchantée sans réveiller le dragon." },
                     { "réponse": "Rebrousser chemin", "réaction": "Tu préfères ne pas prendre de risques et retournes en arrière." }
+                ]
+            }
+        ]
+    },
+    {
+        "dialogue_id": 5,
+        "dialogue_steps": [
+            {
+                "action" : "",
+                "active" : true,
+                "question": "Je ne peux signer de précieux documents commerciaux sans cette chevalière, volée par des bandits taboréens. En toute hâte, ils se sont rendus à la porte voisine et ont découvert leur destin.",
+                "options": [
+                    { "réponse": "C'est dommage.", "réaction": "Si seulement quelqu'un pouvait m'aider" },
+                    { "réponse": "Au revoir", "réaction": "Le sage te regarde, mais ne répond pas..." }
+                ]
+            },
+            {
+                "action" : "accepteQuete:1",
+                "active" : true,
+                "question": "Récupérez la chevalière de Davrik dans la salle des statues juste à côté. Attention aux mons… aux statues. Vous serez récompensé, mon ami.",
+                "options": [
+                    { "réponse": "Accepter Quête", "réaction": "Finalement, les dieux ont répondu à mes prières." },
+                    { "réponse": "Au revoir", "réaction": "Le sage te regarde, mais ne répond pas..." }
                 ]
             }
         ]

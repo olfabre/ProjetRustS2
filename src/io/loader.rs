@@ -1,6 +1,7 @@
 use std::{fs, io};
 use std::io::{stdout, Write};
 use serde_json;
+use std::collections::HashMap;
 
 use crate::models::{
     entities::character::Character,
@@ -52,10 +53,29 @@ pub fn load_ennemie_from_file(filename: &str) -> Result<Vec<Enemy>, serde_json::
     Ok(ennemie)
 }
 
-pub fn load_quetes_from_file(filename: &str) -> Result<Vec<Quete>, serde_json::Error>{
+/*pub fn load_quetes_from_file(filename: &str) -> Result<Vec<Quete>, serde_json::Error>{
     let data = fs::read_to_string(filename).expect("Impossible de lire le fichier des Quêtes.");
     let quetes: Vec<Quete> = serde_json::from_str(&data)?;
     Ok(quetes)
+}*/
+
+
+
+pub fn load_quetes_from_file(filename: &str) -> Result<HashMap<u32, Quete>, serde_json::Error> {
+    // Read the file contents into a string.
+    let data = fs::read_to_string(filename).expect("Impossible de lire le fichier des Quêtes.");
+
+    // Deserialize the JSON into a Vec<Quete>.
+    let quetes: Vec<Quete> = serde_json::from_str(&data)?;
+
+    // Create a HashMap from the Vec<Quete>, mapping IDs to Quete structs.
+    let quete_map: HashMap<u32, Quete> = quetes
+        .into_iter()
+        .map(|quete| (quete.id(), quete)) // Use the quest ID as the key.
+        .collect();
+
+    // Return the resulting HashMap.
+    Ok(quete_map)
 }
 
 
