@@ -1,4 +1,4 @@
-use crate::models::{character::Character, room::Room, item::Item, pnj::Pnj, dialogue::Dialogue, ennemie::Enemy, ennemie};
+use crate::models::{entities::character::Character, entities::room::Room, entities::item::Item, entities::pnj::Pnj, dialogue::Dialogue, entities::ennemie::Enemy, entities::ennemie};
 use crate::io::loader::{load_characters_from_file, load_dialogues_from_file, load_items_from_file, load_pnjs_from_file, load_room_from_file, load_ennemie_from_file};
 use std::io::stdin;
 use crate::models::combat::Combat;
@@ -31,8 +31,8 @@ impl Game {
             loop {
                 let current_room = &self.rooms[character.position];
 
-                println!("\n🌍 {} est actuellement dans : {}", character.name, current_room.name);
-                println!("📍 {} : {}", current_room.name, current_room.description);
+                println!("\n🌍 {} est actuellement dans : {}", character.name, current_room.name());
+                println!("📍 {} : {}", current_room.elem.name(), current_room.elem.description());
 
                 // Affichage des objets trouvés dans la salle
                 if !current_room.items.is_empty() {

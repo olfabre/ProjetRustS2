@@ -1,6 +1,6 @@
 use std::io;
 use std::io::Write;
-use crate::models::{character::Character, ennemie::Enemy}; // Import du joueur et des ennemis
+use crate::models::{entities::character::Character, entities::ennemie::Enemy}; // Import du joueur et des ennemis
 use rand::Rng; // Pour générer des événements aléatoires (ex : attaque spéciale ennemie)
 use crate::io::loader::get_user_input; // Fonction utilitaire pour lire l'entrée utilisateur
 

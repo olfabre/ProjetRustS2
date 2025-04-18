@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 use crate::models::traits::{Movable, Descriptible};
-use crate::models::{room::Room, item::Item};
+use crate::models::{entities::room::Room, entities::item::Item};
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Character {
