@@ -13,7 +13,7 @@ impl Combat {
         println!("⚔️ Un {} sauvage apparaît dans la salle !", enemy.name);
 
         loop {
-            println!("\n👤 Vos PV : {} | 👹 PV de {} : {}", player.health, enemy.name, enemy.health);
+            println!("\n👤 Vos PV : {} | 👹 PV de {} : {}", player.health(), enemy.name, enemy.health);
             println!("🎮 Que voulez-vous faire ?");
             println!("1. Attaquer");
             println!("2. Attaque spéciale");
@@ -23,12 +23,12 @@ impl Combat {
 
             match choice.trim() {
                 "1" => {
-                    let damage = player.strength;
+                    let damage = player.strength();
                     enemy.health = enemy.health.saturating_sub(damage).try_into().unwrap();
                     println!("🗡️ Vous infligez {} dégâts à {}.", damage, enemy.name);
                 }
                 "2" => {
-                    let special_damage = player.strength + 5;
+                    let special_damage = player.strength() + 5;
                     enemy.health = enemy.health.saturating_sub(special_damage);
                     println!("💥 Attaque spéciale ! Vous infligez {} dégâts à {}.", special_damage, enemy.name);
                 }
@@ -52,15 +52,15 @@ impl Combat {
             let mut rng = rand::thread_rng();
             if rng.gen_bool(0.3) {
                 println!("🔥 {} utilise une attaque spéciale !", enemy.name);
-                player.health = player.health.saturating_sub(10);
+                player.set_health(player.health().saturating_sub(10));
                 println!("💔 Vous perdez 10 points de vie !");
             } else {
                 println!("🔁 {} riposte !", enemy.name);
-                player.health = player.health.saturating_sub(enemy.strength);
+                player.set_health(player.health().saturating_sub(enemy.strength));
                 println!("💔 Vous perdez {} points de vie !", enemy.strength);
             }
 
-            if player.health == 0 {
+            if player.health() == 0 {
                 println!("💀 Vous êtes mort...");
                 return false; // <- le joueur est mort
             }
