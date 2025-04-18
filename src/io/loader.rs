@@ -9,6 +9,7 @@ use crate::models::{
     entities::pnj::Pnj,
     entities::room::Room,
     entities::ennemie::Enemy,
+    entities::quete::Quete,
 };
 
 /// Charge les salles depuis un fichier JSON contenant des RoomWrapper
@@ -50,6 +51,13 @@ pub fn load_ennemie_from_file(filename: &str) -> Result<Vec<Enemy>, serde_json::
     let ennemie: Vec<Enemy> = serde_json::from_str(&data)?;
     Ok(ennemie)
 }
+
+pub fn load_quetes_from_file(filename: &str) -> Result<Vec<Quete>, serde_json::Error>{
+    let data = fs::read_to_string(filename).expect("Impossible de lire le fichier des Quêtes.");
+    let quetes: Vec<Quete> = serde_json::from_str(&data)?;
+    Ok(quetes)
+}
+
 
 pub fn get_user_input() -> String {
     let mut input = String::new();

@@ -14,7 +14,8 @@
         },
         "position": 1,
         "experience": 1,
-        "level": 1
+        "level": 1,
+        "quests": []
     },
     {
         "vivant": {
@@ -31,7 +32,8 @@
         },
         "position": 1,
         "experience": 1,
-        "level": 1
+        "level": 1,
+        "quests": []
     }
 
 ]

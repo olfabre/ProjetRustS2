@@ -8,5 +8,5 @@ pub mod pnj;
 pub mod ennemie;
 
 pub mod room;
-mod quete;
+pub(crate) mod quete;
 

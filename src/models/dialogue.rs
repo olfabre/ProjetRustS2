@@ -5,7 +5,6 @@ use crate::models::entities::character::Character;
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Dialogue {
     pub dialogue_id: u32,
-    pub pnj_id: u32, // Associe un dialogue à un PNJ
     pub dialogues: Vec<DialogueStep>,
 }
 
@@ -65,7 +64,7 @@ impl Dialogue {
                     println!("💬 PNJ : \"{}\"", selected_option.réaction);
 
                     // 🛠️ Vérifier si l'action commence par "accepteQuete"
-                    if step.action.starts_with("accepteQuete") && selected_option.réponse == "Accepter" {
+                    if step.action.starts_with("accepteQuete") && selected_option.réponse == "Accepter Quête" {
                         // Extraire l'ID de la quête (si format "accepteQuete:42")
                         if let Some(id_str) = step.action.split(':').nth(1) {
                             if let Ok(id) = id_str.parse::<u32>() {

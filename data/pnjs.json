@@ -19,9 +19,9 @@
     {
         "vivant": {
             "entity": {
-                "id": 0,
-                "name": "Golem de pierre",
-                "description": "Cette pierre est souple!"
+                "id": 1,
+                "name": "Lord Khamar",
+                "description": "Il a servi la reine en temps de guerre !"
             },
             "health": 100,
             "strength": 15,
@@ -36,7 +36,7 @@
     {
         "vivant": {
             "entity": {
-                "id": 0,
+                "id": 2,
                 "name": "Roi fantôme",
                 "description": "Il a des secrets"
             },
@@ -53,7 +53,7 @@
     {
         "vivant": {
             "entity": {
-                "id": 0,
+                "id": 3,
                 "name": "Sage énigmatique",
                 "description": "Sage, tu dis?"
             },

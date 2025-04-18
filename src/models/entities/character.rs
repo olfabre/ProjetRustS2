@@ -3,6 +3,7 @@ use serde::de::Visitor;
 use crate::models::traits::{Movable, Descriptible};
 use crate::models::{entities::room::Room, entities::item::Item};
 use crate::models::entities::entity::Entity;
+use crate::models::entities::quete::Quete;
 use crate::models::entities::vivant::Vivant;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -12,6 +13,7 @@ pub struct Character {
     pub position: usize,
     pub level: i32,       // Ajout du niveau du joueur
     pub experience: i32,  // Ajout de l'expérience du joueur
+    pub quests: Vec<u32>
 
 
 }
@@ -237,7 +239,7 @@ impl Character {
     }
 
     pub fn ajouter_quete(&mut self, id: u32) {
-
+        self.quests.push(id);
     }
 
 
@@ -276,6 +278,24 @@ impl Character {
     pub fn inventory_mut(&mut self) -> &mut Vec<Item> {
         self.vivant.inventory_mut()
     }
+
+    pub fn get_active_quests(&self, all_quests: &Vec<Quete>) -> Vec<String> {
+        // Create a vector to store the names of matching quests.
+        let mut quest_titles: Vec<String> = vec![];
+
+        // Iterate over each quest ID in the character's quests list.
+        for &quest_id_from_char in &self.quests {
+            // Find the quest in the all_quests list that matches the ID.
+            if let Some(quest_found) = all_quests.iter().find(|quest_item| quest_item.id() == quest_id_from_char) {
+                // Clone the name and push it to the quest_titles vector.
+                quest_titles.push(quest_found.name().to_string());
+            }
+        }
+
+        // Return the collected quest titles.
+        quest_titles
+    }
+
 
 
 

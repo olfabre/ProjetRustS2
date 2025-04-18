@@ -1,0 +1,14 @@
+[
+  {
+    "entity": {
+      "id": 0,
+      "name": "Aventuriers Disparus",
+      "description": "Trouvez ce qui s'est passé."
+    },
+    "statu": "disponible",
+    "objectif": 0,
+    "recompense": [],
+    "recompense_items": [],
+    "recompense_argent": 0
+  }
+]

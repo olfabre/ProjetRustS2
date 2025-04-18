@@ -1,7 +1,9 @@
 use crate::models::{entities::character::Character, entities::room::Room, entities::item::Item, entities::pnj::Pnj, dialogue::Dialogue, entities::ennemie::Enemy, entities::ennemie};
-use crate::io::loader::{load_characters_from_file, load_dialogues_from_file, load_items_from_file, load_pnjs_from_file, load_room_from_file, load_ennemie_from_file};
+// use crate::io::loader::{load_characters_from_file, load_dialogues_from_file, load_items_from_file, load_pnjs_from_file, load_room_from_file, load_ennemie_from_file, load_quetes_from_file};
+use crate::io::loader::*;
 use std::io::stdin;
 use crate::models::combat::Combat;
+use crate::models::entities::quete::Quete;
 
 pub struct Game {
     rooms: Vec<Room>,
@@ -10,6 +12,7 @@ pub struct Game {
     pnjs: Vec<Pnj>,
     dialogues: Vec<Dialogue>,
     ennemies: Vec<Enemy>,
+    quetes: Vec<Quete>,
 }
 
 impl Game {
@@ -21,8 +24,9 @@ impl Game {
         let pnjs = load_pnjs_from_file("data/pnjs.json").expect("Erreur lors du chargement des PNJ.");
         let dialogues = load_dialogues_from_file("data/dialogue.json").expect("Erreur lors du chargement des PNJ");
         let ennemies = load_ennemie_from_file("data/ennemie.json").expect("Erreur lors du chargement des ennemis.");
+        let quetes = load_quetes_from_file("data/quetes.json").expect("Erreur lors du chargement des quetes.");
 
-        Game { rooms, characters, items, pnjs, dialogues, ennemies }
+        Game { rooms, characters, items, pnjs, dialogues, ennemies, quetes }
     }
 
     /// Démarre la boucle principale du jeu
@@ -30,7 +34,7 @@ impl Game {
         if let Some(character) = self.characters.first_mut() {
             loop {
                 let current_room = &self.rooms[character.position];
-
+                println!("_________________________________________________________________________________________________________________________________________");
                 println!("\n🌍 {} est actuellement dans : {}", character.name(), current_room.name());
                 println!("📍 {} : {}", current_room.elem.name(), current_room.elem.description());
 
@@ -118,6 +122,12 @@ impl Game {
                     continue;
                 }
 
+                if input.starts_with("quêtes") {
+                    let quetes_found = (character.get_active_quests(&self.quetes));
+                    quetes_found.iter().for_each(|quete| println!("{}", quete));
+                    continue;
+                }
+
                 // Combattre un ennemi
                 if input.starts_with("combattre ") {
                     let ennemi_nom = &input[10..].trim().to_lowercase();
@@ -149,6 +159,8 @@ impl Game {
                     }
 
                 }
+
+
 
                 // Traduire les directions anglaises vers les directions du fichier JSON
                 let direction = match input.as_str() {

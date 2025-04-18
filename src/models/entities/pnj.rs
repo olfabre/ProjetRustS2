@@ -37,7 +37,7 @@ impl Pnj {
         let room = &rooms[character.position];
 
         if let Some(&pnj_id) = room.pnjs.iter().find(|&&id| {
-            pnjs.iter().any(|p| p.id() == id && p.name().to_lowercase() == pnj_nom.to_lowercase())
+            pnjs.iter().any(|p| id == p.id()  &&  p.name().to_lowercase() == pnj_nom.to_lowercase())
         }) {
             if let Some(pnj) = pnjs.iter().find(|p| p.id() == pnj_id) {
                 if let Some(dialogue) = dialogues.iter().find(|d| d.dialogue_id == pnj.dialogue_id) {

@@ -21,7 +21,7 @@
             "terrain_type": "château",
             "locked": false,
             "items": [3, 4, 5],
-            "pnjs": [],
+            "pnjs": [0],
             "enemies": [],
             "exits": {"Est": 2, "Ouest": 64}
         },
@@ -34,7 +34,7 @@
             "terrain_type": "château",
             "locked": false,
             "items": [6, 7, 8],
-            "pnjs": [],
+            "pnjs": [2],
             "enemies": [],
             "exits": {"Sud": 3, "Ouest": 1}
         },
@@ -47,7 +47,7 @@
             "terrain_type": "bibliothèque",
             "locked": false,
             "items": [9, 10, 11],
-            "pnjs": [],
+            "pnjs": [1],
             "enemies": [],
             "exits": {"Nord": 2, "Sud": 6}
         },
