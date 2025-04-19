@@ -13,6 +13,7 @@ pub struct Quete {
     pub recompense: Vec<String>,
     pub recompense_items: Vec<u32>,
     pub recompense_argent: i32,
+    pub experience: i32,
 
 }
 

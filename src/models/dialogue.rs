@@ -93,6 +93,7 @@ impl Dialogue {
                                      let mut quete = quetes.get_mut(&id).unwrap();
                                      // Character supprimer quete
                                      character.supprimer_quete(id);
+                                     character.add_experience(quete.experience);
 
                                      // On récupère l'objet depuis la liste globale
                                      for recompense_item in quete.recompense_items.iter() {

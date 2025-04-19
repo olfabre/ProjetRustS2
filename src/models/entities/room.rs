@@ -18,10 +18,10 @@ pub struct Room {
     pub pnjs: Vec<u32>,
     pub enemies: Vec<u32>,
     pub exits: HashMap<String, usize>,
-    pub north: Option<u32>,
-    pub south: Option<u32>,
-    pub east: Option<u32>,
-    pub west: Option<u32>,
+    pub nord: Option<u32>,
+    pub sud: Option<u32>,
+    pub est: Option<u32>,
+    pub ouest: Option<u32>,
 }
 
 

@@ -14,7 +14,8 @@
     },
     "recompense": ["item"],
     "recompense_items": [39],
-    "recompense_argent": 0
+    "recompense_argent": 0,
+    "experience": 20
   },
   {
     "entity": {
@@ -31,6 +32,7 @@
     },
     "recompense": [],
     "recompense_items": [],
-    "recompense_argent": 0
+    "recompense_argent": 0,
+    "experience": 20
   }
 ]
