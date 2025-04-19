@@ -18,7 +18,12 @@ pub struct Pnj {
 impl Pnj {
     /// Permet à un PNJ de parler en utilisant `dialogue.rs`
 
-    pub fn parler_au_pnj(pnj_nom: &str, character: &mut Character, rooms: &[Room], pnjs: &[Pnj], dialogues: &mut [Dialogue], quetes: &mut HashMap<u32,Quete>) {
+    pub fn parler_au_pnj(pnj_nom: &str, character: &mut Character,
+                         rooms: &[Room],
+                         pnjs: &[Pnj],
+                         dialogues: &mut [Dialogue],
+                         quetes: &mut HashMap<u32,Quete>,
+                         items: &Vec<Item>) {
         let room = &rooms[character.position];
 
         if let Some(&pnj_id) = room.pnjs.iter().find(|&&id| {
@@ -29,7 +34,7 @@ impl Pnj {
 
                 if let Some(dialogue) = dialogues.iter_mut().find(|d| d.dialogue_id == pnj.dialogue_id) {
 
-                    dialogue.afficher_dialogue(character, quetes);
+                    dialogue.afficher_dialogue(character, quetes, items);
                 } else {
                     println!("💬 {} : \"Je n’ai rien à te dire.\"", pnj.name());
                 }

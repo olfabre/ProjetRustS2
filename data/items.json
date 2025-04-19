@@ -557,7 +557,7 @@
         "weight": 10,
         "value": 9,
         "stackable": false,
-        "equippable": false
+        "equippable": true
     },
     {
         "entity": {

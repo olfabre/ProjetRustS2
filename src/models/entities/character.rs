@@ -62,9 +62,10 @@ impl Character {
                     // Sinon, met à jour la position du personnage vers la nouvelle salle
                     self.position = next_room_id;
 
+                    // Ça, c'est déja affiché sur le boucle, on doit pas le repeter
                     // Affiche le nom et la description de la salle dans laquelle on vient d’entrer
-                    println!("✅ {} est maintenant dans : {}", self.name(), next_room.name());
-                    println!("📖 Description : {}", next_room.description());
+                    // println!("✅ {} est maintenant dans : {}", self.name(), next_room.name());
+                    // println!("📖 Description : {}", next_room.description());
                 }
             } else {
                 // Si la salle n’existe pas (ID invalide), affiche un message d’erreur
@@ -247,8 +248,11 @@ impl Character {
     }
 
     pub fn ajouter_quete(&mut self, id: u32) {
-
         self.quests.push(id);
+    }
+
+    pub fn supprimer_quete(&mut self, id: u32) {
+        self.quests.retain(|&q| q != id);
     }
 
 
@@ -286,6 +290,10 @@ impl Character {
 
     pub fn inventory_mut(&mut self) -> &mut Vec<Item> {
         self.vivant.inventory_mut()
+    }
+
+    pub fn add_inventory(&mut self, item_id: u32) {
+
     }
 
     pub fn get_active_quests(&self, all_quests: &HashMap<u32, Quete>) -> Vec<String> {

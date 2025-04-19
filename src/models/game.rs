@@ -35,7 +35,7 @@ impl Game {
         if let Some(character) = self.characters.first_mut() {
             loop {
                 let current_room = &self.rooms[character.position];
-                println!("_________________________________________________________________________");
+                println!("__________________________________________________________________________________________");
                 println!("\n🌍 {} est actuellement dans : {}", character.name(), current_room.name());
                 println!("📍 {} : {}", current_room.elem.name(), current_room.elem.description());
 
@@ -44,7 +44,7 @@ impl Game {
                     println!("🛠 Objets trouvés :");
                     for &item_id in &current_room.items {
                         if let Some(item) = self.items.iter().find(|i| i.id() == item_id) {
-                            println!("- {} : {} (Effet : {})", item.name(), item.description(), item.effect());
+                            println!("   - {} : {} (Effet : {})", item.name(), item.description(), item.effect());
                         }
                     }
                 } else {
@@ -58,7 +58,7 @@ impl Game {
                         // Recherche de l’ennemi correspondant dans la liste globale
                         if let Some(ennemie) = self.ennemies.iter().find(|e| e.id == ennemie_id) {
                             println!(
-                                " - {} (PV: {}, Force: {}, Agilité: {})",
+                                "    - {} (PV: {}, Force: {}, Agilité: {})",
                                 ennemie.name, ennemie.health, ennemie.strength, ennemie.agility
                             );
                         }
@@ -71,24 +71,24 @@ impl Game {
 
                 // Affichage des PNJ présents dans la salle
                 if !current_room.pnjs.is_empty() {
-                    println!("🧑‍🤝‍🧑 Personnages présents :");
+                    println!("🧑 Personnages présents :");
                     for &pnj_id in &current_room.pnjs {
                         if let Some(pnj) = self.pnjs.iter().find(|p| p.id() == pnj_id) {
-                            println!("- {}", pnj.name());
+                            println!("   - {}", pnj.name());
                         }
                     }
                 } else {
                     println!("🧑‍🤝‍🧑 Aucun personnage ici.");
                 }
 
-                println!("\nOù veux-tu aller ? (north, south, east, west, up, down, tunnel, quit, prendre <objet>, utiliser <objet>, parler <pnj>, combattre <ennemie>)");
-
                 // Affiche les directions disponibles
-                println!("Sorties disponibles :");
+                println!("🚪 Sorties disponibles :");
                 for direction in current_room.exits.keys() {
-                    println!("- {}", direction);
+                    println!("   - {}", direction);
                 }
 
+                println!("\nOù veux-tu aller ? ( north, south, east, west, up, down, tunnel, quit )");
+                println!("Que veux-tu faire ? ( prendre <objet>, utiliser <objet>, parler <pnj>, combattre <ennemie> )");
 
                 // Lecture de l'entrée utilisateur
                 let mut input = String::new();
@@ -118,7 +118,8 @@ impl Game {
                 // Parler à un PNJ
                 if input.starts_with("parler ") {
                     let pnj_nom = &input[7..].trim();
-                    Pnj::parler_au_pnj(pnj_nom, character, &self.rooms, &self.pnjs, &mut self.dialogues, &mut self.quetes);
+                    Pnj::parler_au_pnj(pnj_nom, character, &self.rooms, &self.pnjs,
+                                       &mut self.dialogues, &mut self.quetes, &self.items);
                     continue;
                 }
 

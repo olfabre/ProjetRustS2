@@ -3,7 +3,9 @@ use serde::{Deserialize, Serialize};
 use std::io::stdin;
 
 use crate::models::entities::character::Character;
+use crate::models::entities::item::Item;
 use crate::models::entities::quete::Quete;
+use crate::models::tracker::Tracker;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Dialogue {
@@ -26,8 +28,9 @@ pub struct DialogueOption {
 }
 
 impl Dialogue {
-    /// Affiche un dialogue et permet au joueur de choisir une réponse
-    pub fn afficher_dialogue(&mut self, character: &mut Character, quetes: &mut HashMap<u32,Quete>) {
+    // Affiche un dialogue et permet au joueur de choisir une réponse
+    pub fn afficher_dialogue(&mut self, character: &mut Character,
+                             quetes: &mut HashMap<u32,Quete>, items: &Vec<Item>) {
         if self.dialogue_steps.is_empty() {
             println!("Ce PNJ n'a rien à dire.");
         } else {
@@ -35,21 +38,23 @@ impl Dialogue {
             let mut current_index = 0; // Start at the first dialogue step
 
             while current_index < self.dialogue_steps.len() {
-                // let dialogue_step = &self.dialogues[current_index];
+
+                // This is a reference, because step is going to be changed
                 let step = &self.dialogue_steps[current_index];
+
                 // Instead of holding the mutable reference, extract needed values early
-                let is_active = self.dialogue_steps[current_index].active;
-                let question = self.dialogue_steps[current_index].question.clone();
+
                 let options = self.dialogue_steps[current_index].options.clone();
                 let action = self.dialogue_steps[current_index].action.clone();
 
+                // Si un step est inactive, on le saute
                 if !step.active {
                     current_index += 1;
                     continue;
                 }
 
                 println!("current index: ================> {}", current_index);
-                println!("💬 PNJ : \"{}\"", question);
+                println!("💬 PNJ : \"{}\"", step.question);
 
                 for (i, option) in options.iter().enumerate() {
                     println!("{}. {}", i + 1, option.réponse);
@@ -71,15 +76,35 @@ impl Dialogue {
                             // Extraire l'ID de la quête (si format "accepteQuete:42")
                             if let Some(id_str) = action.split(':').nth(1) {
                                 if let Ok(id) = id_str.parse::<u32>() {
-                                    println!("what happened ? ");
+
                                     character.ajouter_quete(id);
-                                    println!("what happened ? 222");
-                                    // Once the quest is accepted, the dialogue becomes inactive,
+
+                                    // Quand la quete est acceptée, le dialogue pour l'offrir disparait
                                     self.dialogue_steps[current_index].active = false;
                                 }
                             }
                         }
 
+                        // Verifier si rendreQuete action
+                        // Verifier si reponse == Completer Quete
+                         if action.starts_with("rendreQuete") && selected_option.réponse == "Completer Quête" {
+                             if let Some(id_str) = action.split(':').nth(1) {
+                                 if let Ok(id) = id_str.parse::<u32>() {
+                                     let mut quete = quetes.get_mut(&id).unwrap();
+                                     // Character supprimer quete
+                                     character.supprimer_quete(id);
+
+                                     // On récupère l'objet depuis la liste globale
+                                     for recompense_item in quete.recompense_items.iter() {
+                                         if let Some(item) = items.iter().find(|item| item.id() == *recompense_item) {
+                                             // On l'ajoute à l'inventaire du personnage
+                                             character.inventory_mut().push(item.clone());
+                                             println!("👜 Tu as ramassé '{}'.", item.name());
+                                         }
+                                     }
+                                 }
+                             }
+                         }
 
                         // come back here
                         //
@@ -94,16 +119,16 @@ impl Dialogue {
                         //     continue; // 🔄 Passer à la prochaine question
                         // }
 
+                        // Sortir de la boucle tôt
                         if selected_option.réponse.starts_with("Au revoir") ||
                             selected_option.réponse.starts_with("Ignorer") ||
                             selected_option.réponse.starts_with("Refuser") {
                             break;
                         }
 
-
-                        // println!(" i guess i broke");
-                        // 🛑 Fin du dialogue si aucune nouvelle question ne correspond
+                        // Le but c'est montrer tous les steps qui sont actives
                         current_index += 1;
+
                     } else {
                         println!("❌ Choix invalide !");
                     }

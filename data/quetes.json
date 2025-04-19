@@ -12,8 +12,8 @@
       "collecter": { "item_id": 40, "count": 1, "current": 0 },
       "visiter": { "room_id": 0, "visited": false}
     },
-    "recompense": [],
-    "recompense_items": [],
+    "recompense": ["item"],
+    "recompense_items": [39],
     "recompense_argent": 0
   },
   {
