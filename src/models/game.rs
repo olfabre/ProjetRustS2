@@ -1,7 +1,7 @@
 use crate::models::{entities::character::Character, entities::room::Room, entities::item::Item, entities::pnj::Pnj, dialogue::Dialogue, entities::ennemie::Enemy, entities::ennemie};
 // use crate::io::loader::{load_characters_from_file, load_dialogues_from_file, load_items_from_file, load_pnjs_from_file, load_room_from_file, load_ennemie_from_file, load_quetes_from_file};
 use crate::io::loader::*;
-use std::io::stdin;
+use std::io::{stdin, Write};
 use crate::models::combat::Combat;
 use crate::models::entities::quete::Quete;
 use std::collections::HashMap;
@@ -20,12 +20,12 @@ impl Game {
     /// Crée une nouvelle instance du jeu en chargeant les données depuis les fichiers JSON
     pub fn new() -> Self {
         let rooms = load_room_from_file("data/rooms.json").expect("Erreur lors du chargement des salles.");
-        let characters = load_characters_from_file("data/characters.json").expect("Erreur lors du chargement des personnages.");
+        let mut characters = load_characters_from_file("data/characters.json").expect("Erreur lors du chargement du joueur.");
         let items = load_items_from_file("data/items.json").expect("Erreur lors du chargement des objets.");
         let pnjs = load_pnjs_from_file("data/pnjs.json").expect("Erreur lors du chargement des PNJ.");
-        let dialogues = load_dialogues_from_file("data/dialogue.json").expect("Erreur lors du chargement des dialogues");
+        let mut dialogues = load_dialogues_from_file("data/dialogue.json").expect("Erreur lors du chargement des dialogues");
         let ennemies = load_ennemie_from_file("data/ennemie.json").expect("Erreur lors du chargement des ennemis.");
-        let quetes = load_quetes_from_file("data/quetes.json").expect("Erreur lors du chargement des quetes.");
+        let mut quetes = load_quetes_from_file("data/quetes.json").expect("Erreur lors du chargement des quetes.");
 
         Game { rooms, characters, items, pnjs, dialogues, ennemies, quetes }
     }
@@ -35,7 +35,7 @@ impl Game {
         if let Some(character) = self.characters.first_mut() {
             loop {
                 let current_room = &self.rooms[character.position];
-                println!("_________________________________________________________________________________________________________________________________________");
+                println!("_________________________________________________________________________");
                 println!("\n🌍 {} est actuellement dans : {}", character.name(), current_room.name());
                 println!("📍 {} : {}", current_room.elem.name(), current_room.elem.description());
 
@@ -58,7 +58,7 @@ impl Game {
                         // Recherche de l’ennemi correspondant dans la liste globale
                         if let Some(ennemie) = self.ennemies.iter().find(|e| e.id == ennemie_id) {
                             println!(
-                                "   - {} (PV: {}, Force: {}, Agilité: {})",
+                                " - {} (PV: {}, Force: {}, Agilité: {})",
                                 ennemie.name, ennemie.health, ennemie.strength, ennemie.agility
                             );
                         }
@@ -90,7 +90,6 @@ impl Game {
                 }
 
 
-
                 // Lecture de l'entrée utilisateur
                 let mut input = String::new();
                 stdin().read_line(&mut input).expect("Erreur de lecture");
@@ -104,11 +103,11 @@ impl Game {
                 // Prendre un objet
                 if input.starts_with("prendre ") {
                     let objet_nom = &input[8..].trim().to_lowercase();
-                    character.prendre_objet(objet_nom, &mut self.rooms, &self.items);
+                    character.prendre_objet(objet_nom, &mut self.rooms, &self.items, &mut self.quetes, &mut self.dialogues);
                     continue;
                 }
 
-                //Utiliser les objtes
+                //Utiliser les objets
                 if input.starts_with("utiliser ") {
                     let objet_nom = &input[8..].trim();
                     character.utiliser_objet(objet_nom, &mut self.rooms, &self.items);
@@ -158,9 +157,7 @@ impl Game {
                     } else {
                         println!("❌ Aucun ennemi nommé '{}' ici.", ennemi_nom);
                     }
-
                 }
-
 
 
                 // Traduire les directions anglaises vers les directions du fichier JSON
@@ -180,5 +177,10 @@ impl Game {
                 character.try_move(direction, &self.rooms);
             }
         }
+    }
+
+    fn clear_console() {
+        print!("\x1B[2J\x1B[1;1H"); // ANSI escape code to clear screen
+        std::io::stdout().flush().unwrap(); // Ensure it prints immediately
     }
 }

@@ -12,3 +12,4 @@ pub trait Movable {
     fn move_to_position(&mut self, direction: usize);
     fn get_position(&self);
 }
+

@@ -5,8 +5,13 @@
       "name": "Aventuriers Disparus",
       "description": "Trouvez ce qui s'est passé."
     },
-    "statu": "disponible",
-    "objectif": 0,
+    "dialog_rendu_id": 1,
+    "objectif_type": "collecter",
+    "objectif": {
+      "tuer": { "ennemi_type": "", "count": 0, "current": 0 },
+      "collecter": { "item_id": 40, "count": 1, "current": 0 },
+      "visiter": { "room_id": 0, "visited": false}
+    },
     "recompense": [],
     "recompense_items": [],
     "recompense_argent": 0
@@ -17,8 +22,13 @@
       "name": "chevalière de Davrik",
       "description": "Sans valeur pour vous, mais un trésor pour quelqu'un d'autre."
     },
-    "statu": "disponible",
-    "objectif": 0,
+    "dialog_rendu_id": 3,
+    "objectif_type": "collecter",
+    "objectif": {
+      "tuer": { "ennemi_type": "", "count": 0, "current": 0 },
+      "collecter": { "item_id": 0, "count": 1, "current": 0 },
+      "visiter": { "room_id": 0, "visited": false}
+    },
     "recompense": [],
     "recompense_items": [],
     "recompense_argent": 0

@@ -19,12 +19,30 @@
         "dialogue_id": 1,
         "dialogue_steps": [
             {
+                "action" : "leadsTo:1",
+                "active" : true,
+                "question" : "Cela me brise le coeur de me séparer de cette propriété, mais je sens que le moment est venu pour moi de redonner quelque chose aux gens.",
+                "options" : [
+                    { "réponse":  "Que faites vous alors?", "réaction": "Je organise une chasse au trésor!"},
+                    { "réponse":  "Au revoir", "réaction": "Soyez prudent là-bas"}
+                ]
+            },
+            {
                 "action" : "accepteQuete:0",
                 "active" : true,
                 "question": "Certains candidats ont disparu pendant la chasse au trésor, et j'ai hâte de savoir ce qui leur est arrivé. Retrouvez-les et rapportez-en la preuve.",
                 "options": [
                     { "réponse": "Accepter Quête", "réaction": "J'espère que tu m'apporteras une conclusion." },
                     { "réponse": "Refuser Quête", "réaction": "Tu rates cette opportunité !" }
+                ]
+            },
+            {
+                "action" : "rendreQuete:0",
+                "active" : false,
+                "question": "Alors, qu'avez vous trouvez?",
+                "options": [
+                    { "réponse": "Completer Quête", "réaction": "J'avais de grands espoirs pour eux. C'est très triste d'apprendre que c'était leur fin. Voici votre récompense." },
+                    { "réponse": "Au revoir", "réaction": " ... ... hmnnn!" }
                 ]
             }
         ]
@@ -33,11 +51,11 @@
         "dialogue_id": 2,
         "dialogue_steps": [
             {
-                "action" : "",
+                "action" : "leadsTo:1",
                 "active" : true,
                 "question": "Réponds à mon énigme pour recevoir une récompense. Que veux-tu faire ?",
                 "options": [
-                    { "réponse": "Écouter l’énigme", "réaction": "Je suis grand quand je suis jeune et petit quand je suis vieux. Qui suis-je ?" },
+                    { "réponse": "Écouter l’énigme", "réaction": "Ecoutez alors!" },
                     { "réponse": "Ignorer", "réaction": "Tu rates une belle opportunité, aventurier." }
                 ]
             },

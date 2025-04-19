@@ -12,7 +12,7 @@ use crate::models::entities::vivant::Vivant;
 pub struct Pnj {
     vivant: Vivant,
     pub role: String,
-    pub dialogue_id: u32,
+    pub dialogue_id: u32, // reference to dialogue
 }
 
 impl Pnj {
@@ -24,7 +24,9 @@ impl Pnj {
         if let Some(&pnj_id) = room.pnjs.iter().find(|&&id| {
             pnjs.iter().any(|p| id == p.id()  &&  p.name().to_lowercase() == pnj_nom.to_lowercase())
         }) {
+
             if let Some(pnj) = pnjs.iter().find(|p| p.id() == pnj_id) {
+
                 if let Some(dialogue) = dialogues.iter_mut().find(|d| d.dialogue_id == pnj.dialogue_id) {
 
                     dialogue.afficher_dialogue(character, quetes);

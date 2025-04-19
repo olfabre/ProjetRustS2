@@ -98,7 +98,7 @@
             },
             "terrain_type": "château",
             "locked": false,
-            "items": [20, 21, 22],
+            "items": [20, 21, 22, 40],
             "pnjs": [],
             "enemies": [],
             "exits": {"Sud": 43, "Est": 8, "Ouest": 6}

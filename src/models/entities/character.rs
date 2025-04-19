@@ -3,9 +3,11 @@ use serde::{Deserialize, Serialize};
 use serde::de::Visitor;
 use crate::models::traits::{Movable, Descriptible};
 use crate::models::{entities::room::Room, entities::item::Item};
+use crate::models::dialogue::Dialogue;
 use crate::models::entities::entity::Entity;
 use crate::models::entities::quete::Quete;
 use crate::models::entities::vivant::Vivant;
+use crate::models::tracker::Tracker;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Character {
@@ -14,7 +16,7 @@ pub struct Character {
     pub position: usize,
     pub level: i32,       // Ajout du niveau du joueur
     pub experience: i32,  // Ajout de l'expérience du joueur
-    pub quests: Vec<u32>
+    pub quests: Vec<u32> // references to quete
 
 
 }
@@ -90,7 +92,10 @@ impl Character {
             }
         }
     }*/
-    pub fn prendre_objet(&mut self, objet_nom: &str, rooms: &mut [Room], items: &[Item]) {
+    pub fn prendre_objet(&mut self, objet_nom: &str,
+                         rooms: &mut [Room], items: &[Item],
+                         quetes: &mut HashMap<u32, Quete>,
+                         dialogues: &mut Vec<Dialogue>) {
         // On convertit le nom pour ignorer la casse lors de la comparaison
         let objet_nom = objet_nom.to_lowercase();
         let current_room = &mut rooms[self.position];
@@ -109,6 +114,8 @@ impl Character {
                 self.inventory_mut().push(item.clone()); // On l'ajoute à l'inventaire du personnage
                 current_room.items.remove(index);    // Et on le retire de la salle
                 println!("👜 Tu as ramassé '{}'.", item.name());
+
+                Tracker::item(item_id, self, quetes, dialogues);
             }
         } else {
             println!("❌ Aucun objet nommé '{}' trouvé ici.", objet_nom);
@@ -298,8 +305,9 @@ impl Character {
         quest_titles
     }
 
-
-
-
+    pub fn quests(&self) -> &Vec<u32> {
+        &self.quests
+    }
 
 }
+
