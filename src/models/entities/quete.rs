@@ -10,7 +10,6 @@ pub struct Quete {
     pub dialog_rendu_id: u32, // reference to dialogue, can belong to a different pnj other than the quest giver
     pub objectif_type: String,
     pub objectif: Objectif,
-    pub recompense: Vec<String>,
     pub recompense_items: Vec<u32>,
     pub recompense_argent: i32,
     pub experience: i32,
@@ -26,16 +25,16 @@ pub struct Objectif {
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Tuer {
-    ennemi_type: String,
+    ennemi_id: u32,
+    target: u32,
     count: u32,
-    current: u32,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Collecter {
     item_id: u32,
-    pub(crate) count: u32,
-    current: u32,
+    target: u32,
+    count: u32,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -61,11 +60,26 @@ impl Quete {
     }
 
     pub fn inc_item_count(&mut self) {
-        self.objectif.collecter.current += 1;
+        self.objectif.collecter.count += 1;
     }
 
-    pub fn verify_count(&self) -> bool {
-        if self.objectif.collecter.current == self.objectif.collecter.count {
+    pub fn is_item_count_reached(&self) -> bool {
+        if self.objectif.collecter.count == self.objectif.collecter.target {
+            return true
+        }
+        false
+    }
+
+    pub fn ennemi_id(&self) -> u32 {
+        self.objectif.tuer.ennemi_id
+    }
+
+    pub fn inc_ennemi_count(&mut self) {
+        self.objectif.tuer.count += 1;
+    }
+
+    pub fn is_ennemi_count_reached(&self) -> bool {
+        if self.objectif.tuer.count == self.objectif.tuer.target {
             return true
         }
         false

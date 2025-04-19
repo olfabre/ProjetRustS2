@@ -71,7 +71,7 @@
                 "description": "Une ancienne cellule de prisonnier désormais vide et lugubre."
             },
             "terrain_type": "souterrain",
-            "locked": true,
+            "locked": false,
             "items": [15, 16, 8],
             "enemies": [2],
             "pnjs": [],

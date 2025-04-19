@@ -113,7 +113,7 @@
                 ]
             },
             {
-                "action" : "accepteQuete:1",
+                "action" : "accepteQuete:5",
                 "active" : true,
                 "question": "Récupérez la chevalière de Davrik dans la salle des statues juste à côté. Attention aux mons… aux statues. Vous serez récompensé, mon ami.",
                 "options": [

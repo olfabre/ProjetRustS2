@@ -16,6 +16,7 @@ pub struct Character {
     pub position: usize,
     pub level: i32,       // Ajout du niveau du joueur
     pub experience: i32,  // Ajout de l'expérience du joueur
+    pub money: i32,
     pub quests: Vec<u32> // references to quete
 
 
@@ -315,6 +316,10 @@ impl Character {
 
     pub fn quests(&self) -> &Vec<u32> {
         &self.quests
+    }
+
+    pub fn add_argent(&mut self, quantité: i32) {
+        self.money += quantité;
     }
 
 }

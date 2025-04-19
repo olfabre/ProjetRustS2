@@ -50,6 +50,10 @@ impl Vivant {
         &mut self.inventory
     }
 
+    pub fn set_id(&mut self, id: u32) {
+        self.entity.set_id(id);
+    }
+
     pub fn set_name(&mut self, name: &str) {
         self.entity.set_name(String::from(name));
     }

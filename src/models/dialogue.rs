@@ -50,7 +50,7 @@ impl Dialogue {
                 // Si un step est inactive, on le saute
                 if !step.active {
                     current_index += 1;
-                    continue;
+                    continue; // 🔄 Passer à la prochaine question
                 }
 
                 println!("current index: ================> {}", current_index);
@@ -78,6 +78,8 @@ impl Dialogue {
                                 if let Ok(id) = id_str.parse::<u32>() {
 
                                     character.ajouter_quete(id);
+                                    // let  quete = quetes.get(&id).unwrap();
+                                    println!("🎯 Quête ajoutée : {}!", quetes.get(&id).unwrap().name());
 
                                     // Quand la quete est acceptée, le dialogue pour l'offrir disparait
                                     self.dialogue_steps[current_index].active = false;
@@ -85,12 +87,15 @@ impl Dialogue {
                             }
                         }
 
-                        // Verifier si rendreQuete action
+                        // Verifier si action  == rendreQuete
                         // Verifier si reponse == Completer Quete
                          if action.starts_with("rendreQuete") && selected_option.réponse == "Completer Quête" {
+                             // Split string a get the part after :
                              if let Some(id_str) = action.split(':').nth(1) {
+                                 // parse string into u32
                                  if let Ok(id) = id_str.parse::<u32>() {
-                                     let mut quete = quetes.get_mut(&id).unwrap();
+                                     // retrieve mut quete from Map
+                                     let  quete = quetes.get(&id).unwrap();
                                      // Character supprimer quete
                                      character.supprimer_quete(id);
                                      character.add_experience(quete.experience);
@@ -103,22 +108,12 @@ impl Dialogue {
                                              println!("👜 Tu as ramassé '{}'.", item.name());
                                          }
                                      }
+
+                                     character.add_argent(quete.recompense_argent);
                                  }
                              }
                          }
 
-                        // come back here
-                        //
-
-                        // 🔍 Rechercher si la réaction correspond à une question existante
-                        // if let Some((new_index, _)) = self.dialogue_steps
-                        //     .iter()
-                        //     .enumerate()
-                        //     .find(|(_, d)| d.question == selected_option.réaction)
-                        // {
-                        //     current_index = new_index; // ✅ Mettre à jour l'index
-                        //     continue; // 🔄 Passer à la prochaine question
-                        // }
 
                         // Sortir de la boucle tôt
                         if selected_option.réponse.starts_with("Au revoir") ||
@@ -128,7 +123,7 @@ impl Dialogue {
                         }
 
                         // Le but c'est montrer tous les steps qui sont actives
-                        current_index += 1;
+                        current_index += 1; // ✅ Mettre à jour l'index
 
                     } else {
                         println!("❌ Choix invalide !");

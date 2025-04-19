@@ -8,31 +8,29 @@
     "dialog_rendu_id": 1,
     "objectif_type": "collecter",
     "objectif": {
-      "tuer": { "ennemi_type": "", "count": 0, "current": 0 },
-      "collecter": { "item_id": 40, "count": 1, "current": 0 },
+      "tuer": { "ennemi_id": 1, "target": 0, "count": 0 },
+      "collecter": { "item_id": 40, "target": 1, "count": 0 },
       "visiter": { "room_id": 0, "visited": false}
     },
-    "recompense": ["item"],
     "recompense_items": [39],
     "recompense_argent": 0,
-    "experience": 20
+    "experience": 100
   },
   {
     "entity": {
-      "id": 1,
-      "name": "chevalière de Davrik",
+      "id": 5,
+      "name": "Chevalière de Davrik",
       "description": "Sans valeur pour vous, mais un trésor pour quelqu'un d'autre."
     },
-    "dialog_rendu_id": 3,
-    "objectif_type": "collecter",
+    "dialog_rendu_id": 5,
+    "objectif_type": "tuer",
     "objectif": {
-      "tuer": { "ennemi_type": "", "count": 0, "current": 0 },
-      "collecter": { "item_id": 0, "count": 1, "current": 0 },
+      "tuer": { "ennemi_id": 2, "target": 1, "count": 0 },
+      "collecter": { "item_id": 0, "target": 0, "count": 0 },
       "visiter": { "room_id": 0, "visited": false}
     },
-    "recompense": [],
     "recompense_items": [],
-    "recompense_argent": 0,
-    "experience": 20
+    "recompense_argent": 25,
+    "experience": 100
   }
 ]
