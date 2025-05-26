@@ -10,7 +10,10 @@
             "strength": 15,
             "intelligence": 10,
             "defense": 20,
-            "inventory": []
+            "inventory": {
+                "capacity": 20,
+                "items": []
+            }
         },
         "role": "guide",
         "dialogue_id": 0
@@ -27,7 +30,10 @@
             "strength": 15,
             "intelligence": 10,
             "defense": 20,
-            "inventory": []
+            "inventory": {
+                "capacity": 20,
+                "items": []
+            }
         },
         "role": "quete",
         "dialogue_id": 1
@@ -44,7 +50,10 @@
             "strength": 15,
             "intelligence": 10,
             "defense": 20,
-            "inventory": []
+            "inventory": {
+                "capacity": 20,
+                "items": []
+            }
         },
         "role": "guide",
         "dialogue_id": 2
@@ -61,7 +70,10 @@
             "strength": 15,
             "intelligence": 10,
             "defense": 20,
-            "inventory": []
+            "inventory": {
+                "capacity": 20,
+                "items": []
+            }
         },
         "role": "quete",
         "dialogue_id": 5

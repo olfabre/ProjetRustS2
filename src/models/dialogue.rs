@@ -104,7 +104,7 @@ impl Dialogue {
                                      for recompense_item in quete.recompense_items.iter() {
                                          if let Some(item) = items.iter().find(|item| item.id() == *recompense_item) {
                                              // On l'ajoute à l'inventaire du personnage
-                                             character.inventory_mut().push(item.clone());
+                                             character.inventory_mut().add_item(item.id(), 1);
                                              println!("👜 Tu as ramassé '{}'.", item.name());
                                          }
                                      }

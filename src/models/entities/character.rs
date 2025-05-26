@@ -5,6 +5,7 @@ use crate::models::traits::{Movable, Descriptible};
 use crate::models::{entities::room::Room, entities::item::Item};
 use crate::models::dialogue::Dialogue;
 use crate::models::entities::entity::Entity;
+use crate::models::entities::inventory::Inventory;
 use crate::models::entities::quete::Quete;
 use crate::models::entities::vivant::Vivant;
 use crate::models::tracker::Tracker;
@@ -102,22 +103,29 @@ impl Character {
         let objet_nom = objet_nom.to_lowercase();
         let current_room = &mut rooms[self.position];
 
-        // On cherche l'objet dans la salle actuelle
+
+        // On cherche l'objet dans la salle actuelle par nom (case-insensitive)
         if let Some((index, item_id)) = current_room
             .items
             .iter()
             .enumerate()
             .find_map(|(i, id)| {
-                items.iter().find(|item| item.id() == *id && item.name().to_lowercase() == objet_nom).map(|_| (i, *id))
+                items
+                    .iter()
+                    .find(|item| item.id() == *id && item.name().to_lowercase() == objet_nom)
+                    .map(|_| (i, *id))
             })
         {
-            // On récupère l'objet depuis la liste globale
             if let Some(item) = items.iter().find(|item| item.id() == item_id) {
-                self.inventory_mut().push(item.clone()); // On l'ajoute à l'inventaire du personnage
-                current_room.items.remove(index);    // Et on le retire de la salle
-                println!("👜 Tu as ramassé '{}'.", item.name());
+                let ajouté = self.vivant.inventory.add_item(item.id(), 1);
 
-                Character::track_item(item_id, self, quetes, dialogues);
+                if ajouté {
+                    current_room.items.remove(index); // Retirer l'objet de la salle
+                    println!("👜 Tu as ramassé '{}'.", item.name());
+                    Character::track_item(item_id, self, quetes, dialogues);
+                } else {
+                    println!("❌ Inventaire plein, impossible de ramasser '{}'.", item.name());
+                }
             }
         } else {
             println!("❌ Aucun objet nommé '{}' trouvé ici.", objet_nom);
@@ -153,67 +161,62 @@ impl Character {
 
     /// Permet au personnage d'utiliser un objet de son inventaire
     pub fn utiliser_objet(&mut self, objet_nom: &str, rooms: &mut [Room], items: &[Item]) {
-        // Mise en minuscule du nom pour comparer sans tenir compte de la casse
         let objet_nom = objet_nom.to_lowercase();
 
-        // On cherche l'objet dans l'inventaire du personnage
-        if let Some(index) = self.inventory_mut().iter().position(|i| i.name().to_lowercase() == objet_nom) {
-            let objet = &self.inventory_mut()[index].clone();
+        // Recherche de l'objet dans l'inventaire
+        if let Some(index) = self.inventory_mut().items.iter().position(|inv_item| {
+            items.iter().any(|item| item.id() == inv_item.item_id && item.name().to_lowercase() == objet_nom)
+        }) {
+            let inv_item = self.inventory_mut().items[index].clone();
 
-            // Vérifie si l'objet peut être utilisé
-            if !objet.usable {
-                println!("⚠️ L'objet '{}' ne peut pas être utilisé directement.", objet.name());
-                return;
-            }
-
-            // On agit en fonction de l'effet de l'objet
-            match objet.effect() {
-                // Potion de soin : restaure 20 PV
-                ("heal_20") => {
-                    self.set_health(self.health() + 20);
-                    if self.health() > 100 { self.set_health(100); } // PV max = 100
-                    println!("💊 Tu as utilisé {}. PV restaurés à {}.", objet.name(), self.health());
-                    self.inventory_mut().remove(index); // Objet consommé
+            // Récupération du vrai Item
+            if let Some(item) = items.iter().find(|i| i.id() == inv_item.item_id) {
+                if !item.usable {
+                    println!("❌ {} ne peut pas être utilisé.", item.name());
+                    return;
                 }
 
-                // Bonus d'attaque (ex. Épée de fer)
-                ("attack_bonus_5") => {
-                    self.set_health(self.strength() + 5);
-                    println!("⚔️ Tu te sens plus fort ! Bonus de force activé (+5).");
-                    // Pas supprimé si c’est un objet permanent
-                }
+                match item.effect() {
+                    "heal_20" => {
+                        self.set_health((self.health() + 20).min(100));
+                        println!("💊 Tu as utilisé {}. PV restaurés à {}.", item.name(), self.health());
+                        self.inventory_mut().remove_item(item.id(), 1);
+                    }
 
-                // Parchemin mystérieux : effet narratif
-                ("Dévoile un secret ancien.") => {
-                    println!("📜 Le parchemin révèle une énigme cachée : 'Cherche là où les ombres dansent...'");
-                    self.inventory_mut().remove(index); // Consommé après usage
-                }
+                    "attack_bonus_5" => {
+                        self.set_strength(self.strength() + 5);
+                        println!("⚔️ Tu te sens plus fort ! Bonus de force activé (+5).");
+                        // Pas consommé ici
+                    }
 
-                // Clé du trésor : déverrouille la salle actuelle si elle est verrouillée
-                ("Déverrouille la salle du trésor.") => {
-                    let current_room = &mut rooms[self.position];
-                    if current_room.locked.unwrap_or(false) {
-                        current_room.locked = Some(false); // On déverrouille
-                        println!("🔓 Tu as utilisé la clé. La salle '{}' est maintenant déverrouillée !", current_room.name());
-                        self.inventory_mut().remove(index); // Clé supprimée après usage
-                    } else {
-                        println!("ℹ️ Il n'y a rien à déverrouiller ici.");
+                    "Dévoile un secret ancien." => {
+                        println!("📜 Le parchemin révèle une énigme : 'Cherche là où les ombres dansent...'");
+                        self.inventory_mut().remove_item(item.id(), 1);
+                    }
+
+                    "Déverrouille la salle du trésor." => {
+                        let current_room = &mut rooms[self.position];
+                        if current_room.locked.unwrap_or(false) {
+                            current_room.locked = Some(false);
+                            println!("🔓 Tu as utilisé la clé. La salle '{}' est maintenant déverrouillée !", current_room.name());
+                            self.inventory_mut().remove_item(item.id(), 1);
+                        } else {
+                            println!("ℹ️ Il n'y a rien à déverrouiller ici.");
+                        }
+                    }
+
+                    effet => {
+                        println!("✨ Tu utilises '{}', effet : {}", item.name(), effet);
                     }
                 }
-
-                // Pour tout autre effet générique
-                (effet) => {
-                    println!("✨ Tu utilises '{}', effet : {}", objet.name(), effet);
-                    // Tu peux personnaliser ici selon tes besoins
-                }
-
-
+            } else {
+                println!("❌ Impossible d'identifier cet objet dans la base de données.");
             }
         } else {
-            // L'objet n'est pas dans l'inventaire du personnage
             println!("❌ Tu ne possèdes pas cet objet.");
         }
     }
+
 
 
 
@@ -237,13 +240,29 @@ impl Character {
 
 
     //L'inventaire de l'objet pas de la character(&self)
-    pub fn afficher_inventaire(&mut self) {
-        println!("🎒 Inventaire :");
-        if self.inventory_mut().is_empty() {
+    //L'inventaire de l'objet pas de la character(&self)
+    pub fn afficher_inventaire(&self, items: &[Item]) {
+        println!("\n🎒 Inventaire :");
+
+        if self.vivant.inventory.items.is_empty() {
             println!("(vide)");
-        } else {
-            for item in self.inventory_mut() {
-                println!("- {} : {} (Effet : {})", item.name(), item.description(), item.effect());
+            return;
+        }
+
+        for inv_item in &self.vivant.inventory.items {
+            if let Some(full_item) = items.iter().find(|i| i.id() == inv_item.item_id) {
+                println!(
+                    "- {} x{} ({})",
+                    full_item.name(),
+                    inv_item.quantity,
+                    full_item.effect()
+                );
+            } else {
+                println!(
+                    "- Objet inconnu (id {}) x{}",
+                    inv_item.item_id,
+                    inv_item.quantity
+                );
             }
         }
     }
@@ -289,7 +308,7 @@ impl Character {
         self.vivant.set_intelligence(intelligence);
     }
 
-    pub fn inventory_mut(&mut self) -> &mut Vec<Item> {
+    pub fn inventory_mut(&mut self) -> &mut Inventory {
         self.vivant.inventory_mut()
     }
 

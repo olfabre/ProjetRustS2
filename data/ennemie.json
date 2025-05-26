@@ -10,7 +10,10 @@
       "strength": 8,
       "intelligence": 3,
       "defense": 6,
-      "inventory": []
+      "inventory": {
+        "capacity": 20,
+        "items": []
+      }
     },
     "loot": []
 
@@ -26,7 +29,10 @@
       "strength": 12,
       "intelligence": 2,
       "defense": 14,
-      "inventory": []
+      "inventory": {
+        "capacity": 20,
+        "items": []
+      }
     },
     "loot": []
 
@@ -42,71 +48,86 @@
       "strength": 10,
       "intelligence": 5,
       "defense": 4,
-      "inventory": []
+      "inventory": {
+        "capacity": 20,
+        "items": []
+      }
     },
     "loot": []
 
   },
   {
     "vivant": {
-    "entity": {
-        "id": 3,
-        "name": "Golem de pierre",
-        "description": "Un golem qui ne bouge pas"
-    },
-    "health": 50,
-    "strength": 15,
-    "intelligence": 1,
-    "defense": 20,
-    "inventory": []
-    },
-    "loot": []
-
-  },
-  {
-    "vivant": {
-    "entity": {
-        "id": 4,
-        "name": "Dragon endormi",
-        "description": "Un dragon qui dort paisiblement"
-    },
-    "health": 100,
-    "strength": 25,
-    "intelligence": 10,
-    "defense": 30,
-    "inventory": []
+      "entity": {
+          "id": 3,
+          "name": "Golem de pierre",
+          "description": "Un golem qui ne bouge pas"
+      },
+      "health": 50,
+      "strength": 15,
+      "intelligence": 1,
+      "defense": 20,
+      "inventory": {
+        "capacity": 20,
+        "items": []
+      }
     },
     "loot": []
 
   },
   {
     "vivant": {
-    "entity": {
-        "id": 5,
-        "name": "Esprit vengeur",
-        "description": "Un esprit en colère"
-    },
-    "health": 35,
-    "strength": 14,
-    "intelligence": 6,
-    "defense": 8,
-    "inventory": []
+      "entity": {
+          "id": 4,
+          "name": "Dragon endormi",
+          "description": "Un dragon qui dort paisiblement"
+      },
+      "health": 100,
+      "strength": 25,
+      "intelligence": 10,
+      "defense": 30,
+      "inventory": {
+        "capacity": 20,
+        "items": []
+      }
     },
     "loot": []
 
   },
   {
     "vivant": {
-    "entity": {
-        "id": 6,
-        "name": "Rôdeur masqué",
-        "description": "Un rôdeur mystérieux"
+      "entity": {
+          "id": 5,
+          "name": "Esprit vengeur",
+          "description": "Un esprit en colère"
+      },
+      "health": 35,
+      "strength": 14,
+      "intelligence": 6,
+      "defense": 8,
+      "inventory": {
+        "capacity": 20,
+        "items": []
+      }
     },
-    "health": 45,
-    "strength": 10,
-    "intelligence": 7,
-    "defense": 5,
-    "inventory": []
+    "loot": []
+
+  },
+  {
+    "vivant": {
+      "entity": {
+          "id": 6,
+          "name": "Rôdeur masqué",
+          "description": "Un rôdeur mystérieux"
+      },
+      "health": 45,
+      "strength": 10,
+      "intelligence": 7,
+      "defense": 5,
+      "inventory": {
+        "capacity": 20,
+        "items": []
+      }
     },
     "loot": []
 
@@ -122,7 +143,10 @@
       "strength": 18,
       "intelligence": 4,
       "defense": 12,
-      "inventory": []
+      "inventory": {
+        "capacity": 20,
+        "items": []
+      }
     },
     "loot": []
   }

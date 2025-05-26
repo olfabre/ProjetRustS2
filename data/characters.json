@@ -10,7 +10,13 @@
             "strength": 15,
             "intelligence": 10,
             "defense": 20,
-            "inventory": []
+            "inventory": {
+                "capacity": 20,
+                "items": [
+                    { "item_id": 0, "quantity": 1 },
+                    { "item_id": 1, "quantity": 2 }
+                ]
+            }
         },
         "position": 1,
         "experience": 1,
@@ -29,7 +35,10 @@
             "strength": 15,
             "intelligence": 10,
             "defense": 20,
-            "inventory": []
+            "inventory": {
+                "capacity": 20,
+                "items": []
+            }
         },
         "position": 1,
         "experience": 1,

@@ -4,6 +4,7 @@ use serde::{Deserialize, Serialize};
 use crate::models::entities::room::Room;
 use crate::models::dialogue::Dialogue;
 use crate::models::entities::character::Character;
+use crate::models::entities::inventory::Inventory;
 use crate::models::entities::item::Item;
 use crate::models::entities::quete::Quete;
 use crate::models::entities::vivant::Vivant;
@@ -56,7 +57,7 @@ impl Pnj {
         self.vivant.description()
     }
 
-    pub fn inventory_mut(&mut self) -> &mut Vec<Item> {
+    pub fn inventory_mut(&mut self) -> &mut Inventory {
         self.vivant.inventory_mut()
     }
 
