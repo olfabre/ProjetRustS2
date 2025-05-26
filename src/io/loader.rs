@@ -53,11 +53,23 @@ pub fn load_ennemie_from_file(filename: &str) -> Result<Vec<Enemy>, serde_json::
     Ok(ennemie)
 }
 
-/*pub fn load_quetes_from_file(filename: &str) -> Result<Vec<Quete>, serde_json::Error>{
-    let data = fs::read_to_string(filename).expect("Impossible de lire le fichier des Quêtes.");
-    let quetes: Vec<Quete> = serde_json::from_str(&data)?;
-    Ok(quetes)
-}*/
+
+pub fn load_enemies_from_file(filename: &str) -> Result<HashMap<u32, Enemy>, serde_json::Error> {
+    // Read the file contents into a string.
+    let data = fs::read_to_string(filename).expect("Impossible de lire le fichier des Ennemis.");
+
+    // Deserialize the JSON into a Vec<Quete>.
+    let enemies: Vec<Enemy> = serde_json::from_str(&data)?;
+
+    // Create a HashMap from the Vec<Quete>, mapping IDs to Quete structs.
+    let enemy_map: HashMap<u32, Enemy> = enemies
+        .into_iter()
+        .map(|enemy| (enemy.id(), enemy)) // Use the quest ID as the key.
+        .collect();
+
+    // Return the resulting HashMap.
+    Ok(enemy_map)
+}
 
 
 

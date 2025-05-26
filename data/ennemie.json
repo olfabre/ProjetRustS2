@@ -1,66 +1,130 @@
 [
   {
-    "id": 0,
-    "name": "Spectre des âmes",
-    "health": 40,
-    "strength": 8,
-    "agility": 3,
-    "room_id": 66
+    "vivant": {
+      "entity": {
+        "id": 0,
+        "name": "Spectre des âmes",
+        "description": "Le premier des inconnus"
+      },
+      "health": 40,
+      "strength": 8,
+      "intelligence": 3,
+      "defense": 6,
+      "inventory": []
+    },
+    "loot": []
+
   },
   {
-    "id": 1,
-    "name": "Gardien de pierre",
-    "health": 80,
-    "strength": 12,
-    "agility": 2,
-    "room_id": 43
+    "vivant": {
+      "entity": {
+        "id": 1,
+        "name": "Gardien de pierre",
+        "description": "Qu'il est solide !"
+      },
+      "health": 80,
+      "strength": 12,
+      "intelligence": 2,
+      "defense": 14,
+      "inventory": []
+    },
+    "loot": []
+
   },
   {
-    "id": 2,
-    "name": "Garde squelette",
-    "health": 30,
-    "strength": 10,
-    "agility": 5,
-    "room_id": 11
+    "vivant": {
+      "entity": {
+        "id": 2,
+        "name": "Garde squelette",
+        "description": "Un squelette qui garde la porte"
+      },
+      "health": 30,
+      "strength": 10,
+      "intelligence": 5,
+      "defense": 4,
+      "inventory": []
+    },
+    "loot": []
+
   },
   {
-    "id": 3,
-    "name": "Golem de pierre",
+    "vivant": {
+    "entity": {
+        "id": 3,
+        "name": "Golem de pierre",
+        "description": "Un golem qui ne bouge pas"
+    },
     "health": 50,
     "strength": 15,
-    "agility": 3,
-    "room_id": 43
+    "intelligence": 1,
+    "defense": 20,
+    "inventory": []
+    },
+    "loot": []
+
   },
   {
-    "id": 4,
-    "name": "Dragon endormi",
+    "vivant": {
+    "entity": {
+        "id": 4,
+        "name": "Dragon endormi",
+        "description": "Un dragon qui dort paisiblement"
+    },
     "health": 100,
     "strength": 25,
-    "agility": 8,
-    "room_id": 4
+    "intelligence": 10,
+    "defense": 30,
+    "inventory": []
+    },
+    "loot": []
+
   },
   {
-    "id": 5,
-    "name": "Esprit vengeur",
+    "vivant": {
+    "entity": {
+        "id": 5,
+        "name": "Esprit vengeur",
+        "description": "Un esprit en colère"
+    },
     "health": 35,
     "strength": 14,
-    "agility": 6,
-    "room_id": 73
+    "intelligence": 6,
+    "defense": 8,
+    "inventory": []
+    },
+    "loot": []
+
   },
   {
-    "id": 6,
-    "name": "Rôdeur masqué",
+    "vivant": {
+    "entity": {
+        "id": 6,
+        "name": "Rôdeur masqué",
+        "description": "Un rôdeur mystérieux"
+    },
     "health": 45,
     "strength": 10,
-    "agility": 10,
-    "room_id": 28
+    "intelligence": 7,
+    "defense": 5,
+    "inventory": []
+    },
+    "loot": []
+
   },
   {
-    "id": 7,
-    "name": "Garde spectral",
-    "health": 60,
-    "strength": 18,
-    "agility": 4,
-    "room_id": 109
+    "vivant": {
+      "entity": {
+        "id": 7,
+        "name": "Garde spectral",
+        "description": "Un garde qui hante les lieux"
+      },
+      "health": 60,
+      "strength": 18,
+      "intelligence": 4,
+      "defense": 12,
+      "inventory": []
+    },
+    "loot": []
   }
+
 ]

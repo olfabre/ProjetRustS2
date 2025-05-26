@@ -3,18 +3,14 @@ use crate::models::dialogue::{Dialogue, DialogueStep};
 use crate::models::entities::character::Character;
 use crate::models::entities::quete::Quete;
 
-pub struct Tracker;
-
-
-impl Tracker {
-
+pub trait Tracker {
     /**
     Returns true or false on quest completion
     */
-    pub fn item(item_id: u32,
-                joueur: &mut Character,
-                quetes: &mut HashMap<u32, Quete>,
-                dialogues: &mut Vec<Dialogue>) -> bool {
+    fn track_item(item_id: u32,
+                  joueur: &mut Character,
+                  quetes: &mut HashMap<u32, Quete>,
+                  dialogues: &mut Vec<Dialogue>) -> bool {
         for quest_id in joueur.quests() {
             if let Some(quest) = quetes.get_mut(&quest_id) { // Use `get_mut` for mutable access
                 if quest.item_id() == item_id {
@@ -35,10 +31,10 @@ impl Tracker {
         false
     }
 
-    pub fn seaennemi(ennemi_id: u32,
-                  joueur: &mut Character,
-                  quetes: &mut HashMap<u32, Quete>,
-                  dialogues: &mut Vec<Dialogue>) {
+    fn track_enemy(ennemi_id: u32,
+                   joueur: &mut Character,
+                   quetes: &mut HashMap<u32, Quete>,
+                   dialogues: &mut Vec<Dialogue>) {
 
         for quest_id in joueur.quests() {
             if let Some(quest) = quetes.get_mut(&quest_id) {
@@ -59,7 +55,7 @@ impl Tracker {
     }
 
 
-    pub fn update_dialogues(id: u32, dialogues: &mut Vec<Dialogue>) {
+    fn update_dialogues(id: u32, dialogues: &mut Vec<Dialogue>) {
         let Some(mut dialogue) = dialogues.iter_mut().find(|mut dialog| {
             dialog.dialogue_id == id
         }) else { return  };

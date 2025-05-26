@@ -10,4 +10,7 @@ pub mod Enemy;
 pub mod room;
 pub mod quete;
 pub mod loot_entry;
+mod inventory;
+
+mod inventory_item;
 

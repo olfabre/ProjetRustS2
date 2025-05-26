@@ -13,7 +13,7 @@ use crate::models::tracker::Tracker;
 pub struct Character {
     vivant: Vivant,
 
-    pub position: usize,
+    pub position: usize, // Le room_id du personnage a present
     pub level: i32,       // Ajout du niveau du joueur
     pub experience: i32,  // Ajout de l'expérience du joueur
     pub money: i32,
@@ -117,7 +117,7 @@ impl Character {
                 current_room.items.remove(index);    // Et on le retire de la salle
                 println!("👜 Tu as ramassé '{}'.", item.name());
 
-                Tracker::item(item_id, self, quetes, dialogues);
+                Character::track_item(item_id, self, quetes, dialogues);
             }
         } else {
             println!("❌ Aucun objet nommé '{}' trouvé ici.", objet_nom);
@@ -324,3 +324,6 @@ impl Character {
 
 }
 
+impl Tracker for Character {
+
+}
