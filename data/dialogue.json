@@ -120,6 +120,15 @@
                     { "réponse": "Accepter Quête", "réaction": "Finalement, les dieux ont répondu à mes prières." },
                     { "réponse": "Au revoir", "réaction": "Le sage te regarde, mais ne répond pas..." }
                 ]
+            },
+            {
+                "action" : "rendreQuete:5",
+                "active" : false,
+                "question": "Alors, J'ai entendu dire que vous avez trouvé la chevalière de Davrik. C'est vrai ?",
+                "options": [
+                    { "réponse": "Completer Quête", "réaction": "Magnifique! Je suis de retour aux affaires!" },
+                    { "réponse": "Au revoir", "réaction": " ... ... hmnnn!" }
+                ]
             }
         ]
     }
