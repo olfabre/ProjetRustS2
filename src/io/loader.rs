@@ -9,7 +9,7 @@ use crate::models::{
     entities::item::Item,
     entities::pnj::Pnj,
     entities::room::Room,
-    entities::ennemie::Enemy,
+    entities::Enemy::Enemy,
     entities::quete::Quete,
 };
 

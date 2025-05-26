@@ -1,10 +1,11 @@
-use crate::models::{entities::character::Character, entities::room::Room, entities::item::Item, entities::pnj::Pnj, dialogue::Dialogue, entities::ennemie::Enemy, entities::ennemie};
+use crate::models::{entities::character::Character, entities::room::Room, entities::item::Item, entities::pnj::Pnj, dialogue::Dialogue, entities::Enemy::Enemy, entities::Enemy};
 // use crate::io::loader::{load_characters_from_file, load_dialogues_from_file, load_items_from_file, load_pnjs_from_file, load_room_from_file, load_ennemie_from_file, load_quetes_from_file};
 use crate::io::loader::*;
 use std::io::{stdin, Write};
 use crate::models::combat::Combat;
 use crate::models::entities::quete::Quete;
 use std::collections::HashMap;
+use log::log;
 
 pub struct Game {
     rooms: Vec<Room>,
@@ -12,7 +13,7 @@ pub struct Game {
     items: Vec<Item>,
     pnjs: Vec<Pnj>,
     dialogues: Vec<Dialogue>,
-    ennemies: Vec<Enemy>,
+    enemies: Vec<Enemy>,
     quetes: HashMap<u32, Quete>,
 }
 
@@ -24,10 +25,10 @@ impl Game {
         let items = load_items_from_file("data/items.json").expect("Erreur lors du chargement des objets.");
         let pnjs = load_pnjs_from_file("data/pnjs.json").expect("Erreur lors du chargement des PNJ.");
         let mut dialogues = load_dialogues_from_file("data/dialogue.json").expect("Erreur lors du chargement des dialogues");
-        let ennemies = load_ennemie_from_file("data/ennemie.json").expect("Erreur lors du chargement des ennemis.");
+        let enemies = load_ennemie_from_file("data/ennemie.json").expect("Erreur lors du chargement des ennemis.");
         let mut quetes = load_quetes_from_file("data/quetes.json").expect("Erreur lors du chargement des quetes.");
 
-        Game { rooms, characters, items, pnjs, dialogues, ennemies, quetes }
+        Game { rooms, characters, items, pnjs, dialogues, enemies: enemies, quetes }
     }
 
     /// Démarre la boucle principale du jeu
@@ -56,7 +57,7 @@ impl Game {
                     println!("⚔️ Ennemis présents ici :");
                     for &ennemie_id in &current_room.enemies {
                         // Recherche de l’ennemi correspondant dans la liste globale
-                        if let Some(ennemie) = self.ennemies.iter().find(|e| e.id == ennemie_id) {
+                        if let Some(ennemie) = self.enemies.iter().find(|e| e.id == ennemie_id) {
                             println!(
                                 "    - {} (PV: {}, Force: {}, Agilité: {})",
                                 ennemie.name, ennemie.health, ennemie.strength, ennemie.agility
@@ -133,8 +134,9 @@ impl Game {
                 if input.starts_with("combattre ") {
                     let ennemi_nom = &input[10..].trim();
                     let current_room_id = character.position as u32;
-
-                    if let Some(enemy) = self.ennemies.iter().find(|e| e.room_id == current_room_id && e.name.to_lowercase() == *ennemi_nom) {
+                    let current_room = self.get_current_room(character);
+                    println!("current room id : {}", current_room_id);
+                    if let Some(enemy) = current_room.enemies.iter().find(|e| e.name.to_lowercase() == *ennemi_nom) {
                         // Clone de l'ennemi pour pouvoir le manipuler sans bouger l'original (qui est dans self.ennemies)
                         let enemy_clone = enemy.clone();
                         let enemy_id = enemy.id;
@@ -149,7 +151,7 @@ impl Game {
                             }
 
                             // Suppression de l’ennemi de la liste globale
-                            self.ennemies.retain(|e| e.id != enemy_id);
+                            self.enemies.retain(|e| e.id != enemy_id);
                         } else if character.health() == 0 {
                             // Si le joueur est mort, on peut afficher un message final et quitter le jeu
                             println!("☠️ Le héros est tombé au combat. Le donjon garde ses secrets... 😔");
@@ -184,4 +186,9 @@ impl Game {
         print!("\x1B[2J\x1B[1;1H"); // ANSI escape code to clear screen
         std::io::stdout().flush().unwrap(); // Ensure it prints immediately
     }
+
+    fn get_current_room(&self, character: &Character) -> &Room {
+        &self.rooms[character.position]
+    }
+
 }
