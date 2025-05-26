@@ -1,7 +1,10 @@
 use std::collections::HashMap;
+use std::io::{stdin, stdout, Write};
+use rand::Rng;
 use serde::{Deserialize, Serialize};
 use serde::de::Visitor;
-use crate::models::traits::{Movable, Descriptible};
+
+use crate::models::traits::descriptible::Descriptible;
 use crate::models::{entities::room::Room, entities::item::Item};
 use crate::models::dialogue::Dialogue;
 use crate::models::entities::entity::Entity;
@@ -9,6 +12,7 @@ use crate::models::entities::inventory::Inventory;
 use crate::models::entities::quete::Quete;
 use crate::models::entities::vivant::Vivant;
 use crate::models::tracker::Tracker;
+use crate::models::traits::combattant::{CombatResult, Combattant};
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Character {
@@ -32,17 +36,6 @@ impl Descriptible for Character {
     }
 }
 
-impl Movable for Character {
-
-    /// Méthode simple pour déplacer le joueur sans vérification
-    fn move_to_position(&mut self, new_position: usize) {
-        self.position = new_position;
-    }
-
-    fn get_position(&self) {
-        todo!()
-    }
-}
 
 impl Character {
 
@@ -312,8 +305,10 @@ impl Character {
         self.vivant.inventory_mut()
     }
 
-    pub fn add_inventory(&mut self, item_id: u32) {
 
+
+    pub fn get_item_details<'a>(&self, item_id: u32, items: &'a [Item]) -> Option<&'a Item> {
+        items.iter().find(|i| i.id() == item_id)
     }
 
     pub fn get_active_quests(&self, all_quests: &HashMap<u32, Quete>) -> Vec<String> {
@@ -341,8 +336,163 @@ impl Character {
         self.money += quantité;
     }
 
+    pub fn combat<T: Combattant>(&mut self, ennemi: &mut T) -> CombatResult {
+        println!("⚔️ Début du combat : {} VS {}", self.name(), ennemi.nom());
+
+        let mut rng = rand::thread_rng();
+
+        loop {
+            // ======== Tour du joueur ========
+            let esquive = rng.gen_bool(0.1); // 10% de chance d'esquive
+            let critique = rng.gen_bool(0.2); // 20% de chance de critique
+
+            let mut degats = self.degats_attaque();
+            if critique {
+                println!("🎯 Coup critique !");
+                degats *= 2;
+            }
+
+            println!("👉 {} attaque avec {} dégâts !", self.name(), degats);
+            ennemi.infliger_degats(degats);
+
+            if !ennemi.est_vivant() {
+                println!("🏆 Tu as vaincu {} !", ennemi.nom());
+
+                let xp_gagnee = 30; // à adapter selon l'ennemi
+                self.add_experience(xp_gagnee);
+                return CombatResult::VICTORY;
+            }
+
+            // ======== Tour de l'ennemi ========
+            if esquive {
+                println!("🌀 Tu esquives l’attaque de {} !", ennemi.nom());
+            } else {
+                let degats_ennemi = ennemi.degats_attaque();
+                println!("💥 {} attaque avec {} dégâts !", ennemi.nom(), degats_ennemi);
+                self.infliger_degats(degats_ennemi);
+            }
+
+            println!(
+                "❤️ État actuel : {} ({} PV), {} ({} PV)\n",
+                self.name(),
+                self.sante(),
+                ennemi.nom(),
+                ennemi.sante()
+            );
+
+            if !self.est_vivant() {
+                println!("☠️ Tu es mort face à {}…", ennemi.nom());
+                return CombatResult::DEFEAT;
+            }
+        }
+    }
+
+    pub fn combat_interactif<T: Combattant>(&mut self, ennemi: &mut T, items: &[Item]) -> CombatResult {
+        println!("\n⚔️ Un combat commence contre {} !", ennemi.nom());
+
+        while self.est_vivant() && ennemi.est_vivant() {
+            println!(
+                "\n🧍‍♂️ {} (PV: {}) vs 🧟 {} (PV: {})",
+                self.nom(),
+                self.sante(),
+                ennemi.nom(),
+                ennemi.sante()
+            );
+
+            println!("Que veux-tu faire ? (attaquer / utiliser / fuir)");
+            print!("> ");
+            stdout().flush().unwrap();
+            let mut input = String::new();
+            stdin().read_line(&mut input).unwrap();
+            let input = input.trim().to_lowercase();
+
+            match input.as_str() {
+                "attaquer" => {
+                    let critique = rand::thread_rng().gen_bool(0.2);
+                    let mut degats = self.degats_attaque().saturating_sub(ennemi.protection_defense());
+                    if critique {
+                        println!("💥 Coup critique !");
+                        degats *= 2;
+                    }
+                    println!("🗡️ Tu infliges {} dégâts à {}.", degats, ennemi.nom());
+                    ennemi.infliger_degats(degats);
+                }
+
+                "utiliser" => {
+                    self.afficher_inventaire(items);
+                    println!("Quel objet veux-tu utiliser ?");
+                    print!("> ");
+                    stdout().flush().unwrap();
+                    let mut nom_objet = String::new();
+                    stdin().read_line(&mut nom_objet).unwrap();
+                    let nom_objet = nom_objet.trim();
+                    self.utiliser_objet(nom_objet, &mut [], items);
+                }
+
+                "fuir" => {
+                    let chance_fuite = rand::thread_rng().gen_bool(0.5);
+                    if chance_fuite {
+                        println!("🏃‍♂️ Tu réussis à fuir !");
+                        return CombatResult::ONGOING;
+                    } else {
+                        println!("❌ Échec de la fuite !");
+                    }
+                }
+
+                _ => {
+                    println!("❓ Commande invalide.");
+                }
+            }
+
+            // === Tour de l'ennemi ===
+            if ennemi.est_vivant() {
+                let esquive = rand::thread_rng().gen_bool(0.1); // 10% de chance que le joueur esquive
+                if esquive {
+                    println!("🌀 Tu esquives l’attaque de {} !", ennemi.nom());
+                } else {
+                    let critique = rand::thread_rng().gen_bool(0.15); // 15% de critique ennemi
+                    let mut degats = ennemi.degats_attaque().saturating_sub(self.protection_defense());
+                    if critique {
+                        println!("💢 Coup critique de {} !", ennemi.nom());
+                        degats *= 2;
+                    }
+                    println!("💥 {} t'attaque et inflige {} dégâts !", ennemi.nom(), degats);
+                    self.infliger_degats(degats);
+                }
+            }
+        }
+
+        if self.est_vivant() {
+            println!("🎉 Tu as vaincu {} !", ennemi.nom());
+            CombatResult::VICTORY
+        } else {
+            println!("☠️ Tu es mort...");
+            CombatResult::DEFEAT
+        }
+    }
+
+
+
 }
 
 impl Tracker for Character {
+
+}
+
+impl Combattant for Character {
+
+
+    fn infliger_degats(&mut self, degats: u32) {
+        todo!()
+    }
+
+    fn degats_attaque(&self) -> u32 {
+        todo!()
+    }
+
+    fn protection_defense(&self) -> u32 {
+        todo!()
+    }
+
 
 }

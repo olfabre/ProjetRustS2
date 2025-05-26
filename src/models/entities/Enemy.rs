@@ -66,9 +66,9 @@ impl Enemy {
 }
 
 
-impl Combat for Enemy {
-
-}
+// impl Combat for Enemy {
+//
+// }
 
 
 /*impl Combattant for Enemy {
