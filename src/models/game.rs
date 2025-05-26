@@ -78,7 +78,7 @@ impl Game {
                         }
                     }
                 } else {
-                    println!("🧑‍🤝‍🧑 Aucun personnage ici.");
+                    println!("🧑 Aucun personnage ici.");
                 }
 
                 // Affiche les directions disponibles
@@ -131,7 +131,7 @@ impl Game {
 
                 // Combattre un ennemi
                 if input.starts_with("combattre ") {
-                    let ennemi_nom = &input[10..].trim().to_lowercase();
+                    let ennemi_nom = &input[10..].trim();
                     let current_room_id = character.position as u32;
 
                     if let Some(enemy) = self.ennemies.iter().find(|e| e.room_id == current_room_id && e.name.to_lowercase() == *ennemi_nom) {

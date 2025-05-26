@@ -35,7 +35,7 @@ impl Tracker {
         false
     }
 
-    pub fn ennemi(ennemi_id: u32,
+    pub fn seaennemi(ennemi_id: u32,
                   joueur: &mut Character,
                   quetes: &mut HashMap<u32, Quete>,
                   dialogues: &mut Vec<Dialogue>) {
