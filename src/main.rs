@@ -1,5 +1,6 @@
 mod models;
 mod io;
+mod traits;
 
 use models::game::Game;
 

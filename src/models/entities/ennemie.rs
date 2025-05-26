@@ -1,31 +1,87 @@
-
 use serde::{Deserialize, Serialize};
-
+use crate::models::entities::vivant::Vivant;
+use crate::traits::combattant::Combattant;
+use crate::models::inventory_item::InventoryItem;
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Enemy {
-    pub id: u32,
-    pub name: String,
-    pub health: i32,
-    pub strength: i32,
+   pub vivant: Vivant,
     pub agility: i32,
     pub room_id: u32,
+
+    loot: Vec<InventoryItem>,
 }
 
 
 impl Enemy {
-    pub fn new(id: u32, name: &str, health: i32, strength: i32, agility: i32, room_id: u32) -> Self{
+    pub fn new(vivant: Vivant, agility: i32, room_id: u32, loot: Vec<InventoryItem>) -> Self{
         Self {
-            id,
-            name: name.to_string(),
-            health,
-            strength,
+            vivant,
             agility,
             room_id,
+            loot,
         }
+    }
+
+
+    pub fn id(&self) -> u32 {
+        self.vivant.id()
+    }
+
+    pub fn name(&self) -> &str {
+        self.vivant.name()
+    }
+
+    pub fn health(&self) -> i32 {
+        self.vivant.health()
+    }
+
+    pub fn strength(&self) -> i32 {
+        self.vivant.strength()
+    }
+
+    pub fn intelligence(&self) -> i32 {
+        self.vivant.intelligence()
+    }
+
+    pub fn set_health(&mut self, health: i32) {
+        self.vivant.set_health(health);
+    }
+
+    pub fn set_strength(&mut self, strength: i32) {
+        self.vivant.set_strength(strength);
+    }
+
+    pub fn set_intelligence(&mut self, intelligence: i32) {
+        self.vivant.set_intelligence(intelligence);
     }
 
     pub fn is_alive(&self) -> bool{
 
-        self.health > 0
-    }    
+        self.vivant.health() > 0
+    }
+
+    pub fn drop_loot(&self) -> Vec<InventoryItem> {
+        // Implémente ta logique pour récupérer les objets
+        self.loot.clone()
+    }
+}
+
+
+impl Combattant for Enemy {
+    fn nom(&self) -> &str { self.vivant.nom() }
+    fn force(&self) -> u32 { self.vivant.force() }
+    fn sante(&self) -> u32 { self.vivant.sante() }
+    fn est_vivant(&self) -> bool { self.vivant.est_vivant() }
+
+    fn infliger_degats(&mut self, degats: u32) {
+        self.vivant.infliger_degats(degats);
+    }
+
+    fn degats_attaque(&self) -> u32 {
+        self.vivant.degats_attaque()
+    }
+
+    fn protection_defense(&self) -> u32 {
+        self.vivant.protection_defense()
+    }
 }

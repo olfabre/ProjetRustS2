@@ -1,5 +1,5 @@
 use std::{fs, io};
-use std::io::{stdout, Write};
+use std::io::{Write};
 use serde_json;
 
 use crate::models::{

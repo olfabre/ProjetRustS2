@@ -1,19 +1,7 @@
 {
-    "player": "Guerrier",
-    "inventory": [
-        {
-            "id": 0,
-            "name": "Torche",
-            "description": "Une torche qui éclaire faiblement.",
-            "effect": "Illumine temporairement les zones sombres.",
-            "usable": true
-        },
-        {
-            "id": 1,
-            "name": "Potion de soin",
-            "description": "Restaure 20 points de vie.",
-            "effect": "heal_20",
-            "usable": true
-        }
+    "capacity": 20,
+    "items": [
+        { "item_id": 0, "quantity": 1 },
+        { "item_id": 1, "quantity": 2 }
     ]
 }

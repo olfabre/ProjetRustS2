@@ -1,28 +1,46 @@
 [
     {
-        "id": 0,
-        "name": "Guerrier",
-        "class": "combat",
-        "health": 100,
-        "strength": 15,
-        "agility": 10,
-        "intelligence": 5,
+        "vivant": {
+            "entity": {
+                "id": 0,
+                "name": "Guerrier",
+                "description": "Attaque physique"
+            },
+            "health": 100,
+            "strength": 15,
+            "intelligence": 10,
+            "defense": 20,
+            "inventory": {
+                "capacity": 20,
+                "items": [
+                    { "item_id": 0, "quantity": 1 },
+                    { "item_id": 1, "quantity": 2 }
+                ]
+            }
+        },
         "position": 0,
-        "inventory": [],
-        "level": 1,
-        "experience": 0
+        "experience": 1,
+        "level": 1
     },
     {
-        "id": 1,
-        "name": "Mage",
-        "class": "magie",
-        "health": 80,
-        "strength": 5,
-        "agility": 10,
-        "intelligence": 20,
+        "vivant": {
+            "entity": {
+                "id": 0,
+                "name": "Mage",
+                "description": "Attaque magique"
+            },
+            "health": 100,
+            "strength": 15,
+            "intelligence": 10,
+            "defense": 20,
+            "inventory": {
+                "capacity": 20,
+                "items": []
+            }
+        },
         "position": 1,
-        "inventory": [],
-        "level": 1,
-        "experience": 0
+        "experience": 1,
+        "level": 1
     }
+
 ]

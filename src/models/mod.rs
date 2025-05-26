@@ -5,6 +5,7 @@ pub mod game;
 pub mod dialogue;
 
 
-mod combat;
 pub mod entities;
+pub mod inventory_item;
+pub mod inventory;
 //pub mod worlds;

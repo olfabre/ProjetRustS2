@@ -1,32 +1,81 @@
 [
     {
-        "id": 0,
-        "name": "Gardien",
-        "role": "Guide",
+        "vivant": {
+            "entity": {
+                "id": 0,
+                "name": "Gardien",
+                "description": "Le premier des inconnus"
+            },
+            "health": 100,
+            "strength": 15,
+            "intelligence": 10,
+            "defense": 20,
+            "inventory": {
+                "capacity": 20,
+                "items": []
+            }
+        },
+        "role": "guide",
         "dialogue_id": 0
+
     },
     {
-        "id": 1,
-        "name": "Roi fantôme",
-        "role": "Boss",
+        "vivant": {
+            "entity": {
+                "id": 0,
+                "name": "Golem de pierre",
+                "description": "Cette pierre est souple!"
+            },
+            "health": 100,
+            "strength": 15,
+            "intelligence": 10,
+            "defense": 20,
+            "inventory": {
+                "capacity": 20,
+                "items": []
+            }
+        },
+        "role": "quete",
         "dialogue_id": 1
+
     },
     {
-        "id": 2,
-        "name": "Sage énigmatique",
-        "role": "Donneur de quête",
+        "vivant": {
+            "entity": {
+                "id": 0,
+                "name": "Roi fantôme",
+                "description": "Il a des secrets"
+            },
+            "health": 100,
+            "strength": 15,
+            "intelligence": 10,
+            "defense": 20,
+            "inventory": {
+                "capacity": 20,
+                "items": []
+            }
+        },
+        "role": "guide",
         "dialogue_id": 2
+
     },
     {
-        "id": 3,
-        "name": "Golem de pierre",
-        "role": "Ennemi",
+        "vivant": {
+            "entity": {
+                "id": 0,
+                "name": "Sage énigmatique",
+                "description": "Sage, tu dis?"
+            },
+            "health": 100,
+            "strength": 15,
+            "intelligence": 10,
+            "defense": 20,
+            "inventory": {
+                "capacity": 20,
+                "items": []
+            }
+        },
+        "role": "quete",
         "dialogue_id": 3
-    },
-    {
-        "id": 4,
-        "name": "Dragon endormi",
-        "role": "Boss",
-        "dialogue_id": 4
     }
 ]

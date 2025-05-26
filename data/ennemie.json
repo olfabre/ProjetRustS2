@@ -1,66 +1,192 @@
 [
   {
-    "id": 0,
-    "name": "Spectre des âmes",
-    "health": 40,
-    "strength": 8,
+    "vivant": {
+      "entity": {
+        "id": 0,
+        "name": "Spectre des âmes",
+        "description": "Un esprit tourmenté flottant silencieusement."
+      },
+      "health": 40,
+      "strength": 8,
+      "defense": 0,
+      "intelligence": 5,
+      "inventory": {
+        "capacity": 20,
+        "items": []
+      }
+    },
     "agility": 3,
-    "room_id": 66
+    "room_id": 66,
+    "loot": [
+      { "item_id": 0, "quantity": 1 },
+      { "item_id": 6, "quantity": 1 }
+    ]
   },
   {
-    "id": 1,
-    "name": "Gardien de pierre",
-    "health": 80,
-    "strength": 12,
+    "vivant": {
+      "entity": {
+        "id": 1,
+        "name": "Gardien de pierre",
+        "description": "Une statue animée défendant l'entrée."
+      },
+      "health": 80,
+      "strength": 12,
+      "defense": 5,
+      "intelligence": 3,
+      "inventory": {
+        "capacity": 20,
+        "items": []
+      }
+    },
     "agility": 2,
-    "room_id": 43
+    "room_id": 43,
+    "loot": [
+      { "item_id": 9, "quantity": 1 },
+      { "item_id": 12, "quantity": 1 }
+    ]
   },
   {
-    "id": 2,
-    "name": "Garde squelette",
-    "health": 30,
-    "strength": 10,
+    "vivant": {
+      "entity": {
+        "id": 2,
+        "name": "Garde squelette",
+        "description": "Un squelette ricanant brandissant une vieille épée."
+      },
+      "health": 30,
+      "strength": 10,
+      "defense": 1,
+      "intelligence": 2,
+      "inventory": {
+        "capacity": 20,
+        "items": []
+      }
+    },
     "agility": 5,
-    "room_id": 11
+    "room_id": 11,
+    "loot": [
+      { "item_id": 1, "quantity": 1 },
+      { "item_id": 8, "quantity": 1 }
+    ]
+
   },
   {
-    "id": 3,
-    "name": "Golem de pierre",
-    "health": 50,
-    "strength": 15,
+    "vivant": {
+      "entity": {
+        "id": 3,
+        "name": "Golem de pierre",
+        "description": "Un golem massif à la peau granitique."
+      },
+      "health": 50,
+      "strength": 15,
+      "defense": 7,
+      "intelligence": 1,
+      "inventory": {
+        "capacity": 20,
+        "items": []
+      }
+    },
     "agility": 3,
-    "room_id": 43
+    "room_id": 43,
+    "loot": [
+      { "item_id": 9, "quantity": 1 },
+      { "item_id": 13, "quantity": 1 }
+    ]
+
   },
   {
-    "id": 4,
-    "name": "Dragon endormi",
-    "health": 100,
-    "strength": 25,
+    "vivant": {
+      "entity": {
+        "id": 4,
+        "name": "Dragon endormi",
+        "description": "Un gigantesque dragon profondément endormi."
+      },
+      "health": 100,
+      "strength": 25,
+      "defense": 10,
+      "intelligence": 12,
+      "inventory": {
+        "capacity": 20,
+        "items": []
+      }
+    },
     "agility": 8,
-    "room_id": 4
+    "room_id": 4,
+    "loot": [
+      { "item_id": 19, "quantity": 1 },
+      { "item_id": 30, "quantity": 1 },
+      { "item_id": 17, "quantity": 1 }
+    ]
+
   },
   {
-    "id": 5,
-    "name": "Esprit vengeur",
-    "health": 35,
-    "strength": 14,
+    "vivant": {
+      "entity": {
+        "id": 5,
+        "name": "Esprit vengeur",
+        "description": "Une silhouette spectrale pleine de rancune."
+      },
+      "health": 35,
+      "strength": 14,
+      "defense": 2,
+      "intelligence": 6,
+      "inventory": {
+        "capacity": 20,
+        "items": []
+      }
+    },
     "agility": 6,
-    "room_id": 73
+    "room_id": 73,
+    "loot": [
+      { "item_id": 33, "quantity": 1 },
+      { "item_id": 16, "quantity": 1 }
+    ]
+
   },
   {
-    "id": 6,
-    "name": "Rôdeur masqué",
-    "health": 45,
-    "strength": 10,
+    "vivant": {
+      "entity": {
+        "id": 6,
+        "name": "Rôdeur masqué",
+        "description": "Un ennemi agile et discret dans l’ombre."
+      },
+      "health": 45,
+      "strength": 10,
+      "defense": 3,
+      "intelligence": 7,
+      "inventory": {
+        "capacity": 20,
+        "items": []
+      }
+    },
     "agility": 10,
-    "room_id": 28
+    "room_id": 28,
+    "loot": [
+      { "item_id": 22, "quantity": 1 },
+      { "item_id": 14, "quantity": 1 }
+    ]
+
   },
   {
-    "id": 7,
-    "name": "Garde spectral",
-    "health": 60,
-    "strength": 18,
+    "vivant": {
+      "entity": {
+        "id": 7,
+        "name": "Garde spectral",
+        "description": "Un gardien invisible, loyal au donjon."
+      },
+      "health": 60,
+      "strength": 18,
+      "defense": 4,
+      "intelligence": 9,
+      "inventory": {
+        "capacity": 20,
+        "items": []
+      }
+    },
     "agility": 4,
-    "room_id": 109
+    "room_id": 109,
+    "loot": [
+      { "item_id": 35, "quantity": 1 },
+      { "item_id": 6, "quantity": 1 }
+    ]
   }
 ]
