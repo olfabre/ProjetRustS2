@@ -1,7 +1,15 @@
-use crate::models::{entities::character::Character, entities::room::Room, entities::item::Item, entities::pnj::Pnj, dialogue::Dialogue, entities::ennemie::Enemy, entities::ennemie};
-use crate::io::loader::{load_characters_from_file, load_dialogues_from_file, load_items_from_file, load_pnjs_from_file, load_room_from_file, load_ennemie_from_file};
-use std::io::stdin;
-use crate::models::combat::Combat;
+use rand::Rng;
+
+use crate::models::{entities::character::Character, entities::room::Room, entities::item::Item, entities::pnj::Pnj, dialogue::Dialogue, entities::Enemy::Enemy};
+// use crate::io::loader::{load_characters_from_file, load_dialogues_from_file, load_items_from_file, load_pnjs_from_file, load_room_from_file, load_ennemie_from_file, load_quetes_from_file};
+use crate::io::loader::*;
+use std::io::{stdin, Write};
+
+use crate::models::entities::quete::Quete;
+use std::collections::HashMap;
+use log::log;
+use crate::models::tracker::Tracker;
+use crate::models::traits::combattant::CombatResult;
 
 pub struct Game {
     rooms: Vec<Room>,
@@ -9,28 +17,34 @@ pub struct Game {
     items: Vec<Item>,
     pnjs: Vec<Pnj>,
     dialogues: Vec<Dialogue>,
-    ennemies: Vec<Enemy>,
+    enemies: HashMap<u32, Enemy>,
+    quetes: HashMap<u32, Quete>,
 }
 
 impl Game {
     /// Crée une nouvelle instance du jeu en chargeant les données depuis les fichiers JSON
     pub fn new() -> Self {
+        // Vectors
         let rooms = load_room_from_file("data/rooms.json").expect("Erreur lors du chargement des salles.");
-        let characters = load_characters_from_file("data/characters.json").expect("Erreur lors du chargement des personnages.");
+        let mut characters = load_characters_from_file("data/characters.json").expect("Erreur lors du chargement du joueur.");
         let items = load_items_from_file("data/items.json").expect("Erreur lors du chargement des objets.");
         let pnjs = load_pnjs_from_file("data/pnjs.json").expect("Erreur lors du chargement des PNJ.");
-        let dialogues = load_dialogues_from_file("data/dialogue.json").expect("Erreur lors du chargement des PNJ");
-        let ennemies = load_ennemie_from_file("data/ennemie.json").expect("Erreur lors du chargement des ennemis.");
+        let mut dialogues = load_dialogues_from_file("data/dialogue.json").expect("Erreur lors du chargement des dialogues");
+        // let enemies = load_ennemie_from_file("data/ennemie.json").expect("Erreur lors du chargement des ennemis.");
+        // Maps
+        let enemies = load_enemies_from_file("data/ennemie.json").expect("Erreur lors du chargement des ennemis.");
+        let mut quetes = load_quetes_from_file("data/quetes.json").expect("Erreur lors du chargement des quetes.");
 
-        Game { rooms, characters, items, pnjs, dialogues, ennemies }
+        Game { rooms, characters, items, pnjs, dialogues, enemies, quetes }
     }
 
     /// Démarre la boucle principale du jeu
     pub fn run(&mut self) {
         if let Some(character) = self.characters.first_mut() {
+            println!("DEBUG: Position de départ du personnage = {}", character.position);
             loop {
                 let current_room = &self.rooms[character.position];
-
+                println!("__________________________________________________________________________________________");
                 println!("\n🌍 {} est actuellement dans : {}", character.name(), current_room.name());
                 println!("📍 {} : {}", current_room.elem.name(), current_room.elem.description());
 
@@ -39,7 +53,7 @@ impl Game {
                     println!("🛠 Objets trouvés :");
                     for &item_id in &current_room.items {
                         if let Some(item) = self.items.iter().find(|i| i.id() == item_id) {
-                            println!("- {} : {} (Effet : {})", item.name(), item.description(), item.effect());
+                            println!("   - {} : {} (Effet : {})", item.name(), item.description(), item.effect());
                         }
                     }
                 } else {
@@ -49,14 +63,14 @@ impl Game {
                 // Vérifie si la salle contient des ennemis
                 if !current_room.enemies.is_empty() {
                     println!("⚔️ Ennemis présents ici :");
-                    for &ennemie_id in &current_room.enemies {
-                        // Recherche de l’ennemi correspondant dans la liste globale
-                        if let Some(ennemie) = self.ennemies.iter().find(|e| e.id == ennemie_id) {
-                            println!(
-                                "   - {} (PV: {}, Force: {}, Agilité: {})",
-                                ennemie.name, ennemie.health, ennemie.strength, ennemie.agility
-                            );
-                        }
+                    for ennemie_id in &current_room.enemies {
+                        // Recherche de l'ennemi correspondant dans la liste globale
+                        let ennemie = self.enemies.get(ennemie_id);
+                        println!(
+                            "    - {} (PV: {}, Force: {}, Intelligence: {})",
+                            ennemie.unwrap().name(), ennemie.unwrap().health(), ennemie.unwrap().strength(), ennemie.unwrap().intelligence()
+                        );
+
                     }
                 } else {
                     // Aucun ennemi trouvé dans cette salle
@@ -66,25 +80,24 @@ impl Game {
 
                 // Affichage des PNJ présents dans la salle
                 if !current_room.pnjs.is_empty() {
-                    println!("🧑‍🤝‍🧑 Personnages présents :");
+                    println!("🧑 Personnages présents :");
                     for &pnj_id in &current_room.pnjs {
                         if let Some(pnj) = self.pnjs.iter().find(|p| p.id() == pnj_id) {
-                            println!("- {}", pnj.name());
+                            println!("   - {}", pnj.name());
                         }
                     }
                 } else {
-                    println!("🧑‍🤝‍🧑 Aucun personnage ici.");
+                    println!("🧑 Aucun personnage ici.");
                 }
-
-                println!("\nOù veux-tu aller ? (north, south, east, west, up, down, tunnel, quit, prendre <objet>, utiliser <objet>, parler <pnj>, combattre <ennemie>)");
 
                 // Affiche les directions disponibles
-                println!("Sorties disponibles :");
+                println!("🚪 Sorties disponibles :");
                 for direction in current_room.exits.keys() {
-                    println!("- {}", direction);
+                    println!("   - {}", direction);
                 }
 
-
+                println!("\nOù veux-tu aller ? ( nord, sud, est, ouest, haut, bas, tunnel, quit )");
+                println!("Que veux-tu faire ? ( prendre <objet>, utiliser <objet>, parler <pnj>, combattre <ennemie> )");
 
                 // Lecture de l'entrée utilisateur
                 let mut input = String::new();
@@ -99,11 +112,11 @@ impl Game {
                 // Prendre un objet
                 if input.starts_with("prendre ") {
                     let objet_nom = &input[8..].trim().to_lowercase();
-                    character.prendre_objet(objet_nom, &mut self.rooms, &self.items);
+                    character.prendre_objet(objet_nom, &mut self.rooms, &self.items, &mut self.quetes, &mut self.dialogues);
                     continue;
                 }
 
-                //Utiliser les objtes
+                //Utiliser les objets
                 if input.starts_with("utiliser ") {
                     let objet_nom = &input[8..].trim();
                     character.utiliser_objet(objet_nom, &mut self.rooms, &self.items);
@@ -114,31 +127,58 @@ impl Game {
                 // Parler à un PNJ
                 if input.starts_with("parler ") {
                     let pnj_nom = &input[7..].trim();
-                    Pnj::parler_au_pnj(pnj_nom, character, &self.rooms, &self.pnjs, &self.dialogues);
+                    Pnj::parler_au_pnj(pnj_nom, character, &self.rooms, &self.pnjs,
+                                       &mut self.dialogues, &mut self.quetes, &self.items);
+                    continue;
+                }
+
+                if input.starts_with("quêtes") {
+                    let quetes_found = character.get_active_quests(&self.quetes);
+                    quetes_found.iter().for_each(|quete| println!("{}", quete));
                     continue;
                 }
 
                 // Combattre un ennemi
-                if input.starts_with("combattre ") {
+                /*if input.starts_with("combattre ") {
                     let ennemi_nom = &input[10..].trim().to_lowercase();
-                    let current_room_id = character.position as u32;
+                    let current_room_id = character.position.clone();
+                    let current_room = self.rooms.iter()
+                        .find(|room| room.id() == current_room_id as u32)
+                        .expect("La salle actuelle n'a pas été trouvée.");
 
-                    if let Some(enemy) = self.ennemies.iter().find(|e| e.room_id == current_room_id && e.name.to_lowercase() == *ennemi_nom) {
+                    // It might happen that the room contains more than one enemy with the same name,
+                    // so we need to check all enemies in the room
+                    let enemies: Vec<&Enemy> = current_room.enemies.iter()
+                        .filter_map(|enemies_id| self.enemies.get(enemies_id))
+                        .filter(|enemy| enemy.name().to_lowercase() == *ennemi_nom)
+                        .collect();
+
+
+                    /*
+                        get enemies from the current room
+                        if at least one enemy is found, start the combat
+
+                     */
+
+                    if enemies.len() > 0 {
+
                         // Clone de l'ennemi pour pouvoir le manipuler sans bouger l'original (qui est dans self.ennemies)
-                        let enemy_clone = enemy.clone();
-                        let enemy_id = enemy.id;
+                        let enemy_clone = enemies[0].clone();
+                        let enemy_id = enemy_clone.id();
 
                         // Lancement du combat et récupération du résultat (true si ennemi vaincu, false sinon)
                         let ennemi_vaincu = Combat::fight(character, enemy_clone);
 
                         if ennemi_vaincu {
-                            // Si l’ennemi est vaincu, on le supprime de la salle actuelle
+                            // Si l'ennemi est vaincu, on le supprime de la salle actuelle
                             if let Some(room) = self.rooms.get_mut(character.position) {
                                 room.enemies.retain(|&id| id != enemy_id);
                             }
 
-                            // Suppression de l’ennemi de la liste globale
-                            self.ennemies.retain(|e| e.id != enemy_id);
+                            Character::track_enemy(enemy_id, character, &mut self.quetes, &mut self.dialogues);
+
+                            // Suppression de l'ennemi de la liste globale
+                            // self.enemies.retain(|e| e.id() != enemy_id);
                         } else if character.health() == 0 {
                             // Si le joueur est mort, on peut afficher un message final et quitter le jeu
                             println!("☠️ Le héros est tombé au combat. Le donjon garde ses secrets... 😔");
@@ -147,25 +187,116 @@ impl Game {
                     } else {
                         println!("❌ Aucun ennemi nommé '{}' ici.", ennemi_nom);
                     }
-
                 }
+*/
+
+                if input.starts_with("combattre ") {
+                    let ennemi_nom = &input[10..].trim().to_lowercase();
+                    let current_room_id = character.position.clone();
+                    let current_room = self.rooms.iter()
+                        .find(|room| room.id() == current_room_id as u32)
+                        .expect("La salle actuelle n'a pas été trouvée.");
+
+                    // It might happen that the room contains more than one enemy with the same name,
+                    // so we need to check all enemies in the room
+                    let enemies: Vec<&Enemy> = current_room.enemies.iter()
+                        .filter_map(|enemies_id| self.enemies.get(enemies_id))
+                        .filter(|enemy| enemy.name().to_lowercase() == *ennemi_nom)
+                        .collect();
+
+                    if enemies.len() > 0 {
+
+                        // Clone de l'ennemi pour pouvoir le manipuler sans bouger l'original (qui est dans self.ennemies)
+                        let mut enemy_clone = enemies[0].clone();
+                        let enemy_id = enemy_clone.id();
+
+                        // 🔄 Utilisation du résultat du combat
+                        match character.combat_interactif(&mut enemy_clone, &self.items) {
+                            CombatResult::VICTORY => {
+                                let loot = enemy_clone.drop_loot();
+                                let mut loot_affichage = vec![];
+
+                                for inv_item in &loot {
+                                    let name = self.items
+                                        .iter()
+                                        .find(|i| i.id() == inv_item.item_id)
+                                        .map(|i| i.name().to_string())
+                                        .unwrap_or_else(|| format!("Objet inconnu ({})", inv_item.item_id));
+                                    loot_affichage.push(format!("{} x{}", name, inv_item.quantity));
+                                }
+
+                                println!("\n🎉 Victoire contre {} !", enemy_clone.vivant.name());
+
+                                if loot_affichage.is_empty() {
+                                    println!("🎁 Aucun objet trouvé.");
+                                } else {
+                                    println!("🎁 Loot récupéré :");
+                                    for ligne in loot_affichage {
+                                        println!("- {}", ligne);
+                                    }
+                                }
+
+                                println!("🩸 Santé restante : {} PV", character.vivant.health());
+
+                                for item in loot {
+                                    character.vivant.inventory.add_item(item.item_id, item.quantity);
+                                }
+
+                                if let Some(room) = self.rooms.get_mut(character.position) {
+                                    room.enemies.retain(|&id| id != enemy_clone.vivant.id());
+                                }
+                                self.enemies.remove(&enemy_id);
+
+                                Character::track_enemy(enemy_id, character, &mut self.quetes, &mut self.dialogues);
+                            }
+
+                            CombatResult::DEFEAT => {
+                                println!("☠️ Tu es mort… fin de l'aventure.");
+                                break;
+                            }
+
+                            CombatResult::ONGOING => {
+                                println!("🔙 Tu as fui le combat.");
+                            }
+                            _ => {}
+                        }
+
+
+                    } else {
+                        println!("❌ Aucun ennemi nommé '{}' ici.", ennemi_nom);
+                    }
+                }
+
+
+
+
+
+                // Character::track_enemy(enemy_id, character, &mut self.quetes, &mut self.dialogues);
 
                 // Traduire les directions anglaises vers les directions du fichier JSON
                 let direction = match input.as_str() {
-                    "north" => "Nord",
-                    "south" => "Sud",
-                    "east" => "Est",
-                    "west" => "Ouest",
-                    "up" => "À l'étage",
-                    "down" => "Sous-sol",
+                    "nord" => "Nord",
+                    "sud" => "Sud",
+                    "est" => "Est",
+                    "ouest" => "Ouest",
+                    "haut" => "À l'étage",
+                    "bas" => "Sous-sol",
                     "tunnel" => "Tunnel",
                     "rez-de-chaussée" => "Rez-de-chaussée",
                     _ => input.as_str(),
                 };
 
                 // Déplacement du personnage avec vérification
-                character.try_move(direction, &self.rooms);
+                character.try_move(direction, &mut self.rooms);
             }
         }
     }
+
+    fn clear_console() {
+        print!("\x1B[2J\x1B[1;1H"); // ANSI escape code to clear screen
+        std::io::stdout().flush().unwrap(); // Ensure it prints immediately
+    }
+
+
+
 }

@@ -1,17 +1,28 @@
+use std::collections::HashMap;
+use std::io::{stdin, stdout, Write};
+use rand::Rng;
 use serde::{Deserialize, Serialize};
 use serde::de::Visitor;
-use crate::models::traits::{Movable, Descriptible};
+
+use crate::models::traits::descriptible::Descriptible;
 use crate::models::{entities::room::Room, entities::item::Item};
+use crate::models::dialogue::Dialogue;
 use crate::models::entities::entity::Entity;
+use crate::models::entities::inventory::Inventory;
+use crate::models::entities::quete::Quete;
 use crate::models::entities::vivant::Vivant;
+use crate::models::tracker::Tracker;
+use crate::models::traits::combattant::{CombatResult, Combattant};
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Character {
-    vivant: Vivant,
+    pub(crate) vivant: Vivant,
 
-    pub position: usize,
+    pub position: usize, // Le room_id du personnage a present
     pub level: i32,       // Ajout du niveau du joueur
     pub experience: i32,  // Ajout de l'expérience du joueur
+    pub money: i32,
+    pub quests: Vec<u32> // references to quete
 
 
 }
@@ -25,48 +36,34 @@ impl Descriptible for Character {
     }
 }
 
-impl Movable for Character {
-
-    /// Méthode simple pour déplacer le joueur sans vérification
-    fn move_to_position(&mut self, new_position: usize) {
-        self.position = new_position;
-    }
-
-    fn get_position(&self) {
-        todo!()
-    }
-}
 
 impl Character {
 
     /// Tente de déplacer le joueur dans la direction donnée,
-    /// en vérifiant la direction et si la salle n’est pas verrouillée.
-    pub fn try_move(&mut self, direction: &str, rooms: &[Room]) {
+    /// en vérifiant la direction et si la salle n'est pas verrouillée.
+    pub fn try_move(&mut self, direction: &str, rooms: &mut [Room]) {
         // Récupère la salle actuelle à partir de la position du personnage
         let current_room = &rooms[self.position];
 
         // Vérifie si une sortie existe dans la direction demandée
         if let Some(&next_room_id) = current_room.exits.get(direction) {
-            // Récupère la salle vers laquelle on veut se déplacer
-            if let Some(next_room) = rooms.get(next_room_id) {
-                // Vérifie si la salle est verrouillée (locked = true)
-                if next_room.locked.unwrap_or(false) {
-                    // Si oui, empêche le déplacement et affiche un message d'information
-                    println!("🚪 La salle '{}' est verrouillée. Tu as besoin d'une clé ou d'une action spéciale pour entrer.", next_room.name());
+            // Recherche la salle cible par son id (et non par son index !)
+            if let Some(next_room) = rooms.iter_mut().find(|r| r.id() == next_room_id as u32) {
+                println!("DEBUG: locked = {:?}", next_room.locked); // Affichage debug
+                if next_room.locked.unwrap_or(true) {
+                    // On tente d'ouvrir la porte (lancer de dés 421)
+                    if next_room.tenter_ouverture() {
+                        self.position = next_room_id;
+                    }
+                    // Sinon, message déjà affiché par tenter_ouverture
                 } else {
                     // Sinon, met à jour la position du personnage vers la nouvelle salle
                     self.position = next_room_id;
-
-                    // Affiche le nom et la description de la salle dans laquelle on vient d’entrer
-                    println!("✅ {} est maintenant dans : {}", self.name(), next_room.name());
-                    println!("📖 Description : {}", next_room.description());
                 }
             } else {
-                // Si la salle n’existe pas (ID invalide), affiche un message d’erreur
                 println!("❌ Salle inconnue.");
             }
         } else {
-            // Si la direction n’existe pas depuis cette salle, affiche un message d’erreur
             println!("❌ Direction invalide.");
         }
     }
@@ -87,25 +84,37 @@ impl Character {
             }
         }
     }*/
-    pub fn prendre_objet(&mut self, objet_nom: &str, rooms: &mut [Room], items: &[Item]) {
+    pub fn prendre_objet(&mut self, objet_nom: &str,
+                         rooms: &mut [Room], items: &[Item],
+                         quetes: &mut HashMap<u32, Quete>,
+                         dialogues: &mut Vec<Dialogue>) {
         // On convertit le nom pour ignorer la casse lors de la comparaison
         let objet_nom = objet_nom.to_lowercase();
         let current_room = &mut rooms[self.position];
 
-        // On cherche l'objet dans la salle actuelle
+
+        // On cherche l'objet dans la salle actuelle par nom (case-insensitive)
         if let Some((index, item_id)) = current_room
             .items
             .iter()
             .enumerate()
             .find_map(|(i, id)| {
-                items.iter().find(|item| item.id() == *id && item.name().to_lowercase() == objet_nom).map(|_| (i, *id))
+                items
+                    .iter()
+                    .find(|item| item.id() == *id && item.name().to_lowercase() == objet_nom)
+                    .map(|_| (i, *id))
             })
         {
-            // On récupère l'objet depuis la liste globale
             if let Some(item) = items.iter().find(|item| item.id() == item_id) {
-                self.inventory_mut().push(item.clone()); // On l'ajoute à l'inventaire du personnage
-                current_room.items.remove(index);    // Et on le retire de la salle
-                println!("👜 Tu as ramassé '{}'.", item.name());
+                let ajouté = self.vivant.inventory.add_item(item.id(), 1);
+
+                if ajouté {
+                    current_room.items.remove(index); // Retirer l'objet de la salle
+                    println!("👜 Tu as ramassé '{}'.", item.name());
+                    Character::track_item(item_id, self, quetes, dialogues);
+                } else {
+                    println!("❌ Inventaire plein, impossible de ramasser '{}'.", item.name());
+                }
             }
         } else {
             println!("❌ Aucun objet nommé '{}' trouvé ici.", objet_nom);
@@ -141,67 +150,62 @@ impl Character {
 
     /// Permet au personnage d'utiliser un objet de son inventaire
     pub fn utiliser_objet(&mut self, objet_nom: &str, rooms: &mut [Room], items: &[Item]) {
-        // Mise en minuscule du nom pour comparer sans tenir compte de la casse
         let objet_nom = objet_nom.to_lowercase();
 
-        // On cherche l'objet dans l'inventaire du personnage
-        if let Some(index) = self.inventory_mut().iter().position(|i| i.name().to_lowercase() == objet_nom) {
-            let objet = &self.inventory_mut()[index].clone();
+        // Recherche de l'objet dans l'inventaire
+        if let Some(index) = self.inventory_mut().items.iter().position(|inv_item| {
+            items.iter().any(|item| item.id() == inv_item.item_id && item.name().to_lowercase() == objet_nom)
+        }) {
+            let inv_item = self.inventory_mut().items[index].clone();
 
-            // Vérifie si l'objet peut être utilisé
-            if !objet.usable {
-                println!("⚠️ L'objet '{}' ne peut pas être utilisé directement.", objet.name());
-                return;
-            }
-
-            // On agit en fonction de l'effet de l'objet
-            match objet.effect() {
-                // Potion de soin : restaure 20 PV
-                ("heal_20") => {
-                    self.set_health(self.health() + 20);
-                    if self.health() > 100 { self.set_health(100); } // PV max = 100
-                    println!("💊 Tu as utilisé {}. PV restaurés à {}.", objet.name(), self.health());
-                    self.inventory_mut().remove(index); // Objet consommé
+            // Récupération du vrai Item
+            if let Some(item) = items.iter().find(|i| i.id() == inv_item.item_id) {
+                if !item.usable {
+                    println!("❌ {} ne peut pas être utilisé.", item.name());
+                    return;
                 }
 
-                // Bonus d'attaque (ex. Épée de fer)
-                ("attack_bonus_5") => {
-                    self.set_health(self.strength() + 5);
-                    println!("⚔️ Tu te sens plus fort ! Bonus de force activé (+5).");
-                    // Pas supprimé si c’est un objet permanent
-                }
+                match item.effect() {
+                    "heal_20" => {
+                        self.set_health((self.health() + 20).min(100));
+                        println!("💊 Tu as utilisé {}. PV restaurés à {}.", item.name(), self.health());
+                        self.inventory_mut().remove_item(item.id(), 1);
+                    }
 
-                // Parchemin mystérieux : effet narratif
-                ("Dévoile un secret ancien.") => {
-                    println!("📜 Le parchemin révèle une énigme cachée : 'Cherche là où les ombres dansent...'");
-                    self.inventory_mut().remove(index); // Consommé après usage
-                }
+                    "attack_bonus_5" => {
+                        self.set_strength(self.strength() + 5);
+                        println!("⚔️ Tu te sens plus fort ! Bonus de force activé (+5).");
+                        // Pas consommé ici
+                    }
 
-                // Clé du trésor : déverrouille la salle actuelle si elle est verrouillée
-                ("Déverrouille la salle du trésor.") => {
-                    let current_room = &mut rooms[self.position];
-                    if current_room.locked.unwrap_or(false) {
-                        current_room.locked = Some(false); // On déverrouille
-                        println!("🔓 Tu as utilisé la clé. La salle '{}' est maintenant déverrouillée !", current_room.name());
-                        self.inventory_mut().remove(index); // Clé supprimée après usage
-                    } else {
-                        println!("ℹ️ Il n'y a rien à déverrouiller ici.");
+                    "Dévoile un secret ancien." => {
+                        println!("📜 Le parchemin révèle une énigme : 'Cherche là où les ombres dansent...'");
+                        self.inventory_mut().remove_item(item.id(), 1);
+                    }
+
+                    "Déverrouille la salle du trésor." => {
+                        let current_room = &mut rooms[self.position];
+                        if current_room.locked.unwrap_or(false) {
+                            current_room.locked = Some(false);
+                            println!("🔓 Tu as utilisé la clé. La salle '{}' est maintenant déverrouillée !", current_room.name());
+                            self.inventory_mut().remove_item(item.id(), 1);
+                        } else {
+                            println!("ℹ️ Il n'y a rien à déverrouiller ici.");
+                        }
+                    }
+
+                    effet => {
+                        println!("✨ Tu utilises '{}', effet : {}", item.name(), effet);
                     }
                 }
-
-                // Pour tout autre effet générique
-                (effet) => {
-                    println!("✨ Tu utilises '{}', effet : {}", objet.name(), effet);
-                    // Tu peux personnaliser ici selon tes besoins
-                }
-
-
+            } else {
+                println!("❌ Impossible d'identifier cet objet dans la base de données.");
             }
         } else {
-            // L'objet n'est pas dans l'inventaire du personnage
             println!("❌ Tu ne possèdes pas cet objet.");
         }
     }
+
 
 
 
@@ -225,19 +229,39 @@ impl Character {
 
 
     //L'inventaire de l'objet pas de la character(&self)
-    pub fn afficher_inventaire(&mut self) {
-        println!("🎒 Inventaire :");
-        if self.inventory_mut().is_empty() {
+    //L'inventaire de l'objet pas de la character(&self)
+    pub fn afficher_inventaire(&self, items: &[Item]) {
+        println!("\n🎒 Inventaire :");
+
+        if self.vivant.inventory.items.is_empty() {
             println!("(vide)");
-        } else {
-            for item in self.inventory_mut() {
-                println!("- {} : {} (Effet : {})", item.name(), item.description(), item.effect());
+            return;
+        }
+
+        for inv_item in &self.vivant.inventory.items {
+            if let Some(full_item) = items.iter().find(|i| i.id() == inv_item.item_id) {
+                println!(
+                    "- {} x{} ({})",
+                    full_item.name(),
+                    inv_item.quantity,
+                    full_item.effect()
+                );
+            } else {
+                println!(
+                    "- Objet inconnu (id {}) x{}",
+                    inv_item.item_id,
+                    inv_item.quantity
+                );
             }
         }
     }
 
     pub fn ajouter_quete(&mut self, id: u32) {
+        self.quests.push(id);
+    }
 
+    pub fn supprimer_quete(&mut self, id: u32) {
+        self.quests.retain(|&q| q != id);
     }
 
 
@@ -273,10 +297,220 @@ impl Character {
         self.vivant.set_intelligence(intelligence);
     }
 
-    pub fn inventory_mut(&mut self) -> &mut Vec<Item> {
+    pub fn inventory_mut(&mut self) -> &mut Inventory {
         self.vivant.inventory_mut()
     }
 
+    pub fn defense(&self) -> i32 {
+        self.vivant.defense()
+    }
+
+    pub fn is_alive(&self) -> bool{
+
+        self.vivant.health() > 0
+    }
+
+    pub fn get_item_details<'a>(&self, item_id: u32, items: &'a [Item]) -> Option<&'a Item> {
+        items.iter().find(|i| i.id() == item_id)
+    }
+
+    pub fn get_active_quests(&self, all_quests: &HashMap<u32, Quete>) -> Vec<String> {
+        // Create a vector to store the names of matching quests.
+        let mut quest_titles: Vec<String> = vec![];
+
+        // Iterate over each quest ID in the character's quests list.
+        for &quest_id_from_char in &self.quests {
+            // Find the quest in the all_quests list that matches the ID.
+            if let Some(quest_found) = all_quests.get(&quest_id_from_char) {
+                // Clone the name and push it to the quest_titles vector.
+                quest_titles.push(quest_found.name().to_string());
+            }
+        }
+
+        // Return the collected quest titles.
+        quest_titles
+    }
+
+    pub fn quests(&self) -> &Vec<u32> {
+        &self.quests
+    }
+
+    pub fn add_argent(&mut self, quantité: i32) {
+        self.money += quantité;
+    }
+
+    pub fn combat<T: Combattant>(&mut self, ennemi: &mut T) -> CombatResult {
+        println!("⚔️ Début du combat : {} VS {}", self.name(), ennemi.nom());
+
+        let mut rng = rand::thread_rng();
+
+        loop {
+            // ======== Tour du joueur ========
+            let esquive = rng.gen_bool(0.1); // 10% de chance d'esquive
+            let critique = rng.gen_bool(0.2); // 20% de chance de critique
+
+            let mut degats = self.degats_attaque();
+            if critique {
+                println!("🎯 Coup critique !");
+                degats *= 2;
+            }
+
+            println!("👉 {} attaque avec {} dégâts !", self.name(), degats);
+            ennemi.infliger_degats(degats);
+
+            if !ennemi.est_vivant() {
+                println!("🏆 Tu as vaincu {} !", ennemi.nom());
+
+                let xp_gagnee = 30; // à adapter selon l'ennemi
+                self.add_experience(xp_gagnee);
+                return CombatResult::VICTORY;
+            }
+
+            // ======== Tour de l'ennemi ========
+            if esquive {
+                println!("🌀 Tu esquives l'attaque de {} !", ennemi.nom());
+            } else {
+                let degats_ennemi = ennemi.degats_attaque();
+                println!("💥 {} attaque avec {} dégâts !", ennemi.nom(), degats_ennemi);
+                self.infliger_degats(degats_ennemi);
+            }
+
+            println!(
+                "❤️ État actuel : {} ({} PV), {} ({} PV)\n",
+                self.name(),
+                self.sante(),
+                ennemi.nom(),
+                ennemi.sante()
+            );
+
+            if !self.est_vivant() {
+                println!("☠️ Tu es mort face à {}…", ennemi.nom());
+                return CombatResult::DEFEAT;
+            }
+        }
+    }
+
+    pub fn combat_interactif<T: Combattant>(&mut self, ennemi: &mut T, items: &[Item]) -> CombatResult {
+        println!("\n⚔️ Un combat commence contre {} !", ennemi.nom());
+
+        while self.est_vivant() && ennemi.est_vivant() {
+            println!(
+                "\n🧍‍♂️ {} (PV: {}) vs 🧟 {} (PV: {})",
+                self.nom(),
+                self.sante(),
+                ennemi.nom(),
+                ennemi.sante()
+            );
+
+            println!("Que veux-tu faire ? (attaquer / utiliser / fuir)");
+            print!("> ");
+            stdout().flush().unwrap();
+            let mut input = String::new();
+            stdin().read_line(&mut input).unwrap();
+            let input = input.trim().to_lowercase();
+
+            match input.as_str() {
+                "attaquer" => {
+                    let critique = rand::thread_rng().gen_bool(0.2);
+                    let mut degats = self.degats_attaque().saturating_sub(ennemi.protection_defense());
+                    if critique {
+                        println!("💥 Coup critique !");
+                        degats *= 2;
+                    }
+                    println!("🗡️ Tu infliges {} dégâts à {}.", degats, ennemi.nom());
+                    ennemi.infliger_degats(degats);
+                }
+
+                "utiliser" => {
+                    self.afficher_inventaire(items);
+                    println!("Quel objet veux-tu utiliser ?");
+                    print!("> ");
+                    stdout().flush().unwrap();
+                    let mut nom_objet = String::new();
+                    stdin().read_line(&mut nom_objet).unwrap();
+                    let nom_objet = nom_objet.trim();
+                    self.utiliser_objet(nom_objet, &mut [], items);
+                }
+
+                "fuir" => {
+                    let chance_fuite = rand::thread_rng().gen_bool(0.5);
+                    if chance_fuite {
+                        println!("🏃‍♂️ Tu réussis à fuir !");
+                        return CombatResult::ONGOING;
+                    } else {
+                        println!("❌ Échec de la fuite !");
+                    }
+                }
+
+                _ => {
+                    println!("❓ Commande invalide.");
+                }
+            }
+
+            // === Tour de l'ennemi ===
+            if ennemi.est_vivant() {
+                let esquive = rand::thread_rng().gen_bool(0.1); // 10% de chance que le joueur esquive
+                if esquive {
+                    println!("🌀 Tu esquives l'attaque de {} !", ennemi.nom());
+                } else {
+                    let critique = rand::thread_rng().gen_bool(0.15); // 15% de critique ennemi
+                    let mut degats = ennemi.degats_attaque().saturating_sub(self.protection_defense());
+                    if critique {
+                        println!("💢 Coup critique de {} !", ennemi.nom());
+                        degats *= 2;
+                    }
+                    println!("💥 {} t'attaque et inflige {} dégâts !", ennemi.nom(), degats);
+                    self.infliger_degats(degats);
+                }
+            }
+        }
+
+        if self.est_vivant() {
+            println!("🎉 Tu as vaincu {} !", ennemi.nom());
+            CombatResult::VICTORY
+        } else {
+            println!("☠️ Tu es mort...");
+            CombatResult::DEFEAT
+        }
+    }
+
+
+
+}
+
+impl Tracker for Character {
+
+}
+
+impl Combattant for Character {
+
+    fn nom(&self) -> &str {
+        self.name()
+    }
+
+    fn force(&self) -> u32 {
+        self.strength().max(0) as u32
+    }
+
+    fn sante(&self) -> u32 {
+        self.health().max(0) as u32
+    }
+
+    fn est_vivant(&self) -> bool {
+        self.health() > 0
+    }
+
+    fn infliger_degats(&mut self, degats: u32) {
+        self.set_health( (self.health() - degats as i32).max(0) );
+    }
+
+    fn degats_attaque(&self) -> u32 {
+        self.strength().max(0) as u32
+    }
+
+    fn protection_defense(&self) -> u32 {
+        self.defense().max(0) as u32
+    }
 
 
 

@@ -1,47 +1,41 @@
-use serde::{Deserialize, Serialize}; 
+use std::collections::HashMap;
+use serde::{Deserialize, Serialize};
 
 use crate::models::entities::room::Room;
 use crate::models::dialogue::Dialogue;
 use crate::models::entities::character::Character;
+use crate::models::entities::inventory::Inventory;
 use crate::models::entities::item::Item;
+use crate::models::entities::quete::Quete;
 use crate::models::entities::vivant::Vivant;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Pnj {
     vivant: Vivant,
     pub role: String,
-    pub dialogue_id: u32,
+    pub dialogue_id: u32, // reference to dialogue
 }
 
 impl Pnj {
     /// Permet à un PNJ de parler en utilisant `dialogue.rs`
-    /*pub fn parler_au_pnj(pnj_nom: &str, position: usize, rooms: &[Room], pnjs: &[Pnj], dialogues: &[Dialogue]) {
-        let room = &rooms[position];
 
-        if let Some(&pnj_id) = room.npcs.iter().find(|&&id| {
-            pnjs.iter().any(|p| p.id == id && p.name.to_lowercase() == pnj_nom.to_lowercase())
-        }) {
-            if let Some(pnj) = pnjs.iter().find(|p| p.id == pnj_id) {
-                if let Some(dialogue) = dialogues.iter().find(|d| d.dialogue_id == pnj.dialogue_id) {
-                    dialogue.afficher_dialogue();
-                } else {
-                    println!("💬 {} : \"Je n’ai rien à te dire.\"", pnj.name);
-                }
-            }
-        } else {
-            println!("❌ Il n'y a pas de {} ici.", pnj_nom);
-        }
-    }*/
-
-    pub fn parler_au_pnj(pnj_nom: &str, character: &mut Character, rooms: &[Room], pnjs: &[Pnj], dialogues: &[Dialogue]) {
+    pub fn parler_au_pnj(pnj_nom: &str, character: &mut Character,
+                         rooms: &[Room],
+                         pnjs: &[Pnj],
+                         dialogues: &mut [Dialogue],
+                         quetes: &mut HashMap<u32,Quete>,
+                         items: &Vec<Item>) {
         let room = &rooms[character.position];
 
         if let Some(&pnj_id) = room.pnjs.iter().find(|&&id| {
-            pnjs.iter().any(|p| p.id() == id && p.name().to_lowercase() == pnj_nom.to_lowercase())
+            pnjs.iter().any(|p| id == p.id()  &&  p.name().to_lowercase() == pnj_nom.to_lowercase())
         }) {
+
             if let Some(pnj) = pnjs.iter().find(|p| p.id() == pnj_id) {
-                if let Some(dialogue) = dialogues.iter().find(|d| d.dialogue_id == pnj.dialogue_id) {
-                    dialogue.afficher_dialogue(character);
+
+                if let Some(dialogue) = dialogues.iter_mut().find(|d| d.dialogue_id == pnj.dialogue_id) {
+
+                    dialogue.afficher_dialogue(character, quetes, items);
                 } else {
                     println!("💬 {} : \"Je n’ai rien à te dire.\"", pnj.name());
                 }
@@ -63,7 +57,7 @@ impl Pnj {
         self.vivant.description()
     }
 
-    pub fn inventory_mut(&mut self) -> &mut Vec<Item> {
+    pub fn inventory_mut(&mut self) -> &mut Inventory {
         self.vivant.inventory_mut()
     }
 

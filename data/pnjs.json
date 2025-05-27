@@ -10,7 +10,10 @@
             "strength": 15,
             "intelligence": 10,
             "defense": 20,
-            "inventory": []
+            "inventory": {
+                "capacity": 20,
+                "items": []
+            }
         },
         "role": "guide",
         "dialogue_id": 0
@@ -19,15 +22,18 @@
     {
         "vivant": {
             "entity": {
-                "id": 0,
-                "name": "Golem de pierre",
-                "description": "Cette pierre est souple!"
+                "id": 1,
+                "name": "Lord Khamar",
+                "description": "Il a servi la reine en temps de guerre !"
             },
             "health": 100,
             "strength": 15,
             "intelligence": 10,
             "defense": 20,
-            "inventory": []
+            "inventory": {
+                "capacity": 20,
+                "items": []
+            }
         },
         "role": "quete",
         "dialogue_id": 1
@@ -36,7 +42,7 @@
     {
         "vivant": {
             "entity": {
-                "id": 0,
+                "id": 2,
                 "name": "Roi fantôme",
                 "description": "Il a des secrets"
             },
@@ -44,7 +50,10 @@
             "strength": 15,
             "intelligence": 10,
             "defense": 20,
-            "inventory": []
+            "inventory": {
+                "capacity": 20,
+                "items": []
+            }
         },
         "role": "guide",
         "dialogue_id": 2
@@ -53,7 +62,7 @@
     {
         "vivant": {
             "entity": {
-                "id": 0,
+                "id": 3,
                 "name": "Sage énigmatique",
                 "description": "Sage, tu dis?"
             },
@@ -61,9 +70,12 @@
             "strength": 15,
             "intelligence": 10,
             "defense": 20,
-            "inventory": []
+            "inventory": {
+                "capacity": 20,
+                "items": []
+            }
         },
         "role": "quete",
-        "dialogue_id": 3
+        "dialogue_id": 5
     }
 ]

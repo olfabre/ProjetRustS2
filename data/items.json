@@ -537,7 +537,7 @@
             "name": "Grimoire du chaman",
             "description": "Un livre mystique rempli de rituels chamaniques."
         },
-        "item_type": "obejet spécial",
+        "item_type": "objet spécial",
         "effect": "boost_nature_magic_15",
         "usable": false,
         "weight": 7,
@@ -557,6 +557,21 @@
         "weight": 10,
         "value": 9,
         "stackable": false,
+        "equippable": true
+    },
+    {
+        "entity": {
+            "id": 40,
+            "name": "Collection d'os",
+            "description": "Un tas de crânes et de cages thoraciques. C'est ça qui est arrivé au groupe qui chassait le trésor?"
+        },
+        "item_type": "objet spécial",
+        "effect": "",
+        "usable": false,
+        "weight": 10,
+        "value": 2,
+        "stackable": false,
         "equippable": false
     }
+
 ]

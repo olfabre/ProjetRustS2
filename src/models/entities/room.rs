@@ -1,7 +1,8 @@
 use serde::{Deserialize, Serialize};
-use crate::models::traits::Descriptible;
+use crate::models::traits::descriptible::Descriptible;
 use std::collections::HashMap;
 use crate::models::entities::entity::Entity;
+use rand::Rng;
 
 /// Structure utilisée uniquement pour désérialiser le JSON avec la clé "elem"
 
@@ -18,10 +19,10 @@ pub struct Room {
     pub pnjs: Vec<u32>,
     pub enemies: Vec<u32>,
     pub exits: HashMap<String, usize>,
-    pub north: Option<u32>,
-    pub south: Option<u32>,
-    pub east: Option<u32>,
-    pub west: Option<u32>,
+    pub nord: Option<u32>,
+    pub sud: Option<u32>,
+    pub est: Option<u32>,
+    pub ouest: Option<u32>,
 }
 
 
@@ -46,5 +47,31 @@ impl Room{
         self.elem.description()
     }
 
+    pub fn tenter_ouverture(&mut self) -> bool {
+        if !self.locked.unwrap_or(true) {
+            // Déjà ouverte
+            return true;
+        }
+        println!("🚪 La porte est verrouillée ! Pour l'ouvrir, il faut faire un 421 avec trois dés.");
+        let mut des = vec![];
+        for _ in 0..3 {
+            des.push(rand::thread_rng().gen_range(1..=6));
+        }
+        println!("🎲 Tu as lancé : {:?}.", des);
+
+        let mut des_tries = des.clone();
+        des_tries.sort();
+        if des_tries == vec![1, 2, 4] {
+            println!("✅ Bravo ! Tu as fait 421, la porte s'ouvre.");
+            self.locked = Some(false);
+            true
+        } else {
+            println!("❌ Raté ! Tu ne peux pas entrer.");
+            false
+        }
+    }
 }
+
+
+
 

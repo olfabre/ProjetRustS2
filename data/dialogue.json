@@ -1,8 +1,7 @@
 [
     {
         "dialogue_id": 0,
-        "pnj_id": 0,
-        "dialogues": [
+        "dialogue_steps": [
             {
                 "action" : "",
                 "active" : true,
@@ -18,26 +17,45 @@
     },
     {
         "dialogue_id": 1,
-        "pnj_id": 1,
-        "dialogues": [
+        "dialogue_steps": [
             {
-                "action" : "",
+                "action" : "leadsTo:1",
                 "active" : true,
-                "question": "Seul le courageux pourra prendre ma couronne.",
-                "options": []
+                "question" : "Cela me brise le coeur de me séparer de cette propriété, mais je sens que le moment est venu pour moi de redonner quelque chose aux gens.",
+                "options" : [
+                    { "réponse":  "Que faites vous alors?", "réaction": "Je organise une chasse au trésor!"},
+                    { "réponse":  "Au revoir", "réaction": "Soyez prudent là-bas"}
+                ]
+            },
+            {
+                "action" : "accepteQuete:0",
+                "active" : true,
+                "question": "Certains candidats ont disparu pendant la chasse au trésor, et j'ai hâte de savoir ce qui leur est arrivé. Retrouvez-les et rapportez-en la preuve.",
+                "options": [
+                    { "réponse": "Accepter Quête", "réaction": "J'espère que tu m'apporteras une conclusion." },
+                    { "réponse": "Refuser Quête", "réaction": "Tu rates cette opportunité !" }
+                ]
+            },
+            {
+                "action" : "rendreQuete:0",
+                "active" : false,
+                "question": "Alors, qu'avez vous trouvez?",
+                "options": [
+                    { "réponse": "Completer Quête", "réaction": "J'avais de grands espoirs pour eux. C'est très triste d'apprendre que c'était leur fin. Voici votre récompense." },
+                    { "réponse": "Au revoir", "réaction": " ... ... hmnnn!" }
+                ]
             }
         ]
     },
     {
         "dialogue_id": 2,
-        "pnj_id": 2,
-        "dialogues": [
+        "dialogue_steps": [
             {
-                "action" : "",
+                "action" : "leadsTo:1",
                 "active" : true,
                 "question": "Réponds à mon énigme pour recevoir une récompense. Que veux-tu faire ?",
                 "options": [
-                    { "réponse": "Écouter l’énigme", "réaction": "Je suis grand quand je suis jeune et petit quand je suis vieux. Qui suis-je ?" },
+                    { "réponse": "Écouter l’énigme", "réaction": "Ecoutez alors!" },
                     { "réponse": "Ignorer", "réaction": "Tu rates une belle opportunité, aventurier." }
                 ]
             },
@@ -54,8 +72,7 @@
     },
     {
         "dialogue_id": 3,
-        "pnj_id": 3,
-        "dialogues": [
+        "dialogue_steps": [
             {
                 "action" : "",
                 "active" : true,
@@ -70,8 +87,7 @@
     },
     {
         "dialogue_id": 4,
-        "pnj_id": 4,
-        "dialogues": [
+        "dialogue_steps": [
             {
                 "action" : "",
                 "active" : true,
@@ -80,6 +96,38 @@
                     { "réponse": "Le réveiller", "réaction": "Le dragon ouvre ses yeux en colère ! Prépare-toi au combat !" },
                     { "réponse": "Voler un trésor", "réaction": "Tu attrapes discrètement une gemme enchantée sans réveiller le dragon." },
                     { "réponse": "Rebrousser chemin", "réaction": "Tu préfères ne pas prendre de risques et retournes en arrière." }
+                ]
+            }
+        ]
+    },
+    {
+        "dialogue_id": 5,
+        "dialogue_steps": [
+            {
+                "action" : "",
+                "active" : true,
+                "question": "Je ne peux signer de précieux documents commerciaux sans cette chevalière, volée par des bandits taboréens. En toute hâte, ils se sont rendus à la porte voisine et ont découvert leur destin.",
+                "options": [
+                    { "réponse": "C'est dommage.", "réaction": "Si seulement quelqu'un pouvait m'aider" },
+                    { "réponse": "Au revoir", "réaction": "Le sage te regarde, mais ne répond pas..." }
+                ]
+            },
+            {
+                "action" : "accepteQuete:5",
+                "active" : true,
+                "question": "Récupérez la chevalière de Davrik dans la salle des statues juste à côté. Attention aux mons… aux statues. Vous serez récompensé, mon ami.",
+                "options": [
+                    { "réponse": "Accepter Quête", "réaction": "Finalement, les dieux ont répondu à mes prières." },
+                    { "réponse": "Au revoir", "réaction": "Le sage te regarde, mais ne répond pas..." }
+                ]
+            },
+            {
+                "action" : "rendreQuete:5",
+                "active" : false,
+                "question": "Alors, J'ai entendu dire que vous avez trouvé la chevalière de Davrik. C'est vrai ?",
+                "options": [
+                    { "réponse": "Completer Quête", "réaction": "Magnifique! Je suis de retour aux affaires!" },
+                    { "réponse": "Au revoir", "réaction": " ... ... hmnnn!" }
                 ]
             }
         ]

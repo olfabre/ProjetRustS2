@@ -1,0 +1,36 @@
+[
+  {
+    "entity": {
+      "id": 0,
+      "name": "Aventuriers Disparus",
+      "description": "Trouvez ce qui s'est passé."
+    },
+    "dialog_rendu_id": 1,
+    "objectif_type": "collecter",
+    "objectif": {
+      "tuer": { "ennemi_id": 1, "target": 0, "count": 0 },
+      "collecter": { "item_id": 40, "target": 1, "count": 0 },
+      "visiter": { "room_id": 0, "visited": false}
+    },
+    "recompense_items": [39],
+    "recompense_argent": 0,
+    "experience": 100
+  },
+  {
+    "entity": {
+      "id": 5,
+      "name": "Chevalière de Davrik",
+      "description": "Sans valeur pour vous, mais un trésor pour quelqu'un d'autre."
+    },
+    "dialog_rendu_id": 5,
+    "objectif_type": "tuer",
+    "objectif": {
+      "tuer": { "ennemi_id": 2, "target": 1, "count": 0 },
+      "collecter": { "item_id": 0, "target": 0, "count": 0 },
+      "visiter": { "room_id": 0, "visited": false}
+    },
+    "recompense_items": [],
+    "recompense_argent": 25,
+    "experience": 100
+  }
+]
