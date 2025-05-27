@@ -2,88 +2,99 @@
     {
         "id": 0,
         "name": "Potion de soin",
-        "type": "consommable",
         "description": "Restaure 20 points de vie.",
+        "type": "consommable",
+
         "effect": "heal_20",
         "usable": true
     },
     {
         "id": 1,
         "name": "Épée de fer",
-        "type": "arme",
         "description": "Une épée tranchante en fer.",
+        "type": "arme",
+
         "effect": "attack_bonus_5",
         "usable": true
     },
     {
         "id": 2,
         "name": "Gemme enchantée",
-        "type": "objet spécial",
         "description": "Une pierre précieuse pulsant d'une lumière mystique.",
+        "type": "objet spécial",
+
         "effect": "Confère une protection magique.",
         "usable": false
     },
     {
         "id": 3,
         "name": "Parchemin mystérieux",
-        "type": "consommable",
         "description": "Un vieux parchemin contenant un message crypté.",
+        "type": "consommable",
+
         "effect": "Dévoile un secret ancien.",
         "usable":true
     },
     {
         "id": 4,
         "name": "Parchemin des énigmes",
-        "type": "objet spécial",
         "description": "Un vieux parchemin contenant un message crypté.",
+        "type": "objet spécial",
+
         "effect": "Contient une énigme qui, une fois résolue, octroie un bonus d'intelligence.",
         "usable": false
     },
     {
         "id": 5,
         "name": "Clé du trésor",
-        "type": "objet spécial",
         "description": "Une clé ancienne, ornée de symboles magiques.",
+        "type": "objet spécial",
+
         "effect": "Déverrouille la salle du trésor.",
         "usable": true
     },
     {
         "id": 6,
         "name": "Anneau de furtivité",
-        "type": "objet spécial",
         "description": "Un anneau magique qui rend son porteur presque invisible aux yeux des ennemis.",
+        "type": "objet spécial",
+
         "effect": "boost_agility_5",
         "usable": false
     },
     {
         "id": 7,
         "name": "Potion de rage",
-        "type": "consommable",
         "description": "Fait entrer le joueur dans un état de rage, augmentant sa force temporairement.",
+        "type": "consommable",
+
         "effect": "boost_strength_10",
         "usable": true
     },
     {
         "id": 8,
         "name": "Clé rouillée",
-        "type": "objet spécial",
         "description": "Une vieille clé corrodée, probablement utile pour ouvrir une porte oubliée.",
+        "type": "objet spécial",
+
         "effect": "Déverrouille une vieille cellule.",
         "usable": true
     },
     {
         "id": 9,
         "name": "Bouclier d'ébène",
-        "type": "armure",
         "description": "Un bouclier robuste forgé dans l'ébène, offrant une défense impressionnante.",
+        "type": "armure",
+
         "effect": "defense_bonus_8",
         "usable": false
     },
     {
         "id": 10,
         "name": "Amulette du sage",
-        "type": "objet spécial",
         "description": "Une amulette ancienne qui améliore la sagesse de son porteur.",
+        "type": "objet spécial",
+
         "effect": "boost_intelligence_5",
         "usable": false
     },
@@ -91,231 +102,259 @@
         "id": 11,
         "name": "Lanterne enchantée",
         "type": "outil",
-        "description": "Une lanterne magique qui éclaire même les ténèbres les plus profondes.",
+
         "effect": "illuminate_dark_areas",
         "usable": true
     },
     {
         "id": 12,
         "name": "Potion de résistance",
-        "type": "consommable",
         "description": "Confère une résistance temporaire aux dégâts physiques.",
+        "type": "consommable",
+
         "effect": "resist_physical_15",
         "usable": true
     },
     {
         "id": 13,
         "name": "Gantelet du titan",
-        "type": "arme",
         "description": "Un gantelet massif qui amplifie la force de son porteur.",
+        "type": "arme",
+
         "effect": "boost_strength_15",
         "usable": false
     },
     {
         "id": 14,
         "name": "Cape des ombres",
-        "type": "objet spécial",
         "description": "Une cape sombre qui permet de se fondre dans l'ombre.",
+        "type": "objet spécial",
+
         "effect": "stealth_bonus_7",
         "usable": false
     },
     {
         "id": 15,
         "name": "Potion de vision",
-        "type": "consommable",
         "description": "Permet de voir les objets cachés pendant une courte durée.",
+        "type": "consommable",
+
         "effect": "reveal_hidden_objects",
         "usable": true
     },
     {
         "id": 16,
         "name": "Talisman du gardien",
-        "type": "objet spécial",
         "description": "Un talisman mystérieux qui protège son porteur des malédictions.",
+        "type": "objet spécial",
+
         "effect": "curse_protection",
         "usable": false
     },
     {
         "id": 17,
         "name": "Grimoire ancien",
-        "type": "objet spécial",
         "description": "Un livre de magie renfermant des sorts oubliés.",
+        "type": "objet spécial",
+
         "effect": "learn_spell_random",
         "usable": true
     },
     {
         "id": 18,
         "name": "Pierre de téléportation",
-        "type": "outil",
         "description": "Une pierre mystique permettant de se téléporter vers un emplacement connu.",
+        "type": "outil",
+
         "effect": "teleport_to_checkpoint",
         "usable": true
     },
     {
         "id": 19,
         "name": "Bague du pyromancien",
-        "type": "objet spécial",
         "description": "Une bague incrustée de rubis qui amplifie les sorts de feu.",
+        "type": "objet spécial",
+
         "effect": "boost_fire_magic_10",
         "usable": false
     },
     {
         "id": 20,
         "name": "Potion d'endurance",
-        "type": "consommable",
         "description": "Augmente temporairement l'endurance, réduisant la consommation d'énergie.",
+        "type": "consommable",
+
         "effect": "stamina_boost_20",
         "usable": true
     },
     {
         "id": 21,
         "name": "Bracelet du chasseur",
-        "type": "objet spécial",
         "description": "Un bracelet orné de plumes qui améliore la précision des tirs.",
+        "type": "objet spécial",
+
         "effect": "boost_archery_10",
         "usable": false
     },
     {
         "id": 22,
         "name": "Griffes de la panthère",
-        "type": "arme",
         "description": "Des griffes acérées conçues pour les assassins agiles.",
+        "type": "arme",
+
         "effect": "attack_bonus_7",
         "usable": false
     },
     {
         "id": 23,
         "name": "Potion de clairvoyance",
-        "type": "consommable",
         "description": "Permet de prédire les attaques ennemies pendant une courte durée.",
+        "type": "consommable",
+
         "effect": "predict_enemy_moves",
         "usable": true
     },
     {
         "id": 24,
         "name": "Éclat de cristal",
-        "type": "objet spécial",
         "description": "Un morceau de cristal pur qui dégage une énergie mystique.",
+        "type": "objet spécial",
+
         "effect": "mana_regen_15",
         "usable": false
     },
     {
         "id": 25,
         "name": "Cape du vent",
-        "type": "objet spécial",
         "description": "Une cape légère qui permet d'esquiver plus facilement.",
+        "type": "objet spécial",
+
         "effect": "dodge_bonus_10",
         "usable": false
     },
     {
         "id": 26,
         "name": "Corne du hurleur",
-        "type": "outil",
         "description": "Une corne antique qui effraie les ennemis proches.",
+        "type": "outil",
+
         "effect": "fear_enemy_aoe",
         "usable": true
     },
     {
         "id": 27,
         "name": "Talisman des esprits",
-        "type": "objet spécial",
         "description": "Un talisman qui permet de communiquer avec les âmes perdues.",
+        "type": "objet spécial",
+
         "effect": "summon_spirit_ally",
         "usable": true
     },
     {
         "id": 28,
         "name": "Couteau du traître",
-        "type": "arme",
         "description": "Une dague empoisonnée infligeant des dégâts progressifs.",
+        "type": "arme",
+
         "effect": "poison_enemy_5",
         "usable": false
     },
     {
         "id": 29,
         "name": "Sceptre de l'orage",
-        "type": "arme",
         "description": "Un sceptre imprégné de la fureur des tempêtes, lançant des éclairs sur les ennemis.",
+        "type": "arme",
+
         "effect": "lightning_strike_15",
         "usable": false
     },
     {
         "id": 30,
         "name": "Pierre de résurrection",
-        "type": "objet spécial",
         "description": "Une gemme dorée capable de ramener son porteur à la vie une fois.",
+        "type": "objet spécial",
+
         "effect": "revive_once",
         "usable": true
     },
     {
         "id": 31,
         "name": "Bottes du vent",
-        "type": "armure",
         "description": "Des bottes enchantées qui augmentent drastiquement la vitesse de déplacement.",
+        "type": "armure",
+
         "effect": "speed_boost_20",
         "usable": false
     },
     {
         "id": 32,
         "name": "Potion de pierre",
-        "type": "consommable",
         "description": "Transforme temporairement la peau du joueur en pierre, augmentant fortement la défense.",
+        "type": "consommable",
+
         "effect": "defense_bonus_25",
         "usable": true
     },
     {
         "id": 33,
         "name": "Cristal du néant",
-        "type": "objet spécial",
         "description": "Un fragment sombre émettant une aura sinistre, amplifiant les sorts d'ombre.",
+        "type": "objet spécial",
+
         "effect": "boost_dark_magic_15",
         "usable": false
     },
     {
         "id": 34,
         "name": "Anneau du renouveau",
-        "type": "objet spécial",
         "description": "Un anneau scintillant qui régénère lentement la santé.",
+        "type": "objet spécial",
+
         "effect": "regen_health_5",
         "usable": false
     },
     {
         "id": 35,
         "name": "Pendentif du gardien",
-        "type": "objet spécial",
         "description": "Un pendentif gravé de symboles anciens, renforçant les défenses magiques.",
+        "type": "objet spécial",
+
         "effect": "magic_defense_bonus_10",
         "usable": false
     },
     {
         "id": 36,
         "name": "Potion du berserker",
-        "type": "consommable",
         "description": "Augmente massivement la force mais réduit la défense pendant un court instant.",
+        "type": "consommable",
+
         "effect": "boost_strength_20_reduce_defense_10",
         "usable": true
     },
     {
         "id": 37,
         "name": "Dague du venin",
-        "type": "arme",
         "description": "Une dague empoisonnée redoutable, infligeant des dégâts progressifs.",
+        "type": "arme",
+
         "effect": "poison_enemy_10",
         "usable": false
     },
     {
         "id": 38,
         "name": "Grimoire du chaman",
-        "type": "objet spécial",
         "description": "Un livre mystique rempli de rituels chamaniques.",
+        "type": "objet spécial",
+
         "effect": "boost_nature_magic_15",
         "usable": false
     },
     {
         "id": 39,
         "name": "Heaume du conquérant",
-        "type": "armure",
         "description": "Un casque lourd renforçant la résistance mentale.",
+        "type": "armure",
+
         "effect": "mental_resistance_10",
         "usable": false
     }
