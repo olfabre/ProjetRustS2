@@ -10,6 +10,7 @@ use std::collections::HashMap;
 use log::log;
 use crate::models::tracker::Tracker;
 use crate::models::traits::combattant::CombatResult;
+use std::path::Path;
 
 pub struct Game {
     rooms: Vec<Room>,
@@ -47,6 +48,15 @@ impl Game {
                 println!("__________________________________________________________________________________________");
                 println!("\n🌍 {} est actuellement dans : {}", character.name(), current_room.name());
                 println!("📍 {} : {}", current_room.elem.name(), current_room.elem.description());
+
+                // Affichage de l'image associée à la salle
+                let image_filename = format!("{}.png", current_room.id());
+                let image_path = format!("images/{}", image_filename);
+                if Path::new(&image_path).exists() {
+                    let _ = std::process::Command::new("viu")
+                        .arg(&image_path)
+                        .status();
+                }
 
                 // Affichage des objets trouvés dans la salle
                 if !current_room.items.is_empty() {
