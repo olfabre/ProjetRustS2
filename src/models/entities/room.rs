@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use crate::models::traits::Descriptible;
+use crate::models::traits::descriptible::Descriptible;
 use std::collections::HashMap;
 use crate::models::entities::entity::Entity;
 

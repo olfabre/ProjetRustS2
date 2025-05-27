@@ -61,7 +61,7 @@
             "locked": false,
             "items": [12, 13, 14],
             "pnjs": [],
-            "enemies": [],
+            "enemies": [2],
             "exits": {"Sud": 5, "Est": 6}
         },
         {

@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 use crate::models::entities::entity::Entity;
 use crate::models::entities::inventory::Inventory;
 use crate::models::entities::item::Item;
+use crate::models::traits::combattant::Combattant;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Vivant {
@@ -59,4 +60,35 @@ impl Vivant {
     }
 
 
+}
+
+impl Combattant for Vivant {
+
+    fn nom(&self) -> &str {
+        self.name()
+    }
+
+    fn force(&self) -> u32 {
+        self.strength().max(0) as u32
+    }
+
+    fn sante(&self) -> u32 {
+        self.health().max(0) as u32
+    }
+
+    fn est_vivant(&self) -> bool {
+        self.health() > 0
+    }
+
+    fn infliger_degats(&mut self, degats: u32) {
+        self.health = (self.health() - degats as i32).max(0);
+    }
+
+    fn degats_attaque(&self) -> u32 {
+        self.strength().max(0) as u32
+    }
+
+    fn protection_defense(&self) -> u32 {
+        self.defense().max(0) as u32
+    }
 }

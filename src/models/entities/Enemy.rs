@@ -1,7 +1,8 @@
 use serde::{Deserialize, Serialize};
-use crate::models::combat::Combat;
+
 use crate::models::entities::vivant::Vivant;
 use crate::models::entities::inventory_item::InventoryItem;
+use crate::models::traits::combattant::Combattant;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Enemy {
@@ -62,13 +63,44 @@ impl Enemy {
         self.loot.clone()
     }
 
+    pub fn defense(&self) -> i32 {
+        self.vivant.defense()
+    }
+
 
 }
 
 
-// impl Combat for Enemy {
-//
-// }
+impl Combattant for Enemy {
+
+    fn nom(&self) -> &str {
+        self.name()
+    }
+
+    fn force(&self) -> u32 {
+        self.strength().max(0) as u32
+    }
+
+    fn sante(&self) -> u32 {
+        self.health().max(0) as u32
+    }
+
+    fn est_vivant(&self) -> bool {
+        self.health() > 0
+    }
+    fn infliger_degats(&mut self, degats: u32) {
+        self.set_health( (self.health() - degats as i32).max(0) );
+    }
+
+    fn degats_attaque(&self) -> u32 {
+        self.strength().max(0) as u32
+    }
+
+    fn protection_defense(&self) -> u32 {
+        self.defense().max(0) as u32
+    }
+
+}
 
 
 /*impl Combattant for Enemy {

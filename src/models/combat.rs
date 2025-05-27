@@ -2,9 +2,11 @@ use std::io;
 use std::io::Write;
 use crate::models::{entities::character::Character, entities::Enemy::Enemy}; // Import du joueur et des ennemis
 use rand::Rng; // Pour générer des événements aléatoires (ex : attaque spéciale ennemie)
-use crate::io::loader::get_user_input; // Fonction utilitaire pour lire l'entrée utilisateur
+use crate::io::loader::get_user_input;
+use crate::models::traits::combattant::Combattant;
+// Fonction utilitaire pour lire l'entrée utilisateur
 
-/// Structure vide pour regrouper les fonctions liées au combat
+// Structure vide pour regrouper les fonctions liées au combat
 // pub trait Combat {
 //
 //     /// Lance un combat entre le joueur et un ennemi
@@ -73,7 +75,7 @@ use crate::io::loader::get_user_input; // Fonction utilitaire pour lire l'entré
 
 
 
-/// Gère un tour de combat entre deux entités
+// Gère un tour de combat entre deux entités
 /*pub fn run_combat_round(attacker: &dyn Combattant, defender: &mut dyn Combattant) {
     if attacker.is_alive() && defender.is_alive() {
         attacker.attack(defender);
@@ -84,7 +86,7 @@ use crate::io::loader::get_user_input; // Fonction utilitaire pour lire l'entré
     }
 }
 
-/// Combat au tour par tour jusqu’à ce qu’un des deux meure
+// Combat au tour par tour jusqu’à ce qu’un des deux meure
 pub fn run_combat(mut entity1: Box<dyn Combattant>, mut entity2: Box<dyn Combattant>) {
     println!(
         "💥 Combat entre {} ({} PV) et {} ({} PV) !",

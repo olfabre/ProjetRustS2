@@ -53,7 +53,7 @@
         "items": []
       }
     },
-    "loot": []
+    "loot": [{"item_id": 0, "quantity": 2}, {"item_id": 1, "quantity": 1}]
 
   },
   {

@@ -16,7 +16,7 @@ use crate::models::traits::combattant::{CombatResult, Combattant};
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Character {
-    vivant: Vivant,
+    pub(crate) vivant: Vivant,
 
     pub position: usize, // Le room_id du personnage a present
     pub level: i32,       // Ajout du niveau du joueur
@@ -305,7 +305,14 @@ impl Character {
         self.vivant.inventory_mut()
     }
 
+    pub fn defense(&self) -> i32 {
+        self.vivant.defense()
+    }
 
+    pub fn is_alive(&self) -> bool{
+
+        self.vivant.health() > 0
+    }
 
     pub fn get_item_details<'a>(&self, item_id: u32, items: &'a [Item]) -> Option<&'a Item> {
         items.iter().find(|i| i.id() == item_id)
@@ -481,18 +488,34 @@ impl Tracker for Character {
 
 impl Combattant for Character {
 
+    fn nom(&self) -> &str {
+        self.name()
+    }
+
+    fn force(&self) -> u32 {
+        self.strength().max(0) as u32
+    }
+
+    fn sante(&self) -> u32 {
+        self.health().max(0) as u32
+    }
+
+    fn est_vivant(&self) -> bool {
+        self.health() > 0
+    }
 
     fn infliger_degats(&mut self, degats: u32) {
-        todo!()
+        self.set_health( (self.health() - degats as i32).max(0) );
     }
 
     fn degats_attaque(&self) -> u32 {
-        todo!()
+        self.strength().max(0) as u32
     }
 
     fn protection_defense(&self) -> u32 {
-        todo!()
+        self.defense().max(0) as u32
     }
+
 
 
 }

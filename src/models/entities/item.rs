@@ -1,8 +1,8 @@
 
 use serde::{Deserialize, Serialize};
 use crate::models::entities::entity::Entity;
-use crate::models::traits::Descriptible;
-use crate::models::traits::Interactable;
+use crate::models::traits::descriptible::Descriptible;
+use crate::models::traits::interactible::Interactable;
 
 
 
