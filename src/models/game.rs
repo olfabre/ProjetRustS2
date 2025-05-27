@@ -1,3 +1,5 @@
+use rand::Rng;
+
 use crate::models::{entities::character::Character, entities::room::Room, entities::item::Item, entities::pnj::Pnj, dialogue::Dialogue, entities::Enemy::Enemy};
 // use crate::io::loader::{load_characters_from_file, load_dialogues_from_file, load_items_from_file, load_pnjs_from_file, load_room_from_file, load_ennemie_from_file, load_quetes_from_file};
 use crate::io::loader::*;
@@ -285,7 +287,7 @@ impl Game {
                 };
 
                 // Déplacement du personnage avec vérification
-                character.try_move(direction, &self.rooms);
+                character.try_move(direction, &mut self.rooms);
             }
         }
     }
