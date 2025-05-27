@@ -13,12 +13,18 @@
             "inventory": {
                 "capacity": 20,
                 "items": [
-                    { "item_id": 0, "quantity": 1 },
-                    { "item_id": 1, "quantity": 2 }
+                    {
+                        "item_id": 0,
+                        "quantity": 1
+                    },
+                    {
+                        "item_id": 1,
+                        "quantity": 2
+                    }
                 ]
             }
         },
-        "position": 1,
+        "position":0,
         "experience": 1,
         "level": 1,
         "money": 0,
@@ -46,5 +52,4 @@
         "money": 0,
         "quests": []
     }
-
 ]

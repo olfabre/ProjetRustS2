@@ -39,6 +39,7 @@ impl Game {
     /// Démarre la boucle principale du jeu
     pub fn run(&mut self) {
         if let Some(character) = self.characters.first_mut() {
+            println!("DEBUG: Position de départ du personnage = {}", character.position);
             loop {
                 let current_room = &self.rooms[character.position];
                 println!("__________________________________________________________________________________________");
@@ -61,7 +62,7 @@ impl Game {
                 if !current_room.enemies.is_empty() {
                     println!("⚔️ Ennemis présents ici :");
                     for ennemie_id in &current_room.enemies {
-                        // Recherche de l’ennemi correspondant dans la liste globale
+                        // Recherche de l'ennemi correspondant dans la liste globale
                         let ennemie = self.enemies.get(ennemie_id);
                         println!(
                             "    - {} (PV: {}, Force: {}, Intelligence: {})",
@@ -167,14 +168,14 @@ impl Game {
                         let ennemi_vaincu = Combat::fight(character, enemy_clone);
 
                         if ennemi_vaincu {
-                            // Si l’ennemi est vaincu, on le supprime de la salle actuelle
+                            // Si l'ennemi est vaincu, on le supprime de la salle actuelle
                             if let Some(room) = self.rooms.get_mut(character.position) {
                                 room.enemies.retain(|&id| id != enemy_id);
                             }
 
                             Character::track_enemy(enemy_id, character, &mut self.quetes, &mut self.dialogues);
 
-                            // Suppression de l’ennemi de la liste globale
+                            // Suppression de l'ennemi de la liste globale
                             // self.enemies.retain(|e| e.id() != enemy_id);
                         } else if character.health() == 0 {
                             // Si le joueur est mort, on peut afficher un message final et quitter le jeu
