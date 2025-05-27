@@ -13,6 +13,7 @@ use crate::models::entities::vivant::Vivant;
 pub struct Pnj {
     vivant: Vivant,
     pub role: String,
+    pub money: i32,
     pub dialogue_id: u32, // reference to dialogue
 }
 

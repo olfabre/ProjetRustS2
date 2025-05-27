@@ -7,6 +7,7 @@ use serde::de::Visitor;
 use crate::models::traits::descriptible::Descriptible;
 use crate::models::{entities::room::Room, entities::item::Item};
 use crate::models::dialogue::Dialogue;
+use crate::models::entities::Enemy::Enemy;
 use crate::models::entities::entity::Entity;
 use crate::models::entities::inventory::Inventory;
 use crate::models::entities::quete::Quete;
@@ -49,7 +50,7 @@ impl Character {
         if let Some(&next_room_id) = current_room.exits.get(direction) {
             // Recherche la salle cible par son id (et non par son index !)
             if let Some(next_room) = rooms.iter_mut().find(|r| r.id() == next_room_id as u32) {
-                println!("DEBUG: locked = {:?}", next_room.locked); // Affichage debug
+                // println!("DEBUG: locked = {:?}", next_room.locked); // Affichage debug
                 if next_room.locked.unwrap_or(true) {
                     // On tente d'ouvrir la porte (lancer de dés 421)
                     if next_room.tenter_ouverture() {
@@ -314,17 +315,38 @@ impl Character {
         items.iter().find(|i| i.id() == item_id)
     }
 
-    pub fn get_active_quests(&self, all_quests: &HashMap<u32, Quete>) -> Vec<String> {
+    pub fn get_active_quests(&self, all_quests: &HashMap<u32, Quete>, items: &Vec<Item>, enemies: &HashMap<u32, Enemy>) -> Vec<String> {
         // Create a vector to store the names of matching quests.
         let mut quest_titles: Vec<String> = vec![];
 
         // Iterate over each quest ID in the character's quests list.
         for &quest_id_from_char in &self.quests {
             // Find the quest in the all_quests list that matches the ID.
+            // Clone the name and push it to the quest_titles vector.
+            let mut descriptor = String::from("* ");
+
             if let Some(quest_found) = all_quests.get(&quest_id_from_char) {
-                // Clone the name and push it to the quest_titles vector.
-                quest_titles.push(quest_found.name().to_string());
+                // Clone the name and append it to descriptor
+                descriptor.push_str(&format!("{} - {}: ", quest_found.name(), quest_found.objectif_type));
+
+                if quest_found.objectif_type == "collecter" {
+                    let Some(item) = items.iter().find(|i| i.id() == quest_found.objectif.collecter.item_id) else { todo!() };
+
+                    descriptor.push_str(&format!("{} - {}",
+                                                 quest_found.objectif.collecter.target,
+                                                 item.name()
+                    ));
+                } else if quest_found.objectif_type == "tuer" {
+                    descriptor.push_str(&format!("{} - {}",
+                                                 quest_found.objectif.tuer.target,
+                                                 enemies.get(&quest_found.objectif.tuer.ennemi_id).unwrap().name()
+                    ));
+                }
+
             }
+
+            // Push the constructed string to the vector
+            quest_titles.push(descriptor);
         }
 
         // Return the collected quest titles.

@@ -18,23 +18,23 @@ pub struct Quete {
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Objectif {
-    tuer: Tuer,
-    pub(crate) collecter: Collecter,
-    visiter: Visiter,
+    pub tuer: Tuer,
+    pub collecter: Collecter,
+    pub visiter: Visiter,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Tuer {
-    ennemi_id: u32,
-    target: u32,
-    count: u32,
+    pub ennemi_id: u32,
+    pub target: u32,
+    pub count: u32,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Collecter {
-    item_id: u32,
-    target: u32,
-    count: u32,
+    pub item_id: u32,
+    pub target: u32,
+    pub count: u32,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]

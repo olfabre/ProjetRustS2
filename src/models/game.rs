@@ -7,6 +7,7 @@ use std::io::{stdin, Write};
 
 use crate::models::entities::quete::Quete;
 use std::collections::HashMap;
+use std::io;
 use log::log;
 use crate::models::tracker::Tracker;
 use crate::models::traits::combattant::CombatResult;
@@ -41,12 +42,17 @@ impl Game {
     /// Démarre la boucle principale du jeu
     pub fn run(&mut self) {
         if let Some(character) = self.characters.first_mut() {
-            println!("DEBUG: Position de départ du personnage = {}", character.position);
+            println!("Position de départ du personnage = {}", character.position);
             loop {
                 let current_room = &self.rooms[character.position];
+                // Pause execution, waiting for user input
+                println!("\n______________________________Appuyez sur Entrée pour continuer___________________________");
                 println!("__________________________________________________________________________________________");
-                println!("\n🌍 {} est actuellement dans : {}", character.name(), current_room.name());
-                println!("📍 {} : {}", current_room.elem.name(), current_room.elem.description());
+                io::stdout().flush().unwrap();  // Ensure the prompt is displayed before waiting
+                let _ = io::stdin().read_line(&mut String::new());
+                clear_console();
+                println!("\n🌍 {} est actuellement dans : ", character.name());
+                println!("   - {} : {}", current_room.elem.name(), current_room.elem.description());
 
                 // Affichage des objets trouvés dans la salle
                 if !current_room.items.is_empty() {
@@ -133,63 +139,12 @@ impl Game {
                 }
 
                 if input.starts_with("quêtes") {
-                    let quetes_found = character.get_active_quests(&self.quetes);
+                    let quetes_found = character.get_active_quests(&self.quetes, &self.items, &self.enemies);
                     quetes_found.iter().for_each(|quete| println!("{}", quete));
                     continue;
                 }
 
                 // Combattre un ennemi
-                /*if input.starts_with("combattre ") {
-                    let ennemi_nom = &input[10..].trim().to_lowercase();
-                    let current_room_id = character.position.clone();
-                    let current_room = self.rooms.iter()
-                        .find(|room| room.id() == current_room_id as u32)
-                        .expect("La salle actuelle n'a pas été trouvée.");
-
-                    // It might happen that the room contains more than one enemy with the same name,
-                    // so we need to check all enemies in the room
-                    let enemies: Vec<&Enemy> = current_room.enemies.iter()
-                        .filter_map(|enemies_id| self.enemies.get(enemies_id))
-                        .filter(|enemy| enemy.name().to_lowercase() == *ennemi_nom)
-                        .collect();
-
-
-                    /*
-                        get enemies from the current room
-                        if at least one enemy is found, start the combat
-
-                     */
-
-                    if enemies.len() > 0 {
-
-                        // Clone de l'ennemi pour pouvoir le manipuler sans bouger l'original (qui est dans self.ennemies)
-                        let enemy_clone = enemies[0].clone();
-                        let enemy_id = enemy_clone.id();
-
-                        // Lancement du combat et récupération du résultat (true si ennemi vaincu, false sinon)
-                        let ennemi_vaincu = Combat::fight(character, enemy_clone);
-
-                        if ennemi_vaincu {
-                            // Si l'ennemi est vaincu, on le supprime de la salle actuelle
-                            if let Some(room) = self.rooms.get_mut(character.position) {
-                                room.enemies.retain(|&id| id != enemy_id);
-                            }
-
-                            Character::track_enemy(enemy_id, character, &mut self.quetes, &mut self.dialogues);
-
-                            // Suppression de l'ennemi de la liste globale
-                            // self.enemies.retain(|e| e.id() != enemy_id);
-                        } else if character.health() == 0 {
-                            // Si le joueur est mort, on peut afficher un message final et quitter le jeu
-                            println!("☠️ Le héros est tombé au combat. Le donjon garde ses secrets... 😔");
-                            break; // Sort de la boucle principale -> fin du jeu
-                        }
-                    } else {
-                        println!("❌ Aucun ennemi nommé '{}' ici.", ennemi_nom);
-                    }
-                }
-*/
-
                 if input.starts_with("combattre ") {
                     let ennemi_nom = &input[10..].trim().to_lowercase();
                     let current_room_id = character.position.clone();
@@ -245,7 +200,8 @@ impl Game {
                                 if let Some(room) = self.rooms.get_mut(character.position) {
                                     room.enemies.retain(|&id| id != enemy_clone.vivant.id());
                                 }
-                                self.enemies.remove(&enemy_id);
+                                // La liste general, c'est juste une liste de references, il suffit de retirer l'ennemi de la salle
+                                // self.enemies.remove(&enemy_id);
 
                                 Character::track_enemy(enemy_id, character, &mut self.quetes, &mut self.dialogues);
                             }
@@ -292,11 +248,13 @@ impl Game {
         }
     }
 
-    fn clear_console() {
-        print!("\x1B[2J\x1B[1;1H"); // ANSI escape code to clear screen
-        std::io::stdout().flush().unwrap(); // Ensure it prints immediately
-    }
 
 
 
+
+}
+
+fn clear_console() {
+    print!("\x1B[2J\x1B[1;1H"); // ANSI escape code to clear screen
+    std::io::stdout().flush().unwrap(); // Ensure it prints immediately
 }

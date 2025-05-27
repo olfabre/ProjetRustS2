@@ -16,6 +16,7 @@
             }
         },
         "role": "guide",
+        "money": 1,
         "dialogue_id": 0
 
     },
@@ -36,6 +37,7 @@
             }
         },
         "role": "quete",
+        "money": 100,
         "dialogue_id": 1
 
     },
@@ -56,6 +58,7 @@
             }
         },
         "role": "guide",
+        "money": 1,
         "dialogue_id": 2
 
     },
@@ -76,6 +79,28 @@
             }
         },
         "role": "quete",
+        "money": 5,
         "dialogue_id": 5
+    },
+    {
+        "vivant": {
+            "entity": {
+                "id": 6,
+                "name": "Marchand des Iles Perdues",
+                "description": "Il vend des objets de basse qualité!"
+            },
+            "health": 70,
+            "strength": 8,
+            "intelligence": 20,
+            "defense": 10,
+            "inventory": {
+                "capacity": 20,
+                "items": [{"item_id": 8, "quantity": 2}, {"item_id": 15, "quantity": 1}, {"item_id": 22, "quantity": 1}]
+            }
+        },
+        "role": "marchand",
+        "money": 400,
+        "dialogue_id": 6
     }
+
 ]

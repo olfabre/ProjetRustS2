@@ -27,7 +27,7 @@
             "description": "Des armures rouillées alignées contre les murs semblent observer silencieusement."
         },
         "terrain_type": "château",
-        "locked": true,
+        "locked": false,
         "items": [
             3,
             4,
@@ -1282,7 +1282,7 @@
             "description": "Des enclumes rouillées et des outils éparpillés jonchent le sol."
         },
         "terrain_type": "Dalles craquelées",
-        "locked": false,
+        "locked": true,
         "items": [
             30,
             31,

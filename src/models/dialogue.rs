@@ -109,7 +109,10 @@ impl Dialogue {
                                          }
                                      }
 
-                                     character.add_argent(quete.recompense_argent);
+                                     if quete.recompense_argent > 0 {
+                                         println!("💰 Tu as gagné {} pièces d'argent.", quete.recompense_argent);
+                                         character.add_argent(quete.recompense_argent);
+                                     }
                                  }
                              }
                          }
