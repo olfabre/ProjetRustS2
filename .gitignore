@@ -20,3 +20,7 @@ Cargo.lock
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/.idea/
 .DS_Store
+.DS_Store
+.idea/modules.xml
+.DS_Store
+.idea/ProjetRustS2.iml

@@ -40,34 +40,30 @@ impl Descriptible for Character {
 impl Character {
 
     /// Tente de déplacer le joueur dans la direction donnée,
-    /// en vérifiant la direction et si la salle n’est pas verrouillée.
-    pub fn try_move(&mut self, direction: &str, rooms: &[Room]) {
+    /// en vérifiant la direction et si la salle n'est pas verrouillée.
+    pub fn try_move(&mut self, direction: &str, rooms: &mut [Room]) {
         // Récupère la salle actuelle à partir de la position du personnage
         let current_room = &rooms[self.position];
 
         // Vérifie si une sortie existe dans la direction demandée
         if let Some(&next_room_id) = current_room.exits.get(direction) {
-            // Récupère la salle vers laquelle on veut se déplacer
-            if let Some(next_room) = rooms.get(next_room_id) {
-                // Vérifie si la salle est verrouillée (locked = true)
-                if next_room.locked.unwrap_or(false) {
-                    // Si oui, empêche le déplacement et affiche un message d'information
-                    println!("🚪 La salle '{}' est verrouillée. Tu as besoin d'une clé ou d'une action spéciale pour entrer.", next_room.name());
+            // Recherche la salle cible par son id (et non par son index !)
+            if let Some(next_room) = rooms.iter_mut().find(|r| r.id() == next_room_id as u32) {
+                println!("DEBUG: locked = {:?}", next_room.locked); // Affichage debug
+                if next_room.locked.unwrap_or(true) {
+                    // On tente d'ouvrir la porte (lancer de dés 421)
+                    if next_room.tenter_ouverture() {
+                        self.position = next_room_id;
+                    }
+                    // Sinon, message déjà affiché par tenter_ouverture
                 } else {
                     // Sinon, met à jour la position du personnage vers la nouvelle salle
                     self.position = next_room_id;
-
-                    // Ça, c'est déja affiché sur le boucle, on doit pas le repeter
-                    // Affiche le nom et la description de la salle dans laquelle on vient d’entrer
-                    // println!("✅ {} est maintenant dans : {}", self.name(), next_room.name());
-                    // println!("📖 Description : {}", next_room.description());
                 }
             } else {
-                // Si la salle n’existe pas (ID invalide), affiche un message d’erreur
                 println!("❌ Salle inconnue.");
             }
         } else {
-            // Si la direction n’existe pas depuis cette salle, affiche un message d’erreur
             println!("❌ Direction invalide.");
         }
     }
@@ -372,7 +368,7 @@ impl Character {
 
             // ======== Tour de l'ennemi ========
             if esquive {
-                println!("🌀 Tu esquives l’attaque de {} !", ennemi.nom());
+                println!("🌀 Tu esquives l'attaque de {} !", ennemi.nom());
             } else {
                 let degats_ennemi = ennemi.degats_attaque();
                 println!("💥 {} attaque avec {} dégâts !", ennemi.nom(), degats_ennemi);
@@ -455,7 +451,7 @@ impl Character {
             if ennemi.est_vivant() {
                 let esquive = rand::thread_rng().gen_bool(0.1); // 10% de chance que le joueur esquive
                 if esquive {
-                    println!("🌀 Tu esquives l’attaque de {} !", ennemi.nom());
+                    println!("🌀 Tu esquives l'attaque de {} !", ennemi.nom());
                 } else {
                     let critique = rand::thread_rng().gen_bool(0.15); // 15% de critique ennemi
                     let mut degats = ennemi.degats_attaque().saturating_sub(self.protection_defense());
