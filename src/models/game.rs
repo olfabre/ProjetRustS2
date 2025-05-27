@@ -49,13 +49,10 @@ impl Game {
                 println!("\n🌍 {} est actuellement dans : {}", character.name(), current_room.name());
                 println!("📍 {} : {}", current_room.elem.name(), current_room.elem.description());
 
-                // Affichage de l'image associée à la salle
-                let image_filename = format!("{}.png", current_room.id());
-                let image_path = format!("images/{}", image_filename);
-                if Path::new(&image_path).exists() {
-                    let _ = std::process::Command::new("viu")
-                        .arg(&image_path)
-                        .status();
+                // Affichage de l'image ASCII art associée à la salle
+                let ascii_path = format!("images_ascii/{}.txt", current_room.id());
+                if let Ok(ascii_art) = std::fs::read_to_string(&ascii_path) {
+                    println!("{}", ascii_art);
                 }
 
                 // Affichage des objets trouvés dans la salle

@@ -62,7 +62,7 @@ impl Room{
         let mut des_tries = des.clone();
         des_tries.sort();
         if des_tries == vec![1, 2, 4] {
-            println!("✅ Bravo ! Tu as fait 421, la porte s'ouvre.");
+            println!("✅ Bravo ! Tu as fait 4-2-1, la porte s'ouvre.");
             self.locked = Some(false);
             true
         } else {
