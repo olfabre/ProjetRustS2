@@ -104,6 +104,7 @@ impl Game {
 
                 println!("\nOù veux-tu aller ? ( nord, sud, est, ouest, haut, bas, tunnel, quit )");
                 println!("Que veux-tu faire ? ( prendre <objet>, utiliser <objet>, parler <pnj>, combattre <ennemie> )");
+                println!("Que veux-tu voir ? ( quêtes, inventaire, stats )");
 
                 // Lecture de l'entrée utilisateur
                 let mut input = String::new();
@@ -124,7 +125,7 @@ impl Game {
 
                 //Utiliser les objets
                 if input.starts_with("utiliser ") {
-                    let objet_nom = &input[8..].trim();
+                    let objet_nom = &input[9..].trim();
                     character.utiliser_objet(objet_nom, &mut self.rooms, &self.items);
                     continue;
                 }
@@ -133,7 +134,7 @@ impl Game {
                 // Parler à un PNJ
                 if input.starts_with("parler ") {
                     let pnj_nom = &input[7..].trim();
-                    Pnj::parler_au_pnj(pnj_nom, character, &self.rooms, &self.pnjs,
+                    Pnj::parler_au_pnj(pnj_nom, character, &self.rooms, &mut self.pnjs,
                                        &mut self.dialogues, &mut self.quetes, &self.items);
                     continue;
                 }

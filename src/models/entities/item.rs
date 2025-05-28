@@ -13,7 +13,7 @@ pub struct Item {
     pub effect: String,
     pub usable: bool,
     pub weight: f32,
-    pub value: u32,
+    pub value: i32,
     pub stackable: bool,
     pub equippable: bool,
 }

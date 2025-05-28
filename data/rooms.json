@@ -12,7 +12,7 @@
             1,
             2
         ],
-        "pnjs": [],
+        "pnjs": [6],
         "enemies": [],
         "exits": {
             "Sud": 64,
@@ -124,7 +124,7 @@
         "enemies": [
             2
         ],
-        "pnjs": [],
+        "pnjs": [6],
         "exits": {
             "Nord": 4,
             "Ouest": 65

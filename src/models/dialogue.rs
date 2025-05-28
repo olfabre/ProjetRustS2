@@ -4,8 +4,10 @@ use std::io::stdin;
 
 use crate::models::entities::character::Character;
 use crate::models::entities::item::Item;
+use crate::models::entities::pnj::Pnj;
 use crate::models::entities::quete::Quete;
 use crate::models::tracker::Tracker;
+use crate::models::traits::money_manager::MoneyManager;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Dialogue {
@@ -30,7 +32,7 @@ pub struct DialogueOption {
 impl Dialogue {
     // Affiche un dialogue et permet au joueur de choisir une réponse
     pub fn afficher_dialogue(&mut self, character: &mut Character,
-                             quetes: &mut HashMap<u32,Quete>, items: &Vec<Item>) {
+                             quetes: &mut HashMap<u32,Quete>, items: &Vec<Item>, pnj: &mut Pnj) {
         if self.dialogue_steps.is_empty() {
             println!("Ce PNJ n'a rien à dire.");
         } else {
@@ -110,13 +112,16 @@ impl Dialogue {
                                      }
 
                                      if quete.recompense_argent > 0 {
-                                         println!("💰 Tu as gagné {} pièces d'argent.", quete.recompense_argent);
-                                         character.add_argent(quete.recompense_argent);
+                                         println!("🪙 Tu as gagné {} pièces d'money.", quete.recompense_argent);
+                                         character.add_money(quete.recompense_argent);
                                      }
                                  }
                              }
                          }
 
+                        if action.starts_with("merchant") && selected_option.réponse == "Commerce" {
+                            self.start_merchant(character, items, pnj);
+                        }
 
                         // Sortir de la boucle tôt
                         if selected_option.réponse.starts_with("Au revoir") ||
@@ -137,4 +142,79 @@ impl Dialogue {
             }
         }
     }
+
+    // 🏪 Merchant System Loop
+    pub fn start_merchant(&mut self, character: &mut Character, items: &Vec<Item>, pnj: &mut Pnj) {
+        loop {
+            println!("\n👤 {} (🪙 {})", character.name(), character.money);
+            println!("🛒 Marchand (🪙 {}) : \"Voici mes merchandises.\"", pnj.money);
+            let mut merchant_items = pnj.inventory_mut();
+
+            for (i, inventory_item) in merchant_items.items.iter().enumerate() {
+                let id = inventory_item.item_id;
+                if let Some(item) = items.iter().find(|i| i.id() == id) {
+                    println!("{}. {} - 🪙 {} - Qt: {}", i + 1, item.name(), item.value, inventory_item.quantity) ;
+                } else {
+                    println!("{}. Objet inconnu (ID: {})", i + 1, id);
+                }
+
+
+            }
+            println!("vendre <objet>  (dans votre inventaire)");
+            println!("quitter");
+            println!("\n➡ Tapez le numéro de l'objet à acheter, ou autre choix :");
+
+            let mut choix = String::new();
+            stdin().read_line(&mut choix).expect("Erreur de lecture");
+
+            if choix.trim().eq_ignore_ascii_case("quitter") {
+                println!("👋 Bon Affaire");
+                break; // Quit merchant loop
+            }
+
+            if let Ok(index) = choix.trim().parse::<usize>() {
+                if index > 0 && index <= merchant_items.items.len() {
+                    let inventory_item = &merchant_items.items[index - 1];
+                    let Some(item) = items.iter().find(|i| i.id() == inventory_item.item_id)
+                        else { todo!() };
+                    if character.money >= item.value {
+                        character.inventory_mut().add_item(item.id(), 1);
+                        character.remove_money(item.value);
+                        pnj.inventory_mut().remove_item(item.id(), 1);
+                        pnj.add_money(item.value);
+
+                        println!("🪙 Tu as acheté '{}'.", item.name());
+                    } else {
+                        println!("❌ Pas assez d'argent !");
+                    }
+                } else {
+                    println!("❌ Choix invalide !");
+                }
+            } else if choix.starts_with("vendre ") {
+                let objet_nom = &choix[9..].trim();
+                if let Some(item) = items.iter().find(|i| {
+                    i.name().eq_ignore_ascii_case(objet_nom) &&
+                        character.inventory_mut().items.iter().any(|(inv)| inv.item_id == i.id())
+                }) {
+
+                    if pnj.money >= item.value {
+                        character.inventory_mut().remove_item(item.id(), 1);
+                        character.add_money(item.value);
+                        pnj.inventory_mut().add_item(item.id(), 1);
+                        pnj.remove_money(item.value);
+                        println!("🪙 Tu as vendu '{}'.", item.name());
+                    } else {
+                        println!("❌ Tu n'as pas cet objet dans ton inventaire !");
+                    }
+                } else {
+                    println!("❌ Objet non trouvé dans ton inventaire !");
+                }
+
+            } else {
+                println!("❌ Entrée invalide !");
+            }
+        }
+    }
+
 }
+

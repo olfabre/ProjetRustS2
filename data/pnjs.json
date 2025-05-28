@@ -86,7 +86,7 @@
         "vivant": {
             "entity": {
                 "id": 6,
-                "name": "Marchand des Iles Perdues",
+                "name": "Marchand Perdu",
                 "description": "Il vend des objets de basse qualité!"
             },
             "health": 70,

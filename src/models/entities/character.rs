@@ -14,6 +14,7 @@ use crate::models::entities::quete::Quete;
 use crate::models::entities::vivant::Vivant;
 use crate::models::tracker::Tracker;
 use crate::models::traits::combattant::{CombatResult, Combattant};
+use crate::models::traits::money_manager::MoneyManager;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Character {
@@ -60,6 +61,7 @@ impl Character {
                 } else {
                     // Sinon, met à jour la position du personnage vers la nouvelle salle
                     self.position = next_room_id;
+                    println!("🏃 {} se déplace vers la salle : {}", self.name(), next_room.name());
                 }
             } else {
                 println!("❌ Salle inconnue.");
@@ -315,6 +317,18 @@ impl Character {
         items.iter().find(|i| i.id() == item_id)
     }
 
+    // pub fn add_money(&mut self, amount: i32) {
+    //     self.money += amount;
+    // }
+    //
+    // pub fn remove_money(&mut self, amount: i32) {
+    //     if amount <= self.money {
+    //         self.money -= amount;
+    //     } else {
+    //         println!("❌ Pas assez d'argent !");
+    //     }
+    // }
+
     pub fn get_active_quests(&self, all_quests: &HashMap<u32, Quete>, items: &Vec<Item>, enemies: &HashMap<u32, Enemy>) -> Vec<String> {
         // Create a vector to store the names of matching quests.
         let mut quest_titles: Vec<String> = vec![];
@@ -534,6 +548,11 @@ impl Combattant for Character {
         self.defense().max(0) as u32
     }
 
+}
 
+impl MoneyManager for Character {
 
+    fn money_mut(&mut self) -> &mut i32 {
+        &mut self.money
+    }
 }
