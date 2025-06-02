@@ -12,7 +12,9 @@
             1,
             2
         ],
-        "pnjs": [6],
+        "pnjs": [
+            6
+        ],
         "enemies": [],
         "exits": {
             "Sud": 64,
@@ -49,7 +51,7 @@
             "description": "Un long couloir éclairé par des torches murales vacillantes."
         },
         "terrain_type": "château",
-        "locked": true,
+        "locked": false,
         "items": [
             6,
             7,
@@ -124,7 +126,9 @@
         "enemies": [
             2
         ],
-        "pnjs": [6],
+        "pnjs": [
+            6
+        ],
         "exits": {
             "Nord": 4,
             "Ouest": 65
@@ -182,7 +186,7 @@
             "description": "Les moindres bruits résonnent étrangement dans ce couloir sombre."
         },
         "terrain_type": "château",
-        "locked": true,
+        "locked": false,
         "items": [
             23,
             24,
@@ -282,7 +286,7 @@
             "description": "La cuisine du donjon, désormais couverte de poussière et d'ustensiles rouillés."
         },
         "terrain_type": "château",
-        "locked": true,
+        "locked": false,
         "items": [
             0,
             3,
@@ -607,7 +611,7 @@
             "description": "Une pièce remplie de coffres fermés à clé. Une forte odeur de métal y règne."
         },
         "terrain_type": "Pierre froide",
-        "locked": true,
+        "locked": false,
         "items": [
             14,
             15,
@@ -1057,7 +1061,7 @@
             "description": "Une large pièce avec des statues imposantes représentant des guerriers en armure. L'air semble chargé d'une présence invisible."
         },
         "terrain_type": "pierre sculptée",
-        "locked": true,
+        "locked": false,
         "items": [
             37,
             38,
@@ -1261,7 +1265,7 @@
             "description": "Un escalier en pierre à moitié impraticable descend dans l'obscurité, une faible brise glaciale s'en échappe."
         },
         "terrain_type": "Escalier de pierre",
-        "locked": true,
+        "locked": false,
         "items": [
             27,
             28,
@@ -1282,7 +1286,7 @@
             "description": "Des enclumes rouillées et des outils éparpillés jonchent le sol."
         },
         "terrain_type": "Dalles craquelées",
-        "locked": true,
+        "locked": false,
         "items": [
             30,
             31,
@@ -1465,7 +1469,7 @@
             "description": "Une cellule humide avec une odeur de pourriture."
         },
         "terrain_type": "Sol boueux",
-        "locked": true,
+        "locked": false,
         "items": [
             19,
             20,
@@ -1585,7 +1589,7 @@
             "description": "Au centre trône un immense pilier brisé, entouré de gravats et de signes mystérieux."
         },
         "terrain_type": "Rocailleux et poussiéreux",
-        "locked": true,
+        "locked": false,
         "items": [
             37,
             38,
@@ -1747,7 +1751,7 @@
             "description": "Des cendres noires recouvrent le sol. On distingue à peine des silhouettes gravées sur les murs."
         },
         "terrain_type": "Sombre et cendreux",
-        "locked": true,
+        "locked": false,
         "items": [
             21,
             22,
@@ -2072,7 +2076,7 @@
             "description": "Une salle circulaire avec des symboles gravés sur le sol."
         },
         "terrain_type": "Pierres anciennes",
-        "locked": true,
+        "locked": false,
         "items": [
             29,
             30,
@@ -2234,7 +2238,7 @@
             "description": "Des étagères poussiéreuses abritent d'anciens grimoires et parchemins mystérieux. Un parfum de vieux papier et de cire flotte dans l'air."
         },
         "terrain_type": "Bibliothèque",
-        "locked": true,
+        "locked": false,
         "items": [
             39,
             0,
