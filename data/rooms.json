@@ -49,7 +49,7 @@
             "description": "Un long couloir éclairé par des torches murales vacillantes."
         },
         "terrain_type": "château",
-        "locked": false,
+        "locked": true,
         "items": [
             6,
             7,

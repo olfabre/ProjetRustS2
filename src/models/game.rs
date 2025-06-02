@@ -1,4 +1,6 @@
 use rand::Rng;
+use std::thread;
+use std::time::Duration;
 
 use crate::models::{entities::character::Character, entities::room::Room, entities::item::Item, entities::pnj::Pnj, dialogue::Dialogue, entities::Enemy::Enemy};
 // use crate::io::loader::{load_characters_from_file, load_dialogues_from_file, load_items_from_file, load_pnjs_from_file, load_room_from_file, load_ennemie_from_file, load_quetes_from_file};
@@ -11,6 +13,7 @@ use std::io;
 use log::log;
 use crate::models::tracker::Tracker;
 use crate::models::traits::combattant::CombatResult;
+use std::process::Command;
 
 pub struct Game {
     rooms: Vec<Room>,
@@ -42,15 +45,80 @@ impl Game {
     /// Démarre la boucle principale du jeu
     pub fn run(&mut self) {
         if let Some(character) = self.characters.first_mut() {
-            println!("Position de départ du personnage = {}", character.position);
+            // println!("Position de départ du personnage = {}", character.position);
+            let mut last_room = character.position;
+            
+            // Afficher l'image de la salle de départ
+            // println!("\nAffichage de l'image de la salle de départ...");
+            let current_room = &self.rooms[character.position];
+            let room_id = current_room.id();
+            
+            // Obtenir le chemin absolu du dossier images
+            let current_dir = std::env::current_dir().expect("Impossible d'obtenir le répertoire courant");
+            let images_dir = current_dir.join("images");
+            let image_path = images_dir.join(format!("{}.png", room_id));
+            // println!("Chemin complet de l'image recherchée : {}", image_path.display());
+            
+            if image_path.exists() {
+                // println!("Image trouvée : {}", image_path.display());
+                let output = Command::new("viu")
+                    .arg("-t")  // Afficher dans le terminal
+                    .arg(image_path.to_str().unwrap())
+                    .spawn();  // Utiliser spawn() au lieu de output()
+                
+                match output {
+                    Ok(_) => (), // println!("Image affichée avec succès"),
+                    Err(e) => println!("Erreur lors de l'affichage de l'image : {}\nDétails : {:?}", e, e),
+                }
+            } else {
+                println!("Aucune image trouvée pour la salle {} à {}", room_id, image_path.display());
+            }
+
             loop {
                 let current_room = &self.rooms[character.position];
+                let room_id = current_room.id();
+                // println!("DEBUG - last_room: {}, current position: {}", last_room, character.position);
+                
                 // Pause execution, waiting for user input
                 println!("\n______________________________Appuyez sur Entrée pour continuer___________________________");
                 println!("__________________________________________________________________________________________");
                 io::stdout().flush().unwrap();  // Ensure the prompt is displayed before waiting
                 let _ = io::stdin().read_line(&mut String::new());
-                clear_console();
+                // clear_console();  // Commenté pour tester l'affichage des images
+
+                // Affiche les directions disponibles
+                println!("🚪 Sorties disponibles :");
+                for direction in current_room.exits.keys() {
+                    println!("   - {}", direction);
+                }
+
+                // Afficher l'image uniquement si on change de salle
+                if last_room != character.position {
+                    // println!("\nAffichage de l'image de la salle...");
+                    
+                    // Obtenir le chemin absolu du dossier images
+                    let current_dir = std::env::current_dir().expect("Impossible d'obtenir le répertoire courant");
+                    let images_dir = current_dir.join("images");
+                    let image_path = images_dir.join(format!("{}.png", room_id));
+                    // println!("Chemin complet de l'image recherchée : {}", image_path.display());
+                    
+                    if image_path.exists() {
+                        // println!("Image trouvée : {}", image_path.display());
+                        let output = Command::new("viu")
+                            .arg("-t")  // Afficher dans le terminal
+                            .arg(image_path.to_str().unwrap())
+                            .spawn();  // Utiliser spawn() au lieu de output()
+                        
+                        match output {
+                            Ok(_) => (), // println!("Image affichée avec succès"),
+                            Err(e) => println!("Erreur lors de l'affichage de l'image : {}\nDétails : {:?}", e, e),
+                        }
+                    } else {
+                        println!("Aucune image trouvée pour la salle {} à {}", room_id, image_path.display());
+                    }
+                    last_room = character.position;
+                }
+
                 println!("\n🌍 {} est actuellement dans : ", character.name());
                 println!("   - {} : {}", current_room.elem.name(), current_room.elem.description());
 
@@ -70,19 +138,15 @@ impl Game {
                 if !current_room.enemies.is_empty() {
                     println!("⚔️ Ennemis présents ici :");
                     for ennemie_id in &current_room.enemies {
-                        // Recherche de l'ennemi correspondant dans la liste globale
                         let ennemie = self.enemies.get(ennemie_id);
                         println!(
                             "    - {} (PV: {}, Force: {}, Intelligence: {})",
                             ennemie.unwrap().name(), ennemie.unwrap().health(), ennemie.unwrap().strength(), ennemie.unwrap().intelligence()
                         );
-
                     }
                 } else {
-                    // Aucun ennemi trouvé dans cette salle
                     println!("⚔️ Aucun ennemi présent ici.");
                 }
-
 
                 // Affichage des PNJ présents dans la salle
                 if !current_room.pnjs.is_empty() {
@@ -94,12 +158,6 @@ impl Game {
                     }
                 } else {
                     println!("🧑 Aucun personnage ici.");
-                }
-
-                // Affiche les directions disponibles
-                println!("🚪 Sorties disponibles :");
-                for direction in current_room.exits.keys() {
-                    println!("   - {}", direction);
                 }
 
                 println!("\nOù veux-tu aller ? ( nord, sud, est, ouest, haut, bas, tunnel, quit )");
@@ -129,7 +187,6 @@ impl Game {
                     character.utiliser_objet(objet_nom, &mut self.rooms, &self.items);
                     continue;
                 }
-
 
                 // Parler à un PNJ
                 if input.starts_with("parler ") {
@@ -161,7 +218,6 @@ impl Game {
                         .collect();
 
                     if enemies.len() > 0 {
-
                         // Clone de l'ennemi pour pouvoir le manipuler sans bouger l'original (qui est dans self.ennemies)
                         let mut enemy_clone = enemies[0].clone();
                         let enemy_id = enemy_clone.id();
@@ -201,8 +257,6 @@ impl Game {
                                 if let Some(room) = self.rooms.get_mut(character.position) {
                                     room.enemies.retain(|&id| id != enemy_clone.vivant.id());
                                 }
-                                // La liste general, c'est juste une liste de references, il suffit de retirer l'ennemi de la salle
-                                // self.enemies.remove(&enemy_id);
 
                                 Character::track_enemy(enemy_id, character, &mut self.quetes, &mut self.dialogues);
                             }
@@ -217,18 +271,10 @@ impl Game {
                             }
                             _ => {}
                         }
-
-
                     } else {
                         println!("❌ Aucun ennemi nommé '{}' ici.", ennemi_nom);
                     }
                 }
-
-
-
-
-
-                // Character::track_enemy(enemy_id, character, &mut self.quetes, &mut self.dialogues);
 
                 // Traduire les directions anglaises vers les directions du fichier JSON
                 let direction = match input.as_str() {
@@ -248,14 +294,9 @@ impl Game {
             }
         }
     }
-
-
-
-
-
 }
 
-fn clear_console() {
-    print!("\x1B[2J\x1B[1;1H"); // ANSI escape code to clear screen
-    std::io::stdout().flush().unwrap(); // Ensure it prints immediately
-}
+// fn clear_console() {
+//     print!("\x1B[2J\x1B[1;1H"); // ANSI escape code to clear screen
+//     std::io::stdout().flush().unwrap(); // Ensure it prints immediately
+// }
