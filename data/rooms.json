@@ -49,7 +49,7 @@
             "description": "Un long couloir éclairé par des torches murales vacillantes."
         },
         "terrain_type": "château",
-        "locked": true,
+        "locked": false,
         "items": [
             6,
             7,
@@ -1302,7 +1302,7 @@
             "description": "Une pièce richement décorée, bien que poussiéreuse."
         },
         "terrain_type": "Tapis usés",
-        "locked": false,
+        "locked": true,
         "items": [
             33,
             34,

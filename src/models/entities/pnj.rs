@@ -19,8 +19,8 @@ pub struct Pnj {
 }
 
 impl Pnj {
-    /// Permet à un PNJ de parler en utilisant `dialogue.rs`
 
+    // Permet à un PNJ de parler en utilisant `dialogue.rs`
     pub fn parler_au_pnj(pnj_nom: &str, character: &mut Character,
                          rooms: &[Room], pnjs: &mut [Pnj],
                          dialogues: &mut [Dialogue],
@@ -40,7 +40,6 @@ impl Pnj {
             println!("❌ Il n'y a pas de {} ici.", pnj_nom);
         }
     }
-
 
     pub fn id(&self) -> u32 {
         self.vivant.id()

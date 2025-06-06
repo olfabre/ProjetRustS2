@@ -6,8 +6,7 @@ use crate::models::entities::entity::Entity;
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Quete {
     entity: Entity,
-    // pub statu: String, // disponible, accepté, terminé, rendu
-    pub dialog_rendu_id: u32, // reference to dialogue, can belong to a different pnj other than the quest giver
+    pub dialogue_id: u32,
     pub objectif_type: String,
     pub objectif: Objectif,
     pub recompense_items: Vec<u32>,
