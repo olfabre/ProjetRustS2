@@ -21,7 +21,7 @@ pub trait Tracker {
                     if quest.is_item_count_reached() { // Vérifiez si le nombre d'éléments requis a été atteint
 
                         // Mettre à jour le dialogue correspondant pour refléter l'état d'achèvement de la quête
-                        Self::update_dialogues(quest.dialogue_id, dialogues);
+                        Self::update_dialogues(quest.dialog_rendu_id, dialogues);
 
                         // Notifier le joueur que la quête est terminée
                         println!("✅ Quête: {} est complete.", quest.name());
@@ -51,7 +51,7 @@ pub trait Tracker {
                     if quest.is_ennemi_count_reached() { // Check if enough enemies have been defeated
 
                         // Mettre à jour le dialogue pour l'état d'achèvement de la quête
-                        Self::update_dialogues(quest.dialogue_id, dialogues);
+                        Self::update_dialogues(quest.dialog_rendu_id, dialogues);
 
                         // Notifier le joueur que la quête est terminée
                         println!("✅ Quête: {} est complete.", quest.name());
