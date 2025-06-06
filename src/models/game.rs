@@ -103,32 +103,20 @@ impl Game {
             loop {
                 let current_room = &self.rooms[character.position];
                 let room_id = current_room.id();
-
-                // Pause execution, waiting for user input
-                println!("\n______________________________Appuyez sur Entrée pour continuer___________________________");
+                
+                println!("\n__________________________________________________________________________________________");
                 println!("__________________________________________________________________________________________");
-                io::stdout().flush().unwrap(); // Ensure the prompt is displayed before waiting
-                let _ = io::stdin().read_line(&mut String::new());
-
-                // Affiche les directions disponibles
-                println!("🚪 Sorties disponibles :");
-                for direction in current_room.exits.keys() {
-                    println!("   - {}", direction);
-                }
 
                 // Afficher l'image uniquement si on change de salle
                 if last_room != character.position {
-                    // println!("\nAffichage de l'image de la salle...");
 
                     // Obtenir le chemin absolu du dossier images
                     let current_dir = std::env::current_dir()
                         .expect("Impossible d'obtenir le répertoire courant");
                     let images_dir = current_dir.join("images");
                     let image_path = images_dir.join(format!("{}.png", room_id));
-                    // println!("Chemin complet de l'image recherchée : {}", image_path.display());
 
                     if image_path.exists() {
-                        // println!("Image trouvée : {}", image_path.display());
                         let output = Command::new("viu")
                             .arg("-t") // Afficher dans le terminal
                             .arg(image_path.to_str().unwrap())
@@ -203,6 +191,12 @@ impl Game {
                     }
                 } else {
                     println!("🧑 Aucun personnage ici.");
+                }
+
+                // Affiche les directions disponibles
+                println!("🚪 Sorties disponibles :");
+                for direction in current_room.exits.keys() {
+                    println!("   - {}", direction);
                 }
 
                 // Affiche les options disponibles pour le joueur
