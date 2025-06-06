@@ -6,7 +6,7 @@ use crate::models::entities::entity::Entity;
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Quete {
     entity: Entity,
-    pub dialogue_id: u32,
+    pub dialog_rendu_id: u32,
     pub objectif_type: String,
     pub objectif: Objectif,
     pub recompense_items: Vec<u32>,

@@ -5,7 +5,7 @@
       "name": "Aventuriers Disparus",
       "description": "Trouvez ce qui s'est passé."
     },
-    "dialogue_id": 1,
+    "dialog_rendu_id": 1,
     "objectif_type": "collecter",
     "objectif": {
       "tuer": { "ennemi_id": 1, "target": 0, "count": 0 },
@@ -22,7 +22,7 @@
       "name": "Chevalière de Davrik",
       "description": "Sans valeur pour vous, mais un trésor pour quelqu'un d'autre."
     },
-    "dialogue_id": 5,
+    "dialog_rendu_id": 5,
     "objectif_type": "tuer",
     "objectif": {
       "tuer": { "ennemi_id": 2, "target": 1, "count": 0 },
