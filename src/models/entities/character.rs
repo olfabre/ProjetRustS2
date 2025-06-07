@@ -455,8 +455,6 @@ impl Character {
         }
     }
 
-
-
 }
 
 impl Tracker for Character {
