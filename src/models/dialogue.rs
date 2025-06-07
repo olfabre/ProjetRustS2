@@ -9,7 +9,7 @@ use crate::models::entities::item::Item;
 use crate::models::entities::pnj::Pnj;
 use crate::models::entities::quete::Quete;
 use crate::models::traits::money_manager::MoneyManager;
-
+use crate::models::traits::quete_manager::QueteManager;
 // === Structure du dialogue ===
 // Représente une conversation interactive avec un PNJ (PNJ)
 
@@ -208,7 +208,7 @@ impl Dialogue {
                 let objet_nom = &choix[7..].trim();
                 if let Some(item) = items.iter().find(|i| {
                     i.name().eq_ignore_ascii_case(objet_nom) &&
-                        character.inventory_mut().items.iter().any(|(inv)| inv.item_id == i.id())
+                        character.inventory_mut().items.iter().any(|inv| inv.item_id == i.id())
                 }) {
                     if pnj.money >= item.value {
                         character.inventory_mut().remove_item(item.id(), 1);

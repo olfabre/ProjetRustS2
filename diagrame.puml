@@ -1,63 +1,78 @@
 @startuml
 
-entity "Personnage" as Pers {
-  * id : int
-  * nom : string
-  * santé : int
-  * force : int
-  * agilité : int
-  * position : int
-  * experience : int
-}
-
-entity "Salle" as Room {
-  * id : int
-  * nom : string
-  * description : string
-  * terrain_type : string
-  * locked : bool
-}
-
-entity "Objet" as Obj {
-  * id : int
-  * nom : string
-  * type : string
-  * effet : string
-  * utilisable : bool
-}
-
-entity "Ennemi" as En {
-  * id : int
-  * nom : string
-  * santé : int
-  * force : int
-  * agilité : int
-  * salle_id : int
-}
-
-entity "PNJ" as Pnj {
-  * id : int
-  * nom : string
-  * dialogues : string
-  * salle_id : int
-}
-entity Quete {
+struct Entity {
   +id : u32
-  +titre : String
+  +name : String
   +description : String
-  +accomplie : bool
 }
 
+struct Item {
+  +entity: Entity
+  +effect : String
+  +usable: bool
+  +weight: f32
+  +value: i32
+  +stackable: bool
+  +equippable: bool
+}
 
+struct Vivant {
 
-' Associations
-Pers -- Room : explore
-Pers -- Obj : possède, utilise
-Pers -- En : combat
-Pers -- Pnj : parle
-Pers ||--o{ Quete : suit
-Room -- Obj : contient
-Room -- En : héberge
-Room -- Pnj : héberge
+  +entity: Entity
+  +health: u32
+  +strength: u32
+  +intelligence: u32
+  +defense: u32
+  +inventory: Inventory
+}
+
+struct Character {
+  +vivant: Vivant
+  +position: usize
+  +level: u32
+  +experience: u32
+  +money: u32
+  +quests: Vec<u32>
+}
+
+struct Pnj {
+  +vivant: Vivant
+  +role: String
+  +money: u32
+  +Dialogue: String
+}
+
+struct Enemy {
+  +vivant: Vivant
+  +loot: Vec<Item>
+}
+
+Entity -d-> Item
+Entity -d-> Vivant
+Vivant --> Pnj
+Vivant --> Enemy
+Vivant --> Character
+Entity -L> Room
+Entity -R> Quete
+
+struct Dialogue {
+  +dialogue_id: u32
+  +dialogue_steps: Vec<DialogueStep>
+}
+
+struct DialogueStep {
+  +action
+  +active: bool
+  +question: String
+  +options: Vec<DialogueOption>
+}
+
+struct DialogueOption {
+  +réponse: String
+  +réaction: String
+}
+
+Dialogue -d-> DialogueStep
+DialogueStep -d-> DialogueOption
 
 @enduml

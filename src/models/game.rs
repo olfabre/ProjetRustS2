@@ -16,6 +16,7 @@ use crate::models::traits::combattant::CombatResult;
 use std::collections::HashMap;
 use std::io;
 use std::process::Command;
+use crate::models::traits::quete_manager::QueteManager;
 
 pub struct Game {
     rooms: Vec<Room>,                          // Liste des salles du jeu
@@ -103,9 +104,12 @@ impl Game {
             loop {
                 let current_room = &self.rooms[character.position];
                 let room_id = current_room.id();
-                
+
                 println!("\n__________________________________________________________________________________________");
                 println!("__________________________________________________________________________________________");
+                io::stdout().flush().unwrap(); // Ensure the prompt is displayed before waiting
+                let _ = io::stdin().read_line(&mut String::new());
+                clear_console();
 
                 // Afficher l'image uniquement si on change de salle
                 if last_room != character.position {
@@ -384,6 +388,12 @@ impl Game {
                 character.try_move(direction, &mut self.rooms);
             }
         }
+
+        fn clear_console() {
+            print!("\x1B[2J\x1B[1;1H"); // ANSI escape code to clear screen
+            std::io::stdout().flush().unwrap(); // Ensure it prints immediately
+        }
+
     }
 }
 

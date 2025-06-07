@@ -1,3 +1,5 @@
+use crate::models::entities::character::Character;
+use crate::models::entities::pnj::Pnj;
 
 pub trait MoneyManager {
 
@@ -13,5 +15,17 @@ pub trait MoneyManager {
         } else {
             println!("❌ Pas assez d'argent !");
         }
+    }
+}
+
+impl MoneyManager for Character {
+    fn money_mut(&mut self) -> &mut i32 {
+        &mut self.money
+    }
+}
+
+impl MoneyManager for Pnj {
+    fn money_mut(&mut self) -> &mut i32 {
+        &mut self.money
     }
 }

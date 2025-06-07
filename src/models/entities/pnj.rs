@@ -59,9 +59,3 @@ impl Pnj {
 
 }
 
-impl MoneyManager for Pnj {
-
-    fn money_mut(&mut self) -> &mut i32 {
-        &mut self.money
-    }
-}

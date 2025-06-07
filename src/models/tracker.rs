@@ -80,3 +80,6 @@ pub trait Tracker {
     }
 }
 
+impl Tracker for Character {
+
+}
