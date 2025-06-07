@@ -21,7 +21,7 @@ pub trait Tracker {
                     if quest.is_item_count_reached() { // Vérifiez si le nombre d'éléments requis a été atteint
 
                         // Mettre à jour le dialogue correspondant pour refléter l'état d'achèvement de la quête
-                        Self::update_dialogues(quest.dialog_rendu_id, dialogues);
+                        Self::update_dialogues(quest.dialogue_rendu_id, dialogues);
 
                         // Notifier le joueur que la quête est terminée
                         println!("✅ Quête: {} est complete.", quest.name());
@@ -51,7 +51,30 @@ pub trait Tracker {
                     if quest.is_ennemi_count_reached() { // Check if enough enemies have been defeated
 
                         // Mettre à jour le dialogue pour l'état d'achèvement de la quête
-                        Self::update_dialogues(quest.dialog_rendu_id, dialogues);
+                        Self::update_dialogues(quest.dialogue_rendu_id, dialogues);
+
+                        // Notifier le joueur que la quête est terminée
+                        println!("✅ Quête: {} est complete.", quest.name());
+                        println!("Retournez voir le donneur de quête pour récupérer votre prix");
+
+                    }
+                }
+            }
+        }
+    }
+
+    fn track_visit(room_id: u32,
+                   joueur: &mut Character,
+                   quetes: &mut HashMap<u32, Quete>,
+                   dialogues: &mut Vec<Dialogue>) {
+        for quest_id in joueur.quests() {
+            if let Some(quest) = quetes.get_mut(&quest_id) { // Accéder à la quête en utilisant son ID
+                if quest.room_id() == room_id {
+                    if !quest.is_visited() {
+                        quest.set_visited();
+
+                        // Mettre à jour le dialogue pour l'état d'achèvement de la quête
+                        Self::update_dialogues(quest.dialogue_rendu_id, dialogues);
 
                         // Notifier le joueur que la quête est terminée
                         println!("✅ Quête: {} est complete.", quest.name());

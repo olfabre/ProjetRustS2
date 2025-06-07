@@ -12,7 +12,7 @@
             1,
             2
         ],
-        "pnjs": [6],
+        "pnjs": [0],
         "enemies": [],
         "exits": {
             "Sud": 64,
@@ -34,7 +34,7 @@
             5
         ],
         "pnjs": [
-            0
+            6
         ],
         "enemies": [],
         "exits": {
@@ -182,7 +182,7 @@
             "description": "Les moindres bruits résonnent étrangement dans ce couloir sombre."
         },
         "terrain_type": "château",
-        "locked": true,
+        "locked": false,
         "items": [
             23,
             24,
@@ -228,7 +228,7 @@
             30,
             31
         ],
-        "pnjs": [],
+        "pnjs": [10],
         "enemies": [],
         "exits": {
             "Nord": 9,

@@ -84,6 +84,17 @@ impl Dialogue {
                         let selected_option = &options[index - 1];
                         println!("💬 PNJ : \"{}\"", selected_option.réaction);
 
+                        // === Ajouter quete automatiquement ===
+                        if action.starts_with("ajouterQuete") {
+                            if let Some(id_str) = action.split(':').nth(1) {
+                                if let Ok(id) = id_str.parse::<u32>() {
+                                    character.ajouter_quete(id);
+                                    println!("🎯 Quête ajoutée : {}!", quetes.get(&id).unwrap().name());
+                                    self.dialogue_steps[current_index].active = false;
+                                }
+                            }
+                        }
+
                         // === Accepter quete ===
                         if action.starts_with("accepteQuete") && selected_option.réponse == "Accepter Quête" {
                             if let Some(id_str) = action.split(':').nth(1) {
@@ -119,7 +130,7 @@ impl Dialogue {
 
                                     // === Distribuer la récompense en argent ===
                                     if quete.recompense_argent > 0 {
-                                        println!("🪙 Tu as gagné {} pièces d'money.", quete.recompense_argent);
+                                        println!("🪙 Tu as gagné {} pièces d'argent.", quete.recompense_argent);
                                         character.add_money(quete.recompense_argent);
                                     }
                                 }

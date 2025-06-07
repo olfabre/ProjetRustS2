@@ -101,6 +101,26 @@
         "role": "marchand",
         "money": 400,
         "dialogue_id": 6
+    },
+    {
+        "vivant": {
+            "entity": {
+                "id": 10,
+                "name": "La Vieille oublieuse",
+                "description": "Elle est juste là, immobile !"
+            },
+            "health": 70,
+            "strength": 24,
+            "intelligence": 20,
+            "defense": 13,
+            "inventory": {
+                "capacity": 20,
+                "items": [{"item_id": 11, "quantity": 1}, {"item_id": 12, "quantity": 1}]
+            }
+        },
+        "role": "quete",
+        "money": 30,
+        "dialogue_id": 10
     }
 
 ]

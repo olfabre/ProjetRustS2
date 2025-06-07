@@ -386,6 +386,9 @@ impl Game {
 
                 // Tentative de déplacement dans la direction donnée
                 character.try_move(direction, &mut self.rooms);
+                if !direction.is_empty() {
+                    Character::track_visit(character.position as u32, character, &mut self.quetes, &mut self.dialogues);
+                }
             }
         }
 

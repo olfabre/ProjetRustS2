@@ -8,10 +8,18 @@
                 "question": "Bienvenue aventurier ! Attention aux dangers du donjon.",
                 "options": [
                     { "réponse": "Où suis-je ?", "réaction": "Tu es à l'entrée du donjon, un lieu rempli de mystères et de dangers." },
-                    { "réponse": "As-tu un conseil ?", "réaction": "Fais attention aux pièges et collecte des objets utiles." },
-                    { "réponse": "Au revoir.", "réaction": "Bonne chance dans ton aventure !" }
+                    { "réponse": "As-tu un conseil ?", "réaction": "Fais attention aux pièges et collecte des objets utiles." }
                 ]
                 
+            },
+            {
+                "action" : "ajouterQuete:3",
+                "active" : true,
+                "question": "Vous traverserez de nombreux dangers et ferez de nombreuses découvertes. Votre premier objectif \nest d'atteindre le passage droit.",
+                "options": [
+                    { "réponse": "Je pense pas avoir d'option!", "réaction": "Bonne Chance dans vos aventures, mon ami!" }
+
+                ]
             }
         ]
     },
@@ -19,7 +27,7 @@
         "dialogue_id": 1,
         "dialogue_steps": [
             {
-                "action" : "leadsTo:1",
+                "action" : "",
                 "active" : true,
                 "question" : "Cela me brise le coeur de me séparer de cette propriété, mais je sens que le moment est venu pour moi de redonner quelque chose aux gens.",
                 "options" : [
@@ -51,7 +59,7 @@
         "dialogue_id": 2,
         "dialogue_steps": [
             {
-                "action" : "leadsTo:1",
+                "action" : "",
                 "active" : true,
                 "question": "Réponds à mon énigme pour recevoir une récompense. Que veux-tu faire ?",
                 "options": [
@@ -106,7 +114,7 @@
             {
                 "action" : "",
                 "active" : true,
-                "question": "Je ne peux signer de précieux documents commerciaux sans cette chevalière, volée par des bandits taboréens. En toute hâte, ils se sont rendus à la porte voisine et ont découvert leur destin.",
+                "question": "Je peux pas signer les documents commerciaux sans cette chevalière, volée par des bandits taboréens. En toute hâte, ils se sont rendus à la porte voisine et ont découvert leur destin.",
                 "options": [
                     { "réponse": "C'est dommage.", "réaction": "Si seulement quelqu'un pouvait m'aider" },
                     { "réponse": "Au revoir", "réaction": "Le sage te regarde, mais ne répond pas..." }
@@ -144,6 +152,31 @@
                     { "réponse": "Au revoir", "réaction": "Au revoir!" }
                 ]
             }
+        ]
+    },
+
+    {
+        "dialogue_id": 10,
+        "dialogue_steps": [
+            {
+                "action" : "",
+                "active" : true,
+                "question": "Qui êtes vous?",
+                "options": [
+                    { "réponse": "Je suis un aventurier! On m'a dit de venir ici!", "réaction": "Ah... oui, oui !" },
+                    { "réponse": "Au revoir", "réaction": "Au revoir!" }
+                ]
+            },
+            {
+                "action" : "rendreQuete:3",
+                "active" : true,
+                "question": "Je pense que tu es prêt à affronter de plus grands défis .",
+                "options": [
+                    { "réponse": "Completer Quête", "réaction": "Au bout de ce couloir qui descend vers le sud, tu trouveras ce que tu cherches ." }
+
+                ]
+            }
+
         ]
     }
 ]

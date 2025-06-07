@@ -6,7 +6,7 @@ use crate::models::entities::entity::Entity;
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Quete {
     entity: Entity,
-    pub dialog_rendu_id: u32,
+    pub dialogue_rendu_id: u32,
     pub objectif_type: String,
     pub objectif: Objectif,
     pub recompense_items: Vec<u32>,
@@ -86,5 +86,16 @@ impl Quete {
         false
     }
 
+    pub fn room_id(&self) -> u32 {
+        self.objectif.visiter.room_id
+    }
+
+    pub fn set_visited(&mut self) {
+        self.objectif.visiter.visited = true;
+    }
+
+    pub fn is_visited(&self) -> bool {
+        self.objectif.visiter.visited
+    }
 
 }
