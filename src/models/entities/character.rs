@@ -10,9 +10,7 @@ use crate::models::dialogue::Dialogue;
 use crate::models::entities::inventory::Inventory;
 use crate::models::entities::quete::Quete;
 use crate::models::entities::vivant::Vivant;
-use crate::models::tracker::Tracker;
 use crate::models::traits::combattant::{CombatResult, Combattant};
-use crate::models::traits::money_manager::MoneyManager;
 use crate::models::traits::quete_manager::QueteManager;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -100,7 +98,7 @@ impl Character {
                 if ajouté {
                     current_room.items.remove(index); // Retirer l'objet de la salle
                     println!("👜 Tu as ramassé '{}'.", item.name());
-                    Character::track_item(item_id, self, quetes, dialogues);
+                    self.track_item(item_id, quetes, dialogues);
                 } else {
                     println!("❌ Inventaire plein, impossible de ramasser '{}'.", item.name());
                 }

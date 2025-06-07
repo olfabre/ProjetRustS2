@@ -11,7 +11,6 @@ use crate::io::loader::*;
 use std::io::{stdin, Write};
 
 use crate::models::entities::quete::Quete;
-use crate::models::tracker::Tracker;
 use crate::models::traits::combattant::CombatResult;
 use std::collections::HashMap;
 use std::io;
@@ -348,9 +347,8 @@ impl Game {
                                     room.enemies.retain(|&id| id != enemy_clone.vivant.id());
                                 }
 
-                                Character::track_enemy(
+                                character.track_enemy(
                                     enemy_id,
-                                    character,
                                     &mut self.quetes,
                                     &mut self.dialogues,
                                 );
@@ -387,7 +385,7 @@ impl Game {
                 // Tentative de déplacement dans la direction donnée
                 character.try_move(direction, &mut self.rooms);
                 if !direction.is_empty() {
-                    Character::track_visit(character.position as u32, character, &mut self.quetes, &mut self.dialogues);
+                    character.track_visit(character.position as u32, &mut self.quetes, &mut self.dialogues);
                 }
             }
         }

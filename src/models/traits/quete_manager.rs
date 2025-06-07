@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use crate::models::dialogue::Dialogue;
 use crate::models::entities::character::Character;
 use crate::models::entities::Enemy::Enemy;
 use crate::models::entities::item::Item;
@@ -8,6 +9,39 @@ pub trait QueteManager {
     fn ajouter_quete(&mut self, id: u32);
     fn supprimer_quete(&mut self, id: u32);
     fn get_active_quests(&self, all_quests: &HashMap<u32, Quete>, items: &Vec<Item>, enemies: &HashMap<u32, Enemy>) -> Vec<String>;
+
+    fn track_item(&mut self,
+                  item_id: u32,
+                  quetes: &mut HashMap<u32, Quete>,
+                  dialogues: &mut Vec<Dialogue>) -> bool;
+
+    fn track_enemy(&mut self,
+                   ennemi_id: u32,
+                   quetes: &mut HashMap<u32, Quete>,
+                   dialogues: &mut Vec<Dialogue>);
+
+    fn track_visit(&mut self,
+                   room_id: u32,
+                   quetes: &mut HashMap<u32, Quete>,
+                   dialogues: &mut Vec<Dialogue>);
+
+    /// Si une quête est terminée, les étapes de dialogue doivent changer pour que le joueur puisse
+    /// rendre la quête
+    fn update_dialogues(id: u32, dialogues: &mut Vec<Dialogue>) {
+        // Rechercher le dialogue associé à l'ID donné
+        let Some(mut dialogue) = dialogues.iter_mut().find(|mut dialog| {
+            dialog.dialogue_id == id
+        }) else { return };
+
+        // Parcourez les étapes du dialogue et activez toute étape correspondant à l'achèvement d'une quête
+        for step in &mut dialogue.dialogue_steps {
+            if step.action.starts_with("rendreQuete") { // Vérifiez si l'action fait référence à l'achèvement d'une quête
+                step.active = true; // Activez l'étape pour qu'elle fasse partie des options de dialogue du joueur
+            }
+        }
+    }
+
+
 }
 
 impl QueteManager for Character {
@@ -56,5 +90,89 @@ impl QueteManager for Character {
         // Renvoie la liste des descriptions de quêtes formatées.
         quest_titles
     }
+
+    /// Lors de l'ajout d'un objet à l'inventaire, cette fonction est appelée et vérifie si l'objet
+    /// est un objet nécessaire pour terminer une quête
+    /// Renvoie true ou false
+    fn track_item(&mut self,
+                  item_id: u32,
+
+                  quetes: &mut HashMap<u32, Quete>,
+                  dialogues: &mut Vec<Dialogue>) -> bool {
+        for quest_id in self.quests() {
+            if let Some(quest) = quetes.get_mut(&quest_id) {
+                if quest.item_id() == item_id {
+
+                    // Augmenter le nombre d'objets pour la quête
+                    quest.inc_item_count();
+                    if quest.is_item_count_reached() { // Vérifiez si le nombre d'éléments requis a été atteint
+
+                        // Mettre à jour le dialogue correspondant pour refléter l'état d'achèvement de la quête
+                        Self::update_dialogues(quest.dialogue_rendu_id, dialogues);
+
+                        // Notifier le joueur que la quête est terminée
+                        println!("✅ Quête: {} est complete.", quest.name());
+                        println!("Retournez voir le donneur de quête pour récupérer votre prix");
+                        return true;
+                    }
+                }
+            }
+        }
+        false // Si quête n'est pas complete
+    }
+
+    /// Lors de tuer un ennemi, cette fonction est appelée et vérifie si l'ennemi
+    /// est nécessaire pour terminer une quête
+    /// Renvoie true ou false
+    fn track_enemy(&mut self,
+                   ennemi_id: u32,
+                   quetes: &mut HashMap<u32, Quete>,
+                   dialogues: &mut Vec<Dialogue>) {
+
+        for quest_id in self.quests() {
+            if let Some(quest) = quetes.get_mut(&quest_id) { // Accéder à la quête en utilisant son ID
+                if quest.ennemi_id() == ennemi_id {
+
+                    // Augmente le nombre d'ennemis requis pour la quête
+                    quest.inc_ennemi_count();
+                    if quest.is_ennemi_count_reached() { // Check if enough enemies have been defeated
+
+                        // Mettre à jour le dialogue pour l'état d'achèvement de la quête
+                        Self::update_dialogues(quest.dialogue_rendu_id, dialogues);
+
+                        // Notifier le joueur que la quête est terminée
+                        println!("✅ Quête: {} est complete.", quest.name());
+                        println!("Retournez voir le donneur de quête pour récupérer votre prix");
+
+                    }
+                }
+            }
+        }
+    }
+
+    fn track_visit(&mut self,
+                   room_id: u32,
+                   quetes: &mut HashMap<u32, Quete>,
+                   dialogues: &mut Vec<Dialogue>) {
+        for quest_id in self.quests() {
+            if let Some(quest) = quetes.get_mut(&quest_id) { // Accéder à la quête en utilisant son ID
+                if quest.room_id() == room_id {
+                    if !quest.is_visited() {
+                        quest.set_visited();
+
+                        // Mettre à jour le dialogue pour l'état d'achèvement de la quête
+                        Self::update_dialogues(quest.dialogue_rendu_id, dialogues);
+
+                        // Notifier le joueur que la quête est terminée
+                        println!("✅ Quête: {} est complete.", quest.name());
+                        println!("Voyez la bonne personne pour récupérer votre prix");
+
+                    }
+                }
+            }
+        }
+    }
+
+
 
 }

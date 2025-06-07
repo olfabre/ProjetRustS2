@@ -112,6 +112,7 @@ impl Dialogue {
                                 if let Ok(id) = id_str.parse::<u32>() {
                                     let quete = quetes.get(&id).unwrap();
 
+                                    // === Si la quête nécessite de rendre un objet pour être terminée
                                     if quete.objectif_type == "collecter" {
                                         character.inventory_mut().remove_item(quete.objectif.collecter.item_id, quete.objectif.collecter.target);
                                         pnj.inventory_mut().add_item(quete.objectif.collecter.item_id, quete.objectif.collecter.target);
@@ -133,6 +134,9 @@ impl Dialogue {
                                         println!("🪙 Tu as gagné {} pièces d'argent.", quete.recompense_argent);
                                         character.add_money(quete.recompense_argent);
                                     }
+
+                                    // === Mettre à jour les étapes du dialogue afin qu'elles ne se répètent pas.
+                                    self.dialogue_steps[current_index].active = false;
                                 }
                             }
                         }

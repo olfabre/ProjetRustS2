@@ -106,8 +106,8 @@
         "vivant": {
             "entity": {
                 "id": 10,
-                "name": "La Vieille oublieuse",
-                "description": "Elle est juste là, immobile !"
+                "name": "Vieille oublieuse",
+                "description": "Elle est juste là, immobile, en regardant l'espace !"
             },
             "health": 70,
             "strength": 24,
