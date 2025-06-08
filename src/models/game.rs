@@ -18,13 +18,13 @@ use std::process::Command;
 use crate::models::traits::quete_manager::QueteManager;
 
 pub struct Game {
-    rooms: Vec<Room>,                          // Liste des salles du jeu
-    characters: Vec<Character>,               // Liste des personnages (joueur compris)
-    items: Vec<Item>,                         // Liste globale des objets disponibles
-    pnjs: Vec<Pnj>,                           // Liste des PNJ présents dans le jeu
-    dialogues: Vec<Dialogue>,                 // Liste des dialogues
-    enemies: HashMap<u32, Enemy>,             // Dictionnaire des ennemis par identifiant
-    quetes: HashMap<u32, Quete>,              // Dictionnaire des quêtes par identifiant
+    pub rooms: Vec<Room>,                         // Liste des salles du jeu
+    pub characters: Vec<Character>,               // Liste des personnages (joueur compris)
+    pub items: Vec<Item>,                         // Liste globale des objets disponibles
+    pub pnjs: Vec<Pnj>,                           // Liste des PNJ présents dans le jeu
+    pub dialogues: Vec<Dialogue>,                 // Liste des dialogues
+    pub enemies: HashMap<u32, Enemy>,             // Dictionnaire des ennemis par identifiant
+    pub quetes: HashMap<u32, Quete>,              // Dictionnaire des quêtes par identifiant
 }
 
 impl Game {
@@ -207,6 +207,10 @@ impl Game {
                 println!("Que veux-tu faire ? ( prendre <objet>, utiliser <objet>, parler <pnj>, combattre <ennemie> )");
                 println!("Que veux-tu voir ? ( quêtes, inventaire, stats )");
 
+                // ---------------------------------------------------------------------------------------------------------
+                //
+                // ---------------------------------------------------------------------------------------------------------
+
                 // Lecture de l'entrée utilisateur
                 let mut input = String::new();
                 stdin().read_line(&mut input).expect("Erreur de lecture");
@@ -250,6 +254,7 @@ impl Game {
                         &mut self.quetes,
                         &self.items,
                     );
+
                     continue;
                 }
 
@@ -258,6 +263,7 @@ impl Game {
                     let quetes_found =
                         character.get_active_quests(&self.quetes, &self.items, &self.enemies);
                     quetes_found.iter().for_each(|quete| println!("{}", quete));
+
                     continue;
                 }
 

@@ -68,18 +68,18 @@ impl QueteManager for Character {
             // Vérifie si la quête correspondant à l'ID existe dans la liste all_quests.
             if let Some(quest_found) = all_quests.get(&quest_id_from_char) {
                 // Ajoute le nom et le type de l'objectif de la quête au descripteur.
-                descriptor.push_str(&format!("{} - {}: ", quest_found.name(), quest_found.objectif_type));
+                descriptor.push_str(&format!("{} - {}: ", quest_found.name(), quest_found.get_type()));
 
                 // Vérifie le type d'objectif de la quête.
-                if quest_found.objectif_type == "collecter" {
+                if quest_found.get_type() == "collecter" {
                     // Recherche l'objet correspondant à l'ID de l'objectif de collecte.
-                    let Some(item) = items.iter().find(|i| i.id() == quest_found.objectif.collecter.item_id) else { todo!() };
+                    let Some(item) = items.iter().find(|i| i.id() == quest_found.target_id()) else { todo!() };
 
                     // Ajoute le nombre d'objets à collecter et leur nom au descripteur.
-                    descriptor.push_str(&format!("{} - {}", quest_found.objectif.collecter.target, item.name()));
-                } else if quest_found.objectif_type == "tuer" {
+                    descriptor.push_str(&format!("{}x  {}", quest_found.target(), item.name()));
+                } else if quest_found.get_type() == "tuer" {
                     // Ajoute le nombre d'ennemis à éliminer et leur nom au descripteur.
-                    descriptor.push_str(&format!("{} - {}", quest_found.objectif.tuer.target, enemies.get(&quest_found.objectif.tuer.ennemi_id).unwrap().name()));
+                    descriptor.push_str(&format!("{}x  {}", quest_found.target(), enemies.get(&quest_found.target_id()).unwrap().name()));
                 }
             }
 
@@ -101,11 +101,11 @@ impl QueteManager for Character {
                   dialogues: &mut Vec<Dialogue>) -> bool {
         for quest_id in self.quests() {
             if let Some(quest) = quetes.get_mut(&quest_id) {
-                if quest.item_id() == item_id {
+                if quest.target_id() == item_id {
 
                     // Augmenter le nombre d'objets pour la quête
-                    quest.inc_item_count();
-                    if quest.is_item_count_reached() { // Vérifiez si le nombre d'éléments requis a été atteint
+                    quest.increment_count();
+                    if quest.is_complete() { // Vérifiez si le nombre d'éléments requis a été atteint
 
                         // Mettre à jour le dialogue correspondant pour refléter l'état d'achèvement de la quête
                         Self::update_dialogues(quest.dialogue_rendu_id, dialogues);
@@ -131,11 +131,11 @@ impl QueteManager for Character {
 
         for quest_id in self.quests() {
             if let Some(quest) = quetes.get_mut(&quest_id) { // Accéder à la quête en utilisant son ID
-                if quest.ennemi_id() == ennemi_id {
+                if quest.target_id() == ennemi_id {
 
                     // Augmente le nombre d'ennemis requis pour la quête
-                    quest.inc_ennemi_count();
-                    if quest.is_ennemi_count_reached() { // Check if enough enemies have been defeated
+                    quest.increment_count();
+                    if quest.is_complete() { // Check if enough enemies have been defeated
 
                         // Mettre à jour le dialogue pour l'état d'achèvement de la quête
                         Self::update_dialogues(quest.dialogue_rendu_id, dialogues);
@@ -156,9 +156,9 @@ impl QueteManager for Character {
                    dialogues: &mut Vec<Dialogue>) {
         for quest_id in self.quests() {
             if let Some(quest) = quetes.get_mut(&quest_id) { // Accéder à la quête en utilisant son ID
-                if quest.room_id() == room_id {
-                    if !quest.is_visited() {
-                        quest.set_visited();
+                if quest.target_id() == room_id {
+                    if !quest.is_complete() {
+                        quest.increment_count();
 
                         // Mettre à jour le dialogue pour l'état d'achèvement de la quête
                         Self::update_dialogues(quest.dialogue_rendu_id, dialogues);

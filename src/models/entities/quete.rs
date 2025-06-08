@@ -7,7 +7,6 @@ use crate::models::entities::entity::Entity;
 pub struct Quete {
     entity: Entity,
     pub dialogue_rendu_id: u32,
-    pub objectif_type: String,
     pub objectif: Objectif,
     pub recompense_items: Vec<u32>,
     pub recompense_argent: i32,
@@ -16,11 +15,13 @@ pub struct Quete {
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct Objectif {
-    pub tuer: Tuer,
-    pub collecter: Collecter,
-    pub visiter: Visiter,
+#[serde(tag = "type", content = "data")] // Helpful for distinguishing types
+pub enum Objectif {
+    Tuer(Tuer),
+    Collecter(Collecter),
+    Visiter(Visiter),
 }
+
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Tuer {
@@ -42,6 +43,57 @@ pub struct Visiter {
     visited: bool,
 }
 
+
+impl Objectif {
+
+    pub fn target_id(&self) -> u32 {
+        match self {
+            Objectif::Collecter(obj) => obj.item_id,
+            Objectif::Tuer(obj) => obj.ennemi_id,
+            Objectif::Visiter(obj) => obj.room_id,
+
+        }
+    }
+
+    pub fn increment_count(&mut self) {
+        match self {
+            Objectif::Tuer(ref mut obj) => obj.count += 1,
+            Objectif::Collecter(ref mut obj) => obj.count += 1,
+            Objectif::Visiter(ref mut obj) => obj.visited = true,
+        }
+    }
+
+    pub fn target(&self) -> u32 {
+        match self {
+            Objectif::Tuer(obj) => obj.target,
+            Objectif::Collecter(obj) => obj.target,
+            Objectif::Visiter(obj) => if obj.visited { 1 } else { 0 },
+        }
+    }
+
+    /// Vérifie si le nombre requis d'objets collectés a été atteint.
+    /// Retourne `true` si le joueur a collecté le nombre cible d'objets, sinon `false`.
+    pub fn is_complete(&self) -> bool {
+        match self {
+            Objectif::Tuer(obj) => obj.count == obj.target,
+            Objectif::Collecter(obj) => obj.count == obj.target,
+            Objectif::Visiter(obj) => obj.visited,
+        }
+    }
+
+    pub fn type_str(&self) -> &'static str {
+        match self {
+            Objectif::Tuer(_) => "tuer",
+            Objectif::Collecter(_) => "collecter",
+            Objectif::Visiter(_) => "visiter",
+        }
+    }
+
+
+
+}
+
+
 impl Quete {
 
     pub fn id(&self) -> u32 {
@@ -52,50 +104,24 @@ impl Quete {
         self.entity.name()
     }
 
-    pub fn item_id(&self) -> u32 {
-        self.objectif.collecter.item_id
+    pub fn target_id(&self) -> u32 {
+        self.objectif.target_id()
     }
 
-    pub fn inc_item_count(&mut self) {
-        self.objectif.collecter.count += 1;
+    pub fn target(&self) -> u32 {
+        self.objectif.target()
     }
 
-    /// Vérifie si le nombre requis d'objets collectés a été atteint.
-    /// Retourne `true` si le joueur a collecté le nombre cible d'objets, sinon `false`.
-    pub fn is_item_count_reached(&self) -> bool {
-        // Compare le nombre actuel d'objets collectés avec le nombre cible requis.
-        if self.objectif.collecter.count == self.objectif.collecter.target {
-            return true // La condition est remplie, l'objectif de collecte est atteint.
-        }
-        false // La condition n'est pas remplie, l'objectif n'est pas encore atteint.
+    pub fn increment_count(&mut self) {
+        self.objectif.increment_count()
     }
 
-
-    pub fn ennemi_id(&self) -> u32 {
-        self.objectif.tuer.ennemi_id
+    pub fn is_complete(&self) -> bool {
+        self.objectif.is_complete()
     }
 
-    pub fn inc_ennemi_count(&mut self) {
-        self.objectif.tuer.count += 1;
-    }
-
-    pub fn is_ennemi_count_reached(&self) -> bool {
-        if self.objectif.tuer.count == self.objectif.tuer.target {
-            return true
-        }
-        false
-    }
-
-    pub fn room_id(&self) -> u32 {
-        self.objectif.visiter.room_id
-    }
-
-    pub fn set_visited(&mut self) {
-        self.objectif.visiter.visited = true;
-    }
-
-    pub fn is_visited(&self) -> bool {
-        self.objectif.visiter.visited
+    pub fn get_type(&self) -> &str {
+        self.objectif.type_str()
     }
 
 }

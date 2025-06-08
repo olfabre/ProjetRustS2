@@ -113,9 +113,9 @@ impl Dialogue {
                                     let quete = quetes.get(&id).unwrap();
 
                                     // === Si la quête nécessite de rendre un objet pour être terminée
-                                    if quete.objectif_type == "collecter" {
-                                        character.inventory_mut().remove_item(quete.objectif.collecter.item_id, quete.objectif.collecter.target);
-                                        pnj.inventory_mut().add_item(quete.objectif.collecter.item_id, quete.objectif.collecter.target);
+                                    if quete.get_type() == "collecter" {
+                                        character.inventory_mut().remove_item(quete.target_id(), quete.target());
+                                        pnj.inventory_mut().add_item(quete.target_id(), quete.target());
                                     }
 
                                     character.supprimer_quete(id);
