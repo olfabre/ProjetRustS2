@@ -62,7 +62,12 @@ impl Game {
 
     /// Démarre la boucle principale du jeu
     pub fn run(&mut self) {
-        if let Some(character) = self.characters.first_mut() {
+        if let Some(character_first) = self.characters.first_mut() {
+
+            // Instance distincte de la structure Character basée sur le premier type de la liste
+            let mut character_instance = character_first.clone();
+            let character = &mut character_instance;
+
             // println!("Position de départ du personnage = {}", character.position);
             let mut last_room = character.position;
 
@@ -248,20 +253,15 @@ impl Game {
                     Pnj::parler_au_pnj(
                         pnj_nom,
                         character,
-                        &self.rooms,
-                        &mut self.pnjs,
-                        &mut self.dialogues,
-                        &mut self.quetes,
-                        &self.items,
+                        self
                     );
-
                     continue;
                 }
 
                 // Affiche les quêtes en cours ou terminée
                 if input.starts_with("quêtes") {
                     let quetes_found =
-                        character.get_active_quests(&self.quetes, &self.items, &self.enemies);
+                        character.get_active_quests(self);
                     quetes_found.iter().for_each(|quete| println!("{}", quete));
 
                     continue;

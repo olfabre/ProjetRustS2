@@ -33,7 +33,6 @@ impl Descriptible for Room {
     }
 
 
-
 }
 
 impl Room{
