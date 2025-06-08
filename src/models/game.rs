@@ -232,10 +232,7 @@ impl Game {
                     let objet_nom = &input[8..].trim().to_lowercase();
                     character.prendre_objet(
                         objet_nom,
-                        &mut self.rooms,
-                        &self.items,
-                        &mut self.quetes,
-                        &mut self.dialogues,
+                        self,
                     );
                     continue;
                 }

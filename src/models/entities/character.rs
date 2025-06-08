@@ -10,6 +10,7 @@ use crate::models::dialogue::Dialogue;
 use crate::models::entities::inventory::Inventory;
 use crate::models::entities::quete::Quete;
 use crate::models::entities::vivant::Vivant;
+use crate::models::game::Game;
 use crate::models::traits::combattant::{CombatResult, Combattant};
 use crate::models::traits::quete_manager::QueteManager;
 
@@ -72,13 +73,10 @@ impl Character {
     /// Permet au personnage de récupérer un objet dans la pièce actuelle par son nom.
     /// Ajoute l'objet à l'inventaire s'il y a de la place et le retire de la pièce.
     /// Déclenche la logique de suivi de quête si nécessaire.
-    pub fn prendre_objet(&mut self, objet_nom: &str,
-                         rooms: &mut [Room], items: &[Item],
-                         quetes: &mut HashMap<u32, Quete>,
-                         dialogues: &mut Vec<Dialogue>) {
+    pub fn prendre_objet(&mut self, objet_nom: &str, game: &mut Game) {
         // On convertit le nom pour ignorer la casse lors de la comparaison
         let objet_nom = objet_nom.to_lowercase();
-        let current_room = &mut rooms[self.position];
+        let current_room = &mut game.rooms[self.position];
 
         // On cherche l'objet dans la salle actuelle par nom (case-insensitive)
         if let Some((index, item_id)) = current_room
@@ -86,19 +84,19 @@ impl Character {
             .iter()
             .enumerate()
             .find_map(|(i, id)| {
-                items
+                game.items
                     .iter()
                     .find(|item| item.id() == *id && item.name().to_lowercase() == objet_nom)
                     .map(|_| (i, *id))
             })
         {
-            if let Some(item) = items.iter().find(|item| item.id() == item_id) {
+            if let Some(item) = game.items.iter().find(|item| item.id() == item_id) {
                 let ajouté = self.vivant.inventory.add_item(item.id(), 1);
 
                 if ajouté {
                     current_room.items.remove(index); // Retirer l'objet de la salle
                     println!("👜 Tu as ramassé '{}'.", item.name());
-                    self.track_item(item_id, quetes, dialogues);
+                    self.track_item(item_id, &mut game.quetes, &mut game.dialogues);
                 } else {
                     println!("❌ Inventaire plein, impossible de ramasser '{}'.", item.name());
                 }
