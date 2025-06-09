@@ -8,6 +8,7 @@ use crate::models::traits::descriptible::Descriptible;
 use crate::models::{entities::room::Room, entities::item::Item};
 use crate::models::dialogue::Dialogue;
 use crate::models::entities::Enemy::Enemy;
+use crate::models::entities::entity::Entity;
 use crate::models::entities::inventory::Inventory;
 use crate::models::entities::quete::Quete;
 use crate::models::entities::vivant::Vivant;
@@ -15,35 +16,20 @@ use crate::models::tracker::Tracker;
 use crate::models::traits::combattant::{CombatResult, Combattant};
 use crate::models::traits::money_manager::MoneyManager;
 
-// Structure qui représente le personnage joueur
-// Hérite des attributs de base d'une entité vivante et ajoute des fonctionnalités spécifiques au joueur
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Character {
-<<<<<<< HEAD
-    pub(crate) vivant: Vivant,    // Attributs de base d'une entité vivante (stats, inventaire, etc.)
-    pub position: usize,          // ID de la salle où se trouve le personnage
-    pub level: i32,               // Niveau du joueur
-    pub experience: i32,          // Points d'expérience accumulés
-    pub money: i32,               // Argent du joueur
-    pub quests: Vec<u32>          // Liste des IDs des quêtes actives
+    pub(crate) vivant: Vivant,
+
+    pub position: usize, // Le room_id du personnage a present
+    pub level: i32,       // Ajout du niveau du joueur
+    pub experience: i32,  // Ajout de l'expérience du joueur
+    pub money: i32,
+    pub quests: Vec<u32> // references to quete
+
+
 }
 
-// Implémentation du trait Descriptible pour afficher les informations du personnage
-=======
-    // Structure principale du personnage combinant les attributs liés au jeu
-    pub(crate) vivant: Vivant,      // Structure Vivant intégrée, probablement contient des statistiques comme la santé et l'inventaire
-    pub position: usize,            // ID de la salle actuelle (index dans une liste de salles)
-    pub level: i32,                 // Niveau actuel du joueur
-    pub experience: i32,            // Points d'expérience accumulés
-    pub money: i32,                 // Argent ou monnaie du joueur
-    pub quests: Vec<u32>            // Liste des IDs de quêtes actives
-}
-
-
-
->>>>>>> 45c85e3a97d5a1eb3c0ba5f1740b97e47a47678f
 impl Descriptible for Character {
-    // Renvoie une chaîne de description du personnage comprenant le nom et les statistiques principales
     fn get_description(&self) -> String {
         format!(
             "{} (Santé: {}, Force: {}, Intelligence: {})",
@@ -52,9 +38,11 @@ impl Descriptible for Character {
     }
 }
 
+
 impl Character {
-    // Déplace le personnage dans une nouvelle salle si possible
-    // Vérifie si la direction existe et si la salle n'est pas verrouillée
+
+    /// Tente de déplacer le joueur dans la direction donnée,
+    /// en vérifiant la direction et si la salle n'est pas verrouillée.
     pub fn try_move(&mut self, direction: &str, rooms: &mut [Room]) {
         // Récupère la salle actuelle à partir de la position du personnage
         let current_room = &rooms[self.position];
@@ -83,14 +71,22 @@ impl Character {
         }
     }
 
-<<<<<<< HEAD
-    // Permet au personnage de ramasser un objet dans la salle actuelle
-    // Met à jour l'inventaire et les quêtes associées
-=======
-    /// Permet au personnage de récupérer un objet dans la pièce actuelle par son nom.
-    /// Ajoute l'objet à l'inventaire s'il y a de la place et le retire de la pièce.
-    /// Déclenche la logique de suivi de quête si nécessaire.
->>>>>>> 45c85e3a97d5a1eb3c0ba5f1740b97e47a47678f
+    //on ne doit pas avoir trop rooms
+    /*pub fn prendre_objet(&mut self, objet_nom: &str, rooms: &mut [Room], items: &[Item]) {
+        if let Some(room) = rooms.get_mut(self.position) {
+            if let Some(&item_id) = room.items.iter().find(|&&id| {
+                items.iter().any(|item| item.id == id && item.name.to_lowercase() == objet_nom.to_lowercase())
+            }) {
+                if let Some(item) = items.iter().find(|i| i.id == item_id) {
+                    room.items.retain(|&id| id != item_id);  // ✅ Supprimer l'objet de la salle
+                    self.inventory.push(item.clone());       // ✅ Ajouter l'objet dans l'inventaire
+                    println!("🎒 {} a pris l'objet : {}", self.name, item.name);
+                }
+            } else {
+                println!("❌ Objet non trouvé dans cette salle !");
+            }
+        }
+    }*/
     pub fn prendre_objet(&mut self, objet_nom: &str,
                          rooms: &mut [Room], items: &[Item],
                          quetes: &mut HashMap<u32, Quete>,
@@ -98,6 +94,7 @@ impl Character {
         // On convertit le nom pour ignorer la casse lors de la comparaison
         let objet_nom = objet_nom.to_lowercase();
         let current_room = &mut rooms[self.position];
+
 
         // On cherche l'objet dans la salle actuelle par nom (case-insensitive)
         if let Some((index, item_id)) = current_room
@@ -127,14 +124,34 @@ impl Character {
         }
     }
 
-<<<<<<< HEAD
-    // Permet au personnage d'utiliser un objet de son inventaire
-    // Applique les effets spécifiques selon le type d'objet
-=======
-    /// Utilise un objet de l'inventaire du personnage par son nom.
-    /// Applique l'effet de l'objet (soins, déverrouillage, amélioration des statistiques, etc.).
-    /// L'objet est retiré de l'inventaire s'il s'agit d'un consommable.
->>>>>>> 45c85e3a97d5a1eb3c0ba5f1740b97e47a47678f
+
+    /*pub fn utiliser_objet(&mut self, objet_nom: &str) {
+        let objet_nom = objet_nom.to_lowercase();
+
+        if let Some(index) = self.inventory.iter().position(|item| item.name.to_lowercase() == objet_nom) {
+            let item = self.inventory.remove(index);
+
+            match item.name.as_str() {
+                "Torche" => {
+                    println!("🔥 {} allume la torche. La salle est maintenant éclairée !", self.name);
+                }
+                "Potion de soin" => {
+                    self.health += 10;
+                    println!("🧪 {} boit une potion et récupère 10 points de vie. (Santé : {})", self.name, self.health);
+                }
+                "Gemme enchantée" => {
+                    println!("💎 {} sent une force mystique l'entourer.", self.name);
+                }
+                _ => {
+                    println!("❌ Cet objet ne peut pas être utilisé.");
+                }
+            }
+        } else {
+            println!("❌ Tu ne possèdes pas cet objet dans ton inventaire !");
+        }
+    }*/
+
+    /// Permet au personnage d'utiliser un objet de son inventaire
     pub fn utiliser_objet(&mut self, objet_nom: &str, rooms: &mut [Room], items: &[Item]) {
         let objet_nom = objet_nom.to_lowercase();
 
@@ -192,12 +209,9 @@ impl Character {
         }
     }
 
-<<<<<<< HEAD
-    // Augmente le niveau du personnage et ses statistiques
-=======
-    /// Augmente le niveau du personnage.
-    /// Améliore les statistiques de base telles que la santé, la force et l'intelligence.
->>>>>>> 45c85e3a97d5a1eb3c0ba5f1740b97e47a47678f
+
+
+
     pub fn level_up(&mut self) {
         self.level += 1;
         self.set_health(self.health() + 20);
@@ -205,12 +219,6 @@ impl Character {
         self.set_intelligence(self.intelligence() + 2);
         println!("🔥 Vous montez au niveau {} ! Vos statistiques augmentent.", self.level);
     }
-
-<<<<<<< HEAD
-    // Ajoute de l'expérience au personnage et vérifie si un niveau supérieur est atteint
-=======
-    /// Ajouter experience
->>>>>>> 45c85e3a97d5a1eb3c0ba5f1740b97e47a47678f
     pub fn add_experience(&mut self, xp: i32) {
         println!("🎖️ Vous gagnez {} XP !", xp);
         self.experience += xp;
@@ -221,12 +229,10 @@ impl Character {
         }
     }
 
-<<<<<<< HEAD
-    // Affiche le contenu de l'inventaire du personnage
-=======
-    /// Affiche le contenu actuel de l'inventaire du personnage.
-    /// Répertorie les noms des objets, leurs quantités et leurs effets.
->>>>>>> 45c85e3a97d5a1eb3c0ba5f1740b97e47a47678f
+
+
+    //L'inventaire de l'objet pas de la character(&self)
+    //L'inventaire de l'objet pas de la character(&self)
     pub fn afficher_inventaire(&self, items: &[Item]) {
         println!("\n🎒 Inventaire :");
 
@@ -253,17 +259,15 @@ impl Character {
         }
     }
 
-    // Ajoute une quête à la liste des quêtes actives
     pub fn ajouter_quete(&mut self, id: u32) {
         self.quests.push(id);
     }
 
-    // Supprime une quête de la liste des quêtes actives
     pub fn supprimer_quete(&mut self, id: u32) {
         self.quests.retain(|&q| q != id);
     }
 
-    // Getters pour les attributs de base
+
     pub fn id(&self) -> u32 {
         self.vivant.id()
     }
@@ -284,7 +288,6 @@ impl Character {
         self.vivant.intelligence()
     }
 
-    // Setters pour modifier les statistiques
     pub fn set_health(&mut self, health: i32) {
         self.vivant.set_health(health);
     }
@@ -297,28 +300,35 @@ impl Character {
         self.vivant.set_intelligence(intelligence);
     }
 
-    // Getter mutable pour l'inventaire
     pub fn inventory_mut(&mut self) -> &mut Inventory {
         self.vivant.inventory_mut()
     }
 
-    // Getter pour la défense
     pub fn defense(&self) -> i32 {
         self.vivant.defense()
     }
 
-    // Vérifie si le personnage est en vie
-    pub fn is_alive(&self) -> bool {
+    pub fn is_alive(&self) -> bool{
+
         self.vivant.health() > 0
     }
 
-<<<<<<< HEAD
-    // Récupère les détails d'un objet spécifique dans l'inventaire
     pub fn get_item_details<'a>(&self, item_id: u32, items: &'a [Item]) -> Option<&'a Item> {
         items.iter().find(|i| i.id() == item_id)
     }
 
-    // Récupère la liste des quêtes actives avec leurs détails
+    // pub fn add_money(&mut self, amount: i32) {
+    //     self.money += amount;
+    // }
+    //
+    // pub fn remove_money(&mut self, amount: i32) {
+    //     if amount <= self.money {
+    //         self.money -= amount;
+    //     } else {
+    //         println!("❌ Pas assez d'argent !");
+    //     }
+    // }
+
     pub fn get_active_quests(&self, all_quests: &HashMap<u32, Quete>, items: &Vec<Item>, enemies: &HashMap<u32, Enemy>) -> Vec<String> {
         // Create a vector to store the names of matching quests.
         let mut quest_titles: Vec<String> = vec![];
@@ -357,63 +367,14 @@ impl Character {
         quest_titles
     }
 
-    // Getter pour la liste des quêtes
-=======
->>>>>>> 45c85e3a97d5a1eb3c0ba5f1740b97e47a47678f
     pub fn quests(&self) -> &Vec<u32> {
         &self.quests
     }
 
-<<<<<<< HEAD
-    // Ajoute de l'argent au personnage
     pub fn add_argent(&mut self, quantité: i32) {
         self.money += quantité;
     }
 
-    // Gère un combat automatique avec un ennemi
-=======
-
-    /// Renvoie une liste des descriptions de quêtes actuellement actives pour le personnage.
-    /// Associe les identifiants de quête aux données de quête et formate l'objectif pour l'affichage.
-    pub fn get_active_quests(&self, all_quests: &HashMap<u32, Quete>, items: &Vec<Item>, enemies: &HashMap<u32, Enemy>) -> Vec<String> {
-        // Créez un vecteur pour stocker les descriptions des quêtes correspondantes.
-        let mut quest_titles: Vec<String> = vec![];
-
-        // Itérer sur chaque ID de quête dans la liste des quêtes du personnage.
-        for &quest_id_from_char in &self.quests {
-            // Initialise une chaîne de caractères pour stocker la description formatée de la quête.
-            let mut descriptor = String::from("* ");
-
-            // Vérifie si la quête correspondant à l'ID existe dans la liste all_quests.
-            if let Some(quest_found) = all_quests.get(&quest_id_from_char) {
-                // Ajoute le nom et le type de l'objectif de la quête au descripteur.
-                descriptor.push_str(&format!("{} - {}: ", quest_found.name(), quest_found.objectif_type));
-
-                // Vérifie le type d'objectif de la quête.
-                if quest_found.objectif_type == "collecter" {
-                    // Recherche l'objet correspondant à l'ID de l'objectif de collecte.
-                    let Some(item) = items.iter().find(|i| i.id() == quest_found.objectif.collecter.item_id) else { todo!() };
-
-                    // Ajoute le nombre d'objets à collecter et leur nom au descripteur.
-                    descriptor.push_str(&format!("{} - {}", quest_found.objectif.collecter.target, item.name()));
-                } else if quest_found.objectif_type == "tuer" {
-                    // Ajoute le nombre d'ennemis à éliminer et leur nom au descripteur.
-                    descriptor.push_str(&format!("{} - {}", quest_found.objectif.tuer.target, enemies.get(&quest_found.objectif.tuer.ennemi_id).unwrap().name()));
-                }
-            }
-
-            // Ajoute la description formatée de la quête au vecteur quest_titles.
-            quest_titles.push(descriptor);
-        }
-
-        // Renvoie la liste des descriptions de quêtes formatées.
-        quest_titles
-    }
-
-    /// Gère une boucle de combat complète entre le joueur et un seul ennemi.
-    /// Alterne les tours, calcule les dégâts, applique les coups critiques et l'esquive.
-    /// Accorde de l'expérience en cas de victoire et gère les conditions de défaite.
->>>>>>> 45c85e3a97d5a1eb3c0ba5f1740b97e47a47678f
     pub fn combat<T: Combattant>(&mut self, ennemi: &mut T) -> CombatResult {
         println!("⚔️ Début du combat : {} VS {}", self.name(), ennemi.nom());
 
@@ -426,7 +387,7 @@ impl Character {
 
             let mut degats = self.degats_attaque();
             if critique {
-                println!("�� Coup critique !");
+                println!("🎯 Coup critique !");
                 degats *= 2;
             }
 
@@ -465,8 +426,6 @@ impl Character {
         }
     }
 
-    /// Boucle de combat interactive où l'utilisateur choisit des actions (attaquer, utiliser un objet, fuir).
-    /// Fournit une interaction dynamique au tour par tour avec une entrée en ligne de commande.
     pub fn combat_interactif<T: Combattant>(&mut self, ennemi: &mut T, items: &[Item]) -> CombatResult {
         println!("\n⚔️ Un combat commence contre {} !", ennemi.nom());
 
