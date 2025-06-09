@@ -7,12 +7,17 @@ use crate::models::{
     entities::room::Room, entities::Enemy::Enemy,
 };
 
+// use crate::io::loader::{load_characters_from_file, load_dialogues_from_file, load_items_from_file, load_pnjs_from_file, load_room_from_file, load_ennemie_from_file, load_quetes_from_file};
+
 use crate::io::loader::*;
 use std::io::{stdin, Write};
 
 use crate::models::entities::quete::Quete;
 use crate::models::tracker::Tracker;
 use crate::models::traits::combattant::CombatResult;
+
+use log::log;
+
 use std::collections::HashMap;
 use std::io;
 use std::process::Command;
@@ -48,7 +53,8 @@ impl Game {
         let mut quetes = load_quetes_from_file("data/quetes.json")
             .expect("Erreur lors du chargement des quetes.");
 
-        // Création de l'instance du jeu avec les données chargées
+
+        // Création de l'instance du jeu avec les données chargée
         Game {
             rooms,
             characters,
@@ -104,17 +110,33 @@ impl Game {
                 let current_room = &self.rooms[character.position];
                 let room_id = current_room.id();
 
+                // println!("DEBUG - last_room: {}, current position: {}", last_room, character.position);
+
+                // Pause execution, waiting for user input
+                println!("\n______________________________Appuyez sur Entrée pour continuer___________________________");
+                println!("__________________________________________________________________________________________");
+                io::stdout().flush().unwrap(); // Ensure the prompt is displayed before waiting
+                let _ = io::stdin().read_line(&mut String::new());
+                // clear_console();  // Commenté pour tester l'affichage des images
+
+
                 println!("\n__________________________________________________________________________________________");
                 println!("__________________________________________________________________________________________");
 
                 // Afficher l'image uniquement si on change de salle
                 if last_room != character.position {
 
+                    // println!("\nAffichage de l'image de la salle...");
+
+
                     // Obtenir le chemin absolu du dossier images
                     let current_dir = std::env::current_dir()
                         .expect("Impossible d'obtenir le répertoire courant");
                     let images_dir = current_dir.join("images");
                     let image_path = images_dir.join(format!("{}.png", room_id));
+
+                    // println!("Chemin complet de l'image recherchée : {}", image_path.display());
+
 
                     if image_path.exists() {
                         let output = Command::new("viu")
@@ -258,7 +280,8 @@ impl Game {
                     continue;
                 }
 
-                // Afficher l'inventaire du personnage
+
+                // Afficher l'inventaire du personnage et stats bass
                 if input.starts_with("inventaire") {
                     character.afficher_inventaire(&self.items);
                     continue;
@@ -388,3 +411,7 @@ impl Game {
 }
 
 
+// fn clear_console() {
+//     print!("\x1B[2J\x1B[1;1H"); // ANSI escape code to clear screen
+//     std::io::stdout().flush().unwrap(); // Ensure it prints immediately
+// }
