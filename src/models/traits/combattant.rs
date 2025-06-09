@@ -1,5 +1,4 @@
-
-
+use crate::models::entities::character::Character;
 
 pub trait Combattant: std::fmt::Debug {
 
