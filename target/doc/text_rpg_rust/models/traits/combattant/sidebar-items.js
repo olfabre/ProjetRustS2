@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["CombatResult"],"fn":["run_combat","run_combat_round"],"trait":["Combattant"]};
+window.SIDEBAR_ITEMS = {"enum":["CombatResult"],"trait":["Combattant"]};

@@ -118,7 +118,17 @@
 <a href="#117" id="117">117</a>
 <a href="#118" id="118">118</a>
 <a href="#119" id="119">119</a>
-<a href="#120" id="120">120</a></pre></div><pre class="rust"><code><span class="comment">// Module de gestion des entités vivantes du jeu
+<a href="#120" id="120">120</a>
+<a href="#121" id="121">121</a>
+<a href="#122" id="122">122</a>
+<a href="#123" id="123">123</a>
+<a href="#124" id="124">124</a>
+<a href="#125" id="125">125</a>
+<a href="#126" id="126">126</a>
+<a href="#127" id="127">127</a>
+<a href="#128" id="128">128</a>
+<a href="#129" id="129">129</a>
+<a href="#130" id="130">130</a></pre></div><pre class="rust"><code><span class="comment">// Module de gestion des entités vivantes du jeu
 // Définit la structure Vivant qui sert de base pour les personnages et ennemis
 // Gère les statistiques de base et l'inventaire des entités vivantes
 
@@ -126,6 +136,7 @@
 <span class="kw">use </span><span class="kw">crate</span>::models::entities::entity::Entity;
 <span class="kw">use </span><span class="kw">crate</span>::models::entities::inventory::Inventory;
 <span class="kw">use </span><span class="kw">crate</span>::models::entities::item::Item;
+<span class="kw">use </span><span class="kw">crate</span>::models::entities::loot_entry::LootEntry;
 <span class="kw">use </span><span class="kw">crate</span>::models::traits::combattant::Combattant;
 
 <span class="comment">// Structure représentant une entité vivante dans le jeu
@@ -137,7 +148,9 @@
     </span>strength: i32,           <span class="comment">// Force (dégâts d'attaque)
     </span>intelligence: i32,       <span class="comment">// Intelligence (pour les sorts)
     </span>defense: i32,            <span class="comment">// Défense (réduction des dégâts)
-    </span><span class="kw">pub </span>inventory: Inventory, <span class="comment">// Inventaire de l'entité
+    </span><span class="kw">pub </span>experience: i32,
+    <span class="kw">pub </span>inventory: Inventory, <span class="comment">// Inventaire de l'entité
+
 </span>}
 
 <span class="kw">impl </span>Vivant {
@@ -236,6 +249,13 @@
     <span class="comment">// Retourne la protection défensive de l'entité
     </span><span class="kw">fn </span>protection_defense(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u32 {
         <span class="self">self</span>.defense().max(<span class="number">0</span>) <span class="kw">as </span>u32
+    }
+
+    <span class="kw">fn </span>loot(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[LootEntry] {
+        <span class="kw-2">&amp;</span>[]
+    }
+    <span class="kw">fn </span>experience_gain(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; i32 {
+        <span class="self">self</span>.experience
     }
 }
 </code></pre></div></section></main></body></html>

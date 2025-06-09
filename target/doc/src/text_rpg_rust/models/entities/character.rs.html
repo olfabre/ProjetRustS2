@@ -528,7 +528,62 @@
 <a href="#527" id="527">527</a>
 <a href="#528" id="528">528</a>
 <a href="#529" id="529">529</a>
-<a href="#530" id="530">530</a></pre></div><pre class="rust"><code><span class="comment">// Module de gestion du personnage joueur
+<a href="#530" id="530">530</a>
+<a href="#531" id="531">531</a>
+<a href="#532" id="532">532</a>
+<a href="#533" id="533">533</a>
+<a href="#534" id="534">534</a>
+<a href="#535" id="535">535</a>
+<a href="#536" id="536">536</a>
+<a href="#537" id="537">537</a>
+<a href="#538" id="538">538</a>
+<a href="#539" id="539">539</a>
+<a href="#540" id="540">540</a>
+<a href="#541" id="541">541</a>
+<a href="#542" id="542">542</a>
+<a href="#543" id="543">543</a>
+<a href="#544" id="544">544</a>
+<a href="#545" id="545">545</a>
+<a href="#546" id="546">546</a>
+<a href="#547" id="547">547</a>
+<a href="#548" id="548">548</a>
+<a href="#549" id="549">549</a>
+<a href="#550" id="550">550</a>
+<a href="#551" id="551">551</a>
+<a href="#552" id="552">552</a>
+<a href="#553" id="553">553</a>
+<a href="#554" id="554">554</a>
+<a href="#555" id="555">555</a>
+<a href="#556" id="556">556</a>
+<a href="#557" id="557">557</a>
+<a href="#558" id="558">558</a>
+<a href="#559" id="559">559</a>
+<a href="#560" id="560">560</a>
+<a href="#561" id="561">561</a>
+<a href="#562" id="562">562</a>
+<a href="#563" id="563">563</a>
+<a href="#564" id="564">564</a>
+<a href="#565" id="565">565</a>
+<a href="#566" id="566">566</a>
+<a href="#567" id="567">567</a>
+<a href="#568" id="568">568</a>
+<a href="#569" id="569">569</a>
+<a href="#570" id="570">570</a>
+<a href="#571" id="571">571</a>
+<a href="#572" id="572">572</a>
+<a href="#573" id="573">573</a>
+<a href="#574" id="574">574</a>
+<a href="#575" id="575">575</a>
+<a href="#576" id="576">576</a>
+<a href="#577" id="577">577</a>
+<a href="#578" id="578">578</a>
+<a href="#579" id="579">579</a>
+<a href="#580" id="580">580</a>
+<a href="#581" id="581">581</a>
+<a href="#582" id="582">582</a>
+<a href="#583" id="583">583</a>
+<a href="#584" id="584">584</a>
+<a href="#585" id="585">585</a></pre></div><pre class="rust"><code><span class="comment">// Module de gestion du personnage joueur
 // Définit la structure Character et ses fonctionnalités
 // Gère toutes les actions possibles du joueur dans le jeu
 
@@ -544,6 +599,8 @@
 <span class="kw">use </span><span class="kw">crate</span>::models::entities::Enemy::Enemy;
 <span class="kw">use </span><span class="kw">crate</span>::models::entities::entity::Entity;
 <span class="kw">use </span><span class="kw">crate</span>::models::entities::inventory::Inventory;
+<span class="kw">use </span><span class="kw">crate</span>::models::entities::inventory_item::InventoryItem;
+<span class="kw">use </span><span class="kw">crate</span>::models::entities::loot_entry::LootEntry;
 <span class="kw">use </span><span class="kw">crate</span>::models::entities::quete::Quete;
 <span class="kw">use </span><span class="kw">crate</span>::models::entities::vivant::Vivant;
 <span class="kw">use </span><span class="kw">crate</span>::models::tracker::Tracker;
@@ -557,7 +614,7 @@
     <span class="kw">pub</span>(<span class="kw">crate</span>) vivant: Vivant,        <span class="comment">// Propriétés de base (santé, inventaire, etc.)
     </span><span class="kw">pub </span>position: usize,              <span class="comment">// ID de la salle actuelle
     </span><span class="kw">pub </span>level: i32,                   <span class="comment">// Niveau du personnage
-    </span><span class="kw">pub </span>experience: i32,              <span class="comment">// Points d'expérience
+    //pub experience: i32,              // Points d'expérience
     </span><span class="kw">pub </span>money: i32,                   <span class="comment">// Argent possédé
     </span><span class="kw">pub </span>quests: Vec&lt;u32&gt;              <span class="comment">// Liste des quêtes actives
 </span>}
@@ -704,23 +761,43 @@
     <span class="comment">// Fait monter le personnage d'un niveau
     // Augmente ses statistiques de base
     </span><span class="kw">pub fn </span>level_up(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
-        <span class="self">self</span>.level += <span class="number">1</span>;
-        <span class="self">self</span>.set_health(<span class="self">self</span>.health() + <span class="number">20</span>);
-        <span class="self">self</span>.set_strength(<span class="self">self</span>.strength() + <span class="number">2</span>);
-        <span class="self">self</span>.set_intelligence(<span class="self">self</span>.intelligence() + <span class="number">2</span>);
-        <span class="macro">println!</span>(<span class="string">"🔥 Vous montez au niveau {} ! Vos statistiques augmentent."</span>, <span class="self">self</span>.level);
+        <span class="comment">// Incrémente le niveau du personnage de 1
+        </span><span class="self">self</span>.level += <span class="number">1</span>;
+        <span class="comment">// Augmente la santé de 20 points
+        </span><span class="self">self</span>.set_health(<span class="self">self</span>.health() + <span class="number">20</span>);
+        <span class="comment">// Augmente la force de 2 points
+        </span><span class="self">self</span>.set_strength(<span class="self">self</span>.strength() + <span class="number">2</span>);
+        <span class="comment">// Augmente l’intelligence de 2 points
+        </span><span class="self">self</span>.set_intelligence(<span class="self">self</span>.intelligence() + <span class="number">2</span>);
+        <span class="comment">// Affiche un message de montée de niveau
+        </span><span class="macro">println!</span>(<span class="string">"🔥 Vous montez au niveau {} ! Vos statistiques augmentent."</span>, <span class="self">self</span>.level);
     }
 
     <span class="comment">// Ajoute de l'expérience au personnage
     // Vérifie si un passage de niveau est possible
     </span><span class="kw">pub fn </span>add_experience(<span class="kw-2">&amp;mut </span><span class="self">self</span>, xp: i32) {
         <span class="macro">println!</span>(<span class="string">"🎖️ Vous gagnez {} XP !"</span>, xp);
-        <span class="self">self</span>.experience += xp;
 
-        <span class="comment">// Vérifier si le joueur atteint le niveau suivant
-        </span><span class="kw">while </span><span class="self">self</span>.experience &gt;= <span class="self">self</span>.level * <span class="number">100 </span>{
-            <span class="self">self</span>.level_up();
+        <span class="comment">// Ajoute l'expérience au total du personnage
+        </span><span class="self">self</span>.vivant.experience += xp;
+
+        <span class="comment">// Initialise un compteur de montées de niveau
+        </span><span class="kw">let </span><span class="kw-2">mut </span>montées = <span class="number">0</span>;
+
+        <span class="comment">// Boucle tant que le personnage a assez d'XP pour monter de niveau
+        </span><span class="kw">while </span><span class="self">self</span>.vivant.experience &gt;= <span class="self">self</span>.level * <span class="number">100 </span>{
+            <span class="comment">// Incrémente le niveau
+            </span><span class="self">self</span>.level_up();
+            <span class="comment">// Compte le nombre de niveaux gagnés
+            </span>montées += <span class="number">1</span>;
         }
+
+        <span class="comment">// Affiche le nombre de niveaux gagnés
+        </span><span class="kw">if </span>montées &gt; <span class="number">0 </span>{
+            <span class="macro">println!</span>(<span class="string">"🆙 Tu as gagné {} niveau{} !"</span>, montées, <span class="kw">if </span>montées &gt; <span class="number">1 </span>{ <span class="string">"x" </span>} <span class="kw">else </span>{ <span class="string">"" </span>});
+        }
+        <span class="comment">// Affiche le niveau actuel
+        </span><span class="macro">println!</span>(<span class="string">"📈 Niveau actuel : {}"</span>, <span class="self">self</span>.level);
     }
 
     <span class="comment">// Affiche le contenu de l'inventaire du personnage
@@ -869,65 +946,54 @@
         <span class="self">self</span>.money += quantité;
     }
 
-    <span class="comment">// Gère un combat automatique avec un ennemi
-    </span><span class="kw">pub fn </span>combat&lt;T: Combattant&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ennemi: <span class="kw-2">&amp;mut </span>T) -&gt; CombatResult {
-        <span class="macro">println!</span>(<span class="string">"⚔️ Début du combat : {} VS {}"</span>, <span class="self">self</span>.name(), ennemi.nom());
+    <span class="comment">// Affiche les objets récupérés après un combat et les ajoute à l'inventaire du joueur.
+    //loot – Liste des objets à ajouter, avec leur identifiant et quantité
+    // items – Liste de tous les objets possibles, utilisée pour retrouver les noms
+    </span><span class="kw">pub fn </span>afficher_et_ajouter_loot(<span class="kw-2">&amp;mut </span><span class="self">self</span>, loot: <span class="kw-2">&amp;</span>[InventoryItem], items: <span class="kw-2">&amp;</span>[Item]) {
+        <span class="comment">// Vérifie si aucun objet n’a été trouvé
+        </span><span class="kw">if </span>loot.is_empty() {
+            <span class="macro">println!</span>(<span class="string">"🎁 Aucun objet trouvé."</span>);
+        } <span class="kw">else </span>{
+            <span class="macro">println!</span>(<span class="string">"🎁 Loot récupéré :"</span>);
 
-        <span class="kw">let </span><span class="kw-2">mut </span>rng = rand::thread_rng();
+            <span class="comment">// Parcours chaque objet récupéré
+            </span><span class="kw">for </span>obj <span class="kw">in </span>loot {
+                <span class="comment">// Recherche le nom de l’objet à partir de son ID
+                </span><span class="kw">let </span>nom = items
+                    .iter()<span class="comment">// Parcours la liste des objets connus
+                    </span>.find(|i| i.id() == obj.item_id)<span class="comment">// Cherche celui qui a le même ID
+                    </span>.map(|i| i.name().as_ref())<span class="comment">// Récupère le nom de l’objet
+                    </span>.unwrap_or(<span class="string">"Objet inconnu"</span>);<span class="comment">// Si non trouvé, nom par défaut
 
-        <span class="kw">loop </span>{
-            <span class="comment">// ======== Tour du joueur ========
-            </span><span class="kw">let </span>esquive = rng.gen_bool(<span class="number">0.1</span>); <span class="comment">// 10% de chance d'esquive
-            </span><span class="kw">let </span>critique = rng.gen_bool(<span class="number">0.2</span>); <span class="comment">// 20% de chance de critique
+                // Affiche l’objet et la quantité obtenue
+                </span><span class="macro">println!</span>(<span class="string">"- {} x{}"</span>, nom, obj.quantity);
 
-            </span><span class="kw">let </span><span class="kw-2">mut </span>degats = <span class="self">self</span>.degats_attaque();
-            <span class="kw">if </span>critique {
-                <span class="macro">println!</span>(<span class="string">"🎯 Coup critique !"</span>);
-                degats <span class="kw-2">*</span>= <span class="number">2</span>;
-            }
-
-            <span class="macro">println!</span>(<span class="string">"👉 {} attaque avec {} dégâts !"</span>, <span class="self">self</span>.name(), degats);
-            ennemi.infliger_degats(degats);
-
-            <span class="kw">if </span>!ennemi.est_vivant() {
-                <span class="macro">println!</span>(<span class="string">"🏆 Tu as vaincu {} !"</span>, ennemi.nom());
-
-                <span class="kw">let </span>xp_gagnee = <span class="number">30</span>; <span class="comment">// à adapter selon l'ennemi
-                </span><span class="self">self</span>.add_experience(xp_gagnee);
-                <span class="kw">return </span>CombatResult::VICTORY;
-            }
-
-            <span class="comment">// ======== Tour de l'ennemi ========
-            </span><span class="kw">if </span>esquive {
-                <span class="macro">println!</span>(<span class="string">"🌀 Tu esquives l'attaque de {} !"</span>, ennemi.nom());
-            } <span class="kw">else </span>{
-                <span class="kw">let </span>degats_ennemi = ennemi.degats_attaque();
-                <span class="macro">println!</span>(<span class="string">"💥 {} attaque avec {} dégâts !"</span>, ennemi.nom(), degats_ennemi);
-                <span class="self">self</span>.infliger_degats(degats_ennemi);
-            }
-
-            <span class="macro">println!</span>(
-                <span class="string">"❤️ État actuel : {} ({} PV), {} ({} PV)\n"</span>,
-                <span class="self">self</span>.name(),
-                <span class="self">self</span>.sante(),
-                ennemi.nom(),
-                ennemi.sante()
-            );
-
-            <span class="kw">if </span>!<span class="self">self</span>.est_vivant() {
-                <span class="macro">println!</span>(<span class="string">"☠️ Tu es mort face à {}…"</span>, ennemi.nom());
-                <span class="kw">return </span>CombatResult::DEFEAT;
+                <span class="comment">// Ajoute l’objet dans l’inventaire du joueur
+                </span><span class="self">self</span>.inventory_mut().add_item(obj.item_id, obj.quantity);
             }
         }
     }
 
-    <span class="comment">// Gère un combat interactif avec un ennemi
-    // Permet au joueur de choisir ses actions
+
+
+    <span class="doccomment">/// Lance un combat interactif entre le joueur et un ennemi donné.
+    ///
+    /// Le joueur peut choisir d'attaquer, d'utiliser un objet ou de fuir.
+    /// Si le joueur gagne, il obtient du loot et de l'expérience.
+    ///
+    /// # Paramètres
+    /// - `ennemi` : l'ennemi à combattre.
+    /// - `items` : la liste globale des objets connus du jeu.
+    ///
+    /// # Retour
+    /// Un `CombatResult` indiquant si le joueur a gagné, perdu, ou fui.
     </span><span class="kw">pub fn </span>combat_interactif&lt;T: Combattant&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ennemi: <span class="kw-2">&amp;mut </span>T, items: <span class="kw-2">&amp;</span>[Item]) -&gt; CombatResult {
         <span class="macro">println!</span>(<span class="string">"\n⚔️ Un combat commence contre {} !"</span>, ennemi.nom());
 
-        <span class="kw">while </span><span class="self">self</span>.est_vivant() &amp;&amp; ennemi.est_vivant() {
-            <span class="macro">println!</span>(
+        <span class="comment">// Boucle principale : tant que les deux sont vivants, le combat continue
+        </span><span class="kw">while </span><span class="self">self</span>.est_vivant() &amp;&amp; ennemi.est_vivant() {
+            <span class="comment">// Affiche les PV actuels des deux combattants
+            </span><span class="macro">println!</span>(
                 <span class="string">"\n🧍‍♂️ {} (PV: {}) vs 🧟 {} (PV: {})"</span>,
                 <span class="self">self</span>.nom(),
                 <span class="self">self</span>.sante(),
@@ -935,38 +1001,48 @@
                 ennemi.sante()
             );
 
-            <span class="macro">println!</span>(<span class="string">"Que veux-tu faire ? (attaquer / utiliser / fuir)"</span>);
+            <span class="comment">// Demande à l'utilisateur l'action à effectuer
+            </span><span class="macro">println!</span>(<span class="string">"Que veux-tu faire ? (attaquer / utiliser / fuir)"</span>);
             <span class="macro">print!</span>(<span class="string">"&gt; "</span>);
-            stdout().flush().unwrap();
-            <span class="kw">let </span><span class="kw-2">mut </span>input = String::new();
-            stdin().read_line(<span class="kw-2">&amp;mut </span>input).unwrap();
-            <span class="kw">let </span>input = input.trim().to_lowercase();
+            stdout().flush().unwrap(); <span class="comment">// Assure l'affichage immédiat du prompt
+            </span><span class="kw">let </span><span class="kw-2">mut </span>input = String::new();
+            stdin().read_line(<span class="kw-2">&amp;mut </span>input).unwrap(); <span class="comment">// Lecture de l'entrée utilisateur
+            </span><span class="kw">let </span>input = input.trim().to_lowercase(); <span class="comment">// Nettoie et convertit en minuscule
 
-            <span class="kw">match </span>input.as_str() {
+            // Traitement du choix de l'utilisateur
+            </span><span class="kw">match </span>input.as_str() {
                 <span class="string">"attaquer" </span>=&gt; {
-                    <span class="kw">let </span>critique = rand::thread_rng().gen_bool(<span class="number">0.2</span>);
-                    <span class="kw">let </span><span class="kw-2">mut </span>degats = <span class="self">self</span>.degats_attaque().saturating_sub(ennemi.protection_defense());
+                    <span class="comment">// Génère une chance de critique (20%)
+                    </span><span class="kw">let </span>critique = rand::thread_rng().gen_bool(<span class="number">0.2</span>);
+                    <span class="comment">// Calcule les dégâts nets après défense
+                    </span><span class="kw">let </span><span class="kw-2">mut </span>degats = <span class="self">self</span>.degats_attaque().saturating_sub(ennemi.protection_defense());
                     <span class="kw">if </span>critique {
-                        <span class="macro">println!</span>(<span class="string">"💥 Coup critique !"</span>);
+                        <span class="comment">// Double les dégâts si critique
+                        </span><span class="macro">println!</span>(<span class="string">"💥 Coup critique !"</span>);
                         degats <span class="kw-2">*</span>= <span class="number">2</span>;
                     }
-                    <span class="macro">println!</span>(<span class="string">"🗡️ Tu infliges {} dégâts à {}."</span>, degats, ennemi.nom());
+
+                    <span class="comment">// Affiche les dégâts infligés
+                    </span><span class="macro">println!</span>(<span class="string">"🗡️ Tu infliges {} dégâts à {}."</span>, degats, ennemi.nom());
                     ennemi.infliger_degats(degats);
                 }
 
                 <span class="string">"utiliser" </span>=&gt; {
-                    <span class="self">self</span>.afficher_inventaire(items);
+                    <span class="comment">// Affiche l'inventaire disponible
+                    </span><span class="self">self</span>.afficher_inventaire(items);
                     <span class="macro">println!</span>(<span class="string">"Quel objet veux-tu utiliser ?"</span>);
                     <span class="macro">print!</span>(<span class="string">"&gt; "</span>);
                     stdout().flush().unwrap();
                     <span class="kw">let </span><span class="kw-2">mut </span>nom_objet = String::new();
                     stdin().read_line(<span class="kw-2">&amp;mut </span>nom_objet).unwrap();
                     <span class="kw">let </span>nom_objet = nom_objet.trim();
-                    <span class="self">self</span>.utiliser_objet(nom_objet, <span class="kw-2">&amp;mut </span>[], items);
+                    <span class="comment">// Utilise l’objet choisi
+                    </span><span class="self">self</span>.utiliser_objet(nom_objet, <span class="kw-2">&amp;mut </span>[], items);
                 }
 
                 <span class="string">"fuir" </span>=&gt; {
-                    <span class="kw">let </span>chance_fuite = rand::thread_rng().gen_bool(<span class="number">0.5</span>);
+                    <span class="comment">// Chance de fuir avec succès (50%)
+                    </span><span class="kw">let </span>chance_fuite = rand::thread_rng().gen_bool(<span class="number">0.5</span>);
                     <span class="kw">if </span>chance_fuite {
                         <span class="macro">println!</span>(<span class="string">"🏃‍♂️ Tu réussis à fuir !"</span>);
                         <span class="kw">return </span>CombatResult::ONGOING;
@@ -980,32 +1056,58 @@
                 }
             }
 
-            <span class="comment">// === Tour de l'ennemi ===
+            <span class="comment">// === Tour de l'ennemi s’il est encore vivant ===
             </span><span class="kw">if </span>ennemi.est_vivant() {
-                <span class="kw">let </span>esquive = rand::thread_rng().gen_bool(<span class="number">0.1</span>); <span class="comment">// 10% de chance que le joueur esquive
+                <span class="comment">// Chance d’esquive (10%)
+                </span><span class="kw">let </span>esquive = rand::thread_rng().gen_bool(<span class="number">0.1</span>); <span class="comment">// 10% de chance que le joueur esquive
                 </span><span class="kw">if </span>esquive {
                     <span class="macro">println!</span>(<span class="string">"🌀 Tu esquives l'attaque de {} !"</span>, ennemi.nom());
                 } <span class="kw">else </span>{
-                    <span class="kw">let </span>critique = rand::thread_rng().gen_bool(<span class="number">0.15</span>); <span class="comment">// 15% de critique ennemi
+                    <span class="comment">// Chance de coup critique ennemi (15%)
+                    </span><span class="kw">let </span>critique = rand::thread_rng().gen_bool(<span class="number">0.15</span>); <span class="comment">// 15% de critique ennemi
                     </span><span class="kw">let </span><span class="kw-2">mut </span>degats = ennemi.degats_attaque().saturating_sub(<span class="self">self</span>.protection_defense());
                     <span class="kw">if </span>critique {
                         <span class="macro">println!</span>(<span class="string">"💢 Coup critique de {} !"</span>, ennemi.nom());
                         degats <span class="kw-2">*</span>= <span class="number">2</span>;
                     }
-                    <span class="macro">println!</span>(<span class="string">"💥 {} t'attaque et inflige {} dégâts !"</span>, ennemi.nom(), degats);
+                    <span class="comment">// Applique les dégâts au joueur
+                    </span><span class="macro">println!</span>(<span class="string">"💥 {} t'attaque et inflige {} dégâts !"</span>, ennemi.nom(), degats);
                     <span class="self">self</span>.infliger_degats(degats);
                 }
             }
         }
 
         <span class="kw">if </span><span class="self">self</span>.est_vivant() {
+            <span class="comment">// Le joueur a gagné
+            </span><span class="macro">println!</span>(<span class="string">"\n🏆 Combat terminé !"</span>);
             <span class="macro">println!</span>(<span class="string">"🎉 Tu as vaincu {} !"</span>, ennemi.nom());
+
+            <span class="comment">// Génération du butin (loot) à partir de la table de l’ennemi
+            </span><span class="kw">let </span>loot = LootEntry::generer_depuis_table(ennemi.loot());
+            <span class="comment">// Affichage et ajout dans l’inventaire
+            </span><span class="self">self</span>.afficher_et_ajouter_loot(<span class="kw-2">&amp;</span>loot, items);
+
+            <span class="comment">// Ajout de chaque item au vrai inventaire du joueur
+            </span><span class="kw">for </span>item <span class="kw">in </span>loot {
+                <span class="self">self</span>.vivant.inventory_mut().add_item(item.item_id, item.quantity);
+            }
+
+
+            <span class="comment">// Gain d’expérience après victoire
+            </span><span class="kw">let </span>xp = ennemi.experience_gain();
+            <span class="self">self</span>.add_experience(xp);
+            <span class="macro">println!</span>(<span class="string">"🎖️ Expérience gagnée : {} XP !"</span>, xp);
+            <span class="macro">println!</span>(<span class="string">" ❤️ Santé restante : {} "</span>, <span class="self">self</span>.sante());
+
+
             CombatResult::VICTORY
         } <span class="kw">else </span>{
-            <span class="macro">println!</span>(<span class="string">"☠️ Tu es mort..."</span>);
+            <span class="comment">// Le joueur a perdu
+            </span><span class="macro">println!</span>(<span class="string">"☠️ Tu es mort..."</span>);
             CombatResult::DEFEAT
         }
     }
+
 }
 
 <span class="comment">// Implémentation du trait Tracker pour Character
@@ -1049,6 +1151,14 @@
     </span><span class="kw">fn </span>protection_defense(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u32 {
         <span class="self">self</span>.defense().max(<span class="number">0</span>) <span class="kw">as </span>u32
     }
+
+    <span class="kw">fn </span>loot(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[LootEntry] {
+        <span class="kw-2">&amp;</span>[]
+    }
+
+    <span class="kw">fn </span>experience_gain(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; i32 {
+        <span class="self">self</span>.vivant.strength() * <span class="number">2
+    </span>}
 }
 
 <span class="comment">// Implémentation du trait MoneyManager pour Character
