@@ -10,6 +10,7 @@
             "strength": 15,
             "intelligence": 10,
             "defense": 20,
+            "experience": 0,
             "inventory": {
                 "capacity": 20,
                 "items": []
@@ -31,6 +32,7 @@
             "strength": 15,
             "intelligence": 10,
             "defense": 20,
+            "experience": 0,
             "inventory": {
                 "capacity": 20,
                 "items": []
@@ -52,6 +54,7 @@
             "strength": 15,
             "intelligence": 10,
             "defense": 20,
+            "experience": 0,
             "inventory": {
                 "capacity": 20,
                 "items": []
@@ -73,6 +76,7 @@
             "strength": 15,
             "intelligence": 10,
             "defense": 20,
+            "experience": 0,
             "inventory": {
                 "capacity": 20,
                 "items": []
@@ -93,6 +97,7 @@
             "strength": 8,
             "intelligence": 20,
             "defense": 10,
+            "experience": 0,
             "inventory": {
                 "capacity": 20,
                 "items": [{"item_id": 8, "quantity": 2}, {"item_id": 15, "quantity": 1}, {"item_id": 22, "quantity": 1}]

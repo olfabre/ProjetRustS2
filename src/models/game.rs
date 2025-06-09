@@ -289,7 +289,7 @@ impl Game {
                 if input.starts_with("stats") {
                     println!("\n📊 Statistiques de {} :", character.name());
                     println!("   🧬 Niveau : {}", character.level);
-                    println!("   ⭐ Expérience : {} XP", character.experience);
+                    println!("   ⭐ Expérience : {} XP", character.vivant.experience);
                     println!("   ❤️ Points de vie : {}", character.health());
                     println!("   💪 Force : {}", character.strength());
                     println!("   🧠 Intelligence : {}", character.intelligence());
@@ -324,7 +324,7 @@ impl Game {
                         let enemy_id = enemy_clone.id();
 
                         // 🔄 Utilisation du résultat du combat
-                        match character.combat_interactif(&mut enemy_clone, &self.items) {
+                        /*match character.combat_interactif(&mut enemy_clone, &self.items) {
                             CombatResult::VICTORY => {
                                 let loot = enemy_clone.drop_loot();
                                 let mut loot_affichage = vec![];
@@ -382,7 +382,34 @@ impl Game {
                                 println!("🔙 Tu as fui le combat.");
                             }
                             _ => {}
+                        }*/
+                        match character.combat_interactif(&mut enemy_clone, &self.items) {
+                            CombatResult::VICTORY => {
+                                // Ne pas réafficher victoire / loot / santé : déjà fait dans combat_interactif
+                                for item in enemy_clone.drop_loot() {
+                                    character.vivant.inventory.add_item(item.item_id, item.quantity);
+                                }
+
+                                if let Some(room) = self.rooms.get_mut(character.position) {
+                                    room.enemies.retain(|&id| id != enemy_clone.vivant.id());
+                                }
+
+                                Character::track_enemy(enemy_id, character, &mut self.quetes, &mut self.dialogues);
+                                continue;
+                            }
+
+                            CombatResult::DEFEAT => {
+                                println!("☠️ Tu es mort… fin de l'aventure.");
+                                break;
+                            }
+
+                            CombatResult::ONGOING => {
+                                println!("🔙 Tu as fui le combat.");
+                            }
+
+                            _ => {}
                         }
+
                     } else {
                         println!("❌ Aucun ennemi nommé '{}' ici.", ennemi_nom);
                     }
