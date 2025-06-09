@@ -18,6 +18,15 @@ use std::collections::HashMap;
 use std::io;
 use std::process::Command;
 
+// Structure principale du jeu qui gère l'état global et les interactions
+// Contient toutes les données nécessaires au fonctionnement du jeu :
+// - rooms : Liste des salles du jeu
+// - characters : Liste des personnages jouables
+// - items : Liste des objets disponibles
+// - pnjs : Liste des personnages non-joueurs
+// - dialogues : Liste des dialogues possibles
+// - enemies : Map des ennemis avec leur ID comme clé
+// - quetes : Map des quêtes avec leur ID comme clé
 pub struct Game {
     rooms: Vec<Room>,
     characters: Vec<Character>,
