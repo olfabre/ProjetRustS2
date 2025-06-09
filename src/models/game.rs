@@ -6,18 +6,14 @@ use crate::models::{
     dialogue::Dialogue, entities::character::Character, entities::item::Item, entities::pnj::Pnj,
     entities::room::Room, entities::Enemy::Enemy,
 };
-
 // use crate::io::loader::{load_characters_from_file, load_dialogues_from_file, load_items_from_file, load_pnjs_from_file, load_room_from_file, load_ennemie_from_file, load_quetes_from_file};
-
 use crate::io::loader::*;
 use std::io::{stdin, Write};
 
 use crate::models::entities::quete::Quete;
 use crate::models::tracker::Tracker;
 use crate::models::traits::combattant::CombatResult;
-
 use log::log;
-
 use std::collections::HashMap;
 use std::io;
 use std::process::Command;
@@ -32,13 +28,13 @@ use std::process::Command;
 // - enemies : Map des ennemis avec leur ID comme clé
 // - quetes : Map des quêtes avec leur ID comme clé
 pub struct Game {
-    rooms: Vec<Room>,                          // Liste des salles du jeu
-    characters: Vec<Character>,               // Liste des personnages (joueur compris)
-    items: Vec<Item>,                         // Liste globale des objets disponibles
-    pnjs: Vec<Pnj>,                           // Liste des PNJ présents dans le jeu
-    dialogues: Vec<Dialogue>,                 // Liste des dialogues
-    enemies: HashMap<u32, Enemy>,             // Dictionnaire des ennemis par identifiant
-    quetes: HashMap<u32, Quete>,              // Dictionnaire des quêtes par identifiant
+    rooms: Vec<Room>,
+    characters: Vec<Character>,
+    items: Vec<Item>,
+    pnjs: Vec<Pnj>,
+    dialogues: Vec<Dialogue>,
+    enemies: HashMap<u32, Enemy>,
+    quetes: HashMap<u32, Quete>,
 }
 
 impl Game {
@@ -62,8 +58,6 @@ impl Game {
         let mut quetes = load_quetes_from_file("data/quetes.json")
             .expect("Erreur lors du chargement des quetes.");
 
-
-        // Création de l'instance du jeu avec les données chargée
         Game {
             rooms,
             characters,
@@ -82,6 +76,7 @@ impl Game {
             let mut last_room = character.position;
 
             // Afficher l'image de la salle de départ
+            // println!("\nAffichage de l'image de la salle de départ...");
             let current_room = &self.rooms[character.position];
             let room_id = current_room.id();
 
@@ -114,11 +109,9 @@ impl Game {
                 );
             }
 
-            // Boucle principale du jeu
             loop {
                 let current_room = &self.rooms[character.position];
                 let room_id = current_room.id();
-
                 // println!("DEBUG - last_room: {}, current position: {}", last_room, character.position);
 
                 // Pause execution, waiting for user input
@@ -128,26 +121,25 @@ impl Game {
                 let _ = io::stdin().read_line(&mut String::new());
                 // clear_console();  // Commenté pour tester l'affichage des images
 
-
-                println!("\n__________________________________________________________________________________________");
-                println!("__________________________________________________________________________________________");
+                // Affiche les directions disponibles
+                println!("🚪 Sorties disponibles :");
+                for direction in current_room.exits.keys() {
+                    println!("   - {}", direction);
+                }
 
                 // Afficher l'image uniquement si on change de salle
                 if last_room != character.position {
-
                     // println!("\nAffichage de l'image de la salle...");
-
 
                     // Obtenir le chemin absolu du dossier images
                     let current_dir = std::env::current_dir()
                         .expect("Impossible d'obtenir le répertoire courant");
                     let images_dir = current_dir.join("images");
                     let image_path = images_dir.join(format!("{}.png", room_id));
-
                     // println!("Chemin complet de l'image recherchée : {}", image_path.display());
 
-
                     if image_path.exists() {
+                        // println!("Image trouvée : {}", image_path.display());
                         let output = Command::new("viu")
                             .arg("-t") // Afficher dans le terminal
                             .arg(image_path.to_str().unwrap())
@@ -170,7 +162,6 @@ impl Game {
                     last_room = character.position;
                 }
 
-                // Affiche le nom et la description de la salle
                 println!("\n🌍 {} est actuellement dans : ", character.name());
                 println!(
                     "   - {} : {}",
@@ -224,13 +215,6 @@ impl Game {
                     println!("🧑 Aucun personnage ici.");
                 }
 
-                // Affiche les directions disponibles
-                println!("🚪 Sorties disponibles :");
-                for direction in current_room.exits.keys() {
-                    println!("   - {}", direction);
-                }
-
-                // Affiche les options disponibles pour le joueur
                 println!("\nOù veux-tu aller ? ( nord, sud, est, ouest, haut, bas, tunnel, quit )");
                 println!("Que veux-tu faire ? ( prendre <objet>, utiliser <objet>, parler <pnj>, combattre <ennemie> )");
                 println!("Que veux-tu voir ? ( quêtes, inventaire, stats )");
@@ -240,7 +224,6 @@ impl Game {
                 stdin().read_line(&mut input).expect("Erreur de lecture");
                 let input = input.trim().to_lowercase();
 
-                // Quitte le jeu
                 if input == "quit" {
                     println!("🏁 Fin du jeu.");
                     break;
@@ -281,7 +264,6 @@ impl Game {
                     continue;
                 }
 
-                // Affiche les quêtes en cours ou terminée
                 if input.starts_with("quêtes") {
                     let quetes_found =
                         character.get_active_quests(&self.quetes, &self.items, &self.enemies);
@@ -289,8 +271,9 @@ impl Game {
                     continue;
                 }
 
-
                 // Afficher l'inventaire du personnage et stats bass
+
+                // Afficher l'inventaire
                 if input.starts_with("inventaire") {
                     character.afficher_inventaire(&self.items);
                     continue;
@@ -320,8 +303,8 @@ impl Game {
                         .find(|room| room.id() == current_room_id as u32)
                         .expect("La salle actuelle n'a pas été trouvée.");
 
-                    // Il peut arriver que la salle contienne plusieurs ennemis portant le même nom.
-                    // Nous devons donc vérifier tous les ennemis présents dans la salle.
+                    // It might happen that the room contains more than one enemy with the same name,
+                    // so we need to check all enemies in the room
                     let enemies: Vec<&Enemy> = current_room
                         .enemies
                         .iter()
@@ -412,13 +395,12 @@ impl Game {
                     _ => input.as_str(),
                 };
 
-                // Tentative de déplacement dans la direction donnée
+                // Déplacement du personnage avec vérification
                 character.try_move(direction, &mut self.rooms);
             }
         }
     }
 }
-
 
 // fn clear_console() {
 //     print!("\x1B[2J\x1B[1;1H"); // ANSI escape code to clear screen
