@@ -191,8 +191,6 @@ impl Character {
     // Ajoute de l'expérience au personnage
     // Vérifie si un passage de niveau est possible
     pub fn add_experience(&mut self, xp: i32) {
-        println!("🎖️ Vous gagnez {} XP !", xp);
-
         // Ajoute l'expérience au total du personnage
         self.vivant.experience += xp;
 
