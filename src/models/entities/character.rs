@@ -267,62 +267,6 @@ impl Character {
 
 
 
-
-
-    /// Gère une boucle de combat complète entre le joueur et un seul ennemi.
-    /// Alterne les tours, calcule les dégâts, applique les coups critiques et l'esquive.
-    /// Accorde de l'expérience en cas de victoire et gère les conditions de défaite.
-    pub fn combat<T: Combattant>(&mut self, ennemi: &mut T) -> CombatResult {
-        println!("⚔️ Début du combat : {} VS {}", self.name(), ennemi.nom());
-
-        let mut rng = rand::thread_rng();
-
-        loop {
-            // ======== Tour du joueur ========
-            let esquive = rng.gen_bool(0.1); // 10% de chance d'esquive
-            let critique = rng.gen_bool(0.2); // 20% de chance de critique
-
-            let mut degats = self.degats_attaque();
-            if critique {
-                println!("🎯 Coup critique !");
-                degats *= 2;
-            }
-
-            println!("👉 {} attaque avec {} dégâts !", self.name(), degats);
-            ennemi.infliger_degats(degats);
-
-            if !ennemi.est_vivant() {
-                println!("🏆 Tu as vaincu {} !", ennemi.nom());
-
-                let xp_gagnee = 30; // à adapter selon l'ennemi
-                self.add_experience(xp_gagnee);
-                return CombatResult::VICTORY;
-            }
-
-            // ======== Tour de l'ennemi ========
-            if esquive {
-                println!("🌀 Tu esquives l'attaque de {} !", ennemi.nom());
-            } else {
-                let degats_ennemi = ennemi.degats_attaque();
-                println!("💥 {} attaque avec {} dégâts !", ennemi.nom(), degats_ennemi);
-                self.infliger_degats(degats_ennemi);
-            }
-
-            println!(
-                "❤️ État actuel : {} ({} PV), {} ({} PV)\n",
-                self.name(),
-                self.sante(),
-                ennemi.nom(),
-                ennemi.sante()
-            );
-
-            if !self.est_vivant() {
-                println!("☠️ Tu es mort face à {}…", ennemi.nom());
-                return CombatResult::DEFEAT;
-            }
-        }
-    }
-
     /// Boucle de combat interactive où l'utilisateur choisit des actions (attaquer, utiliser un objet, fuir).
     /// Fournit une interaction dynamique au tour par tour avec une entrée en ligne de commande.
     pub fn combat_interactif<T: Combattant>(&mut self, ennemi: &mut T, items: &[Item]) -> CombatResult {
