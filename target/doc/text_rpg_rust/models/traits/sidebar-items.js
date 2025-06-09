@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["combattant","descriptible","interactible","money_manager"]};

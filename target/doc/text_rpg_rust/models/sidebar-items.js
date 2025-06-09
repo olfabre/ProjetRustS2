@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["combat","dialogue","entities","game","tracker","traits"]};

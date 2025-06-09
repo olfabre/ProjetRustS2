@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["Enemy","character","entity","inventory","inventory_item","item","loot_entry","pnj","quete","room","vivant"]};

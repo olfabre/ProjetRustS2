@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["get_user_input","load_characters_from_file","load_dialogues_from_file","load_enemies_from_file","load_ennemie_from_file","load_items_from_file","load_pnjs_from_file","load_quetes_from_file","load_room_from_file"]};
