@@ -1,25 +1,4 @@
-/*pub trait Combattant {
-    fn get_name(&self) -> &str;
-    fn get_health(&self) -> i32;
-    fn get_strength(&self) -> i32;
 
-    fn receive_damage(&mut self, amount: i32);
-
-    fn is_alive(&self) -> bool {
-        self.get_health() > 0
-    }
-
-    fn attack(&self, target: &mut dyn Combattant) {
-        let damage = self.get_strength();
-        println!(
-            "{} attaque {} et inflige {} dégâts !",
-            self.get_name(),
-            target.get_name(),
-            damage
-        );
-        target.receive_damage(damage);
-    }
-}*/
 use crate::models::entities::loot_entry::LootEntry;
 
 // Trait définissant les capacités de combat pour les entités du jeu

@@ -385,7 +385,7 @@ impl Game {
                         }*/
                         match character.combat_interactif(&mut enemy_clone, &self.items) {
                             CombatResult::VICTORY => {
-                                // 🧼 Ne pas réafficher victoire / loot / santé : déjà fait dans combat_interactif
+                                // Ne pas réafficher victoire / loot / santé : déjà fait dans combat_interactif
                                 for item in enemy_clone.drop_loot() {
                                     character.vivant.inventory.add_item(item.item_id, item.quantity);
                                 }
