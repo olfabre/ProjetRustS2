@@ -1,137 +1,145 @@
+// === Imports ===
 use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 use std::io::stdin;
 
+// Importations de modules internes (modèles de domaine et traits)
 use crate::models::entities::character::Character;
 use crate::models::entities::item::Item;
 use crate::models::entities::pnj::Pnj;
 use crate::models::entities::quete::Quete;
-use crate::models::tracker::Tracker;
 use crate::models::traits::money_manager::MoneyManager;
+
+// === Structure du dialogue ===
+// Représente une conversation interactive avec un PNJ (PNJ)
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Dialogue {
-    pub dialogue_id: u32,
-    pub dialogue_steps: Vec<DialogueStep>,
+    pub dialogue_id: u32,                  // ID unique pour le dialogue
+    pub dialogue_steps: Vec<DialogueStep>, // Séquence d'étapes/questions dans le dialogue
 }
 
+// === Dialogue Step ===
+// Une seule étape dans un dialogue (une question et des options)
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct DialogueStep {
-    pub action: String,     // reference to quetes
-    pub active: bool,
-    pub question: String,
-    pub options: Vec<DialogueOption>,
+    pub action: String,     // Action associée (ex. : accepter une quête)
+    pub active: bool,       // Indique si cette étape est actuellement active
+    pub question: String,   // La question posée au joueur
+    pub options: Vec<DialogueOption>, // Liste des choix de réponse
 }
 
+
+// === Dialogue Option ===
+// Une réponse possible à une étape de dialogue, avec réaction du PNJ
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct DialogueOption {
-    pub réponse: String,
-    pub réaction: String,
+    pub réponse: String,    // Reponse du joueur
+    pub réaction: String,   // Réaction du PNJ à la réponse
 }
 
+// === Dialogue Implementation ===
 impl Dialogue {
-    // Affiche un dialogue et permet au joueur de choisir une réponse
+
+    // === afficher_dialogue ===
+    // Gère le dialogue interactif avec le joueur
+    // - Affiche les questions du dialogue
+    // - Gère l'acceptation/l'achèvement des quêtes
+    // - Déclenche le mode marchand si nécessaire
     pub fn afficher_dialogue(&mut self, character: &mut Character,
                              quetes: &mut HashMap<u32,Quete>, items: &Vec<Item>, pnj: &mut Pnj) {
         if self.dialogue_steps.is_empty() {
             println!("Ce PNJ n'a rien à dire.");
         } else {
 
-            let mut current_index = 0; // Start at the first dialogue step
+            let mut current_index = 0; // Index de l'étape de dialogue en cours
 
             while current_index < self.dialogue_steps.len() {
 
-                // This is a reference, because step is going to be changed
                 let step = &self.dialogue_steps[current_index];
-
-                // Instead of holding the mutable reference, extract needed values early
-
                 let options = self.dialogue_steps[current_index].options.clone();
                 let action = self.dialogue_steps[current_index].action.clone();
 
-                // Si un step est inactive, on le saute
+                // Ignorer les étapes inactives
                 if !step.active {
                     current_index += 1;
-                    continue; // 🔄 Passer à la prochaine question
+                    continue;
                 }
 
+                // === Afficher l'étape de dialogue et les options ===
                 println!("current index: ================> {}", current_index);
                 println!("💬 PNJ : \"{}\"", step.question);
-
                 for (i, option) in options.iter().enumerate() {
                     println!("{}. {}", i + 1, option.réponse);
                 }
 
+                // === Lire la saisie utilisateur ===
                 println!("➡ Tape le numéro de ton choix :");
                 let mut choix = String::new();
                 stdin().read_line(&mut choix).expect("Erreur de lecture");
 
+                // === Gérer la réponse de l'utilisateur ===
                 if let Ok(index) = choix.trim().parse::<usize>() {
                     if index > 0 && index <= step.options.len() {
                         let selected_option = &options[index - 1];
-
-                        // Afficher la réaction
                         println!("💬 PNJ : \"{}\"", selected_option.réaction);
 
-                        // 🛠️ Vérifier si l'action commence par "accepteQuete"
+                        // === Accepter quete ===
                         if action.starts_with("accepteQuete") && selected_option.réponse == "Accepter Quête" {
-                            // Extraire l'ID de la quête (si format "accepteQuete:42")
                             if let Some(id_str) = action.split(':').nth(1) {
                                 if let Ok(id) = id_str.parse::<u32>() {
-
                                     character.ajouter_quete(id);
-                                    // let  quete = quetes.get(&id).unwrap();
                                     println!("🎯 Quête ajoutée : {}!", quetes.get(&id).unwrap().name());
-
-                                    // Quand la quete est acceptée, le dialogue pour l'offrir disparait
                                     self.dialogue_steps[current_index].active = false;
                                 }
                             }
                         }
 
-                        // Verifier si action  == rendreQuete
-                        // Verifier si reponse == Completer Quete
-                         if action.starts_with("rendreQuete") && selected_option.réponse == "Completer Quête" {
-                             // Split string a get the part after :
-                             if let Some(id_str) = action.split(':').nth(1) {
-                                 // parse string into u32
-                                 if let Ok(id) = id_str.parse::<u32>() {
-                                     // retrieve mut quete from Map
-                                     let  quete = quetes.get(&id).unwrap();
-                                     // Character supprimer quete
-                                     character.supprimer_quete(id);
-                                     character.add_experience(quete.experience);
+                        // === Terminer la quête ===
+                        if action.starts_with("rendreQuete") && selected_option.réponse == "Completer Quête" {
+                            if let Some(id_str) = action.split(':').nth(1) {
+                                if let Ok(id) = id_str.parse::<u32>() {
+                                    let quete = quetes.get(&id).unwrap();
 
-                                     // On récupère l'objet depuis la liste globale
-                                     for recompense_item in quete.recompense_items.iter() {
-                                         if let Some(item) = items.iter().find(|item| item.id() == *recompense_item) {
-                                             // On l'ajoute à l'inventaire du personnage
-                                             character.inventory_mut().add_item(item.id(), 1);
-                                             println!("👜 Tu as ramassé '{}'.", item.name());
-                                         }
-                                     }
+                                    if quete.objectif_type == "collecter" {
+                                        character.inventory_mut().remove_item(quete.objectif.collecter.item_id, quete.objectif.collecter.target);
+                                        pnj.inventory_mut().add_item(quete.objectif.collecter.item_id, quete.objectif.collecter.target);
+                                    }
 
-                                     if quete.recompense_argent > 0 {
-                                         println!("🪙 Tu as gagné {} pièces d'money.", quete.recompense_argent);
-                                         character.add_money(quete.recompense_argent);
-                                     }
-                                 }
-                             }
-                         }
+                                    character.supprimer_quete(id);
+                                    character.add_experience(quete.experience);
 
+                                    // === Distribuer les objets de récompense ===
+                                    for recompense_item in quete.recompense_items.iter() {
+                                        if let Some(item) = items.iter().find(|item| item.id() == *recompense_item) {
+                                            character.inventory_mut().add_item(item.id(), 1);
+                                            println!("👜 Tu as ramassé '{}'.", item.name());
+                                        }
+                                    }
+
+                                    // === Distribuer la récompense en argent ===
+                                    if quete.recompense_argent > 0 {
+                                        println!("🪙 Tu as gagné {} pièces d'money.", quete.recompense_argent);
+                                        character.add_money(quete.recompense_argent);
+                                    }
+                                }
+                            }
+                        }
+
+                        // === Démarrer le système marchand ===
                         if action.starts_with("merchant") && selected_option.réponse == "Commerce" {
                             self.start_merchant(character, items, pnj);
                         }
 
-                        // Sortir de la boucle tôt
+                        // === Quitter le dialogue plus tôt que prévu si le joueur dit au revoir ===
                         if selected_option.réponse.starts_with("Au revoir") ||
                             selected_option.réponse.starts_with("Ignorer") ||
                             selected_option.réponse.starts_with("Refuser") {
                             break;
                         }
 
-                        // Le but c'est montrer tous les steps qui sont actives
-                        current_index += 1; // ✅ Mettre à jour l'index
+                        // Passer à l'étape suivante
+                        current_index += 1;
 
                     } else {
                         println!("❌ Choix invalide !");
@@ -143,46 +151,49 @@ impl Dialogue {
         }
     }
 
-    // 🏪 Merchant System Loop
+    // === start_merchant ===
+    // Gère l'achat/la vente d'objets entre le personnage et le PNJ
     pub fn start_merchant(&mut self, character: &mut Character, items: &Vec<Item>, pnj: &mut Pnj) {
         loop {
             println!("\n👤 {} (🪙 {})", character.name(), character.money);
             println!("🛒 Marchand (🪙 {}) : \"Voici mes merchandises.\"", pnj.money);
             let mut merchant_items = pnj.inventory_mut();
 
+            // === Lister les articles du marchand ===
             for (i, inventory_item) in merchant_items.items.iter().enumerate() {
                 let id = inventory_item.item_id;
                 if let Some(item) = items.iter().find(|i| i.id() == id) {
-                    println!("{}. {} - 🪙 {} - Qt: {}", i + 1, item.name(), item.value, inventory_item.quantity) ;
+                    println!("{}. {} - 🪙 {} - Qt: {}", i + 1, item.name(), item.value, inventory_item.quantity);
                 } else {
                     println!("{}. Objet inconnu (ID: {})", i + 1, id);
                 }
-
-
             }
-            println!("vendre <objet>  (dans votre inventaire)");
+
+            println!("vendre <objet>, inventaire (afficher inventaire)");
             println!("quitter");
             println!("\n➡ Tapez le numéro de l'objet à acheter, ou autre choix :");
 
             let mut choix = String::new();
             stdin().read_line(&mut choix).expect("Erreur de lecture");
 
+            // === Quitter le mode marchand ===
             if choix.trim().eq_ignore_ascii_case("quitter") {
                 println!("👋 Bon Affaire");
-                break; // Quit merchant loop
+                break;
             }
 
+            // === Achat d'articles ===
             if let Ok(index) = choix.trim().parse::<usize>() {
                 if index > 0 && index <= merchant_items.items.len() {
                     let inventory_item = &merchant_items.items[index - 1];
                     let Some(item) = items.iter().find(|i| i.id() == inventory_item.item_id)
-                        else { todo!() };
+                    else { todo!() };
+
                     if character.money >= item.value {
                         character.inventory_mut().add_item(item.id(), 1);
                         character.remove_money(item.value);
                         pnj.inventory_mut().remove_item(item.id(), 1);
                         pnj.add_money(item.value);
-
                         println!("🪙 Tu as acheté '{}'.", item.name());
                     } else {
                         println!("❌ Pas assez d'argent !");
@@ -190,13 +201,15 @@ impl Dialogue {
                 } else {
                     println!("❌ Choix invalide !");
                 }
-            } else if choix.starts_with("vendre ") {
-                let objet_nom = &choix[9..].trim();
+            }
+
+            // === Vente d'articles ===
+            else if choix.starts_with("vendre ") {
+                let objet_nom = &choix[7..].trim();
                 if let Some(item) = items.iter().find(|i| {
                     i.name().eq_ignore_ascii_case(objet_nom) &&
                         character.inventory_mut().items.iter().any(|(inv)| inv.item_id == i.id())
                 }) {
-
                     if pnj.money >= item.value {
                         character.inventory_mut().remove_item(item.id(), 1);
                         character.add_money(item.value);
@@ -210,6 +223,9 @@ impl Dialogue {
                     println!("❌ Objet non trouvé dans ton inventaire !");
                 }
 
+            // === Afficher l'inventaire ===
+            } else if choix.starts_with("inventaire") {
+                character.afficher_inventaire(items);
             } else {
                 println!("❌ Entrée invalide !");
             }
@@ -217,4 +233,3 @@ impl Dialogue {
     }
 
 }
-

@@ -6,8 +6,7 @@ use crate::models::entities::entity::Entity;
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Quete {
     entity: Entity,
-    // pub statu: String, // disponible, accepté, terminé, rendu
-    pub dialog_rendu_id: u32, // reference to dialogue, can belong to a different pnj other than the quest giver
+    pub dialog_rendu_id: u32,
     pub objectif_type: String,
     pub objectif: Objectif,
     pub recompense_items: Vec<u32>,
@@ -45,8 +44,6 @@ pub struct Visiter {
 
 impl Quete {
 
-
-
     pub fn id(&self) -> u32 {
         self.entity.id()
     }
@@ -63,12 +60,16 @@ impl Quete {
         self.objectif.collecter.count += 1;
     }
 
+    /// Vérifie si le nombre requis d'objets collectés a été atteint.
+    /// Retourne `true` si le joueur a collecté le nombre cible d'objets, sinon `false`.
     pub fn is_item_count_reached(&self) -> bool {
+        // Compare le nombre actuel d'objets collectés avec le nombre cible requis.
         if self.objectif.collecter.count == self.objectif.collecter.target {
-            return true
+            return true // La condition est remplie, l'objectif de collecte est atteint.
         }
-        false
+        false // La condition n'est pas remplie, l'objectif n'est pas encore atteint.
     }
+
 
     pub fn ennemi_id(&self) -> u32 {
         self.objectif.tuer.ennemi_id
