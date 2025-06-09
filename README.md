@@ -4,7 +4,7 @@
 
 La documentation technique complète est disponible :
 Vous pouvez accéder directement à la documentation générée à l'adresse :
-`./target/doc/text_rpg_rust/index.html
+./target/doc/text_rpg_rust/index.html
 
 ## 🎮 Structure du Projet
 
