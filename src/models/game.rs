@@ -301,108 +301,62 @@ impl Game {
 
                 // Combattre un ennemi
                 if input.starts_with("combattre ") {
+                    // Extrait le nom de l’ennemi à partir de l’entrée utilisateur, en supprimant "combattre"
                     let ennemi_nom = &input[10..].trim().to_lowercase();
+
+                    // Récupère l’identifiant de la salle actuelle du personnage
                     let current_room_id = character.position.clone();
+
+                    // Recherche la salle actuelle dans la liste des salles en utilisant son ID
                     let current_room = self
                         .rooms
                         .iter()
                         .find(|room| room.id() == current_room_id as u32)
                         .expect("La salle actuelle n'a pas été trouvée.");
 
-                    // It might happen that the room contains more than one enemy with the same name,
-                    // so we need to check all enemies in the room
+                    // Filtre tous les ennemis de la salle actuelle dont le nom correspond à celui saisi
                     let enemies: Vec<&Enemy> = current_room
                         .enemies
                         .iter()
+                        // Récupère chaque ennemi par son ID depuis la map globale des ennemis
                         .filter_map(|enemies_id| self.enemies.get(enemies_id))
+                        // Compare les noms en minuscules (pour être insensible à la casse)
                         .filter(|enemy| enemy.name().to_lowercase() == *ennemi_nom)
                         .collect();
 
+                    // Vérifie si au moins un ennemi correspondant a été trouvé
                     if enemies.len() > 0 {
                         // Clone de l'ennemi pour pouvoir le manipuler sans bouger l'original (qui est dans self.ennemies)
                         let mut enemy_clone = enemies[0].clone();
                         let enemy_id = enemy_clone.id();
 
-                        // 🔄 Utilisation du résultat du combat
-                        /*match character.combat_interactif(&mut enemy_clone, &self.items) {
-                            CombatResult::VICTORY => {
-                                let loot = enemy_clone.drop_loot();
-                                let mut loot_affichage = vec![];
-
-                                for inv_item in &loot {
-                                    let name = self
-                                        .items
-                                        .iter()
-                                        .find(|i| i.id() == inv_item.item_id)
-                                        .map(|i| i.name().to_string())
-                                        .unwrap_or_else(|| {
-                                            format!("Objet inconnu ({})", inv_item.item_id)
-                                        });
-                                    loot_affichage.push(format!("{} x{}", name, inv_item.quantity));
-                                }
-
-                                println!("\n🎉 Victoire contre {} !", enemy_clone.vivant.name());
-
-                                if loot_affichage.is_empty() {
-                                    println!("🎁 Aucun objet trouvé.");
-                                } else {
-                                    println!("🎁 Loot récupéré :");
-                                    for ligne in loot_affichage {
-                                        println!("- {}", ligne);
-                                    }
-                                }
-
-                                println!("🩸 Santé restante : {} PV", character.vivant.health());
-
-                                for item in loot {
-                                    character
-                                        .vivant
-                                        .inventory
-                                        .add_item(item.item_id, item.quantity);
-                                }
-
-                                if let Some(room) = self.rooms.get_mut(character.position) {
-                                    room.enemies.retain(|&id| id != enemy_clone.vivant.id());
-                                }
-
-                                Character::track_enemy(
-                                    enemy_id,
-                                    character,
-                                    &mut self.quetes,
-                                    &mut self.dialogues,
-                                );
-                            }
-
-                            CombatResult::DEFEAT => {
-                                println!("☠️ Tu es mort… fin de l'aventure.");
-                                break;
-                            }
-
-                            CombatResult::ONGOING => {
-                                println!("🔙 Tu as fui le combat.");
-                            }
-                            _ => {}
-                        }*/
+                        // Lance le combat entre le personnage et l'ennemi cloné
                         match character.combat_interactif(&mut enemy_clone, &self.items) {
                             CombatResult::VICTORY => {
-                                // Ne pas réafficher victoire / loot / santé : déjà fait dans combat_interactif
+                                // Le combat_interactif affiche déjà le loot et les messages de victoire
+
+                                // Ajoute les objets trouvés dans l’inventaire du joueur
                                 for item in enemy_clone.drop_loot() {
                                     character.vivant.inventory.add_item(item.item_id, item.quantity);
                                 }
 
+                                // Supprime l’ennemi vaincu de la salle actuelle
                                 if let Some(room) = self.rooms.get_mut(character.position) {
                                     room.enemies.retain(|&id| id != enemy_clone.vivant.id());
                                 }
 
+                                // Met à jour l'avancement des quêtes liées à cet ennemi
                                 Character::track_enemy(enemy_id, character, &mut self.quetes, &mut self.dialogues);
                                 continue;
                             }
 
+                            // Si le personnage perd le combat, affiche un message de fin
                             CombatResult::DEFEAT => {
                                 println!("☠️ Tu es mort… fin de l'aventure.");
                                 break;
                             }
 
+                            // Si le personnage fuit le combat, affiche un message d’échec de l’action
                             CombatResult::ONGOING => {
                                 println!("🔙 Tu as fui le combat.");
                             }
@@ -411,6 +365,7 @@ impl Game {
                         }
 
                     } else {
+                        // Si aucun ennemi du nom donné n’est présent dans la salle
                         println!("❌ Aucun ennemi nommé '{}' ici.", ennemi_nom);
                     }
                 }

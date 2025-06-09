@@ -130,16 +130,7 @@
 <a href="#129" id="129">129</a>
 <a href="#130" id="130">130</a>
 <a href="#131" id="131">131</a>
-<a href="#132" id="132">132</a>
-<a href="#133" id="133">133</a>
-<a href="#134" id="134">134</a>
-<a href="#135" id="135">135</a>
-<a href="#136" id="136">136</a>
-<a href="#137" id="137">137</a>
-<a href="#138" id="138">138</a>
-<a href="#139" id="139">139</a>
-<a href="#140" id="140">140</a>
-<a href="#141" id="141">141</a></pre></div><pre class="rust"><code><span class="comment">// Module de gestion des ennemis du jeu
+<a href="#132" id="132">132</a></pre></div><pre class="rust"><code><span class="comment">// Module de gestion des ennemis du jeu
 // Définit la structure Enemy et ses fonctionnalités
 // Permet de gérer les ennemis, leurs statistiques et leur loot
 
@@ -147,6 +138,7 @@
 
 <span class="kw">use </span><span class="kw">crate</span>::models::entities::vivant::Vivant;
 <span class="kw">use </span><span class="kw">crate</span>::models::entities::inventory_item::InventoryItem;
+<span class="kw">use </span><span class="kw">crate</span>::models::entities::loot_entry::LootEntry;
 <span class="kw">use </span><span class="kw">crate</span>::models::traits::combattant::Combattant;
 
 <span class="comment">// Structure représentant un ennemi dans le jeu
@@ -154,12 +146,12 @@
 </span><span class="attr">#[derive(Debug, Serialize, Deserialize, Clone)]
 </span><span class="kw">pub struct </span>Enemy {
     <span class="kw">pub </span>vivant: Vivant,                <span class="comment">// Propriétés de base (santé, force, etc.)
-    </span>loot: Vec&lt;InventoryItem&gt;,         <span class="comment">// Liste des objets que l'ennemi peut lâcher
+    </span>loot: Vec&lt;LootEntry&gt;,         <span class="comment">// Liste des objets que l'ennemi peut lâcher
 </span>}
 
 <span class="kw">impl </span>Enemy {
     <span class="comment">// Crée un nouvel ennemi avec ses statistiques et son loot
-    </span><span class="kw">pub fn </span>new(vivant: Vivant, loot: Vec&lt;InventoryItem&gt;) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">pub fn </span>new(vivant: Vivant, loot: Vec&lt;LootEntry&gt;) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             vivant,
             loot,
@@ -213,7 +205,7 @@
 
     <span class="comment">// Retourne la liste des objets que l'ennemi peut lâcher
     </span><span class="kw">pub fn </span>drop_loot(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;InventoryItem&gt; {
-        <span class="self">self</span>.loot.clone()
+        LootEntry::generer_depuis_table(<span class="kw-2">&amp;</span><span class="self">self</span>.loot)
     }
 
     <span class="comment">// Retourne la défense de l'ennemi
@@ -259,24 +251,15 @@
     </span><span class="kw">fn </span>protection_defense(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u32 {
         <span class="self">self</span>.defense().max(<span class="number">0</span>) <span class="kw">as </span>u32
     }
+
+    <span class="kw">fn </span>loot(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[LootEntry] {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.loot
+    }
+    <span class="kw">fn </span>experience_gain(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; i32 {
+        <span class="comment">//self.vivant.strength + self.vivant.defense + self.vivant.intelligence
+        </span><span class="self">self</span>.vivant.experience
+    }
 }
 
 
-<span class="comment">/*impl Combattant for Enemy {
-    fn nom(&amp;self) -&gt; &amp;str { self.vivant.nom() }
-    fn force(&amp;self) -&gt; u32 { self.vivant.force() }
-    fn sante(&amp;self) -&gt; u32 { self.vivant.sante() }
-    fn est_vivant(&amp;self) -&gt; bool { self.vivant.est_vivant() }
-
-    fn infliger_degats(&amp;mut self, degats: u32) {
-        self.vivant.infliger_degats(degats);
-    }
-
-    fn degats_attaque(&amp;self) -&gt; u32 {
-        self.vivant.degats_attaque()
-    }
-
-    fn protection_defense(&amp;self) -&gt; u32 {
-        self.vivant.protection_defense()
-    }
-}*/</span></code></pre></div></section></main></body></html>
+</code></pre></div></section></main></body></html>

@@ -394,25 +394,7 @@
 <a href="#393" id="393">393</a>
 <a href="#394" id="394">394</a>
 <a href="#395" id="395">395</a>
-<a href="#396" id="396">396</a>
-<a href="#397" id="397">397</a>
-<a href="#398" id="398">398</a>
-<a href="#399" id="399">399</a>
-<a href="#400" id="400">400</a>
-<a href="#401" id="401">401</a>
-<a href="#402" id="402">402</a>
-<a href="#403" id="403">403</a>
-<a href="#404" id="404">404</a>
-<a href="#405" id="405">405</a>
-<a href="#406" id="406">406</a>
-<a href="#407" id="407">407</a>
-<a href="#408" id="408">408</a>
-<a href="#409" id="409">409</a>
-<a href="#410" id="410">410</a>
-<a href="#411" id="411">411</a>
-<a href="#412" id="412">412</a>
-<a href="#413" id="413">413</a>
-<a href="#414" id="414">414</a></pre></div><pre class="rust"><code><span class="comment">// Module principal du jeu qui gère la logique et l'état du jeu
+<a href="#396" id="396">396</a></pre></div><pre class="rust"><code><span class="comment">// Module principal du jeu qui gère la logique et l'état du jeu
 // Ce module contient la structure Game et ses implémentations
 
 </span><span class="kw">use </span>rand::Rng;
@@ -703,7 +685,7 @@
                 </span><span class="kw">if </span>input.starts_with(<span class="string">"stats"</span>) {
                     <span class="macro">println!</span>(<span class="string">"\n📊 Statistiques de {} :"</span>, character.name());
                     <span class="macro">println!</span>(<span class="string">"   🧬 Niveau : {}"</span>, character.level);
-                    <span class="macro">println!</span>(<span class="string">"   ⭐ Expérience : {} XP"</span>, character.experience);
+                    <span class="macro">println!</span>(<span class="string">"   ⭐ Expérience : {} XP"</span>, character.vivant.experience);
                     <span class="macro">println!</span>(<span class="string">"   ❤️ Points de vie : {}"</span>, character.health());
                     <span class="macro">println!</span>(<span class="string">"   💪 Force : {}"</span>, character.strength());
                     <span class="macro">println!</span>(<span class="string">"   🧠 Intelligence : {}"</span>, character.intelligence());
@@ -715,90 +697,72 @@
 
                 <span class="comment">// Combattre un ennemi
                 </span><span class="kw">if </span>input.starts_with(<span class="string">"combattre "</span>) {
-                    <span class="kw">let </span>ennemi_nom = <span class="kw-2">&amp;</span>input[<span class="number">10</span>..].trim().to_lowercase();
-                    <span class="kw">let </span>current_room_id = character.position.clone();
-                    <span class="kw">let </span>current_room = <span class="self">self
+                    <span class="comment">// Extrait le nom de l’ennemi à partir de l’entrée utilisateur, en supprimant "combattre"
+                    </span><span class="kw">let </span>ennemi_nom = <span class="kw-2">&amp;</span>input[<span class="number">10</span>..].trim().to_lowercase();
+
+                    <span class="comment">// Récupère l’identifiant de la salle actuelle du personnage
+                    </span><span class="kw">let </span>current_room_id = character.position.clone();
+
+                    <span class="comment">// Recherche la salle actuelle dans la liste des salles en utilisant son ID
+                    </span><span class="kw">let </span>current_room = <span class="self">self
                         </span>.rooms
                         .iter()
                         .find(|room| room.id() == current_room_id <span class="kw">as </span>u32)
                         .expect(<span class="string">"La salle actuelle n'a pas été trouvée."</span>);
 
-                    <span class="comment">// It might happen that the room contains more than one enemy with the same name,
-                    // so we need to check all enemies in the room
+                    <span class="comment">// Filtre tous les ennemis de la salle actuelle dont le nom correspond à celui saisi
                     </span><span class="kw">let </span>enemies: Vec&lt;<span class="kw-2">&amp;</span>Enemy&gt; = current_room
                         .enemies
                         .iter()
-                        .filter_map(|enemies_id| <span class="self">self</span>.enemies.get(enemies_id))
-                        .filter(|enemy| enemy.name().to_lowercase() == <span class="kw-2">*</span>ennemi_nom)
+                        <span class="comment">// Récupère chaque ennemi par son ID depuis la map globale des ennemis
+                        </span>.filter_map(|enemies_id| <span class="self">self</span>.enemies.get(enemies_id))
+                        <span class="comment">// Compare les noms en minuscules (pour être insensible à la casse)
+                        </span>.filter(|enemy| enemy.name().to_lowercase() == <span class="kw-2">*</span>ennemi_nom)
                         .collect();
 
-                    <span class="kw">if </span>enemies.len() &gt; <span class="number">0 </span>{
+                    <span class="comment">// Vérifie si au moins un ennemi correspondant a été trouvé
+                    </span><span class="kw">if </span>enemies.len() &gt; <span class="number">0 </span>{
                         <span class="comment">// Clone de l'ennemi pour pouvoir le manipuler sans bouger l'original (qui est dans self.ennemies)
                         </span><span class="kw">let </span><span class="kw-2">mut </span>enemy_clone = enemies[<span class="number">0</span>].clone();
                         <span class="kw">let </span>enemy_id = enemy_clone.id();
 
-                        <span class="comment">// 🔄 Utilisation du résultat du combat
+                        <span class="comment">// Lance le combat entre le personnage et l'ennemi cloné
                         </span><span class="kw">match </span>character.combat_interactif(<span class="kw-2">&amp;mut </span>enemy_clone, <span class="kw-2">&amp;</span><span class="self">self</span>.items) {
                             CombatResult::VICTORY =&gt; {
-                                <span class="kw">let </span>loot = enemy_clone.drop_loot();
-                                <span class="kw">let </span><span class="kw-2">mut </span>loot_affichage = <span class="macro">vec!</span>[];
+                                <span class="comment">// Le combat_interactif affiche déjà le loot et les messages de victoire
 
-                                <span class="kw">for </span>inv_item <span class="kw">in </span><span class="kw-2">&amp;</span>loot {
-                                    <span class="kw">let </span>name = <span class="self">self
-                                        </span>.items
-                                        .iter()
-                                        .find(|i| i.id() == inv_item.item_id)
-                                        .map(|i| i.name().to_string())
-                                        .unwrap_or_else(|| {
-                                            <span class="macro">format!</span>(<span class="string">"Objet inconnu ({})"</span>, inv_item.item_id)
-                                        });
-                                    loot_affichage.push(<span class="macro">format!</span>(<span class="string">"{} x{}"</span>, name, inv_item.quantity));
+                                // Ajoute les objets trouvés dans l’inventaire du joueur
+                                </span><span class="kw">for </span>item <span class="kw">in </span>enemy_clone.drop_loot() {
+                                    character.vivant.inventory.add_item(item.item_id, item.quantity);
                                 }
 
-                                <span class="macro">println!</span>(<span class="string">"\n🎉 Victoire contre {} !"</span>, enemy_clone.vivant.name());
-
-                                <span class="kw">if </span>loot_affichage.is_empty() {
-                                    <span class="macro">println!</span>(<span class="string">"🎁 Aucun objet trouvé."</span>);
-                                } <span class="kw">else </span>{
-                                    <span class="macro">println!</span>(<span class="string">"🎁 Loot récupéré :"</span>);
-                                    <span class="kw">for </span>ligne <span class="kw">in </span>loot_affichage {
-                                        <span class="macro">println!</span>(<span class="string">"- {}"</span>, ligne);
-                                    }
-                                }
-
-                                <span class="macro">println!</span>(<span class="string">"🩸 Santé restante : {} PV"</span>, character.vivant.health());
-
-                                <span class="kw">for </span>item <span class="kw">in </span>loot {
-                                    character
-                                        .vivant
-                                        .inventory
-                                        .add_item(item.item_id, item.quantity);
-                                }
-
-                                <span class="kw">if let </span><span class="prelude-val">Some</span>(room) = <span class="self">self</span>.rooms.get_mut(character.position) {
+                                <span class="comment">// Supprime l’ennemi vaincu de la salle actuelle
+                                </span><span class="kw">if let </span><span class="prelude-val">Some</span>(room) = <span class="self">self</span>.rooms.get_mut(character.position) {
                                     room.enemies.retain(|<span class="kw-2">&amp;</span>id| id != enemy_clone.vivant.id());
                                 }
 
-                                Character::track_enemy(
-                                    enemy_id,
-                                    character,
-                                    <span class="kw-2">&amp;mut </span><span class="self">self</span>.quetes,
-                                    <span class="kw-2">&amp;mut </span><span class="self">self</span>.dialogues,
-                                );
+                                <span class="comment">// Met à jour l'avancement des quêtes liées à cet ennemi
+                                </span>Character::track_enemy(enemy_id, character, <span class="kw-2">&amp;mut </span><span class="self">self</span>.quetes, <span class="kw-2">&amp;mut </span><span class="self">self</span>.dialogues);
+                                <span class="kw">continue</span>;
                             }
 
-                            CombatResult::DEFEAT =&gt; {
+                            <span class="comment">// Si le personnage perd le combat, affiche un message de fin
+                            </span>CombatResult::DEFEAT =&gt; {
                                 <span class="macro">println!</span>(<span class="string">"☠️ Tu es mort… fin de l'aventure."</span>);
                                 <span class="kw">break</span>;
                             }
 
-                            CombatResult::ONGOING =&gt; {
+                            <span class="comment">// Si le personnage fuit le combat, affiche un message d’échec de l’action
+                            </span>CombatResult::ONGOING =&gt; {
                                 <span class="macro">println!</span>(<span class="string">"🔙 Tu as fui le combat."</span>);
                             }
+
                             <span class="kw">_ </span>=&gt; {}
                         }
+
                     } <span class="kw">else </span>{
-                        <span class="macro">println!</span>(<span class="string">"❌ Aucun ennemi nommé '{}' ici."</span>, ennemi_nom);
+                        <span class="comment">// Si aucun ennemi du nom donné n’est présent dans la salle
+                        </span><span class="macro">println!</span>(<span class="string">"❌ Aucun ennemi nommé '{}' ici."</span>, ennemi_nom);
                     }
                 }
 

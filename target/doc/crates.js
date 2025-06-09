@@ -1,2 +1,2 @@
-window.ALL_CRATES = ["text_rpg_rust"];
-//{"start":21,"fragment_lengths":[15]}
+window.ALL_CRATES = ["cfg_if","getrandom","itoa","libc","log","memchr","ppv_lite86","proc_macro2","quote","rand","rand_chacha","rand_core","ryu","serde","serde_derive","serde_json","syn","text_rpg_rust","unicode_ident","zerocopy"];
+//{"start":21,"fragment_lengths":[8,12,7,7,6,9,13,14,8,7,14,12,6,8,15,13,6,16,16,11]}

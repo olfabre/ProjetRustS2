@@ -21,8 +21,9 @@ pub trait Combattant: std::fmt::Debug {
     // Calcule la protection contre les dégâts
     fn protection_defense(&self) -> u32;
 
-
+    // Retourne la liste des objets pouvant être récupérés après la défaite de ce combattant
     fn loot(&self) -> &[LootEntry];
+    // Retourne l'expérience gagnée lorsqu'on vainc ce combattant
     fn experience_gain(&self) -> i32;
 
 
@@ -34,5 +35,4 @@ pub enum CombatResult {
     VICTORY,  // Le combattant a remporté le combat
     DEFEAT,   // Le combattant a perdu le combat
     ONGOING,  // Le combat est toujours en cours
-    Ongoing,  // Alias pour ONGOING (à nettoyer)
 }

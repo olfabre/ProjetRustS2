@@ -10,9 +10,6 @@ pub mod game;
 // Gère les interactions avec les PNJ et les choix de dialogue
 pub mod dialogue;
 
-// Module de gestion du système de combat
-// Définit les règles de combat et les interactions entre combattants
-mod combat;
 
 // Module contenant toutes les entités du jeu (personnages, objets, etc.)
 // Organise les différentes structures qui représentent les éléments du jeu

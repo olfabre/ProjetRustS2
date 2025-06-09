@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["combat","dialogue","entities","game","tracker","traits"]};
+window.SIDEBAR_ITEMS = {"mod":["dialogue","entities","game","tracker","traits"]};
