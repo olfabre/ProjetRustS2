@@ -1,3 +1,6 @@
+// Module principal du jeu qui gère la logique et l'état du jeu
+// Ce module contient la structure Game et ses implémentations
+
 use rand::Rng;
 use std::thread;
 use std::time::Duration;
@@ -28,17 +31,18 @@ use std::process::Command;
 // - enemies : Map des ennemis avec leur ID comme clé
 // - quetes : Map des quêtes avec leur ID comme clé
 pub struct Game {
-    rooms: Vec<Room>,
-    characters: Vec<Character>,
-    items: Vec<Item>,
-    pnjs: Vec<Pnj>,
-    dialogues: Vec<Dialogue>,
-    enemies: HashMap<u32, Enemy>,
-    quetes: HashMap<u32, Quete>,
+    rooms: Vec<Room>,          // Toutes les salles du jeu
+    characters: Vec<Character>, // Personnages jouables
+    items: Vec<Item>,          // Objets disponibles
+    pnjs: Vec<Pnj>,           // Personnages non-joueurs
+    dialogues: Vec<Dialogue>,  // Dialogues possibles
+    enemies: HashMap<u32, Enemy>, // Ennemis avec leur ID comme clé
+    quetes: HashMap<u32, Quete>,  // Quêtes avec leur ID comme clé
 }
 
 impl Game {
     /// Crée une nouvelle instance du jeu en chargeant les données depuis les fichiers JSON
+    /// Initialise toutes les structures de données nécessaires au jeu
     pub fn new() -> Self {
         // Vectors
         let rooms =
@@ -70,6 +74,8 @@ impl Game {
     }
 
     /// Démarre la boucle principale du jeu
+    /// Gère les interactions du joueur, les déplacements, les combats et les dialogues
+    /// Affiche les images des salles et gère l'interface utilisateur
     pub fn run(&mut self) {
         if let Some(character) = self.characters.first_mut() {
             // println!("Position de départ du personnage = {}", character.position);

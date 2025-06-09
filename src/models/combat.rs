@@ -1,3 +1,6 @@
+// Module de gestion du système de combat
+// Ce module contient les fonctions et structures nécessaires pour gérer les combats entre entités
+
 use std::io;
 use std::io::Write;
 use crate::models::{entities::character::Character, entities::Enemy::Enemy}; // Import du joueur et des ennemis
@@ -7,11 +10,15 @@ use crate::models::traits::combattant::Combattant;
 // Fonction utilitaire pour lire l'entrée utilisateur
 
 // Structure vide pour regrouper les fonctions liées au combat
+// Cette structure était utilisée pour implémenter le système de combat basé sur des choix
+// Elle a été remplacée par un système plus flexible utilisant le trait Combattant
 // pub trait Combat {
-//
 //     /// Lance un combat entre le joueur et un ennemi
+//     /// Permet au joueur de choisir ses actions (attaque normale, spéciale ou fuite)
+//     /// Gère les dégâts et les effets spéciaux des ennemis
+//     /// Retourne true si l'ennemi est vaincu, false si le joueur fuit ou meurt
 //     fn fight(player: &mut Character, mut enemy: Enemy) -> bool {
-//         println!("⚔️ Un {} sauvage apparaît dans la salle !", enemy.name());
+//         println!("⚔️ Un {} sauvage apparaît dans la salle !");
 //
 //         loop {
 //             println!("\n👤 Vos PV : {} | 👹 PV de {} : {}", player.health(), enemy.name(), enemy.health());
@@ -48,7 +55,7 @@ use crate::models::traits::combattant::Combattant;
 //             if !enemy.is_alive() {
 //                 println!("🎉 Vous avez vaincu {} !", enemy.name());
 //                 player.add_experience(50);
-//                 return true; // <- L’ennemi est vaincu
+//                 return true; // <- L'ennemi est vaincu
 //             }
 //
 //             // Tour de l'ennemi
@@ -69,11 +76,10 @@ use crate::models::traits::combattant::Combattant;
 //             }
 //         }
 //     }
-//
 // }
 
-
-
+// Les fonctions de combat ont été déplacées dans le module traits::combattant
+// pour une meilleure organisation et réutilisation du code
 
 // Gère un tour de combat entre deux entités
 /*pub fn run_combat_round(attacker: &dyn Combattant, defender: &mut dyn Combattant) {
@@ -86,7 +92,7 @@ use crate::models::traits::combattant::Combattant;
     }
 }
 
-// Combat au tour par tour jusqu’à ce qu’un des deux meure
+// Combat au tour par tour jusqu'à ce qu'un des deux meure
 pub fn run_combat(mut entity1: Box<dyn Combattant>, mut entity2: Box<dyn Combattant>) {
     println!(
         "💥 Combat entre {} ({} PV) et {} ({} PV) !",

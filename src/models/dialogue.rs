@@ -14,28 +14,31 @@ use crate::models::traits::money_manager::MoneyManager;
 
 // Structure représentant un dialogue complet avec un PNJ
 // Contient un identifiant unique et une liste d'étapes de dialogue
+// Chaque dialogue peut avoir plusieurs étapes qui s'enchaînent
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Dialogue {
-    pub dialogue_id: u32,
-    pub dialogue_steps: Vec<DialogueStep>,
+    pub dialogue_id: u32,        // Identifiant unique du dialogue
+    pub dialogue_steps: Vec<DialogueStep>,  // Liste des étapes du dialogue
 }
 
 // Structure représentant une étape de dialogue
 // Contient une action associée, un état actif/inactif, une question et des options de réponse
+// Les actions peuvent déclencher des événements comme l'acceptation de quêtes
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct DialogueStep {
-    pub action: String,     // reference to quetes
-    pub active: bool,
-    pub question: String,
-    pub options: Vec<DialogueOption>,
+    pub action: String,     // Action à effectuer (ex: "accepteQuete:42", "merchant")
+    pub active: bool,       // Si l'étape est disponible ou non
+    pub question: String,   // Question posée par le PNJ
+    pub options: Vec<DialogueOption>,  // Réponses possibles du joueur
 }
 
 // Structure représentant une option de réponse dans un dialogue
 // Contient la réponse du joueur et la réaction du PNJ
+// Les réponses peuvent déclencher des actions spécifiques
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct DialogueOption {
-    pub réponse: String,
-    pub réaction: String,
+    pub réponse: String,    // Texte de la réponse du joueur
+    pub réaction: String,   // Réaction du PNJ à cette réponse
 }
 
 impl Dialogue {
