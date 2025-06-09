@@ -14,6 +14,8 @@ use crate::models::dialogue::Dialogue;
 use crate::models::entities::Enemy::Enemy;
 use crate::models::entities::entity::Entity;
 use crate::models::entities::inventory::Inventory;
+use crate::models::entities::inventory_item::InventoryItem;
+use crate::models::entities::loot_entry::LootEntry;
 use crate::models::entities::quete::Quete;
 use crate::models::entities::vivant::Vivant;
 use crate::models::tracker::Tracker;
@@ -27,7 +29,7 @@ pub struct Character {
     pub(crate) vivant: Vivant,        // Propriétés de base (santé, inventaire, etc.)
     pub position: usize,              // ID de la salle actuelle
     pub level: i32,                   // Niveau du personnage
-    pub experience: i32,              // Points d'expérience
+    //pub experience: i32,              // Points d'expérience
     pub money: i32,                   // Argent possédé
     pub quests: Vec<u32>              // Liste des quêtes actives
 }
@@ -185,12 +187,18 @@ impl Character {
     // Vérifie si un passage de niveau est possible
     pub fn add_experience(&mut self, xp: i32) {
         println!("🎖️ Vous gagnez {} XP !", xp);
-        self.experience += xp;
+        self.vivant.experience += xp;
+        let mut montées = 0;
 
         // Vérifier si le joueur atteint le niveau suivant
-        while self.experience >= self.level * 100 {
+        while self.vivant.experience >= self.level * 100 {
             self.level_up();
+            montées += 1;
         }
+        if montées > 0 {
+            println!("🆙 Tu as gagné {} niveau{} !", montées, if montées > 1 { "x" } else { "" });
+        }
+        println!("📈 Niveau actuel : {}", self.level);
     }
 
     // Affiche le contenu de l'inventaire du personnage
@@ -339,57 +347,24 @@ impl Character {
         self.money += quantité;
     }
 
-    // Gère un combat automatique avec un ennemi
-    pub fn combat<T: Combattant>(&mut self, ennemi: &mut T) -> CombatResult {
-        println!("⚔️ Début du combat : {} VS {}", self.name(), ennemi.nom());
-
-        let mut rng = rand::thread_rng();
-
-        loop {
-            // ======== Tour du joueur ========
-            let esquive = rng.gen_bool(0.1); // 10% de chance d'esquive
-            let critique = rng.gen_bool(0.2); // 20% de chance de critique
-
-            let mut degats = self.degats_attaque();
-            if critique {
-                println!("🎯 Coup critique !");
-                degats *= 2;
-            }
-
-            println!("👉 {} attaque avec {} dégâts !", self.name(), degats);
-            ennemi.infliger_degats(degats);
-
-            if !ennemi.est_vivant() {
-                println!("🏆 Tu as vaincu {} !", ennemi.nom());
-
-                let xp_gagnee = 30; // à adapter selon l'ennemi
-                self.add_experience(xp_gagnee);
-                return CombatResult::VICTORY;
-            }
-
-            // ======== Tour de l'ennemi ========
-            if esquive {
-                println!("🌀 Tu esquives l'attaque de {} !", ennemi.nom());
-            } else {
-                let degats_ennemi = ennemi.degats_attaque();
-                println!("💥 {} attaque avec {} dégâts !", ennemi.nom(), degats_ennemi);
-                self.infliger_degats(degats_ennemi);
-            }
-
-            println!(
-                "❤️ État actuel : {} ({} PV), {} ({} PV)\n",
-                self.name(),
-                self.sante(),
-                ennemi.nom(),
-                ennemi.sante()
-            );
-
-            if !self.est_vivant() {
-                println!("☠️ Tu es mort face à {}…", ennemi.nom());
-                return CombatResult::DEFEAT;
+    pub fn afficher_et_ajouter_loot(&mut self, loot: &[InventoryItem], items: &[Item]) {
+        if loot.is_empty() {
+            println!("🎁 Aucun objet trouvé.");
+        } else {
+            println!("🎁 Loot récupéré :");
+            for obj in loot {
+                let nom = items
+                    .iter()
+                    .find(|i| i.id() == obj.item_id)
+                    .map(|i| i.name().as_ref())
+                    .unwrap_or("Objet inconnu");
+                println!("- {} x{}", nom, obj.quantity);
+                self.inventory_mut().add_item(obj.item_id, obj.quantity);
             }
         }
     }
+
+
 
     // Gère un combat interactif avec un ennemi
     // Permet au joueur de choisir ses actions
@@ -469,13 +444,31 @@ impl Character {
         }
 
         if self.est_vivant() {
+            println!("\n🏆 Combat terminé !");
             println!("🎉 Tu as vaincu {} !", ennemi.nom());
+
+            let loot = LootEntry::generer_depuis_table(ennemi.loot());
+            self.afficher_et_ajouter_loot(&loot, items);
+
+            // Ajout dans l’inventaire
+            for item in loot {
+                self.vivant.inventory_mut().add_item(item.item_id, item.quantity);
+            }
+
+
+            let xp = ennemi.experience_gain();
+            self.add_experience(xp);
+            println!("🎖️ Expérience gagnée : {} XP !", xp);
+            println!(" ❤️ Santé restante : {} ", self.sante());
+
+
             CombatResult::VICTORY
         } else {
             println!("☠️ Tu es mort...");
             CombatResult::DEFEAT
         }
     }
+
 }
 
 // Implémentation du trait Tracker pour Character
@@ -518,6 +511,14 @@ impl Combattant for Character {
     // Retourne la protection défensive du personnage
     fn protection_defense(&self) -> u32 {
         self.defense().max(0) as u32
+    }
+
+    fn loot(&self) -> &[LootEntry] {
+        &[]
+    }
+
+    fn experience_gain(&self) -> i32 {
+        self.vivant.strength() * 2
     }
 }
 

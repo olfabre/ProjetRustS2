@@ -15,7 +15,9 @@
         "pnjs": [
             6
         ],
-        "enemies": [],
+        "enemies": [
+
+        ],
         "exits": {
             "Sud": 64,
             "Sous-sol": 66,
@@ -38,7 +40,7 @@
         "pnjs": [
             0
         ],
-        "enemies": [],
+        "enemies": [1],
         "exits": {
             "Est": 2,
             "Ouest": 64
@@ -60,7 +62,7 @@
         "pnjs": [
             2
         ],
-        "enemies": [],
+        "enemies": [0],
         "exits": {
             "Sud": 3,
             "Ouest": 1
@@ -82,7 +84,7 @@
         "pnjs": [
             1
         ],
-        "enemies": [],
+        "enemies": [5],
         "exits": {
             "Nord": 2,
             "Sud": 6
@@ -273,7 +275,7 @@
             37
         ],
         "pnjs": [],
-        "enemies": [],
+        "enemies": [7],
         "exits": {
             "Nord": 11,
             "Sud": 13
@@ -1008,7 +1010,7 @@
             30
         ],
         "pnjs": [],
-        "enemies": [],
+        "enemies": [7],
         "exits": {
             "Est": 34,
             "Ouest": 49
@@ -1109,7 +1111,7 @@
             5
         ],
         "pnjs": [],
-        "enemies": [],
+        "enemies": [5],
         "exits": {
             "Nord": 55,
             "Est": 54,
@@ -1130,7 +1132,7 @@
             8
         ],
         "pnjs": [],
-        "enemies": [],
+        "enemies": [4],
         "exits": {
             "Nord": 59,
             "Est": 46,
@@ -1251,7 +1253,7 @@
             26
         ],
         "pnjs": [],
-        "enemies": [],
+        "enemies": [3],
         "exits": {
             "Nord": 61,
             "Sud": 59,
@@ -1333,7 +1335,7 @@
             38
         ],
         "pnjs": [],
-        "enemies": [],
+        "enemies": [0],
         "exits": {
             "Nord": 0,
             "Est": 1,
@@ -1354,7 +1356,7 @@
             3
         ],
         "pnjs": [],
-        "enemies": [],
+        "enemies": [4],
         "exits": {
             "Est": 5,
             "Ouest": 60
@@ -1516,7 +1518,7 @@
             27
         ],
         "pnjs": [],
-        "enemies": [],
+        "enemies": [2],
         "exits": {
             "Nord": 72,
             "Ouest": 74
@@ -1717,7 +1719,7 @@
             17
         ],
         "pnjs": [],
-        "enemies": [],
+        "enemies": [4],
         "exits": {
             "Est": 86,
             "Ouest": 82
@@ -1778,7 +1780,7 @@
             26
         ],
         "pnjs": [],
-        "enemies": [],
+        "enemies": [0],
         "exits": {
             "Nord": 85,
             "Est": 87,
@@ -1860,7 +1862,7 @@
             38
         ],
         "pnjs": [],
-        "enemies": [],
+        "enemies": [5],
         "exits": {
             "Sud": 96,
             "Est": 91,
@@ -1921,7 +1923,7 @@
             7
         ],
         "pnjs": [],
-        "enemies": [],
+        "enemies": [6],
         "exits": {
             "Sud": 100,
             "Est": 94,
@@ -1962,7 +1964,7 @@
             13
         ],
         "pnjs": [],
-        "enemies": [],
+        "enemies": [6],
         "exits": {
             "Sud": 106,
             "Ouest": 94
@@ -2144,7 +2146,7 @@
             0
         ],
         "pnjs": [],
-        "enemies": [],
+        "enemies": [3],
         "exits": {
             "Nord": 105,
             "Sud": 115,
@@ -2366,7 +2368,7 @@
             19
         ],
         "pnjs": [],
-        "enemies": [],
+        "enemies": [4],
         "exits": {
             "Nord": 104,
             "Sud": 114

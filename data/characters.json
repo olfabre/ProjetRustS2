@@ -9,7 +9,8 @@
             "health": 100,
             "strength": 15,
             "intelligence": 10,
-            "defense": 20,
+            "defense": 10,
+            "experience": 1,
             "inventory": {
                 "capacity": 20,
                 "items": [
@@ -25,7 +26,6 @@
             }
         },
         "position":0,
-        "experience": 1,
         "level": 1,
         "money": 10,
         "quests": []
@@ -40,14 +40,14 @@
             "health": 100,
             "strength": 15,
             "intelligence": 10,
-            "defense": 20,
+            "defense": 10,
+            "experience": 1,
             "inventory": {
                 "capacity": 20,
                 "items": []
             }
         },
         "position": 1,
-        "experience": 1,
         "level": 1,
         "money": 0,
         "quests": []

@@ -1,1 +1,1 @@
-{"rustc_vv":"rustc 1.85.0 (4d91de4e4 2025-02-17)\nbinary: rustc\ncommit-hash: 4d91de4e48198da2e33413efdcd9cd2cc0c46688\ncommit-date: 2025-02-17\nhost: x86_64-apple-darwin\nrelease: 1.85.0\nLLVM version: 19.1.7\n"}
+{"rustc_vv":"rustc 1.84.1 (e71f9a9a9 2025-01-27)\nbinary: rustc\ncommit-hash: e71f9a9a98b0faf423844bf0ba7438f29dc27d58\ncommit-date: 2025-01-27\nhost: aarch64-apple-darwin\nrelease: 1.84.1\nLLVM version: 19.1.5\n"}

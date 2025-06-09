@@ -6,6 +6,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::models::entities::vivant::Vivant;
 use crate::models::entities::inventory_item::InventoryItem;
+use crate::models::entities::loot_entry::LootEntry;
 use crate::models::traits::combattant::Combattant;
 
 // Structure représentant un ennemi dans le jeu
@@ -13,12 +14,12 @@ use crate::models::traits::combattant::Combattant;
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Enemy {
     pub vivant: Vivant,                // Propriétés de base (santé, force, etc.)
-    loot: Vec<InventoryItem>,         // Liste des objets que l'ennemi peut lâcher
+    loot: Vec<LootEntry>,         // Liste des objets que l'ennemi peut lâcher
 }
 
 impl Enemy {
     // Crée un nouvel ennemi avec ses statistiques et son loot
-    pub fn new(vivant: Vivant, loot: Vec<InventoryItem>) -> Self {
+    pub fn new(vivant: Vivant, loot: Vec<LootEntry>) -> Self {
         Self {
             vivant,
             loot,
@@ -72,7 +73,7 @@ impl Enemy {
 
     // Retourne la liste des objets que l'ennemi peut lâcher
     pub fn drop_loot(&self) -> Vec<InventoryItem> {
-        self.loot.clone()
+        LootEntry::generer_depuis_table(&self.loot)
     }
 
     // Retourne la défense de l'ennemi
@@ -118,24 +119,14 @@ impl Combattant for Enemy {
     fn protection_defense(&self) -> u32 {
         self.defense().max(0) as u32
     }
+
+    fn loot(&self) -> &[LootEntry] {
+        &self.loot
+    }
+    fn experience_gain(&self) -> i32 {
+        //self.vivant.strength + self.vivant.defense + self.vivant.intelligence
+        self.vivant.experience
+    }
 }
 
 
-/*impl Combattant for Enemy {
-    fn nom(&self) -> &str { self.vivant.nom() }
-    fn force(&self) -> u32 { self.vivant.force() }
-    fn sante(&self) -> u32 { self.vivant.sante() }
-    fn est_vivant(&self) -> bool { self.vivant.est_vivant() }
-
-    fn infliger_degats(&mut self, degats: u32) {
-        self.vivant.infliger_degats(degats);
-    }
-
-    fn degats_attaque(&self) -> u32 {
-        self.vivant.degats_attaque()
-    }
-
-    fn protection_defense(&self) -> u32 {
-        self.vivant.protection_defense()
-    }
-}*/

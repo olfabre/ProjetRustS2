@@ -6,6 +6,7 @@ use serde::{Deserialize, Serialize};
 use crate::models::entities::entity::Entity;
 use crate::models::entities::inventory::Inventory;
 use crate::models::entities::item::Item;
+use crate::models::entities::loot_entry::LootEntry;
 use crate::models::traits::combattant::Combattant;
 
 // Structure représentant une entité vivante dans le jeu
@@ -17,7 +18,9 @@ pub struct Vivant {
     strength: i32,           // Force (dégâts d'attaque)
     intelligence: i32,       // Intelligence (pour les sorts)
     defense: i32,            // Défense (réduction des dégâts)
+    pub experience: i32,
     pub inventory: Inventory, // Inventaire de l'entité
+
 }
 
 impl Vivant {
@@ -116,5 +119,12 @@ impl Combattant for Vivant {
     // Retourne la protection défensive de l'entité
     fn protection_defense(&self) -> u32 {
         self.defense().max(0) as u32
+    }
+
+    fn loot(&self) -> &[LootEntry] {
+        &[]
+    }
+    fn experience_gain(&self) -> i32 {
+        self.experience
     }
 }
