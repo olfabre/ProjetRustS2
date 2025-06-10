@@ -5,7 +5,7 @@
 
 La documentation utilisateur est disponible :
 Vous pouvez accéder directement à la documentation générée à l'adresse :
-[Voir la documentation technique](https://github.com/olfabre/ProjetRustS2/blob/version_finale/doc_utilisateur.pdf)
+[Voir la documentation utilisateur](https://github.com/olfabre/ProjetRustS2/blob/version_finale/doc_utilisateur.pdf)
 
 ## 📚 Documentation Technique
 
