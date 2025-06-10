@@ -4,7 +4,8 @@
 
 La documentation technique complète est disponible :
 Vous pouvez accéder directement à la documentation générée à l'adresse :
-./target/doc/text_rpg_rust/index.html
+[Voir la documentation technique](https://olfabre.github.io/ProjetRustS2/blob/version_finale/target/doc/text_rpg_rust/all.html)
+
 
 ## 🎮 Structure du Projet
 
