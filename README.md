@@ -1,5 +1,12 @@
 # Documentation du Projet Rust S2
 
+
+## 📚 Documentation tilisateur
+
+La documentation utilisateur est disponible :
+Vous pouvez accéder directement à la documentation générée à l'adresse :
+[Voir la documentation technique](https://github.com/olfabre/ProjetRustS2/blob/version_finale/doc_utilisateur.pdf)
+
 ## 📚 Documentation Technique
 
 La documentation technique complète est disponible :
