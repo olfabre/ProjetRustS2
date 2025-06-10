@@ -255,10 +255,24 @@ impl Game {
                     continue;
                 }
 
+                // if input.starts_with("quêtes") {
+                //     let quetes_found =
+                //         character.get_active_quests(&self.quetes, &self.items, &self.enemies);
+                //     quetes_found.iter().for_each(|quete| println!("{}", quete));
+                //     continue;
+                // }
+
                 if input.starts_with("quêtes") {
+                    println!("\n📜 Quêtes actives :");
                     let quetes_found =
                         character.get_active_quests(&self.quetes, &self.items, &self.enemies);
-                    quetes_found.iter().for_each(|quete| println!("{}", quete));
+                    if quetes_found.is_empty() {
+                        println!("(aucune quête en cours)");
+                    } else {
+                        quetes_found
+                            .iter()
+                            .for_each(|quete| println!("   - {}", quete));
+                    }
                     continue;
                 }
 
