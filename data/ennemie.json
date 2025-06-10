@@ -7,15 +7,29 @@
         "description": "Le premier des inconnus"
       },
       "health": 40,
-      "strength": 8,
+      "strength": 14,
       "intelligence": 3,
       "defense": 6,
+      "experience": 10,
       "inventory": {
         "capacity": 20,
-        "items": []
+        "items": [{ "item_id": 10, "quantity": 1 }]
       }
     },
-    "loot": []
+    "loot": [
+      {
+        "item_id": 2,
+        "min_quantity": 1,
+        "max_quantity": 1,
+        "drop_chance": 1.0
+      },
+      {
+        "item_id": 10,
+        "min_quantity": 1,
+        "max_quantity": 1,
+        "drop_chance": 1.0
+      }
+    ]
 
   },
   {
@@ -26,15 +40,19 @@
         "description": "Qu'il est solide !"
       },
       "health": 80,
-      "strength": 12,
+      "strength": 16,
       "intelligence": 2,
       "defense": 14,
+      "experience": 20,
       "inventory": {
         "capacity": 20,
-        "items": []
+        "items": [{ "item_id": 9, "quantity": 1 }]
       }
     },
-    "loot": []
+    "loot": [
+      { "item_id": 9, "min_quantity": 1, "max_quantity": 1, "drop_chance": 1.0 },
+      { "item_id": 32, "min_quantity": 1, "max_quantity": 1, "drop_chance": 1.0 }
+    ]
 
   },
   {
@@ -45,91 +63,118 @@
         "description": "Un squelette qui garde la porte"
       },
       "health": 30,
-      "strength": 10,
+      "strength": 12,
       "intelligence": 5,
-      "defense": 4,
+      "defense": 5,
+      "experience": 12,
       "inventory": {
         "capacity": 20,
-        "items": []
+        "items": [{ "item_id": 1, "quantity": 1 }]
       }
     },
-    "loot": [{"item_id": 0, "quantity": 2}, {"item_id": 1, "quantity": 1}]
-
+    "loot": [
+      { "item_id": 0, "min_quantity": 1, "max_quantity": 1, "drop_chance": 1.0 },
+      { "item_id": 1, "min_quantity": 1, "max_quantity": 1, "drop_chance": 1.0 },
+      { "item_id": 40, "min_quantity": 1, "max_quantity": 1, "drop_chance": 1.0 }
+    ]
   },
   {
     "vivant": {
       "entity": {
-          "id": 3,
-          "name": "Golem de pierre",
-          "description": "Un golem qui ne bouge pas"
+        "id": 3,
+        "name": "Golem de pierre",
+        "description": "Un golem qui ne bouge pas"
       },
       "health": 50,
-      "strength": 15,
+      "strength": 18,
       "intelligence": 1,
       "defense": 20,
+      "experience": 25,
       "inventory": {
         "capacity": 20,
-        "items": []
+        "items": [ { "item_id": 13, "quantity": 1 }]
       }
     },
-    "loot": []
+    "loot": [
+      { "item_id": 13, "min_quantity": 1, "max_quantity": 1, "drop_chance": 1.0 },
+      { "item_id": 32, "min_quantity": 1, "max_quantity": 1, "drop_chance": 1.0 }
+    ]
+
 
   },
   {
     "vivant": {
       "entity": {
-          "id": 4,
-          "name": "Dragon endormi",
-          "description": "Un dragon qui dort paisiblement"
+        "id": 4,
+        "name": "Dragon endormi",
+        "description": "Un dragon qui dort paisiblement"
       },
       "health": 100,
-      "strength": 25,
+      "strength": 24,
       "intelligence": 10,
       "defense": 30,
+      "experience": 50,
       "inventory": {
         "capacity": 20,
-        "items": []
+        "items": [{ "item_id": 19, "quantity": 1 },
+          { "item_id": 30, "quantity": 1 }]
       }
     },
-    "loot": []
+    "loot": [
+      { "item_id": 30, "min_quantity": 1, "max_quantity": 1, "drop_chance": 1.0 },
+      { "item_id": 19, "min_quantity": 1, "max_quantity": 1, "drop_chance": 1.0 },
+      { "item_id": 34, "min_quantity": 1, "max_quantity": 1, "drop_chance": 1.0 }
+    ]
+
 
   },
   {
     "vivant": {
       "entity": {
-          "id": 5,
-          "name": "Esprit vengeur",
-          "description": "Un esprit en colère"
+        "id": 5,
+        "name": "Esprit vengeur",
+        "description": "Un esprit en colère"
       },
       "health": 35,
-      "strength": 14,
+      "strength": 16,
       "intelligence": 6,
       "defense": 8,
+      "experience": 15,
       "inventory": {
         "capacity": 20,
-        "items": []
+        "items": [{ "item_id": 16, "quantity": 1 }]
       }
     },
-    "loot": []
+    "loot": [
+      { "item_id": 33, "min_quantity": 1, "max_quantity": 1, "drop_chance": 1.0 },
+      { "item_id": 16, "min_quantity": 1, "max_quantity": 1, "drop_chance": 1.0 }
+    ]
+
 
   },
   {
     "vivant": {
       "entity": {
-          "id": 6,
-          "name": "Rôdeur masqué",
-          "description": "Un rôdeur mystérieux"
+        "id": 6,
+        "name": "Rôdeur masqué",
+        "description": "Un rôdeur mystérieux"
       },
       "health": 45,
-      "strength": 10,
+      "strength": 13,
       "intelligence": 7,
       "defense": 5,
+      "experience": 18,
       "inventory": {
         "capacity": 20,
-        "items": []
+        "items": [{ "item_id": 28, "quantity": 1 },
+          { "item_id": 25, "quantity": 1 }]
       }
     },
-    "loot": []
+    "loot": [
+      { "item_id": 25, "min_quantity": 1, "max_quantity": 1, "drop_chance": 1.0 },
+      { "item_id": 28, "min_quantity": 1, "max_quantity": 1, "drop_chance": 1.0 }
+    ]
+
 
   },
   {
@@ -143,12 +188,17 @@
       "strength": 18,
       "intelligence": 4,
       "defense": 12,
+      "experience": 22,
       "inventory": {
         "capacity": 20,
-        "items": []
+        "items": [{ "item_id": 35, "quantity": 1 }]
       }
     },
-    "loot": []
+    "loot": [
+      { "item_id": 35, "min_quantity": 1, "max_quantity": 1, "drop_chance": 1.0 },
+      { "item_id": 3, "min_quantity": 1, "max_quantity": 1, "drop_chance": 1.0 }
+    ]
+
   }
 
 ]

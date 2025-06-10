@@ -8,6 +8,8 @@ use crate::models::traits::descriptible::Descriptible;
 use crate::models::{entities::room::Room, entities::item::Item};
 use crate::models::dialogue::Dialogue;
 use crate::models::entities::inventory::Inventory;
+use crate::models::entities::inventory_item::InventoryItem;
+use crate::models::entities::loot_entry::LootEntry;
 use crate::models::entities::quete::Quete;
 use crate::models::entities::vivant::Vivant;
 use crate::models::game::Game;
@@ -166,26 +168,46 @@ impl Character {
         }
     }
 
-    /// Augmente le niveau du personnage.
-    /// Améliore les statistiques de base telles que la santé, la force et l'intelligence.
+    // Fait monter le personnage d'un niveau
+    // Augmente ses statistiques de base
     pub fn level_up(&mut self) {
+        // Incrémente le niveau du personnage de 1
         self.level += 1;
+        // Augmente la santé de 20 points
         self.set_health(self.health() + 20);
+        // Augmente la force de 2 points
         self.set_strength(self.strength() + 2);
+        // Augmente l’intelligence de 2 points
         self.set_intelligence(self.intelligence() + 2);
+        // Affiche un message de montée de niveau
         println!("🔥 Vous montez au niveau {} ! Vos statistiques augmentent.", self.level);
     }
 
-    /// Ajouter experience
+    // Ajoute de l'expérience au personnage
+    // Vérifie si un passage de niveau est possible
     pub fn add_experience(&mut self, xp: i32) {
-        println!("🎖️ Vous gagnez {} XP !", xp);
+        // Ajoute l'expérience au total du personnage
         self.experience += xp;
 
-        // Vérifier si le joueur atteint le niveau suivant
+        // Initialise un compteur de montées de niveau
+        let mut montées = 0;
+
+        // Boucle tant que le personnage a assez d'XP pour monter de niveau
         while self.experience >= self.level * 100 {
+            // Incrémente le niveau
             self.level_up();
+            // Compte le nombre de niveaux gagnés
+            montées += 1;
         }
+
+        // Affiche le nombre de niveaux gagnés
+        if montées > 0 {
+            println!("🆙 Tu as gagné {} niveau{} !", montées, if montées > 1 { "x" } else { "" });
+        }
+        // Affiche le niveau actuel
+        println!("📈 Niveau actuel : {}", self.level);
     }
+
 
     /// Affiche le contenu actuel de l'inventaire du personnage.
     /// Répertorie les noms des objets, leurs quantités et leurs effets.
@@ -267,12 +289,53 @@ impl Character {
 
 
 
-    /// Boucle de combat interactive où l'utilisateur choisit des actions (attaquer, utiliser un objet, fuir).
-    /// Fournit une interaction dynamique au tour par tour avec une entrée en ligne de commande.
+    // Affiche les objets récupérés après un combat et les ajoute à l'inventaire du joueur.
+    //loot – Liste des objets à ajouter, avec leur identifiant et quantité
+    // items – Liste de tous les objets possibles, utilisée pour retrouver les noms
+    pub fn afficher_et_ajouter_loot(&mut self, loot: &[InventoryItem], items: &[Item]) {
+        // Vérifie si aucun objet n’a été trouvé
+        if loot.is_empty() {
+            println!("🎁 Aucun objet trouvé.");
+        } else {
+            println!("🎁 Loot récupéré :");
+
+            // Parcours chaque objet récupéré
+            for obj in loot {
+                // Recherche le nom de l’objet à partir de son ID
+                let nom = items
+                    .iter()// Parcours la liste des objets connus
+                    .find(|i| i.id() == obj.item_id)// Cherche celui qui a le même ID
+                    .map(|i| i.name().as_ref())// Récupère le nom de l’objet
+                    .unwrap_or("Objet inconnu");// Si non trouvé, nom par défaut
+
+                // Affiche l’objet et la quantité obtenue
+                println!("- {} x{}", nom, obj.quantity);
+
+                // Ajoute l’objet dans l’inventaire du joueur
+                self.inventory_mut().add_item(obj.item_id, obj.quantity);
+            }
+        }
+    }
+
+
+
+    /// Lance un combat interactif entre le joueur et un ennemi donné.
+    ///
+    /// Le joueur peut choisir d'attaquer, d'utiliser un objet ou de fuir.
+    /// Si le joueur gagne, il obtient du loot et de l'expérience.
+    ///
+    /// # Paramètres
+    /// - `ennemi` : l'ennemi à combattre.
+    /// - `items` : la liste globale des objets connus du jeu.
+    ///
+    /// # Retour
+    /// Un `CombatResult` indiquant si le joueur a gagné, perdu, ou fui.
     pub fn combat_interactif<T: Combattant>(&mut self, ennemi: &mut T, items: &[Item]) -> CombatResult {
         println!("\n⚔️ Un combat commence contre {} !", ennemi.nom());
 
+        // Boucle principale : tant que les deux sont vivants, le combat continue
         while self.est_vivant() && ennemi.est_vivant() {
+            // Affiche les PV actuels des deux combattants
             println!(
                 "\n🧍‍♂️ {} (PV: {}) vs 🧟 {} (PV: {})",
                 self.nom(),
@@ -281,26 +344,34 @@ impl Character {
                 ennemi.sante()
             );
 
+            // Demande à l'utilisateur l'action à effectuer
             println!("Que veux-tu faire ? (attaquer / utiliser / fuir)");
             print!("> ");
-            stdout().flush().unwrap();
+            stdout().flush().unwrap(); // Assure l'affichage immédiat du prompt
             let mut input = String::new();
-            stdin().read_line(&mut input).unwrap();
-            let input = input.trim().to_lowercase();
+            stdin().read_line(&mut input).unwrap(); // Lecture de l'entrée utilisateur
+            let input = input.trim().to_lowercase(); // Nettoie et convertit en minuscule
 
+            // Traitement du choix de l'utilisateur
             match input.as_str() {
                 "attaquer" => {
+                    // Génère une chance de critique (20%)
                     let critique = rand::thread_rng().gen_bool(0.2);
+                    // Calcule les dégâts nets après défense
                     let mut degats = self.degats_attaque().saturating_sub(ennemi.protection_defense());
                     if critique {
+                        // Double les dégâts si critique
                         println!("💥 Coup critique !");
                         degats *= 2;
                     }
+
+                    // Affiche les dégâts infligés
                     println!("🗡️ Tu infliges {} dégâts à {}.", degats, ennemi.nom());
                     ennemi.infliger_degats(degats);
                 }
 
                 "utiliser" => {
+                    // Affiche l'inventaire disponible
                     self.afficher_inventaire(items);
                     println!("Quel objet veux-tu utiliser ?");
                     print!("> ");
@@ -308,10 +379,12 @@ impl Character {
                     let mut nom_objet = String::new();
                     stdin().read_line(&mut nom_objet).unwrap();
                     let nom_objet = nom_objet.trim();
+                    // Utilise l’objet choisi
                     self.utiliser_objet(nom_objet, &mut [], items);
                 }
 
                 "fuir" => {
+                    // Chance de fuir avec succès (50%)
                     let chance_fuite = rand::thread_rng().gen_bool(0.5);
                     if chance_fuite {
                         println!("🏃‍♂️ Tu réussis à fuir !");
@@ -326,18 +399,21 @@ impl Character {
                 }
             }
 
-            // === Tour de l'ennemi ===
+            // === Tour de l'ennemi s’il est encore vivant ===
             if ennemi.est_vivant() {
+                // Chance d’esquive (10%)
                 let esquive = rand::thread_rng().gen_bool(0.1); // 10% de chance que le joueur esquive
                 if esquive {
                     println!("🌀 Tu esquives l'attaque de {} !", ennemi.nom());
                 } else {
+                    // Chance de coup critique ennemi (15%)
                     let critique = rand::thread_rng().gen_bool(0.15); // 15% de critique ennemi
                     let mut degats = ennemi.degats_attaque().saturating_sub(self.protection_defense());
                     if critique {
                         println!("💢 Coup critique de {} !", ennemi.nom());
                         degats *= 2;
                     }
+                    // Applique les dégâts au joueur
                     println!("💥 {} t'attaque et inflige {} dégâts !", ennemi.nom(), degats);
                     self.infliger_degats(degats);
                 }
@@ -345,9 +421,31 @@ impl Character {
         }
 
         if self.est_vivant() {
+            // Le joueur a gagné
+            println!("\n🏆 Combat terminé !");
             println!("🎉 Tu as vaincu {} !", ennemi.nom());
+
+            // Génération du butin (loot) à partir de la table de l’ennemi
+            let loot = LootEntry::generer_depuis_table(ennemi.loot());
+            // Affichage et ajout dans l’inventaire
+            self.afficher_et_ajouter_loot(&loot, items);
+
+            // Ajout de chaque item au vrai inventaire du joueur
+            for item in loot {
+                self.vivant.inventory_mut().add_item(item.item_id, item.quantity);
+            }
+
+
+            // Gain d’expérience après victoire
+            let xp = ennemi.experience_gain();
+            self.add_experience(xp);
+            println!("🎖️ Expérience gagnée : {} XP !", xp);
+            println!(" ❤️ Santé restante : {} ", self.sante());
+
+
             CombatResult::VICTORY
         } else {
+            // Le joueur a perdu
             println!("☠️ Tu es mort...");
             CombatResult::DEFEAT
         }
@@ -357,36 +455,50 @@ impl Character {
 
 
 
+// Implémentation du trait Combattant pour Character
+// Permet au personnage de participer aux combats
 impl Combattant for Character {
-
+    // Retourne le nom du personnage
     fn nom(&self) -> &str {
         self.name()
     }
 
+    // Retourne la force du personnage (minimum 0)
     fn force(&self) -> u32 {
         self.strength().max(0) as u32
     }
 
+    // Retourne les points de vie du personnage (minimum 0)
     fn sante(&self) -> u32 {
         self.health().max(0) as u32
     }
 
+    // Vérifie si le personnage est en vie
     fn est_vivant(&self) -> bool {
         self.health() > 0
     }
 
+    // Inflige des dégâts au personnage
     fn infliger_degats(&mut self, degats: u32) {
         self.set_health( (self.health() - degats as i32).max(0) );
     }
 
+    // Retourne les dégâts d'attaque du personnage
     fn degats_attaque(&self) -> u32 {
         self.strength().max(0) as u32
     }
 
+    // Retourne la protection défensive du personnage
     fn protection_defense(&self) -> u32 {
         self.defense().max(0) as u32
     }
 
-}
+    fn loot(&self) -> &[LootEntry] {
+        &[]
+    }
 
+    fn experience_gain(&self) -> i32 {
+        self.vivant.strength() * 2
+    }
+}
 

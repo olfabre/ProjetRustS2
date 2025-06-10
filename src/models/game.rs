@@ -365,7 +365,7 @@ impl Game {
                             CombatResult::ONGOING => {
                                 println!("🔙 Tu as fui le combat.");
                             }
-                            _ => {}
+
                         }
                     } else {
                         println!("❌ Aucun ennemi nommé '{}' ici.", ennemi_nom);

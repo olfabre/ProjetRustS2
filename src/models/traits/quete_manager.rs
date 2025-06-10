@@ -1,8 +1,6 @@
 use std::collections::HashMap;
 use crate::models::dialogue::Dialogue;
 use crate::models::entities::character::Character;
-use crate::models::entities::Enemy::Enemy;
-use crate::models::entities::item::Item;
 use crate::models::entities::quete::Quete;
 use crate::models::game::Game;
 
