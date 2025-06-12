@@ -1,7 +1,5 @@
 @startuml
-skinparam dpi 200
-skinparam nodesep 45
-skinparam ranksep 45
+
 ' --- Configuration générale ---
 skinparam classAttributeIconSize 0
 hide empty members
