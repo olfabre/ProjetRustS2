@@ -1,5 +1,4 @@
-use std::{fs, io};
-use std::io::{stdout, Write};
+use std::{fs};
 use serde_json;
 use std::collections::HashMap;
 
@@ -47,12 +46,6 @@ pub fn load_dialogues_from_file(filename: &str) -> Result<Vec<Dialogue>, serde_j
     Ok(dialogues)
 }
 
-pub fn load_ennemie_from_file(filename: &str) -> Result<Vec<Enemy>, serde_json::Error>{
-    let data = fs::read_to_string(filename).expect("Impossible de lire le fichier des Ennemie.");
-    let ennemie: Vec<Enemy> = serde_json::from_str(&data)?;
-    Ok(ennemie)
-}
-
 
 pub fn load_enemies_from_file(filename: &str) -> Result<HashMap<u32, Enemy>, serde_json::Error> {
     // Read the file contents into a string.
@@ -91,17 +84,3 @@ pub fn load_quetes_from_file(filename: &str) -> Result<HashMap<u32, Quete>, serd
 }
 
 
-pub fn get_user_input() -> String {
-    let mut input = String::new();
-    print!("> ");
-    io::stdout().flush().unwrap();
-    io::stdin().read_line(&mut input).expect("Erreur de lecture.");
-    input
-}
-
-//charge le inventaires depui inventory.json
-/*pub fn load_inventory_from_file(filename: &str) -> Result<Vec<Inventory>>{
-    let data = fs::read_to_string(filename).expect("Impossible de lire le fichier des Inventory.");
-    let inventory: Vec<Inventory> = serde_json::from_str(&data)?;
-    Ok(inventory)
-}*/

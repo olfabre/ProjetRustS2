@@ -67,7 +67,7 @@ impl Dialogue {
                 }
 
                 // === Afficher l'étape de dialogue et les options ===
-                println!("current index: ================> {}", current_index);
+                println!("{}", pnj.description());
                 println!("💬 PNJ : \"{}\"", step.question);
                 for (i, option) in options.iter().enumerate() {
                     println!("{}. {}", i + 1, option.réponse);
@@ -172,7 +172,7 @@ impl Dialogue {
         loop {
             println!("\n👤 {} (🪙 {})", character.name(), character.money);
             println!("🛒 Marchand (🪙 {}) : \"Voici mes merchandises.\"", pnj.money);
-            let mut merchant_items = pnj.inventory_mut();
+            let merchant_items = pnj.inventory_mut();
 
             // === Lister les articles du marchand ===
             for (i, inventory_item) in merchant_items.items.iter().enumerate() {

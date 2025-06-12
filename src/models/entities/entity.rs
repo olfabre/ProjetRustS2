@@ -24,15 +24,6 @@ impl Entity {
         &self.description
     }
 
-    pub fn set_id(&mut self, id: u32) {
-        self.id = id;
-    }
 
-    pub fn set_name(&mut self, name: String) {
-        self.name = name;
-    }
 
-    pub fn set_description(&mut self, description: String) {
-        self.description = description;
-    }
 }

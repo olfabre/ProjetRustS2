@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+
 use std::io::{stdin, stdout, Write};
 use rand::Rng;
 use serde::{Deserialize, Serialize};
@@ -6,11 +6,9 @@ use serde::de::Visitor;
 
 use crate::models::traits::descriptible::Descriptible;
 use crate::models::{entities::room::Room, entities::item::Item};
-use crate::models::dialogue::Dialogue;
 use crate::models::entities::inventory::Inventory;
 use crate::models::entities::inventory_item::InventoryItem;
 use crate::models::entities::loot_entry::LootEntry;
-use crate::models::entities::quete::Quete;
 use crate::models::entities::vivant::Vivant;
 use crate::models::game::Game;
 use crate::models::traits::combattant::{CombatResult, Combattant};

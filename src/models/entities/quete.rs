@@ -1,6 +1,5 @@
-use std::collections::HashMap;
+
 use serde::{Deserialize, Serialize};
-use crate::models::entities::character::Character;
 use crate::models::entities::entity::Entity;
 
 #[derive(Debug, Serialize, Deserialize, Clone)]

@@ -28,7 +28,7 @@ pub trait QueteManager {
     /// rendre la quête
     fn update_dialogues(id: u32, dialogues: &mut Vec<Dialogue>) {
         // Rechercher le dialogue associé à l'ID donné
-        let Some(mut dialogue) = dialogues.iter_mut().find(|mut dialog| {
+        let Some(dialogue) = dialogues.iter_mut().find(|dialog| {
             dialog.dialogue_id == id
         }) else { return };
 
@@ -114,7 +114,7 @@ impl QueteManager for Character {
 
                         // Notifier le joueur que la quête est terminée
                         println!("✅ Quête: {} est complete.", quest.name());
-                        println!("Retournez voir le donneur de quête pour récupérer votre prix");
+                        println!("Voyez la bonne personne pour récupérer votre prix");
                         return true;
                     }
                 }
@@ -144,7 +144,7 @@ impl QueteManager for Character {
 
                         // Notifier le joueur que la quête est terminée
                         println!("✅ Quête: {} est complete.", quest.name());
-                        println!("Retournez voir le donneur de quête pour récupérer votre prix");
+                        println!("Voyez la bonne personne pour récupérer votre prix");
 
                     }
                 }

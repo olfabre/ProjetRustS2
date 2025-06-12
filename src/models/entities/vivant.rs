@@ -1,7 +1,6 @@
 use serde::{Deserialize, Serialize};
 use crate::models::entities::entity::Entity;
 use crate::models::entities::inventory::Inventory;
-use crate::models::entities::item::Item;
 use crate::models::entities::loot_entry::LootEntry;
 use crate::models::traits::combattant::Combattant;
 
@@ -45,20 +44,12 @@ impl Vivant {
         self.defense
     }
 
-    pub fn inventory(&self) -> &Inventory{
-        &self.inventory
-    }
+
 
     pub fn inventory_mut(&mut self) -> &mut Inventory {
         &mut self.inventory
     }
-    pub fn set_id(&mut self, id: u32) {
-        self.entity.set_id(id);
-    }
 
-    pub fn set_name(&mut self, name: &str) {
-        self.entity.set_name(String::from(name));
-    }
 
 
 }

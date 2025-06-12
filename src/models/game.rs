@@ -1,6 +1,3 @@
-use rand::Rng;
-use std::thread;
-use std::time::Duration;
 
 use crate::models::{
     dialogue::Dialogue, entities::character::Character, entities::item::Item, entities::pnj::Pnj,
@@ -33,19 +30,19 @@ impl Game {
         // Vectors
         let rooms =
             load_room_from_file("data/rooms.json").expect("Erreur lors du chargement des salles.");
-        let mut characters = load_characters_from_file("data/characters.json")
+        let characters = load_characters_from_file("data/characters.json")
             .expect("Erreur lors du chargement du joueur.");
         let items =
             load_items_from_file("data/items.json").expect("Erreur lors du chargement des objets.");
         let pnjs =
             load_pnjs_from_file("data/pnjs.json").expect("Erreur lors du chargement des PNJ.");
-        let mut dialogues = load_dialogues_from_file("data/dialogue.json")
+        let dialogues = load_dialogues_from_file("data/dialogue.json")
             .expect("Erreur lors du chargement des dialogues");
         // let enemies = load_ennemie_from_file("data/ennemie.json").expect("Erreur lors du chargement des ennemis.");
         // Maps
         let enemies = load_enemies_from_file("data/ennemie.json")
             .expect("Erreur lors du chargement des ennemis.");
-        let mut quetes = load_quetes_from_file("data/quetes.json")
+        let quetes = load_quetes_from_file("data/quetes.json")
             .expect("Erreur lors du chargement des quetes.");
 
         // Création de l'instance du jeu avec les données chargées
