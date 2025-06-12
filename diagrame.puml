@@ -1,63 +1,279 @@
 @startuml
+skinparam dpi 200
+skinparam nodesep 45
+skinparam ranksep 45
+' --- Configuration générale ---
+skinparam classAttributeIconSize 0
+hide empty members
 
-entity "Personnage" as Pers {
-  * id : int
-  * nom : string
-  * santé : int
-  * force : int
-  * agilité : int
-  * position : int
-  * experience : int
+' --- Classes (Structs) ---
+
+class Entity {
+  + id: u32
+  + name: String
+  + description: String
 }
 
-entity "Salle" as Room {
-  * id : int
-  * nom : string
-  * description : string
-  * terrain_type : string
-  * locked : bool
+class Vivant {
+  - entity: Entity
+  # health: i32
+  # strength: i32
+  # intelligence: i32
+  # defense: i32
+  # experience: i32
+  + inventory: Inventory
 }
 
-entity "Objet" as Obj {
-  * id : int
-  * nom : string
-  * type : string
-  * effet : string
-  * utilisable : bool
+class Character {
+  # vivant: Vivant
+  + position: usize
+  + level: i32
+  + money: i32
+  + quests: Vec<u32>
+  + try_move()
+  + prendre_objet()
+  + utiliser_objet()
+  + level_up()
+  + add_experience()
+  + combat_interactif()
 }
 
-entity "Ennemi" as En {
-  * id : int
-  * nom : string
-  * santé : int
-  * force : int
-  * agilité : int
-  * salle_id : int
+class Pnj {
+  - vivant: Vivant
+  + role: String
+  + money: i32
+  + dialogue_id: u32
+  + {static} parler_au_pnj()
 }
 
-entity "PNJ" as Pnj {
-  * id : int
-  * nom : string
-  * dialogues : string
-  * salle_id : int
-}
-entity Quete {
-  +id : u32
-  +titre : String
-  +description : String
-  +accomplie : bool
+class Enemy {
+  + vivant: Vivant
+  - loot: Vec<LootEntry>
+  + drop_loot(): Vec<InventoryItem>
 }
 
+class Item {
+  - entity: Entity
+  + effect: String
+  + usable: bool
+  + weight: f32
+  + value: i32
+  + stackable: bool
+  + equippable: bool
+}
+
+class Inventory {
+  + capacity: usize
+  + items: Vec<InventoryItem>
+  + add_item()
+  + remove_item()
+}
+
+class InventoryItem {
+  + item_id: u32
+  + quantity: u32
+}
+
+class LootEntry {
+  + item_id: u32
+  + min_quantity: u32
+  + max_quantity: u32
+  + drop_chance: f32
+  + {static} generer_depuis_table()
+}
+
+class Room {
+  - elem: Entity
+  + terrain_type: String
+  + locked: Option<bool>
+  + items: Vec<u32>
+  + pnjs: Vec<u32>
+  + enemies: Vec<u32>
+  + exits: HashMap<String, usize>
+  + tenter_ouverture(): bool
+}
+
+class Dialogue {
+  + dialogue_id: u32
+  + dialogue_steps: Vec<DialogueStep>
+  + afficher_dialogue()
+  + start_merchant()
+}
+
+class DialogueStep {
+  + action: String
+  + active: bool
+  + question: String
+  + options: Vec<DialogueOption>
+}
+
+class DialogueOption {
+  + réponse: String
+  + réaction: String
+}
+
+class Quete {
+  - entity: Entity
+  + dialog_rendu_id: u32
+  + objectif_type: String
+  + objectif: Objectif
+  + recompense_items: Vec<u32>
+  + recompense_argent: i32
+  + experience: i32
+}
+
+class Objectif {
+  + tuer: Tuer
+  + collecter: Collecter
+  + visiter: Visiter
+}
+
+class Tuer {
+ + ennemi_id: u32
+ + target: u32
+ + count: u32
+}
+class Collecter {
+ + item_id: u32
+ + target: u32
+ + count: u32
+}
+class Visiter {
+ + room_id: u32
+ + visited: bool
+}
+
+class Game {
+  - rooms: Vec<Room>
+  - characters: Vec<Character>
+  - items: Vec<Item>
+  - pnjs: Vec<Pnj>
+  - dialogues: Vec<Dialogue>
+  - enemies: HashMap<u32, Enemy>
+  - quetes: HashMap<u32, Quete>
+  + new()
+  + run()
+}
+
+' --- Traits (Interfaces) ---
+
+interface Combattant <<trait>> {
+  + nom(): &str
+  + force(): u32
+  + sante(): u32
+  + est_vivant(): bool
+  + infliger_degats(degats: u32)
+  + degats_attaque(): u32
+  + protection_defense(): u32
+  + loot(): &[LootEntry]
+  + experience_gain(): i32
+}
+
+interface Tracker <<trait>> {
+  + {static} track_item()
+  + {static} track_enemy()
+  + {static} update_dialogues()
+}
+
+interface MoneyManager <<trait>> {
+ + money_mut(): &mut i32
+ + add_money()
+ + remove_money()
+}
+
+interface Descriptible <<trait>> {
+    + get_description(): String
+}
+
+interface Interactable <<trait>> {
+    + interact()
+}
+
+' --- Énumérations ---
+
+enum CombatResult {
+    VICTORY
+    DEFEAT
+    ONGOING
+}
 
 
-' Associations
-Pers -- Room : explore
-Pers -- Obj : possède, utilise
-Pers -- En : combat
-Pers -- Pnj : parle
-Pers ||--o{ Quete : suit
-Room -- Obj : contient
-Room -- En : héberge
-Room -- Pnj : héberge
+' --- Relations ---
+
+' Composition (une struct en contient une autre)
+Vivant *-- "1" Entity : contient
+Character *-- "1" Vivant : contient
+Pnj *-- "1" Vivant : contient
+Enemy *-- "1" Vivant : contient
+Item *-- "1" Entity : contient
+Room *-- "1" Entity : contient
+Quete *-- "1" Entity : contient
+
+Vivant "1" *-- "1" Inventory
+Inventory "1" *-- "*" InventoryItem
+Enemy "1" *-- "*" LootEntry
+Dialogue "1" *-- "*" DialogueStep
+DialogueStep "1" *-- "*" DialogueOption
+Quete "1" *-- "1" Objectif
+Objectif "1" *-- "1" Tuer
+Objectif "1" *-- "1" Collecter
+Objectif "1" *-- "1" Visiter
+
+Game "1" *-- "*" Room
+Game "1" *-- "*" Character
+Game "1" *-- "*" Item
+Game "1" *-- "*" Pnj
+Game "1" *-- "*" Dialogue
+Game "1" *-- "*" Enemy
+Game "1" *-- "*" Quete
+
+' Implémentation de Trait
+Character ..|> Combattant
+Enemy ..|> Combattant
+Vivant ..|> Combattant
+
+Character ..|> Tracker
+Character ..|> MoneyManager
+Pnj ..|> MoneyManager
+
+Character ..|> Descriptible
+Item ..|> Descriptible
+Room ..|> Descriptible
+Item ..|> Interactable
+
+' Association / Référence par ID (pointillées)
+Room ..> Item : contient IDs
+Room ..> Pnj : contient IDs
+Room ..> Enemy : contient IDs
+
+InventoryItem ..> Item : référence par ID
+LootEntry ..> Item : référence par ID
+Pnj ..> Dialogue : référence par ID
+Character ..> Quete : référence par ID
+Quete ..> Dialogue : référence par ID
+
+Room "1" ..> "*" Room : exits
+Tuer ..> Enemy : référence par ID
+Collecter ..> Item : référence par ID
+Visiter ..> Room : référence par ID
+
+Combattant ..> LootEntry : utilise
+Character ..> CombatResult : retourne
+
+' --- Notes explicatives ---
+note right of Game
+  Structure principale qui contient
+  l'état et la logique du jeu.
+  Elle charge toutes les données
+  au démarrage.
+end note
+
+note top of Vivant
+  La composition est utilisée
+  au lieu de l'héritage.
+  Character, Pnj, et Enemy
+  ont chacun une instance
+  de Vivant.
+end note
 
 @enduml
